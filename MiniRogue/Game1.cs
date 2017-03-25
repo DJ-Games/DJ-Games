@@ -61,12 +61,6 @@ namespace MiniRogue
         {
             // TODO: Add your initialization logic here
 
-
-            gamestate = Gamestate.TITILESCREEN;
-
-
-
-
             base.Initialize();
 
         }
@@ -91,9 +85,9 @@ namespace MiniRogue
             restingCard = Content.Load<Texture2D>("The_Dungeon");
             trapCard = Content.Load<Texture2D>("Trap");
             treasureCard = Content.Load<Texture2D>("Treasure");
-            titleScreen = Content.Load<Texture2D>("Title_Screen");
+            titleScreen = Content.Load<Texture2D>("Title");
 
-
+            gamestate = Gamestate.TITILESCREEN;
 
         }
 
@@ -124,7 +118,7 @@ namespace MiniRogue
             {
                 case Gamestate.TITILESCREEN:
 
-                    if (kbState.IsKeyDown(Keys.Space)) ;
+                    if (kbState.IsKeyDown(Keys.Space)) 
                     {
                         gamestate = Gamestate.DELVE;
 
@@ -173,7 +167,7 @@ namespace MiniRogue
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
 
@@ -184,7 +178,7 @@ namespace MiniRogue
             {
                 case Gamestate.TITILESCREEN:
 
-                    spriteBatch.Draw(titleScreen, new Rectangle(20, 20, 150, 400), Color.White);
+                    spriteBatch.Draw(titleScreen, new Rectangle(275, 40, 250, 400), Color.White);
 
 
 
