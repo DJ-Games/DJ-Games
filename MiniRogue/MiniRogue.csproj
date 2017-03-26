@@ -42,8 +42,9 @@
     <Compile Include="Card.cs" />
     <Compile Include="Dungeon.cs" />
     <Compile Include="Enemy.cs" />
-    <Compile Include="Event.cs" />
+    <Compile Include="EventCard.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Hand.cs" />
     <Compile Include="Merchant.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />

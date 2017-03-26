@@ -20,6 +20,18 @@ namespace MiniRogue
         CREDITS,
     }
 
+    enum CardPosition
+    {
+        POSITION1,
+        POSITION2,
+        POSITION3,
+        POSITION4, 
+        POSITION5, 
+        POSITION6,
+
+
+
+    }
 
 
 
@@ -156,13 +168,17 @@ namespace MiniRogue
                         gamestate = Gamestate.DELVE;
                     }
 
-
-
-
-
                     break;
 
                 case Gamestate.DELVE:
+
+                    Hand hand = new Hand();
+
+
+
+
+
+
 
                     break;
 

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace MiniRogue
 {
-    class Event : Card
+    class EventCard : Card
     {
 
 
         public bool Success { get; set; }
 
 
-        public Event(string name) : base(name)
+        public EventCard(string name) : base(name)
         {
 
         }
