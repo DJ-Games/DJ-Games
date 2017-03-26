@@ -145,3 +145,9 @@
 /processorParam:TextureFormat=Color
 /build:Character_Stats.PNG
 
+#begin Font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Font.spritefont
+

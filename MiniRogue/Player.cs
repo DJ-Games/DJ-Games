@@ -24,10 +24,23 @@ namespace MiniRogue
         public int Level { get; set; }
 
 
-        public Player()
+        public Player(int armor, int health, int gold, int food)
         {
+
+            Armor = armor;
+            Health = health;
+            Gold = gold;
+            Food = food;
+
             Spells = new List<string>();
         }
+
+        public Player()
+        {
+
+        }
+
+
 
 
 

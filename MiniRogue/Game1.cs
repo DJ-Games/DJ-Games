@@ -42,6 +42,9 @@ namespace MiniRogue
         Texture2D trapCard;
         Texture2D treasureCard;
         Texture2D titleScreen;
+        SpriteFont font;
+
+        Player player;
 
 
 
@@ -86,7 +89,7 @@ namespace MiniRogue
             trapCard = Content.Load<Texture2D>("Trap");
             treasureCard = Content.Load<Texture2D>("Treasure");
             titleScreen = Content.Load<Texture2D>("Title");
-
+            font = Content.Load<SpriteFont>("Font");
             gamestate = Gamestate.TITILESCREEN;
 
         }
@@ -120,7 +123,7 @@ namespace MiniRogue
 
                     if (kbState.IsKeyDown(Keys.Space)) 
                     {
-                        gamestate = Gamestate.DELVE;
+                        gamestate = Gamestate.DIFFICULTY_SELECT;
 
                     }
 
@@ -128,6 +131,34 @@ namespace MiniRogue
                     break;
 
                 case Gamestate.DIFFICULTY_SELECT:
+
+                    if (kbState.IsKeyDown(Keys.D1))
+                    {
+                        player = new Player(1, 5, 5, 6);
+                        gamestate = Gamestate.DELVE;
+                    }
+
+                    if (kbState.IsKeyDown(Keys.D2))
+                    {
+                        player = new Player(0, 5, 3, 6);
+                        gamestate = Gamestate.DELVE;
+                    }
+
+                    if (kbState.IsKeyDown(Keys.D3))
+                    {
+                        player = new Player(0, 4, 2, 5);
+                        gamestate = Gamestate.DELVE;
+                    }
+
+                    if (kbState.IsKeyDown(Keys.D4))
+                    {
+                        player = new Player(0, 3, 1, 3);
+                        gamestate = Gamestate.DELVE;
+                    }
+
+
+
+
 
                     break;
 
@@ -179,16 +210,28 @@ namespace MiniRogue
                 case Gamestate.TITILESCREEN:
 
                     spriteBatch.Draw(titleScreen, new Rectangle(275, 40, 250, 400), Color.White);
-
+                    spriteBatch.DrawString(font, "Press Space to Begin", new Vector2(350, 300), Color.AntiqueWhite);
 
 
                     break;
 
                 case Gamestate.DIFFICULTY_SELECT:
 
+                    spriteBatch.DrawString(font, "Difficulty Select", new Vector2(300, 50), Color.White);
+                    spriteBatch.DrawString(font, "1. Casual", new Vector2(300, 100), Color.White);
+                    spriteBatch.DrawString(font, "2. Normal", new Vector2(300, 150), Color.White);
+                    spriteBatch.DrawString(font, "3. Hard", new Vector2(300, 200), Color.White);
+                    spriteBatch.DrawString(font, "4. Impossible", new Vector2(300, 250), Color.White);
+
+
+
                     break;
 
                 case Gamestate.DELVE:
+
+                    
+
+
 
                     break;
 
