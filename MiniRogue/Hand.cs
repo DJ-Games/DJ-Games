@@ -8,6 +8,10 @@ namespace MiniRogue
 {
     class Hand
     {
+
+
+
+
         private List<Card> playerHand;
 
         public List<Card> PlayerHand
@@ -16,7 +20,7 @@ namespace MiniRogue
             set { playerHand = value; }
         }
 
-        Random rGen = new Random();
+        public Random rGen { get; set; }
 
         public Hand ()
         {
@@ -32,19 +36,18 @@ namespace MiniRogue
 
             playerHand.Add(new Treasure("Treasure"));
 
-
+            rGen = new Random();
         }
 
-        public void dealHand()
+        public Card RevealCard(int position)
         {
-            
+            int tempInt;
 
+            tempInt = rGen.Next(playerHand.Count);
 
+            return playerHand[tempInt];
 
-
-
-
-
+        
         }
 
 
