@@ -39,13 +39,15 @@ namespace MiniRogue
             rGen = new Random();
         }
 
-        public Card RevealCard(int position)
+        public Card RevealCard()
         {
             int tempInt;
 
             tempInt = rGen.Next(playerHand.Count);
 
             return playerHand[tempInt];
+
+            playerHand.RemoveAt(tempInt);
 
         
         }

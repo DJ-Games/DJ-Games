@@ -57,6 +57,7 @@ namespace MiniRogue
         SpriteFont font;
 
         Player player;
+        Card currentCard;
 
 
 
@@ -176,7 +177,7 @@ namespace MiniRogue
 
                     Hand hand = new Hand();
 
-
+                    currentCard = hand.RevealCard();
 
 
 
@@ -247,7 +248,7 @@ namespace MiniRogue
 
                 case Gamestate.DELVE:
 
-                    
+                    spriteBatch.Draw(currentCard.CardTexture, currentCard.CardRectangle, Color.White);
 
 
 
