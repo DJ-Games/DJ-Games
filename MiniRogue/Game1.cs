@@ -106,8 +106,10 @@ namespace MiniRogue
             titleScreen = Content.Load<Texture2D>("Title");
             font = Content.Load<SpriteFont>("Font");
             gamestate = Gamestate.TITILESCREEN;
+            currentCard = new Card("bullshit");
 
         }
+
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -175,9 +177,9 @@ namespace MiniRogue
 
                 case Gamestate.DELVE:
 
-                    Hand hand = new Hand();
+                    //Hand hand = new Hand();
 
-                    currentCard = hand.RevealCard();
+                    //currentCard = hand.RevealCard();
 
 
 
@@ -228,7 +230,7 @@ namespace MiniRogue
             {
                 case Gamestate.TITILESCREEN:
 
-                    spriteBatch.Draw(titleScreen, new Rectangle(275, 40, 250, 400), Color.White);
+                    spriteBatch.Draw(titleScreen, new Rectangle(300, 40, 250, 400), Color.White);
                     spriteBatch.DrawString(font, "Press Space to Begin", new Vector2(350, 300), Color.AntiqueWhite);
 
 
@@ -248,7 +250,7 @@ namespace MiniRogue
 
                 case Gamestate.DELVE:
 
-                    spriteBatch.Draw(currentCard.CardTexture, currentCard.CardRectangle, Color.White);
+                   spriteBatch.Draw(currentCard.CardTexture, currentCard.CardRectangle, Color.White);
 
 
 

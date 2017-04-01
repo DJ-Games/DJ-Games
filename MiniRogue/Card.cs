@@ -51,7 +51,7 @@ namespace MiniRogue
         public Card(string name)
         {
             this.Name = name;
-            cardRectangle = new Rectangle();
+            ;
         }
 
         // Methods
