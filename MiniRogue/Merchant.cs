@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace MiniRogue
 {
@@ -17,7 +19,7 @@ namespace MiniRogue
 
         //Constructors
 
-        public Merchant(string name) : base(name)
+        public Merchant(string name, Texture2D cardTexture) : base(name, cardTexture)
         {
 
         }

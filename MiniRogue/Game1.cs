@@ -28,9 +28,6 @@ namespace MiniRogue
         POSITION4, 
         POSITION5, 
         POSITION6,
-
-
-
     }
 
 
@@ -48,7 +45,7 @@ namespace MiniRogue
         Texture2D characterStatsCard;
         Texture2D eventCard;
         Texture2D merchantCard;
-        Texture2D monsterCard;
+        Texture2D enemyCard;
         Texture2D restingCard;
         Texture2D theDungeonCard;
         Texture2D trapCard;
@@ -58,9 +55,6 @@ namespace MiniRogue
 
         Player player;
         Card currentCard;
-
-
-
 
 
         public Game1()
@@ -99,14 +93,14 @@ namespace MiniRogue
             characterStatsCard = Content.Load<Texture2D>("Character_Stats");
             eventCard = Content.Load<Texture2D>("Event");
             merchantCard = Content.Load<Texture2D>("Merchant");
-            monsterCard = Content.Load<Texture2D>("Monster");
+            enemyCard = Content.Load<Texture2D>("Monster");
             restingCard = Content.Load<Texture2D>("The_Dungeon");
             trapCard = Content.Load<Texture2D>("Trap");
             treasureCard = Content.Load<Texture2D>("Treasure");
             titleScreen = Content.Load<Texture2D>("Title");
             font = Content.Load<SpriteFont>("Font");
             gamestate = Gamestate.TITILESCREEN;
-            currentCard = new Card("bullshit");
+            
 
         }
 
@@ -177,9 +171,10 @@ namespace MiniRogue
 
                 case Gamestate.DELVE:
 
-                    //Hand hand = new Hand();
+                    Hand playerHand = new Hand();
+                    playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
 
-                    //currentCard = hand.RevealCard();
+                    currentCard = playerHand.RevealCard();
 
 
 
@@ -250,7 +245,8 @@ namespace MiniRogue
 
                 case Gamestate.DELVE:
 
-                   spriteBatch.Draw(currentCard.CardTexture, currentCard.CardRectangle, Color.White);
+                    currentCard.DrawCard(spriteBatch, 200, 200);
+
 
 
 

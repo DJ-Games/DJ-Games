@@ -48,13 +48,24 @@ namespace MiniRogue
 
 
         // Constructors
-        public Card(string name)
+        public Card(string name, Texture2D cardTexture)
         {
+
+            CardTexture = cardTexture;
+            CardRectangle = new Rectangle();
+
             this.Name = name;
-            ;
+            
         }
 
         // Methods
+
+        public void DrawCard(SpriteBatch sBatch, int xPos, int yPos)
+        {
+            cardRectangle.X = XPos;
+            cardRectangle.Y = YPos;
+            sBatch.Draw(CardTexture, CardRectangle, Color.White);   
+        }
 
 
 
