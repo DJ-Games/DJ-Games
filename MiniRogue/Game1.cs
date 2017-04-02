@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Threading;
 
 namespace MiniRogue
 {
@@ -227,28 +228,39 @@ namespace MiniRogue
 
                                         case 1:
                                             player.Food++;
-                                            
+                                            Thread.Sleep(250);
+                                            turnPhase = TurnPhase.PHASE2;
                                             break;
 
                                         case 2:
                                             player.Health+=2;
+                                            Thread.Sleep(250);
+                                            turnPhase = TurnPhase.PHASE2;
                                             break;
 
                                         case 3:
                                             player.Gold++;
+                                            Thread.Sleep(250);
+                                            turnPhase = TurnPhase.PHASE2;
                                             break;
 
                                         case 4:
                                             player.Experience += 2;
+                                            Thread.Sleep(250);
+                                            turnPhase = TurnPhase.PHASE2;
                                             break;
 
                                         case 5:
                                             player.Armor++;
+                                            Thread.Sleep(250);
+                                            turnPhase = TurnPhase.PHASE2;
                                             break;
 
                                         case 6:
 
                                             // Copy code from moster state here, then make something better here later.
+                                            Thread.Sleep(250);
+                                            turnPhase = TurnPhase.PHASE2;
                                             break;
 
                                         default:
@@ -414,12 +426,61 @@ namespace MiniRogue
                             spriteBatch.DrawString(font, "HP: " + player.Health, new Vector2(250, 900), Color.White);
                             spriteBatch.DrawString(font, "Gold: " + player.Gold, new Vector2(350, 900), Color.White);
 
-                            spriteBatch.DrawString(font, "Press space to roll die.", new Vector2(50, 800), Color.White);
-                            spriteBatch.DrawString(font, currentRoll.ToString(), new Vector2(400, 800), Color.White);
+                            switch (currentCard.Name)
+                            {
+
+                                case "EventCard":
+                                    spriteBatch.DrawString(font, "Press space to roll die.", new Vector2(50, 800), Color.White);
+                                    spriteBatch.DrawString(font, currentRoll.ToString(), new Vector2(400, 800), Color.White);
+                                    break;
+
+                                case "Resting":
+                                    spriteBatch.DrawString(font, "1: XP", new Vector2(50, 825), Color.White);
+                                    spriteBatch.DrawString(font, "2: Food", new Vector2(50, 850), Color.White);
+                                    spriteBatch.DrawString(font, "3: Health", new Vector2(50, 875), Color.White);
+
+
+
+                                    break;
+
+
+                                case "Treasure":
+
+                                    break;
+
+                                case "Monster":
+
+                                    break;
+
+                                case "Trap":
+
+                                    break;
+
+                                case "Merchant":
+
+                                    break;
+
+
+
+                                default:
+                                    break;
+                            }
+
+
+
 
 
                             break;
                         case TurnPhase.PHASE2:
+
+                            currentCard.DrawCard(spriteBatch, 45, 40);
+                            spriteBatch.DrawString(font, "XP: " + player.Experience, new Vector2(50, 900), Color.White);
+                            spriteBatch.DrawString(font, "Armor: " + player.Armor, new Vector2(150, 900), Color.White);
+                            spriteBatch.DrawString(font, "HP: " + player.Health, new Vector2(250, 900), Color.White);
+                            spriteBatch.DrawString(font, "Gold: " + player.Gold, new Vector2(350, 900), Color.White);
+
+
+
                             break;
                         case TurnPhase.PHASE3:
                             break;
