@@ -30,6 +30,17 @@ namespace MiniRogue
         BOSSPHASE,
     }
 
+    enum CardType
+    {
+        MERCHANT, 
+        EVENT,
+        TREASURE,
+        MONSTER,
+        TRAP,
+        RESTING, 
+        BOSS,
+    }
+
     //enum CardPosition
     //{
     //    POSITION1,
@@ -39,6 +50,8 @@ namespace MiniRogue
     //    POSITION5, 
     //    POSITION6,
     //}
+
+    
 
 
 
@@ -200,10 +213,120 @@ namespace MiniRogue
                             
                         case TurnPhase.PHASE1:
 
-                            if (SingleKeyPress(Keys.Space))
+                            switch (currentCard.Name)
                             {
-                                currentRoll = playerDice.RollDice(1);
+                                case "EventCard":
+
+                                    if (SingleKeyPress(Keys.Space))
+                                    {
+                                        currentRoll = playerDice.RollDice(1);
+                                    }
+
+                                    switch (currentRoll)
+                                    {
+
+                                        case 1:
+                                            player.Food++;
+                                            
+                                            break;
+
+                                        case 2:
+                                            player.Health+=2;
+                                            break;
+
+                                        case 3:
+                                            player.Gold++;
+                                            break;
+
+                                        case 4:
+                                            player.Experience += 2;
+                                            break;
+
+                                        case 5:
+                                            player.Armor++;
+                                            break;
+
+                                        case 6:
+
+                                            // Copy code from moster state here, then make something better here later.
+                                            break;
+
+                                        default:
+                                            break;
+                                    }
+
+                                    break;
+
+                                case "Resting":
+                                    int playerChoice;
+
+                                    if (SingleKeyPress(Keys.D1))
+                                    {
+                                        playerChoice = 1;
+                                    }
+                                    else if (SingleKeyPress(Keys.D2))
+                                    {
+                                        playerChoice = 2;
+                                    }
+                                    else if (SingleKeyPress(Keys.D3))
+                                    {
+                                        playerChoice = 3;
+                                    }
+                                    else
+                                    {
+                                        playerChoice = 0;
+                                    }
+
+
+                                    switch (playerChoice)
+                                    {
+                                        case 1:
+                                            player.Experience++;
+                                            turnPhase = TurnPhase.PHASE2;
+                                            break;
+
+                                        case 2:
+                                            player.Food++;
+                                            turnPhase = TurnPhase.PHASE2;
+                                            break;
+
+                                        case 3:
+                                            player.Health += 2;
+                                            turnPhase = TurnPhase.PHASE2;
+                                            break;
+                                       
+                                        default:
+                                            break;
+                                    }
+                                    break;
+
+                                case "Treasure":
+
+                                    break;
+
+                                case "Monster":
+
+                                    break;
+
+                                case "Trap":
+
+                                    break;
+
+                                case "Merchant":
+
+                                    break;
+
+                                default:
+                                    break;
                             }
+
+
+
+
+
+
+
+
 
                             break;
                         case TurnPhase.PHASE2:

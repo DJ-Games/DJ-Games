@@ -18,6 +18,7 @@ namespace MiniRogue
         public bool Visible { get; set; }
 
 
+
         private Rectangle cardRectangle;
 
         public Rectangle CardRectangle
