@@ -164,7 +164,6 @@ namespace MiniRogue
                     {
                         player = new Player(1, 5, 5, 6);
                         gamestate = Gamestate.DELVE;
-
                     }
 
                     if (SingleKeyPress(Keys.D2))
@@ -205,8 +204,6 @@ namespace MiniRogue
                             {
                                 currentRoll = playerDice.RollDice(1);
                             }
-
-
 
                             break;
                         case TurnPhase.PHASE2:
