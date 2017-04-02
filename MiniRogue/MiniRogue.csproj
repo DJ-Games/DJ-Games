@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="Boss.cs" />
     <Compile Include="Card.cs" />
+    <Compile Include="Dice.cs" />
     <Compile Include="Dungeon.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="EventCard.cs" />

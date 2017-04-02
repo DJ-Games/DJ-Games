@@ -52,7 +52,7 @@ namespace MiniRogue
         {
 
             CardTexture = cardTexture;
-            CardRectangle = new Rectangle();
+            CardRectangle = new Rectangle(0, 0, 494, 708);
 
             this.Name = name;
             
@@ -62,8 +62,8 @@ namespace MiniRogue
 
         public void DrawCard(SpriteBatch sBatch, int xPos, int yPos)
         {
-            cardRectangle.X = XPos;
-            cardRectangle.Y = YPos;
+            cardRectangle.X = xPos;
+            cardRectangle.Y = yPos;
             sBatch.Draw(CardTexture, CardRectangle, Color.White);   
         }
 
