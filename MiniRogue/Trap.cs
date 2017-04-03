@@ -26,49 +26,57 @@ namespace MiniRogue
         }
 
 
-        public void TrapResult(int option, Player player)
+        //---------------------- METHODS -----------------------------
+        public override void HandleCard()
         {
-            switch (option)
-            {
-                case 1:
-                    player.Food--;
-                    break;
-                case 2:
-                    player.Gold--;
-                    break;
-                case 3:
-                    if (player.Armor == 0)
-                    {
-                        player.Health -= 2;
-                    }
-                    else
-                    {
-                        player.Armor--;
-                    }
-                    break;
-                case 4:
-                    player.Health--;
-                    break;
-                case 5:
-                    player.Experience--;
-                    break;
-                case 6:
-                    player.Health -= 2;
-                    // will need to make multi dimensional array to determine this
-                    break;
 
-
-
-                default:
-                    break;
-            }
         }
 
+        //public void TrapResult(int option, Player player)
+        //{
+        //    switch (option)
+        //    {
+        //        case 1:
+        //            player.Food--;
+        //            break;
+        //        case 2:
+        //            player.Gold--;
+        //            break;
+        //        case 3:
+        //            if (player.Armor == 0)
+        //            {
+        //                player.Health -= 2;
+        //            }
+        //            else
+        //            {
+        //                player.Armor--;
+        //            }
+        //            break;
+        //        case 4:
+        //            player.Health--;
+        //            break;
+        //        case 5:
+        //            player.Experience--;
+        //            break;
+        //        case 6:
+        //            player.Health -= 2;
+        //            // will need to make multi dimensional array to determine this
+        //            break;
 
 
 
+        //        default:
+        //            break;
+        //    }
+        //}
 
-
+        public override void DrawCard(SpriteBatch sBatch, SpriteFont font, int xPos, int yPos)
+        {
+            XPos = xPos;
+            YPos = yPos;
+            sBatch.Draw(CardTexture, CardRectangle, Color.White);
+            sBatch.DrawString(font, "Press Space to roll for skill check.", new Vector2(50, 800), Color.White);
+        }
 
     }
 }

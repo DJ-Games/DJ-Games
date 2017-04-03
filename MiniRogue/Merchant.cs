@@ -24,9 +24,19 @@ namespace MiniRogue
 
         }
 
+        //---------------------- METHODS -----------------------------
+        public override void HandleCard()
+        {
 
-        // Figure out this method
+        }
 
+        public override void DrawCard(SpriteBatch sBatch, SpriteFont font, int xPos, int yPos)
+        {
+            XPos = xPos;
+            YPos = yPos;
+            sBatch.Draw(CardTexture, CardRectangle, Color.White);
+            sBatch.DrawString(font, "What would you like to buy?", new Vector2(50, 800), Color.White);
+        }
 
 
 

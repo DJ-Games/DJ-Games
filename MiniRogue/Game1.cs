@@ -117,7 +117,7 @@ namespace MiniRogue
             eventCard = Content.Load<Texture2D>("Event");
             merchantCard = Content.Load<Texture2D>("Merchant");
             enemyCard = Content.Load<Texture2D>("Monster");
-            restingCard = Content.Load<Texture2D>("The_Dungeon");
+            restingCard = Content.Load<Texture2D>("Resting");
             trapCard = Content.Load<Texture2D>("Trap");
             treasureCard = Content.Load<Texture2D>("Treasure");
             titleScreen = Content.Load<Texture2D>("Title");
@@ -173,40 +173,54 @@ namespace MiniRogue
                     //player = difficulty.Select(kbState, PrevKbState);
 
 
+                    // This whole gamestate is bad code... too much repeating code. Find Better method. 
+
+
                     if (SingleKeyPress(Keys.D1))
                     {
                         player = new Player(1, 5, 5, 6);
+                        playerHand = new Hand();
+                        playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
+                        turnPhase.HandlePhase(player, playerHand);
                         gamestate = Gamestate.DELVE;
                     }
 
                     if (SingleKeyPress(Keys.D2))
                     {
                         player = new Player(0, 5, 3, 6);
+                        playerHand = new Hand();
+                        playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
+                        turnPhase.HandlePhase(player, playerHand);
                         gamestate = Gamestate.DELVE;
                     }
 
                     if (SingleKeyPress(Keys.D3))
                     {
                         player = new Player(0, 4, 2, 5);
+                        playerHand = new Hand();
+                        playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
+                        turnPhase.HandlePhase(player, playerHand);
                         gamestate = Gamestate.DELVE;
                     }
 
                     if (SingleKeyPress(Keys.D4))
                     {
                         player = new Player(0, 3, 1, 3);
+                        playerHand = new Hand();
+                        playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
+                        turnPhase.HandlePhase(player, playerHand);
                         gamestate = Gamestate.DELVE;
                     }
-
-
 
 
                     break;
 
                 case Gamestate.DELVE:
 
-                    playerHand = new Hand();
-                    playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
-                    turnPhase.HandlePhase(player, playerHand);
+
+
+
+
 
                     break;
 

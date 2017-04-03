@@ -54,15 +54,13 @@ namespace MiniRogue
 
         public Card RevealCard()
         {
-            int tempInt;
-
-            tempInt = rGen.Next(playerHand.Count);
-
-            return playerHand[tempInt];
-
+            Card tempCard;
+            int tempInt = rGen.Next(playerHand.Count);
+            tempCard = playerHand[tempInt];
             playerHand.RemoveAt(tempInt);
+            return tempCard;
 
-        
+
         }
 
 

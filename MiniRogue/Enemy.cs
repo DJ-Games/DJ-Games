@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MiniRogue
 {
-    class Enemy :Card
+    class Enemy : Card
     {
 
         // Properties
@@ -22,6 +22,23 @@ namespace MiniRogue
         public Enemy(string name, Texture2D cardTexture) : base(name, cardTexture)
         {
 
+        }
+
+
+
+
+        //---------------------- METHODS -----------------------------
+        public override void HandleCard()
+        {
+
+        }
+
+        public override void DrawCard(SpriteBatch sBatch,SpriteFont font, int xPos, int yPos)
+        {
+            XPos = xPos;
+            YPos = yPos;
+            sBatch.Draw(CardTexture, CardRectangle, Color.White);
+            sBatch.DrawString(font, "Press Space to roll for monster difficulty.", new Vector2(50, 800), Color.White);
         }
 
 
