@@ -21,16 +21,6 @@ namespace MiniRogue
         CREDITS,
     }
 
-    enum TurnPhase
-    {
-        SETUPPHASE,
-        PHASE1,
-        PHASE2,
-        PHASE3,
-        PHASE4,
-        BOSSPHASE,
-    }
-
     enum CardType
     {
         MERCHANT, 
@@ -63,7 +53,6 @@ namespace MiniRogue
         SpriteBatch spriteBatch;
 
         Gamestate gamestate;
-        TurnPhase turnPhase;
         KeyboardState kbState;
         KeyboardState PrevKbState;
 
@@ -81,9 +70,11 @@ namespace MiniRogue
 
         Player player;
         Hand playerHand;
-        Card currentCard;
         Dice playerDice;
+        Phase turnPhase;
+        Difficulty difficulty;
         int currentRoll;
+
 
 
         public Game1()
@@ -132,6 +123,8 @@ namespace MiniRogue
             titleScreen = Content.Load<Texture2D>("Title");
             font = Content.Load<SpriteFont>("Font");
             playerDice = new Dice();
+            turnPhase = new Phase() {CurrentPhase = 1};
+            difficulty = new Difficulty();
             gamestate = Gamestate.TITILESCREEN;
             
 
@@ -159,6 +152,9 @@ namespace MiniRogue
 
             // TODO: Add your update logic here
 
+
+
+            //------------------- Switch for gamestates ------------------------
             switch (gamestate)
             {
                 case Gamestate.TITILESCREEN:
@@ -169,10 +165,13 @@ namespace MiniRogue
 
                     }
 
-
                     break;
 
                 case Gamestate.DIFFICULTY_SELECT:
+
+
+                    //player = difficulty.Select(kbState, PrevKbState);
+
 
                     if (SingleKeyPress(Keys.D1))
                     {
@@ -198,160 +197,16 @@ namespace MiniRogue
                         gamestate = Gamestate.DELVE;
                     }
 
+
+
+
                     break;
 
                 case Gamestate.DELVE:
 
-                    switch (turnPhase)
-                    {
-                        case TurnPhase.SETUPPHASE:
-                            playerHand = new Hand();
-                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
-                            currentCard = playerHand.RevealCard();
-                            turnPhase = TurnPhase.PHASE1;
-
-                            break;
-                            
-                        case TurnPhase.PHASE1:
-
-                            switch (currentCard.Name)
-                            {
-                                case "EventCard":
-
-                                    if (SingleKeyPress(Keys.Space))
-                                    {
-                                        currentRoll = playerDice.RollDice(1);
-                                    }
-
-                                    switch (currentRoll)
-                                    {
-
-                                        case 1:
-                                            player.Food++;
-                                            Thread.Sleep(250);
-                                            turnPhase = TurnPhase.PHASE2;
-                                            break;
-
-                                        case 2:
-                                            player.Health+=2;
-                                            Thread.Sleep(250);
-                                            turnPhase = TurnPhase.PHASE2;
-                                            break;
-
-                                        case 3:
-                                            player.Gold++;
-                                            Thread.Sleep(250);
-                                            turnPhase = TurnPhase.PHASE2;
-                                            break;
-
-                                        case 4:
-                                            player.Experience += 2;
-                                            Thread.Sleep(250);
-                                            turnPhase = TurnPhase.PHASE2;
-                                            break;
-
-                                        case 5:
-                                            player.Armor++;
-                                            Thread.Sleep(250);
-                                            turnPhase = TurnPhase.PHASE2;
-                                            break;
-
-                                        case 6:
-
-                                            // Copy code from moster state here, then make something better here later.
-                                            Thread.Sleep(250);
-                                            turnPhase = TurnPhase.PHASE2;
-                                            break;
-
-                                        default:
-                                            break;
-                                    }
-
-                                    break;
-
-                                case "Resting":
-                                    int playerChoice;
-
-                                    if (SingleKeyPress(Keys.D1))
-                                    {
-                                        playerChoice = 1;
-                                    }
-                                    else if (SingleKeyPress(Keys.D2))
-                                    {
-                                        playerChoice = 2;
-                                    }
-                                    else if (SingleKeyPress(Keys.D3))
-                                    {
-                                        playerChoice = 3;
-                                    }
-                                    else
-                                    {
-                                        playerChoice = 0;
-                                    }
-
-
-                                    switch (playerChoice)
-                                    {
-                                        case 1:
-                                            player.Experience++;
-                                            turnPhase = TurnPhase.PHASE2;
-                                            break;
-
-                                        case 2:
-                                            player.Food++;
-                                            turnPhase = TurnPhase.PHASE2;
-                                            break;
-
-                                        case 3:
-                                            player.Health += 2;
-                                            turnPhase = TurnPhase.PHASE2;
-                                            break;
-                                       
-                                        default:
-                                            break;
-                                    }
-                                    break;
-
-                                case "Treasure":
-
-                                    break;
-
-                                case "Monster":
-
-                                    break;
-
-                                case "Trap":
-
-                                    break;
-
-                                case "Merchant":
-
-                                    break;
-
-                                default:
-                                    break;
-                            }
-
-
-
-
-
-
-
-
-
-                            break;
-                        case TurnPhase.PHASE2:
-                            break;
-                        case TurnPhase.PHASE3:
-                            break;
-                        case TurnPhase.PHASE4:
-                            break;
-                        case TurnPhase.BOSSPHASE:
-                            break;
-                        default:
-                            break;
-                    }
+                    playerHand = new Hand();
+                    playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
+                    turnPhase.HandlePhase(player, playerHand);
 
                     break;
 
@@ -414,88 +269,10 @@ namespace MiniRogue
 
                 case Gamestate.DELVE:
 
-                    switch (turnPhase)
-                    {
-                        case TurnPhase.SETUPPHASE:
-                            break;
-                        case TurnPhase.PHASE1:
-
-                            currentCard.DrawCard(spriteBatch, 45, 40);
-                            spriteBatch.DrawString(font, "XP: " + player.Experience, new Vector2(50, 900), Color.White);
-                            spriteBatch.DrawString(font, "Armor: " + player.Armor, new Vector2(150, 900), Color.White);
-                            spriteBatch.DrawString(font, "HP: " + player.Health, new Vector2(250, 900), Color.White);
-                            spriteBatch.DrawString(font, "Gold: " + player.Gold, new Vector2(350, 900), Color.White);
-
-                            switch (currentCard.Name)
-                            {
-
-                                case "EventCard":
-                                    spriteBatch.DrawString(font, "Press space to roll die.", new Vector2(50, 800), Color.White);
-                                    spriteBatch.DrawString(font, currentRoll.ToString(), new Vector2(400, 800), Color.White);
-                                    break;
-
-                                case "Resting":
-                                    spriteBatch.DrawString(font, "1: XP", new Vector2(50, 825), Color.White);
-                                    spriteBatch.DrawString(font, "2: Food", new Vector2(50, 850), Color.White);
-                                    spriteBatch.DrawString(font, "3: Health", new Vector2(50, 875), Color.White);
-
-
-
-                                    break;
-
-
-                                case "Treasure":
-
-                                    break;
-
-                                case "Monster":
-
-                                    break;
-
-                                case "Trap":
-
-                                    break;
-
-                                case "Merchant":
-
-                                    break;
-
-
-
-                                default:
-                                    break;
-                            }
-
-
-
-
-
-                            break;
-                        case TurnPhase.PHASE2:
-
-                            currentCard.DrawCard(spriteBatch, 45, 40);
-                            spriteBatch.DrawString(font, "XP: " + player.Experience, new Vector2(50, 900), Color.White);
-                            spriteBatch.DrawString(font, "Armor: " + player.Armor, new Vector2(150, 900), Color.White);
-                            spriteBatch.DrawString(font, "HP: " + player.Health, new Vector2(250, 900), Color.White);
-                            spriteBatch.DrawString(font, "Gold: " + player.Gold, new Vector2(350, 900), Color.White);
-
-
-
-                            break;
-                        case TurnPhase.PHASE3:
-                            break;
-                        case TurnPhase.PHASE4:
-                            break;
-                        case TurnPhase.BOSSPHASE:
-                            break;
-                        default:
-                            break;
-                    }
-
-
-
+                    turnPhase.DrawPhase(spriteBatch, font, player);
 
                     break;
+
 
                 case Gamestate.BOSS:
 
