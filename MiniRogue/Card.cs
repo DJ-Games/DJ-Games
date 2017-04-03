@@ -48,11 +48,11 @@ namespace MiniRogue
             set { cardRectangle.Y = value; }
         }
 
-        KeyboardState kbState;
-        KeyboardState previousKbState;
-        Dice dice = new Dice();
-        int currentRoll;
+        public KeyboardState CurrentKbState { get; set; }
 
+        public KeyboardState PreviousKbState { get; set; }
+
+        public Dice Dice { get; set; }
 
 
         // Constructors
@@ -61,8 +61,8 @@ namespace MiniRogue
 
             CardTexture = cardTexture;
             CardRectangle = new Rectangle(0, 0, 494, 708);
-
-            this.Name = name;
+            Dice = new Dice();
+            Name = name;
             
         }
 
@@ -70,20 +70,17 @@ namespace MiniRogue
 
         public abstract void DrawCard(SpriteBatch sBatch,SpriteFont font, int xPos, int yPos);
 
-        public abstract void HandleCard();
+        public abstract void HandleCard(Player player);
 
 
-        private bool SingleKeyPress(Keys key)
+        public bool SingleKeyPress(Keys key)
         {
-            kbState = Keyboard.GetState();
-            if (kbState.IsKeyDown(key) && previousKbState.IsKeyUp(key))
+            if (CurrentKbState.IsKeyDown(key) && PreviousKbState.IsKeyUp(key))
             {
                 return true;
             }
             return false;
         }
-
-
 
     }
 }

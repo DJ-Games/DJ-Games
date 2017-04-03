@@ -42,7 +42,6 @@
     <Compile Include="Card.cs" />
     <Compile Include="Dice.cs" />
     <Compile Include="Difficulty.cs" />
-    <Compile Include="Dungeon.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="EventCard.cs" />
     <Compile Include="Game1.cs" />

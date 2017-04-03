@@ -38,15 +38,15 @@ namespace MiniRogue
 
             playerHand.Add(new Enemy("Enemy", enemyTex ));
 
-            playerHand.Add(new EventCard("EventCard", eventTex));
+            //playerHand.Add(new EventCard("EventCard", eventTex));
 
-            playerHand.Add(new Merchant("Merchant", merchantTex));
+            //playerHand.Add(new Merchant("Merchant", merchantTex));
 
-            playerHand.Add(new Resting("Resting", restingTex));
+            //playerHand.Add(new Resting("Resting", restingTex));
 
-            playerHand.Add(new Trap("Trap", trapTex));
+            //playerHand.Add(new Trap("Trap", trapTex));
 
-            playerHand.Add(new Treasure("Treasure", treasureTex));
+            //playerHand.Add(new Treasure("Treasure", treasureTex));
 
 
 

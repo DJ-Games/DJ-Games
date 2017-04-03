@@ -5,20 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace MiniRogue
 {
     class Enemy : Card
     {
 
-        // Properties
+        //---------------------- PROPERTIES --------------------------
+
         public int Damage { get; set; }
 
         public int ExpReward { get; set; }
 
         public int Health { get; set; }
 
-        // Consructors
+        //----------------------CONSTRUCTORS -------------------------
+
         public Enemy(string name, Texture2D cardTexture) : base(name, cardTexture)
         {
 
@@ -28,9 +31,15 @@ namespace MiniRogue
 
 
         //---------------------- METHODS -----------------------------
-        public override void HandleCard()
-        {
 
+        public override void HandleCard(Player player)
+        {
+            CurrentKbState = Keyboard.GetState();
+            if (SingleKeyPress(Keys.Space))
+            {
+                Health = 10; // player.DungeonArea + player.playerDice.RollDice(1);
+            }
+            PreviousKbState = CurrentKbState;
         }
 
         public override void DrawCard(SpriteBatch sBatch,SpriteFont font, int xPos, int yPos)
@@ -39,6 +48,7 @@ namespace MiniRogue
             YPos = yPos;
             sBatch.Draw(CardTexture, CardRectangle, Color.White);
             sBatch.DrawString(font, "Press Space to roll for monster difficulty.", new Vector2(50, 800), Color.White);
+            sBatch.DrawString(font, "Monster Health: " + Health, new Vector2(50, 825), Color.White);
         }
 
 

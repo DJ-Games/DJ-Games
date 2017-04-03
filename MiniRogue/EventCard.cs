@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 
 namespace MiniRogue
@@ -23,7 +24,7 @@ namespace MiniRogue
         }
 
         //---------------------- METHODS -----------------------------
-        public override void HandleCard()
+        public override void HandleCard(Player player)
         {
             
 

@@ -27,7 +27,7 @@ namespace MiniRogue
             {
                 case 1:
                     CurrentCard = playerHand.RevealCard();
-                    CurrentCard.HandleCard();
+                    CurrentCard.HandleCard(player);
                     break;
                 case 2:
                     break;

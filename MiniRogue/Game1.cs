@@ -21,31 +21,6 @@ namespace MiniRogue
         CREDITS,
     }
 
-    enum CardType
-    {
-        MERCHANT, 
-        EVENT,
-        TREASURE,
-        MONSTER,
-        TRAP,
-        RESTING, 
-        BOSS,
-    }
-
-    //enum CardPosition
-    //{
-    //    POSITION1,
-    //    POSITION2,
-    //    POSITION3,
-    //    POSITION4, 
-    //    POSITION5, 
-    //    POSITION6,
-    //}
-
-    
-
-
-
 
     public class Game1 : Game
     {
@@ -178,7 +153,7 @@ namespace MiniRogue
 
                     if (SingleKeyPress(Keys.D1))
                     {
-                        player = new Player(1, 5, 5, 6);
+                        player = new Player(1, 5, 5, 6) ;
                         playerHand = new Hand();
                         playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
                         turnPhase.HandlePhase(player, playerHand);
