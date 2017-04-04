@@ -9,6 +9,13 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MiniRogue
 {
+    enum EnemyTurnState
+    {
+        MONSTERHEALTHROLL1,
+        DAMAGEROLL1,
+
+    }
+
     class Enemy : Card
     {
 
@@ -19,6 +26,8 @@ namespace MiniRogue
         public int ExpReward { get; set; }
 
         public int Health { get; set; }
+
+        EnemyTurnState enemyTurnState = new EnemyTurnState();
 
         //----------------------CONSTRUCTORS -------------------------
 
@@ -34,12 +43,38 @@ namespace MiniRogue
 
         public override void HandleCard(Player player)
         {
-            if (SingleKeyPress(Keys.Space))
+            PreviousKbState = CurrentKbState;
+
+            switch (enemyTurnState)
             {
-                Health = 10; // player.DungeonArea + player.playerDice.RollDice(1);
+                case EnemyTurnState.MONSTERHEALTHROLL1:
+
+                    if (SingleKeyPress(Keys.Space))
+                    {
+                        Health = player.DungeonArea + player.playerDice.RollDice(1);
+                        enemyTurnState = EnemyTurnState.DAMAGEROLL1;
+                    }
+                    break;
+
+                case EnemyTurnState.DAMAGEROLL1:
+                    break;
+
+                default:
+                    break;
             }
 
         }
+
+
+
+
+
+
+
+
+
+
+
 
         public override void DrawCard(SpriteBatch sBatch,SpriteFont font, int xPos, int yPos)
         {

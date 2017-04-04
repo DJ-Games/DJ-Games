@@ -47,7 +47,6 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Hand.cs" />
     <Compile Include="Merchant.cs" />
-    <Compile Include="Phase.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

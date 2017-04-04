@@ -26,7 +26,7 @@ namespace MiniRogue
         //---------------------- METHODS -----------------------------
         public override void HandleCard(Player player)
         {
-            
+            PreviousKbState = CurrentKbState;
 
             //switch ()
             //{

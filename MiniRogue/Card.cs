@@ -20,7 +20,6 @@ namespace MiniRogue
         public bool Visible { get; set; }
 
 
-
         private Rectangle cardRectangle;
 
         public Rectangle CardRectangle
@@ -28,7 +27,6 @@ namespace MiniRogue
             get { return cardRectangle; }
             set { cardRectangle = value; }
         }
-
 
         public Texture2D CardTexture { get; set; }
 
@@ -55,6 +53,10 @@ namespace MiniRogue
         public Dice Dice { get; set; }
 
 
+
+
+
+
         // Constructors
         public Card(string name, Texture2D cardTexture)
         {
@@ -78,12 +80,16 @@ namespace MiniRogue
             CurrentKbState = Keyboard.GetState();
             if (CurrentKbState.IsKeyDown(key) && PreviousKbState.IsKeyUp(key))
             {
-                PreviousKbState = CurrentKbState;
                 return true;
             }
-            PreviousKbState = CurrentKbState;
             return false;
         }
+
+
+
+
+
+
 
     }
 }

@@ -24,12 +24,15 @@ namespace MiniRogue
         public Trap(string name, Texture2D cardTexture) : base(name, cardTexture)
         {
 
+
+
         }
 
 
         //---------------------- METHODS -----------------------------
         public override void HandleCard(Player player)
         {
+            PreviousKbState = CurrentKbState;
 
         }
 

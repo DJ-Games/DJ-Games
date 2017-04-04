@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace MiniRogue
 {
@@ -42,19 +44,20 @@ namespace MiniRogue
         public void ResolveTurn(KeyboardState current, KeyboardState previous, Player player, Hand playerHand)
         {
 
-            CurrentKBState = current;
-            PreviousKBState = previous;
+
 
             switch (turnState)
             {
                 case TurnState.SETUP:
                     CurrentCard = playerHand.RevealCard();
                     turnState = TurnState.TURN1;
+                    
 
                     break;
                 case TurnState.TURN1:
                     CurrentCard.HandleCard(player);
-                    //CurrentCard.DrawCard();
+
+
 
                     break;
                 case TurnState.TURN2:
@@ -72,6 +75,38 @@ namespace MiniRogue
 
 
         }
+
+
+        public void DrawTurn(SpriteBatch sBatch, SpriteFont font)
+        {
+            switch (turnState)
+            {
+                case TurnState.SETUP:
+
+
+
+                    break;
+                case TurnState.TURN1:
+
+                    CurrentCard.DrawCard(sBatch, font, 45, 40);
+
+
+
+                    break;
+                case TurnState.TURN2:
+                    break;
+                case TurnState.TURN3:
+                    break;
+                case TurnState.TURN4:
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+
+
 
 
 

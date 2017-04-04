@@ -46,7 +46,6 @@ namespace MiniRogue
         Player player;
         Hand playerHand;
         Dice playerDice;
-        Phase turnPhase;
         Turn playerTurn;
         Difficulty difficulty;
         int currentRoll;
@@ -99,7 +98,6 @@ namespace MiniRogue
             titleScreen = Content.Load<Texture2D>("Title");
             font = Content.Load<SpriteFont>("Font");
             playerDice = new Dice();
-            turnPhase = new Phase() {CurrentPhase = 1};
             difficulty = new Difficulty();
             playerTurn = new Turn();
             gamestate = Gamestate.TITILESCREEN;
@@ -158,7 +156,6 @@ namespace MiniRogue
                         player = new Player(1, 5, 5, 6) ;
                         playerHand = new Hand();
                         playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
-                        //turnPhase.HandlePhase(player, playerHand);
                         gamestate = Gamestate.DELVE;
                     }
 
@@ -167,7 +164,6 @@ namespace MiniRogue
                         player = new Player(0, 5, 3, 6);
                         playerHand = new Hand();
                         playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
-                        //turnPhase.HandlePhase(player, playerHand);
                         gamestate = Gamestate.DELVE;
                     }
 
@@ -176,7 +172,6 @@ namespace MiniRogue
                         player = new Player(0, 4, 2, 5);
                         playerHand = new Hand();
                         playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
-                        //turnPhase.HandlePhase(player, playerHand);
                         gamestate = Gamestate.DELVE;
                     }
 
@@ -185,7 +180,6 @@ namespace MiniRogue
                         player = new Player(0, 3, 1, 3);
                         playerHand = new Hand();
                         playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
-                        //turnPhase.HandlePhase(player, playerHand);
                         gamestate = Gamestate.DELVE;
                     }
 
@@ -260,7 +254,9 @@ namespace MiniRogue
 
                 case Gamestate.DELVE:
 
-                    //turnPhase.DrawPhase(spriteBatch, font, player);
+                    playerTurn.DrawTurn(spriteBatch, font);
+                    spriteBatch.DrawString(font, "Health: " + player.Health + "    Food: " + player.Food + "    Gold: " + player.Gold +
+                        "    XP: " + player.Experience, new Vector2(20, 900), Color.White);
 
                     break;
 
