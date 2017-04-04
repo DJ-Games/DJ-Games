@@ -72,7 +72,7 @@ namespace MiniRogue
 
         public abstract void DrawCard(SpriteBatch sBatch,SpriteFont font, int xPos, int yPos);
 
-        public abstract void HandleCard(Player player);
+        public abstract bool HandleCard(Player player);
 
 
         public bool SingleKeyPress(Keys key)

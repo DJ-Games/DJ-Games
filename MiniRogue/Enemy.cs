@@ -13,6 +13,7 @@ namespace MiniRogue
     {
         MONSTERHEALTHROLL1,
         DAMAGEROLL1,
+        COMPLETE,
 
     }
 
@@ -41,9 +42,12 @@ namespace MiniRogue
 
         //---------------------- METHODS -----------------------------
 
-        public override void HandleCard(Player player)
+        public override bool HandleCard(Player player)
         {
             PreviousKbState = CurrentKbState;
+
+
+
 
             switch (enemyTurnState)
             {
@@ -54,13 +58,19 @@ namespace MiniRogue
                         Health = player.DungeonArea + player.playerDice.RollDice(1);
                         enemyTurnState = EnemyTurnState.DAMAGEROLL1;
                     }
-                    break;
+                    return false;
 
                 case EnemyTurnState.DAMAGEROLL1:
-                    break;
+
+                    // Temp auto move to COMPLETE state till code is finished
+                    enemyTurnState = EnemyTurnState.COMPLETE;
+                    return false;
+
+                case EnemyTurnState.COMPLETE:
+                    return true;
 
                 default:
-                    break;
+                    return false;
             }
 
         }

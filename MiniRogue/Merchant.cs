@@ -26,9 +26,13 @@ namespace MiniRogue
         }
 
         //---------------------- METHODS -----------------------------
-        public override void HandleCard(Player player)
+        public override bool HandleCard(Player player)
         {
             PreviousKbState = CurrentKbState;
+
+
+            // temp return till states enum is made.
+            return false;
 
         }
 
