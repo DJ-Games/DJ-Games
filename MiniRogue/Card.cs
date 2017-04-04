@@ -75,10 +75,13 @@ namespace MiniRogue
 
         public bool SingleKeyPress(Keys key)
         {
+            CurrentKbState = Keyboard.GetState();
             if (CurrentKbState.IsKeyDown(key) && PreviousKbState.IsKeyUp(key))
             {
+                PreviousKbState = CurrentKbState;
                 return true;
             }
+            PreviousKbState = CurrentKbState;
             return false;
         }
 

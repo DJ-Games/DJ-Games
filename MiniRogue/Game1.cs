@@ -47,6 +47,7 @@ namespace MiniRogue
         Hand playerHand;
         Dice playerDice;
         Phase turnPhase;
+        Turn playerTurn;
         Difficulty difficulty;
         int currentRoll;
 
@@ -100,6 +101,7 @@ namespace MiniRogue
             playerDice = new Dice();
             turnPhase = new Phase() {CurrentPhase = 1};
             difficulty = new Difficulty();
+            playerTurn = new Turn();
             gamestate = Gamestate.TITILESCREEN;
             
 
@@ -156,7 +158,7 @@ namespace MiniRogue
                         player = new Player(1, 5, 5, 6) ;
                         playerHand = new Hand();
                         playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
-                        turnPhase.HandlePhase(player, playerHand);
+                        //turnPhase.HandlePhase(player, playerHand);
                         gamestate = Gamestate.DELVE;
                     }
 
@@ -165,7 +167,7 @@ namespace MiniRogue
                         player = new Player(0, 5, 3, 6);
                         playerHand = new Hand();
                         playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
-                        turnPhase.HandlePhase(player, playerHand);
+                        //turnPhase.HandlePhase(player, playerHand);
                         gamestate = Gamestate.DELVE;
                     }
 
@@ -174,7 +176,7 @@ namespace MiniRogue
                         player = new Player(0, 4, 2, 5);
                         playerHand = new Hand();
                         playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
-                        turnPhase.HandlePhase(player, playerHand);
+                        //turnPhase.HandlePhase(player, playerHand);
                         gamestate = Gamestate.DELVE;
                     }
 
@@ -183,7 +185,7 @@ namespace MiniRogue
                         player = new Player(0, 3, 1, 3);
                         playerHand = new Hand();
                         playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
-                        turnPhase.HandlePhase(player, playerHand);
+                        //turnPhase.HandlePhase(player, playerHand);
                         gamestate = Gamestate.DELVE;
                     }
 
@@ -192,7 +194,7 @@ namespace MiniRogue
 
                 case Gamestate.DELVE:
 
-
+                    playerTurn.ResolveTurn(kbState, PrevKbState, player, playerHand);
 
 
 
@@ -258,7 +260,7 @@ namespace MiniRogue
 
                 case Gamestate.DELVE:
 
-                    turnPhase.DrawPhase(spriteBatch, font, player);
+                    //turnPhase.DrawPhase(spriteBatch, font, player);
 
                     break;
 

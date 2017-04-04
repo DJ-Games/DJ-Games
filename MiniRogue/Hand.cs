@@ -11,9 +11,6 @@ namespace MiniRogue
     class Hand
     {
 
-
-
-
         private List<Card> playerHand;
 
         public List<Card> PlayerHand
@@ -23,6 +20,9 @@ namespace MiniRogue
         }
 
         public Random rGen { get; set; }
+
+
+
 
         public Hand ()
         {
@@ -35,7 +35,6 @@ namespace MiniRogue
         public void DrawNewHand(Texture2D enemyTex, Texture2D eventTex, Texture2D merchantTex,
             Texture2D restingTex, Texture2D trapTex, Texture2D treasureTex)
         {
-
             playerHand.Add(new Enemy("Enemy", enemyTex ));
 
             //playerHand.Add(new EventCard("EventCard", eventTex));
@@ -47,10 +46,11 @@ namespace MiniRogue
             //playerHand.Add(new Trap("Trap", trapTex));
 
             //playerHand.Add(new Treasure("Treasure", treasureTex));
-
-
-
         }
+
+
+
+
 
         public Card RevealCard()
         {
@@ -59,8 +59,6 @@ namespace MiniRogue
             tempCard = playerHand[tempInt];
             playerHand.RemoveAt(tempInt);
             return tempCard;
-
-
         }
 
 

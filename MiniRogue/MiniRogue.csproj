@@ -54,6 +54,7 @@
     <Compile Include="Resting.cs" />
     <Compile Include="Trap.cs" />
     <Compile Include="Treasure.cs" />
+    <Compile Include="Turn.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

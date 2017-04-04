@@ -34,12 +34,11 @@ namespace MiniRogue
 
         public override void HandleCard(Player player)
         {
-            CurrentKbState = Keyboard.GetState();
             if (SingleKeyPress(Keys.Space))
             {
                 Health = 10; // player.DungeonArea + player.playerDice.RollDice(1);
             }
-            PreviousKbState = CurrentKbState;
+
         }
 
         public override void DrawCard(SpriteBatch sBatch,SpriteFont font, int xPos, int yPos)
