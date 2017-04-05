@@ -11,7 +11,7 @@ namespace MiniRogue
 {
     enum EnemyTurnState
     {
-        MONSTERHEALTHROLL1,
+        MONSTERHEALTHROLL,
         DAMAGEROLL1,
         COMPLETE,
 
@@ -51,7 +51,7 @@ namespace MiniRogue
 
             switch (enemyTurnState)
             {
-                case EnemyTurnState.MONSTERHEALTHROLL1:
+                case EnemyTurnState.MONSTERHEALTHROLL:
 
                     if (SingleKeyPress(Keys.Space))
                     {
