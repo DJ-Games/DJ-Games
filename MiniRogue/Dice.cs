@@ -18,7 +18,7 @@ namespace MiniRogue
             rGen = new Random();
         }
 
-        public int RollDice(int number)
+        public int RollCombatDice(int number)
         {
             switch (number)
             {
@@ -42,11 +42,13 @@ namespace MiniRogue
                     return 0;
                     break;
             }
-
-
-
-
         }
 
+        public int RollDice()
+        {
+            return rGen.Next(6) + 1;
+        }
+         
     }
 }
+

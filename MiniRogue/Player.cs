@@ -19,6 +19,8 @@ namespace MiniRogue
 
         public int Experience { get; set; }
 
+        public int Rank { get; set; }
+
         public List<string> Spells { get; set; }
 
         public int Level { get; set; }
@@ -30,6 +32,7 @@ namespace MiniRogue
         public Dice playerDice { get; set; }
 
 
+
         public Player(int armor, int health, int gold, int food)
         {
 
@@ -37,6 +40,7 @@ namespace MiniRogue
             Health = health;
             Gold = gold;
             Food = food;
+            Rank = 1; 
 
             DungeonLevel = 1;
             DungeonArea = 1;
