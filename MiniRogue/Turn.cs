@@ -55,15 +55,10 @@ namespace MiniRogue
 
                     break;
                 case TurnState.TURN1:
-                    //if (CurrentCard.HandleCard(player));
-                    //{
-                    //    turnState = TurnState.TURN2;
-                    //}
-
-                    CurrentCard.HandleCard(player);
-
-
-
+                    if (CurrentCard.HandleCard(player)) 
+                    {
+                        turnState = TurnState.TURN2;
+                    }
                     break;
                 case TurnState.TURN2:
                     break;
@@ -99,6 +94,7 @@ namespace MiniRogue
 
                     break;
                 case TurnState.TURN2:
+
                     break;
                 case TurnState.TURN3:
                     break;

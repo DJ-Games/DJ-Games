@@ -12,8 +12,8 @@ namespace MiniRogue
 {
     enum EnemyTurnState
     {
-        MONSTERHEALTHROLL,
-        DAMAGEROLL,
+        MONSTER_HEALTH_ROLL,
+        DAMAGE_ROLL,
         COMPLETE,
 
     }
@@ -61,6 +61,9 @@ namespace MiniRogue
 
 
         //---------------------- METHODS -----------------------------
+
+
+
 
 
         /// <summary>
@@ -113,16 +116,16 @@ namespace MiniRogue
 
             switch (enemyTurnState)
             {
-                case EnemyTurnState.MONSTERHEALTHROLL:
+                case EnemyTurnState.MONSTER_HEALTH_ROLL:
 
                     if (SingleKeyPress(Keys.Space))
                     {
                         health = player.DungeonArea + player.playerDice.RollCombatDice(1);
-                        enemyTurnState = EnemyTurnState.DAMAGEROLL;
+                        enemyTurnState = EnemyTurnState.DAMAGE_ROLL;
                     }
                     return false;
 
-                case EnemyTurnState.DAMAGEROLL:
+                case EnemyTurnState.DAMAGE_ROLL:
 
 
                     if (Health > 0)
@@ -172,12 +175,44 @@ namespace MiniRogue
                     }
                     else
                     {
+                        switch (player.DungeonLevel)
+                        {
+                            case 1:
+
+                                player.Experience += 1;
+
+                                break;
+
+                            case 2:
+
+                                player.Experience += 2; 
+
+                                break;
+
+                            case 3:
+
+                                player.Experience += 2;
+
+                                break;
+
+                            case 4:
+
+                                player.Experience += 3;
+
+                                break;
+
+                            case 5:
+
+                                player.Experience += 3;
+
+                                break;
+
+                            default:
+                                break;
+                        }
                         enemyTurnState = EnemyTurnState.COMPLETE;
                     }
                      
-
-                    
-
                     return false;
 
                 case EnemyTurnState.COMPLETE:

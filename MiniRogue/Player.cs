@@ -17,7 +17,36 @@ namespace MiniRogue
 
         public int Food { get; set; }
 
-        public int Experience { get; set; }
+        private int experience;
+
+        public int Experience
+        {
+            get { return experience; }
+            set
+            {
+                if ((experience = value) < 6)
+                {
+                    Rank = 1;
+                    experience = value;
+                }
+                if ((experience = value) >= 6 && (experience = value) < 12)
+                {
+                    Rank = 2;
+                    experience = value;
+                }
+                if ((experience = value) >= 12 && (experience = value) < 18)
+                {
+                    Rank = 3;
+                    experience = value;
+                }
+                if ((experience = value) >= 18)
+                {
+                    Rank = 4;
+                    experience = value;
+                }
+            }
+        }
+
 
         public int Rank { get; set; }
 
