@@ -9,6 +9,16 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MiniRogue
 {
+
+    enum TrapTurnState
+    {
+
+    }
+
+
+
+
+
     class Trap : Card
     {
 

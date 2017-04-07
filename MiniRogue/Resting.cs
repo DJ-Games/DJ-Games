@@ -61,11 +61,11 @@ namespace MiniRogue
                     }
                     return false;
 
-                //case RestingTurnState.REVIEW:
-                //    return false;
+                case RestingTurnState.REVIEW:
+                    return false;
 
-                //case RestingTurnState.COMPLETE:
-                //    return true;
+                case RestingTurnState.COMPLETE:
+                    return true;
 
                 default:
                     return false;
@@ -79,11 +79,26 @@ namespace MiniRogue
         public override void DrawCard(SpriteBatch sBatch, SpriteFont font, int xPos, int yPos)
         {
 
-                    XPos = xPos;
-                    YPos = yPos;
-                    sBatch.Draw(CardTexture, CardRectangle, Color.White);
-                    sBatch.DrawString(font, "Select a number.", new Vector2(50, 800), Color.White);
+            XPos = xPos;
+            YPos = yPos;
+            sBatch.Draw(CardTexture, CardRectangle, Color.White);
+            sBatch.DrawString(font, "Select a number.", new Vector2(50, 800), Color.White);
+
+            switch (restingTurnState)
+            {
+                case RestingTurnState.SELECTION:
                     sBatch.DrawString(font, "1:  +1XP  2:  +1FOOD   3:  +2HP", new Vector2(50, 825), Color.White);
+                    break;
+                case RestingTurnState.REVIEW:
+                    break;
+                case RestingTurnState.COMPLETE:
+                    break;
+                default:
+                    break;
+            }
+
+
+
 
         }
 

@@ -174,10 +174,7 @@ namespace MiniRogue
                     break;
             }
 
-
-
-            // temp return till states enum is made.
-            return false;
+            return true;
 
 
 
