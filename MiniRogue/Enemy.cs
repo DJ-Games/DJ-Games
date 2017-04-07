@@ -34,9 +34,13 @@ namespace MiniRogue
             get { return health; }
             set
             {
-                if (health-value<0)
+                if((health = value) < 0)
                 {
                     health = 0;
+                }
+                else
+                {
+                    health = value;
                 }
                 
 
@@ -58,6 +62,12 @@ namespace MiniRogue
 
         //---------------------- METHODS -----------------------------
 
+
+        /// <summary>
+        /// Handles Enemy card turn.
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
         public override bool HandleCard(Player player)
         {
             PreviousKbState = CurrentKbState;
@@ -114,9 +124,11 @@ namespace MiniRogue
 
                 case EnemyTurnState.DAMAGEROLL:
 
-                    if (SingleKeyPress(Keys.Space))
+
+                    if (Health > 0)
                     {
-                        while (Health > 0)
+
+                        if (SingleKeyPress(Keys.Space))
                         {
                             switch (player.Rank)
                             {
@@ -154,19 +166,17 @@ namespace MiniRogue
                             if (Health > 0)
                             {
                                 player.Health -= Damage;
-
-
                             }
-
-
                         }
+
                     }
+                    else
+                    {
+                        enemyTurnState = EnemyTurnState.COMPLETE;
+                    }
+                     
 
-
-                 
-
-
-                    enemyTurnState = EnemyTurnState.COMPLETE;
+                    
 
                     return false;
 

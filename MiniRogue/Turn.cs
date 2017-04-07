@@ -115,14 +115,14 @@ namespace MiniRogue
 
 
 
-        private bool SingleKeyPress(Keys key)
-        {
-            if (CurrentKBState.IsKeyDown(key) && PreviousKBState.IsKeyUp(key))
-            {
-                return true;
-            }
-            return false;
-        }
+        //private bool SingleKeyPress(Keys key)
+        //{
+        //    if (CurrentKBState.IsKeyDown(key) && PreviousKBState.IsKeyUp(key))
+        //    {
+        //        return true;
+        //    }
+        //    return false;
+        //}
 
     }
 }
