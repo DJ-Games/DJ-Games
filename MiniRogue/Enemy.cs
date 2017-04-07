@@ -210,6 +210,7 @@ namespace MiniRogue
                             default:
                                 break;
                         }
+                        player.HasFoughtMonster = true;
                         enemyTurnState = EnemyTurnState.COMPLETE;
                     }
                      

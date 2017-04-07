@@ -10,7 +10,14 @@ using Microsoft.Xna.Framework.Input;
 namespace MiniRogue
 {
 
-
+    enum TreasureTurnState
+    {
+        GOLD_AWARD,
+        EXTRA_TREASURE_ROLL,
+        TREASURE_ROLL,
+        REVIEW,
+        COMPLETE,
+    }
 
 
 
@@ -21,9 +28,17 @@ namespace MiniRogue
 
         public bool Sucess { get; set; }
 
+        public int ExtTreasureResult { get; set; }
+
+        public int TreasureResult { get; set; }
+
+
+
+        TreasureTurnState treasureTurnState;
+
         public Treasure(string name, Texture2D cardTexture) : base(name, cardTexture)
         {
-
+            treasureTurnState = TreasureTurnState.GOLD_AWARD;
         }
 
 
@@ -32,48 +47,130 @@ namespace MiniRogue
         {
             PreviousKbState = CurrentKbState;
 
-            // temp return till states enum is made.
-            return false;
+            switch (treasureTurnState)
+            {
+                case TreasureTurnState.GOLD_AWARD:
+
+                    if (player.HasFoughtMonster)
+                    {
+                        player.Gold += 2;
+                    }
+                    else
+                    {
+                        player.Gold++;
+                    }
+                    treasureTurnState = TreasureTurnState.EXTRA_TREASURE_ROLL;
+
+                    return false;
+
+                case TreasureTurnState.EXTRA_TREASURE_ROLL:
+
+                    if (SingleKeyPress(Keys.Space))
+                    {
+                        ExtTreasureResult = player.playerDice.RollDice();
+
+                        if (ExtTreasureResult >= 5)
+                        {
+                            treasureTurnState = TreasureTurnState.TREASURE_ROLL;
+                        }
+                        else
+                        {
+                            treasureTurnState = TreasureTurnState.REVIEW;
+                        }
+
+                    }
+
+                    return false;
+
+                case TreasureTurnState.TREASURE_ROLL:
+
+                    if (SingleKeyPress(Keys.Space))
+                    {
+                        TreasureResult = player.playerDice.RollDice();
+
+                        switch (TreasureResult)
+                        {
+
+                            case 1:
+                                player.Armor++;
+                                break;
+
+                            case 2:
+                                player.Experience += 2;
+                                break;
+
+                            case 3:
+                                player.Spells.Add("Fireball");
+                                break;
+                            case 4:
+                                player.Spells.Add("Freeze");
+                                break;
+                            case 5:
+                                player.Spells.Add("Poison");
+                                break;
+                            case 6:
+                                player.Spells.Add("Healing");
+                                break;
+                            default:
+                                break;
+
+
+                        }
+                        treasureTurnState = TreasureTurnState.REVIEW;
+
+                    }
+
+                    return false;
+
+                case TreasureTurnState.REVIEW:
+
+                    treasureTurnState = TreasureTurnState.COMPLETE;
+
+                    return false;
+
+                case TreasureTurnState.COMPLETE:
+
+                    return true;
+
+                default:
+
+                    return false;
+            }
+
 
         }
 
 
 
 
-
-        //public void TreasureResult(int option, Player player)
-        //{
-        //    switch (option)
-        //    {
-        //        case 1:
-        //            player.Armor++;
-        //            break;
-        //        case 2:
-        //            player.Experience += 2;
-        //            break;
-        //        case 3:
-        //            player.Spells.Add("Fireball");
-        //            break;
-        //        case 4:
-        //            player.Spells.Add("Freeze");
-        //            break;
-        //        case 5:
-        //            player.Spells.Add("Poison");
-        //            break;
-        //        case 6:
-        //            player.Spells.Add("Healing");
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
-
         public override void DrawCard(SpriteBatch sBatch, SpriteFont font, int xPos, int yPos)
         {
             XPos = xPos;
             YPos = yPos;
             sBatch.Draw(CardTexture, CardRectangle, Color.White);
-            sBatch.DrawString(font, "Press Space to roll for attempt.", new Vector2(50, 800), Color.White);
+
+            switch (treasureTurnState)
+            {
+                case TreasureTurnState.GOLD_AWARD:
+                    break;
+                case TreasureTurnState.EXTRA_TREASURE_ROLL:
+
+                    sBatch.DrawString(font, "Press Space. Roll 5+ to revceive extra treasure.", new Vector2(50, 800), Color.White);
+
+                    break;
+                case TreasureTurnState.TREASURE_ROLL:
+
+                    sBatch.DrawString(font, "Press Space to roll for Treasure.", new Vector2(50, 800), Color.White);
+
+                    break;
+                case TreasureTurnState.REVIEW:
+                    break;
+                case TreasureTurnState.COMPLETE:
+                    break;
+                default:
+                    break;
+            }
+
         }
 
     }

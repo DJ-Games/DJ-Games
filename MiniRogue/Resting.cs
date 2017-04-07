@@ -47,17 +47,17 @@ namespace MiniRogue
                     if (SingleKeyPress(Keys.D1))
                     {
                         player.Experience++;
-                        //restingTurnState = RestingTurnState.REVIEW;
+                        restingTurnState = RestingTurnState.REVIEW;
                     }
                     if (SingleKeyPress(Keys.D2))
                     {
                         player.Food++;
-                        //restingTurnState = RestingTurnState.REVIEW;
+                        restingTurnState = RestingTurnState.REVIEW;
                     }
                     if (SingleKeyPress(Keys.D3))
                     {
                         player.Health += 2;
-                        //restingTurnState = RestingTurnState.REVIEW;
+                        restingTurnState = RestingTurnState.REVIEW;
                     }
                     return false;
 

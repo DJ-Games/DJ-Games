@@ -60,6 +60,8 @@ namespace MiniRogue
 
         public Dice playerDice { get; set; }
 
+        public bool HasFoughtMonster { get; set; }
+
 
 
         public Player(int armor, int health, int gold, int food)
@@ -74,6 +76,8 @@ namespace MiniRogue
             DungeonLevel = 1;
             DungeonArea = 1;
 
+            HasFoughtMonster = false;
+
             playerDice = new Dice();
             Spells = new List<string>();
         }
@@ -83,7 +87,61 @@ namespace MiniRogue
 
         }
 
+        // Methods
+        public void FallBelow()
+        {
+            switch (Rank)
+            {
+                case 1:
 
+                    break;
+
+                case 2:
+
+                    DungeonLevel--;
+                    DungeonArea -= 2;
+
+                    break;
+
+                case 3:
+
+                    DungeonLevel--;
+                    if (DungeonArea == 7)
+                    {
+                        DungeonArea -= 3;
+                    }
+                    else
+                    {
+                        DungeonArea -= 2;
+                    }
+
+                    break;
+
+                case 4:
+
+                    DungeonLevel--;
+                    DungeonArea -= 3;
+
+                    break;
+
+                case 5:
+
+                    DungeonLevel--;
+                    if (DungeonArea == 14)
+                    {
+                        DungeonArea -= 4;
+                    }
+                    else
+                    {
+                        DungeonArea -= 3;
+                    }
+
+                    break;
+
+                default:
+                    break;
+            }
+        }
 
 
 
