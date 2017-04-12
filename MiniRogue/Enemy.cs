@@ -244,6 +244,7 @@ namespace MiniRogue
             sBatch.Draw(CardTexture, CardRectangle, Color.White);
             sBatch.DrawString(font, "Press Space to roll for monster difficulty.", new Vector2(50, 800), Color.White);
             sBatch.DrawString(font, "Monster Health: " + Health, new Vector2(50, 825), Color.White);
+            
         }
 
 
