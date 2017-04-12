@@ -56,8 +56,12 @@ namespace MiniRogue
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            graphics.PreferredBackBufferWidth = 576;  // set this value to the desired width of your window
-            graphics.PreferredBackBufferHeight = 960;   // set this value to the desired height of your window
+            //graphics.PreferredBackBufferWidth = 576;  // set this value to the desired width of your window
+            //graphics.PreferredBackBufferHeight = 960;   // set this value to the desired height of your window
+
+            graphics.IsFullScreen = true;
+            graphics.ApplyChanges();
+
             graphics.ApplyChanges();
         }
 
