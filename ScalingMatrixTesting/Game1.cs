@@ -11,11 +11,19 @@ namespace ScalingMatrixTesting
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Texture2D title;
+
 
         public Game1()
         {
+
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;  // set this value to the desired width of your window
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;   // set this value to the desired height of your window
+
+
         }
 
         /// <summary>
@@ -41,6 +49,10 @@ namespace ScalingMatrixTesting
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+
+            title = Content.Load<Texture2D>("Title");
+
+
         }
 
         /// <summary>
@@ -76,6 +88,18 @@ namespace ScalingMatrixTesting
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+
+
+            spriteBatch.Begin();
+
+
+            spriteBatch.Draw(title, new Vector2(10, 10), Color.White);
+
+
+
+
+            spriteBatch.End();
+
 
             base.Draw(gameTime);
         }
