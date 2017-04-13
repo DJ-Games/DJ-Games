@@ -237,7 +237,7 @@ namespace MiniRogue
             {
                 case Gamestate.TITILESCREEN:
 
-                    spriteBatch.Draw(titleScreen, new Vector2((), 10), Color.White);                 
+                    spriteBatch.Draw(titleScreen, new Vector2((10), 10), Color.White);                 
 
                     //spriteBatch.Draw(titleScreen, new Rectangle(45, 40, 494, 708), Color.White);
                     spriteBatch.DrawString(font, "Press Space to Begin", new Vector2(210, 800), Color.AntiqueWhite);
