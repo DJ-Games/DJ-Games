@@ -50,14 +50,22 @@ namespace MiniRogue
         Difficulty difficulty;
         int currentRoll;
 
+        int deviceWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+        int deviceHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+
+
 
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            graphics.PreferredBackBufferWidth = 576;  // set this value to the desired width of your window
-            graphics.PreferredBackBufferHeight = 960;   // set this value to the desired height of your window
+            //graphics.PreferredBackBufferWidth = 576;  // set this value to the desired width of your window
+            //graphics.PreferredBackBufferHeight = 960;   // set this value to the desired height of your window
+
+            //Sets resolution to resolution of current device. 
+            graphics.PreferredBackBufferWidth = deviceWidth;  
+            graphics.PreferredBackBufferHeight = deviceHeight;   
 
             //graphics.IsFullScreen = true;;
 
@@ -237,7 +245,7 @@ namespace MiniRogue
             {
                 case Gamestate.TITILESCREEN:
 
-                    spriteBatch.Draw(titleScreen, new Vector2((10), 10), Color.White);                 
+                    spriteBatch.Draw(titleScreen, new Vector2(deviceWidth / 2.2f, deviceHeight / 2.2f), new Rectangle?(), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);                 
 
                     //spriteBatch.Draw(titleScreen, new Rectangle(45, 40, 494, 708), Color.White);
                     spriteBatch.DrawString(font, "Press Space to Begin", new Vector2(210, 800), Color.AntiqueWhite);
