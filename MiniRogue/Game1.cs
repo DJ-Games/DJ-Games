@@ -56,11 +56,10 @@ namespace MiniRogue
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            //graphics.PreferredBackBufferWidth = 576;  // set this value to the desired width of your window
-            //graphics.PreferredBackBufferHeight = 960;   // set this value to the desired height of your window
+            graphics.PreferredBackBufferWidth = 576;  // set this value to the desired width of your window
+            graphics.PreferredBackBufferHeight = 960;   // set this value to the desired height of your window
 
-            graphics.IsFullScreen = true;
-            graphics.ApplyChanges();
+            //graphics.IsFullScreen = true;;
 
             graphics.ApplyChanges();
         }
@@ -238,7 +237,7 @@ namespace MiniRogue
             {
                 case Gamestate.TITILESCREEN:
 
-                    spriteBatch.Draw(titleScreen, new Rectangle((GraphicsDevice.Viewport.Height / 10), (GraphicsDevice.Viewport.Width / 10), (GraphicsDevice.Viewport.Height / 2), (GraphicsDevice.Viewport.Width / 8)), Color.White);                 
+                    spriteBatch.Draw(titleScreen, new Vector2((), 10), Color.White);                 
 
                     //spriteBatch.Draw(titleScreen, new Rectangle(45, 40, 494, 708), Color.White);
                     spriteBatch.DrawString(font, "Press Space to Begin", new Vector2(210, 800), Color.AntiqueWhite);
