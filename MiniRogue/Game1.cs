@@ -173,47 +173,14 @@ namespace MiniRogue
 
                     break;
 
+                // -------------- Difficulty Select Screen Game State Update -------------------
+                // 
+                // Player is created, hand is created, new hand is draw, and player stats
+                // set based on difficulty selection. 
+
                 case Gamestate.DIFFICULTY_SELECT:
 
-
-
-                    //player = difficulty.Select(kbState, PrevKbState);
-
-
-                    // This whole gamestate is bad code... too much repeating code. Find Better method. 
-
-
-                    //if (SingleKeyPress(Keys.D1))
-                    //{
-                    //    player = new Player(1, 5, 5, 6);
-                    //    playerHand = new Hand();
-                    //    playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
-                    //    gamestate = Gamestate.DELVE;
-                    //}
-
-                    //if (SingleKeyPress(Keys.D2))
-                    //{
-                    //    player = new Player(0, 5, 3, 6);
-                    //    playerHand = new Hand();
-                    //    playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
-                    //    gamestate = Gamestate.DELVE;
-                    //}
-
-                    //if (SingleKeyPress(Keys.D3))
-                    //{
-                    //    player = new Player(0, 4, 2, 5);
-                    //    playerHand = new Hand();
-                    //    playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
-                    //    gamestate = Gamestate.DELVE;
-                    //}
-
-                    //if (SingleKeyPress(Keys.D4))
-                    //{
-                    //    player = new Player(0, 3, 1, 3);
-                    //    playerHand = new Hand();
-                    //    playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
-                    //    gamestate = Gamestate.DELVE;
-                    //}
+                    //----- Begin Mouse controls -----
 
                     if (SingleMouseClick())
                     {
@@ -259,14 +226,26 @@ namespace MiniRogue
                         }
                     }
 
-
-
-
                     break;
+
+                //----- End Mouse Controls -----
+
+                // -------------- Delve Game State Update -------------------
 
                 case Gamestate.DELVE:
 
                     playerTurn.ResolveTurn(kbState, prevKbState, player, playerHand);
+
+                    
+
+
+
+
+
+
+
+
+
 
 
 
@@ -315,24 +294,20 @@ namespace MiniRogue
 
                     spriteBatch.Draw(titleScreen, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);                 
 
-                    //spriteBatch.Draw(titleScreen, new Rectangle(45, 40, 494, 708), Color.White);
-                    //spriteBatch.DrawString(font, "Press Space to Begin", new Vector2(210, 800), Color.AntiqueWhite);
-
 
                     break;
 
-                case Gamestate.DIFFICULTY_SELECT:
 
-                    //spriteBatch.DrawString(font, "Difficulty Select", new Vector2(220, 200), Color.White);
-                    //spriteBatch.DrawString(font, "1. Casual", new Vector2(220, 250), Color.White);
-                    //spriteBatch.DrawString(font, "2. Normal", new Vector2(220, 300), Color.White);
-                    //spriteBatch.DrawString(font, "3. Hard", new Vector2(220, 350), Color.White);
-                    //spriteBatch.DrawString(font, "4. Impossible", new Vector2(220, 400), Color.White);
+                // -------------- Difficulty Select Screen Game State Draw -----------------
+
+                case Gamestate.DIFFICULTY_SELECT:
 
                     spriteBatch.Draw(difficultyScreen, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
 
                     break;
+
+                // -------------- Delve Game State Draw -------------------
 
                 case Gamestate.DELVE:
 
