@@ -17,7 +17,7 @@ namespace MiniRogue
         // Properties
         public string Name { get; set; }
 
-        public bool Visible { get; set; }
+        public bool Flipped { get; set; }
 
 
         private Rectangle cardRectangle;

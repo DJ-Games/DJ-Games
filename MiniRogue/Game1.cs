@@ -349,6 +349,14 @@ namespace MiniRogue
                     spriteBatch.DrawString(font, "Dungeon Level: " + player.DungeonLevel, new Vector2(1120, 20), Color.White);
                     spriteBatch.DrawString(font, "Dungeon Area: " + player.DungeonArea, new Vector2(1120, 40), Color.White);
 
+                    spriteBatch.Draw(door, new Vector2(75, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(door, new Vector2(300, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(door, new Vector2(300, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(door, new Vector2(525, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(door, new Vector2(750, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(door, new Vector2(750, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(door, new Vector2(975, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+
                     break;
 
 

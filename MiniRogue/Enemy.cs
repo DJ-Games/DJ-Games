@@ -14,6 +14,8 @@ namespace MiniRogue
     {
         MONSTER_HEALTH_ROLL,
         DAMAGE_ROLL,
+        DAMAGE_ROLL_MAXIMIZE,
+        REVIEW,
         COMPLETE,
 
     }
@@ -28,6 +30,11 @@ namespace MiniRogue
         public int ExpReward { get; set; }
 
         private int health;
+
+        public int DamageRoll1 { get; set; }
+        public int DamageRoll2 { get; set; }
+        public int DamageRoll3 { get; set; }
+        public int DamageRoll4 { get; set; }
 
         public int Health
         {
@@ -120,7 +127,7 @@ namespace MiniRogue
 
                     if (SingleKeyPress(Keys.Space))
                     {
-                        health = player.DungeonArea + player.playerDice.RollCombatDice(1);
+                        health = player.DungeonArea + player.playerDice.RollDice();
                         enemyTurnState = EnemyTurnState.DAMAGE_ROLL;
                     }
                     return false;
@@ -133,46 +140,66 @@ namespace MiniRogue
 
                         if (SingleKeyPress(Keys.Space))
                         {
+
+
+
+
                             switch (player.Rank)
                             {
                                 case 1:
 
-                                    Health -= player.playerDice.RollCombatDice(1);
+                                    DamageRoll1 = player.playerDice.RollDice();
 
                                     break;
 
 
                                 case 2:
 
-                                    Health -= player.playerDice.RollCombatDice(2);
+                                    DamageRoll1 = player.playerDice.RollDice();
+                                    DamageRoll2 = player.playerDice.RollDice();
 
                                     break;
 
 
                                 case 3:
 
-                                    Health -= player.playerDice.RollCombatDice(3);
+                                    DamageRoll1 = player.playerDice.RollDice();
+                                    DamageRoll2 = player.playerDice.RollDice();
+                                    DamageRoll3 = player.playerDice.RollDice();
 
                                     break;
 
 
                                 case 4:
 
-                                    Health -= player.playerDice.RollCombatDice(4);
+                                    DamageRoll1 = player.playerDice.RollDice();
+                                    DamageRoll2 = player.playerDice.RollDice();
+                                    DamageRoll3 = player.playerDice.RollDice();
+                                    DamageRoll4 = player.playerDice.RollDice();
 
                                     break;
 
                                 default:
                                     break;
                             }
-
-                            if (Health > 0)
-                            {
-                                player.Health -= Damage;
-                            }
                         }
+                    } 
+                    return false;
+                case EnemyTurnState.DAMAGE_ROLL_MAXIMIZE:
 
+                    
+
+
+
+
+
+
+
+                    if (Health > 0)
+                    {
+                        player.Health -= Damage;
                     }
+        
                     else
                     {
                         switch (player.DungeonLevel)
@@ -210,11 +237,15 @@ namespace MiniRogue
                             default:
                                 break;
                         }
-                        player.HasFoughtMonster = true;
+    player.HasFoughtMonster = true;
                         enemyTurnState = EnemyTurnState.COMPLETE;
                     }
-                     
+
+                    return false; 
+
+                case EnemyTurnState.REVIEW:
                     return false;
+
 
                 case EnemyTurnState.COMPLETE:
                     Thread.Sleep(2000);
@@ -244,7 +275,31 @@ namespace MiniRogue
             sBatch.Draw(CardTexture, CardRectangle, Color.White);
             sBatch.DrawString(font, "Press Space to roll for monster difficulty.", new Vector2(50, 800), Color.White);
             sBatch.DrawString(font, "Monster Health: " + Health, new Vector2(50, 825), Color.White);
-            
+
+            switch (enemyTurnState)
+            {
+                case EnemyTurnState.MONSTER_HEALTH_ROLL:
+                    break;
+                case EnemyTurnState.DAMAGE_ROLL:
+                    break;
+                case EnemyTurnState.DAMAGE_ROLL_MAXIMIZE:
+                    
+                    //sBatch.DrawString(font, "Player Die")
+
+
+
+                    break;
+                case EnemyTurnState.REVIEW:
+                    break;
+                case EnemyTurnState.COMPLETE:
+                    break;
+                default:
+                    break;
+            }
+
+
+
+
         }
 
 
