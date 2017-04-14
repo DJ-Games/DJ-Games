@@ -44,6 +44,7 @@ namespace MiniRogue
         Texture2D treasureCard;
         Texture2D titleScreen;
         Texture2D difficultyScreen;
+        Texture2D door;
         SpriteFont font;
         Vector2 position;
 
@@ -112,9 +113,10 @@ namespace MiniRogue
             treasureCard = Content.Load<Texture2D>("Treasure");
             titleScreen = Content.Load<Texture2D>("TitleScreen");
             difficultyScreen = Content.Load<Texture2D>("DifficultySelectScreen");
+            door = Content.Load<Texture2D>("Door");
             font = Content.Load<SpriteFont>("Font");
             position = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
-                graphics.GraphicsDevice.Viewport.Height / 2);
+            graphics.GraphicsDevice.Viewport.Height / 2);
             playerDice = new Dice();
             difficulty = new Difficulty();
             playerTurn = new Turn();
