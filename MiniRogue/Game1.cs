@@ -29,7 +29,9 @@ namespace MiniRogue
 
         Gamestate gamestate;
         KeyboardState kbState;
-        KeyboardState PrevKbState;
+        KeyboardState prevKbState;
+        MouseState mouseState;
+        MouseState prevMouseState;
 
         Texture2D bossMonsterCard;
         Texture2D characterStatsCard;
@@ -41,7 +43,9 @@ namespace MiniRogue
         Texture2D trapCard;
         Texture2D treasureCard;
         Texture2D titleScreen;
+        Texture2D difficultyScreen;
         SpriteFont font;
+        Vector2 position;
 
         Player player;
         Hand playerHand;
@@ -83,7 +87,7 @@ namespace MiniRogue
             // TODO: Add your initialization logic here
 
             base.Initialize();
-
+            this.IsMouseVisible = true;
         }
 
         /// <summary>
@@ -106,8 +110,11 @@ namespace MiniRogue
             restingCard = Content.Load<Texture2D>("Resting");
             trapCard = Content.Load<Texture2D>("Trap");
             treasureCard = Content.Load<Texture2D>("Treasure");
-            titleScreen = Content.Load<Texture2D>("Title");
+            titleScreen = Content.Load<Texture2D>("TitleScreen");
+            difficultyScreen = Content.Load<Texture2D>("DifficultySelectScreen");
             font = Content.Load<SpriteFont>("Font");
+            position = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
+                graphics.GraphicsDevice.Viewport.Height / 2);
             playerDice = new Dice();
             difficulty = new Difficulty();
             playerTurn = new Turn();
@@ -138,6 +145,9 @@ namespace MiniRogue
 
             // TODO: Add your update logic here
 
+            mouseState = Mouse.GetState();
+            position.X = mouseState.X;
+            position.Y = mouseState.Y;
 
 
             //------------------- Switch for gamestates ------------------------
@@ -151,9 +161,18 @@ namespace MiniRogue
 
                     }
 
+                    if (SingleMouseClick())
+                    {
+                        if (position.X > 800 && position.X < 1050 && position.Y > 372 && position.Y < 446)
+                        {
+                            gamestate = Gamestate.DIFFICULTY_SELECT;
+                        }
+                    }
+
                     break;
 
                 case Gamestate.DIFFICULTY_SELECT:
+
 
 
                     //player = difficulty.Select(kbState, PrevKbState);
@@ -162,44 +181,90 @@ namespace MiniRogue
                     // This whole gamestate is bad code... too much repeating code. Find Better method. 
 
 
-                    if (SingleKeyPress(Keys.D1))
+                    //if (SingleKeyPress(Keys.D1))
+                    //{
+                    //    player = new Player(1, 5, 5, 6);
+                    //    playerHand = new Hand();
+                    //    playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
+                    //    gamestate = Gamestate.DELVE;
+                    //}
+
+                    //if (SingleKeyPress(Keys.D2))
+                    //{
+                    //    player = new Player(0, 5, 3, 6);
+                    //    playerHand = new Hand();
+                    //    playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
+                    //    gamestate = Gamestate.DELVE;
+                    //}
+
+                    //if (SingleKeyPress(Keys.D3))
+                    //{
+                    //    player = new Player(0, 4, 2, 5);
+                    //    playerHand = new Hand();
+                    //    playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
+                    //    gamestate = Gamestate.DELVE;
+                    //}
+
+                    //if (SingleKeyPress(Keys.D4))
+                    //{
+                    //    player = new Player(0, 3, 1, 3);
+                    //    playerHand = new Hand();
+                    //    playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
+                    //    gamestate = Gamestate.DELVE;
+                    //}
+
+                    if (SingleMouseClick())
                     {
-                        player = new Player(1, 5, 5, 6) ;
-                        playerHand = new Hand();
-                        playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
-                        gamestate = Gamestate.DELVE;
+                        if (position.X > 800 && position.X < 1050 && position.Y > 167 && position.Y < 241)
+                        {
+                            player = new Player(1, 5, 5, 6);
+                            playerHand = new Hand();
+                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
+                            gamestate = Gamestate.DELVE;
+                        }
                     }
 
-                    if (SingleKeyPress(Keys.D2))
+                    if (SingleMouseClick())
                     {
-                        player = new Player(0, 5, 3, 6);
-                        playerHand = new Hand();
-                        playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
-                        gamestate = Gamestate.DELVE;
+                        if (position.X > 800 && position.X < 1050 && position.Y > 270 && position.Y < 344)
+                        {
+                            player = new Player(0, 5, 3, 6);
+                            playerHand = new Hand();
+                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
+                            gamestate = Gamestate.DELVE;
+                        }
                     }
 
-                    if (SingleKeyPress(Keys.D3))
+                    if (SingleMouseClick())
                     {
-                        player = new Player(0, 4, 2, 5);
-                        playerHand = new Hand();
-                        playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
-                        gamestate = Gamestate.DELVE;
+                        if (position.X > 800 && position.X < 1050 && position.Y > 373 && position.Y < 447)
+                        {
+                            player = new Player(0, 4, 2, 5);
+                            playerHand = new Hand();
+                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
+                            gamestate = Gamestate.DELVE;
+                        }
                     }
 
-                    if (SingleKeyPress(Keys.D4))
+                    if (SingleMouseClick())
                     {
-                        player = new Player(0, 3, 1, 3);
-                        playerHand = new Hand();
-                        playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
-                        gamestate = Gamestate.DELVE;
+                        if (position.X > 800 && position.X < 1050 && position.Y > 476 && position.Y < 550)
+                        {
+                            player = new Player(0, 3, 1, 3);
+                            playerHand = new Hand();
+                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
+                            gamestate = Gamestate.DELVE;
+                        }
                     }
+
+
 
 
                     break;
 
                 case Gamestate.DELVE:
 
-                    playerTurn.ResolveTurn(kbState, PrevKbState, player, playerHand);
+                    playerTurn.ResolveTurn(kbState, prevKbState, player, playerHand);
 
 
 
@@ -223,7 +288,8 @@ namespace MiniRogue
                     break;
             }
 
-            PrevKbState = kbState;
+            prevKbState = kbState;
+            prevMouseState = mouseState;
 
             base.Update(gameTime);
         }
@@ -245,22 +311,23 @@ namespace MiniRogue
             {
                 case Gamestate.TITILESCREEN:
 
-                    spriteBatch.Draw(titleScreen, new Vector2(150, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .8f, SpriteEffects.None, 1);                 
+                    spriteBatch.Draw(titleScreen, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);                 
 
                     //spriteBatch.Draw(titleScreen, new Rectangle(45, 40, 494, 708), Color.White);
-                    spriteBatch.DrawString(font, "Press Space to Begin", new Vector2(210, 800), Color.AntiqueWhite);
+                    //spriteBatch.DrawString(font, "Press Space to Begin", new Vector2(210, 800), Color.AntiqueWhite);
 
 
                     break;
 
                 case Gamestate.DIFFICULTY_SELECT:
 
-                    spriteBatch.DrawString(font, "Difficulty Select", new Vector2(220, 200), Color.White);
-                    spriteBatch.DrawString(font, "1. Casual", new Vector2(220, 250), Color.White);
-                    spriteBatch.DrawString(font, "2. Normal", new Vector2(220, 300), Color.White);
-                    spriteBatch.DrawString(font, "3. Hard", new Vector2(220, 350), Color.White);
-                    spriteBatch.DrawString(font, "4. Impossible", new Vector2(220, 400), Color.White);
+                    //spriteBatch.DrawString(font, "Difficulty Select", new Vector2(220, 200), Color.White);
+                    //spriteBatch.DrawString(font, "1. Casual", new Vector2(220, 250), Color.White);
+                    //spriteBatch.DrawString(font, "2. Normal", new Vector2(220, 300), Color.White);
+                    //spriteBatch.DrawString(font, "3. Hard", new Vector2(220, 350), Color.White);
+                    //spriteBatch.DrawString(font, "4. Impossible", new Vector2(220, 400), Color.White);
 
+                    spriteBatch.Draw(difficultyScreen, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
 
                     break;
@@ -306,7 +373,16 @@ namespace MiniRogue
         private bool SingleKeyPress(Keys key)
         {
             kbState = Keyboard.GetState();
-            if (kbState.IsKeyDown(key) && PrevKbState.IsKeyUp(key))
+            if (kbState.IsKeyDown(key) && prevKbState.IsKeyUp(key))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool SingleMouseClick()
+        {
+            if (mouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton == ButtonState.Released)
             {
                 return true;
             }
