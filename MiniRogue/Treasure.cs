@@ -147,7 +147,7 @@ namespace MiniRogue
         {
             XPos = xPos;
             YPos = yPos;
-            sBatch.Draw(CardTexture, CardRectangle, Color.White);
+            //sBatch.Draw(CardTexture, CardRectangle, Color.White);
 
             switch (treasureTurnState)
             {

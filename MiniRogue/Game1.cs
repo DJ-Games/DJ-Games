@@ -335,8 +335,17 @@ namespace MiniRogue
                 case Gamestate.DELVE:
 
                     playerTurn.DrawTurn(spriteBatch, font);
-                    spriteBatch.DrawString(font, "Health: " + player.Health + "    Food: " + player.Food + "    Gold: " + player.Gold +
-                        "    XP: " + player.Experience, new Vector2(20, 900), Color.White);
+                    spriteBatch.DrawString(font, "Health: " + player.Health, new Vector2(20, 20), Color.White);
+                    spriteBatch.DrawString(font, "Armor: " + player.Armor, new Vector2(120, 20), Color.White);
+                    spriteBatch.DrawString(font, "Gold: " + player.Gold, new Vector2(220, 20), Color.White);
+                    spriteBatch.DrawString(font, "Food: " + player.Food, new Vector2(320, 20), Color.White);
+                    spriteBatch.DrawString(font, "XP: " + player.Experience, new Vector2(420, 20), Color.White);
+                    spriteBatch.DrawString(font, "Rank: " + player.Rank, new Vector2(520, 20), Color.White);
+                    spriteBatch.DrawString(font, "Spell1: ", new Vector2(620, 20), Color.White);
+                    spriteBatch.DrawString(font, "Spell2: ", new Vector2(820, 20), Color.White);
+
+                    spriteBatch.DrawString(font, "Dungeon Level: " + player.DungeonLevel, new Vector2(1120, 20), Color.White);
+                    spriteBatch.DrawString(font, "Dungeon Area: " + player.DungeonArea, new Vector2(1120, 40), Color.White);
 
                     break;
 
