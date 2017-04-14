@@ -24,9 +24,9 @@ namespace MiniRogue
 
         TurnState turnState = new TurnState();
 
-        public  KeyboardState CurrentKBState { get; set; }
+        public  MouseState MouseState { get; set; }
 
-        public KeyboardState PreviousKBState { get; set; }
+        public MouseState PreviousMouseState { get; set; }
 
         public Card CurrentCard { get; set; }
 
@@ -41,9 +41,10 @@ namespace MiniRogue
 
 
 
-        public void ResolveTurn(KeyboardState current, KeyboardState previous, Player player, Hand playerHand)
+        public void ResolveTurn(MouseState current, MouseState previous, Player player, Hand playerHand)
         {
-
+            MouseState = current;
+            PreviousMouseState = previous;
 
 
             switch (turnState)
@@ -111,8 +112,11 @@ namespace MiniRogue
 
 
 
+
+
                     break;
                 case TurnState.TURN1:
+
 
                     CurrentCard.DrawCard(sBatch, font, 45, 40);
 
@@ -141,7 +145,14 @@ namespace MiniRogue
         }
 
 
-
+        private bool SingleMouseClick()
+        {
+            if (MouseState.LeftButton == ButtonState.Pressed && PreviousMouseState.LeftButton == ButtonState.Released)
+            {
+                return true;
+            }
+            return false;
+        }
 
 
 
@@ -153,6 +164,9 @@ namespace MiniRogue
         //    }
         //    return false;
         //}
+
+
+
 
     }
 }

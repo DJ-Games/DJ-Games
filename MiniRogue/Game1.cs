@@ -234,7 +234,7 @@ namespace MiniRogue
 
                 case Gamestate.DELVE:
 
-                    playerTurn.ResolveTurn(kbState, prevKbState, player, playerHand);
+                    playerTurn.ResolveTurn(mouseState, prevMouseState, player, playerHand);
 
                     
 
