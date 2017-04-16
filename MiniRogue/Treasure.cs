@@ -20,7 +20,6 @@ namespace MiniRogue
     }
 
 
-
     class Treasure : Card
     {
 

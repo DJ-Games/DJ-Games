@@ -41,9 +41,9 @@ namespace MiniRogue
 
 
 
-        public void ResolveTurn(MouseState current, MouseState previous, Player player, Hand playerHand)
+        public void ResolveTurn(MouseState current, MouseState previous, Vector2 position, Player player, Hand playerHand)
         {
-            MouseState = current;
+            MouseState = Mouse.GetState();
             PreviousMouseState = previous;
 
 
@@ -51,19 +51,36 @@ namespace MiniRogue
             {
                 case TurnState.SETUP:
 
-                    CurrentCard = playerHand.RevealCard();
-                    turnState = TurnState.TURN1;
+
+                    if (SingleMouseClick())
+                    {
+                        CurrentCard = playerHand.RevealCard();
+                        if (position.X > 75 && position.X < 175 && position.Y > 260 && position.Y < 360)
+                        {
+                            if (CurrentCard.HandleCard(player))
+                            {
+                                turnState = TurnState.TURN1;
+                            }
+                        }
+                    }
 
                     break;
 
                 case TurnState.TURN1:
 
-                    if (CurrentCard.HandleCard(player)) 
-                    {
-                        turnState = TurnState.TURN2;
-                        CurrentCard = playerHand.RevealCard();
-                    }
+                    PreviousMouseState = MouseState;
 
+                    if (SingleMouseClick())
+                    {
+                        if (position.X > 800 && position.X < 1050 && position.Y > 476 && position.Y < 550)
+                        {
+                            if (CurrentCard.HandleCard(player))
+                            {
+                                turnState = TurnState.TURN2;
+                            }
+
+                        }
+                    }
                     break;
 
                 case TurnState.TURN2:
@@ -147,6 +164,7 @@ namespace MiniRogue
 
         private bool SingleMouseClick()
         {
+            MouseState = Mouse.GetState();
             if (MouseState.LeftButton == ButtonState.Pressed && PreviousMouseState.LeftButton == ButtonState.Released)
             {
                 return true;

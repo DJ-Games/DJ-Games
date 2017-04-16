@@ -21,6 +21,16 @@ namespace MiniRogue
         CREDITS,
     }
 
+    enum CurrentTurnState
+    {
+        SETUP,
+        TURN1,
+        TURN2,
+        TURN3,
+        TURN4,
+
+    }
+
 
     public class Game1 : Game
     {
@@ -28,6 +38,7 @@ namespace MiniRogue
         SpriteBatch spriteBatch;
 
         Gamestate gamestate;
+        CurrentTurnState currentTurnState;
         KeyboardState kbState;
         KeyboardState prevKbState;
         MouseState mouseState;
@@ -121,6 +132,7 @@ namespace MiniRogue
             difficulty = new Difficulty();
             playerTurn = new Turn();
             gamestate = Gamestate.TITILESCREEN;
+            currentTurnState = CurrentTurnState.SETUP;
             
 
         }
@@ -234,7 +246,33 @@ namespace MiniRogue
 
                 case Gamestate.DELVE:
 
-                    playerTurn.ResolveTurn(mouseState, prevMouseState, player, playerHand);
+                    switch (currentTurnState)
+                    {
+                        case CurrentTurnState.SETUP:
+
+                            if (SingleMouseClick())
+                            {
+                                if (position.X > 75 && position.X < 175 && position.Y > 260 && position.Y < 360)
+                                {
+                                    
+                                    playerHand.RevealCard
+                                }
+                            }
+
+                            break;
+                        case CurrentTurnState.TURN1:
+                            break;
+                        case CurrentTurnState.TURN2:
+                            break;
+                        case CurrentTurnState.TURN3:
+                            break;
+                        case CurrentTurnState.TURN4:
+                            break;
+                        default:
+                            break;
+                    }
+
+                    //playerTurn.ResolveTurn(mouseState, prevMouseState, position, player, playerHand);
 
                     
 
@@ -311,7 +349,6 @@ namespace MiniRogue
 
                 case Gamestate.DELVE:
 
-                    playerTurn.DrawTurn(spriteBatch, font);
                     spriteBatch.DrawString(font, "Health: " + player.Health, new Vector2(20, 20), Color.White);
                     spriteBatch.DrawString(font, "Armor: " + player.Armor, new Vector2(120, 20), Color.White);
                     spriteBatch.DrawString(font, "Gold: " + player.Gold, new Vector2(220, 20), Color.White);
@@ -320,17 +357,33 @@ namespace MiniRogue
                     spriteBatch.DrawString(font, "Rank: " + player.Rank, new Vector2(520, 20), Color.White);
                     spriteBatch.DrawString(font, "Spell1: ", new Vector2(620, 20), Color.White);
                     spriteBatch.DrawString(font, "Spell2: ", new Vector2(820, 20), Color.White);
-
                     spriteBatch.DrawString(font, "Dungeon Level: " + player.DungeonLevel, new Vector2(1120, 20), Color.White);
                     spriteBatch.DrawString(font, "Dungeon Area: " + player.DungeonArea, new Vector2(1120, 40), Color.White);
 
-                    spriteBatch.Draw(door, new Vector2(75, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                    spriteBatch.Draw(door, new Vector2(300, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                    spriteBatch.Draw(door, new Vector2(300, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                    spriteBatch.Draw(door, new Vector2(525, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                    spriteBatch.Draw(door, new Vector2(750, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                    spriteBatch.Draw(door, new Vector2(750, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                    spriteBatch.Draw(door, new Vector2(975, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                    switch (currentTurnState)
+                    {
+                        case CurrentTurnState.SETUP:
+
+                            spriteBatch.Draw(door, new Vector2(75, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(door, new Vector2(300, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(door, new Vector2(300, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(door, new Vector2(525, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(door, new Vector2(750, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(door, new Vector2(750, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(door, new Vector2(975, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+
+                            break;
+                        case CurrentTurnState.TURN1:
+                            break;
+                        case CurrentTurnState.TURN2:
+                            break;
+                        case CurrentTurnState.TURN3:
+                            break;
+                        case CurrentTurnState.TURN4:
+                            break;
+                        default:
+                            break;
+                    }
 
                     break;
 
