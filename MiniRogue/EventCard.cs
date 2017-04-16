@@ -185,7 +185,7 @@ namespace MiniRogue
         {
             XPos = xPos;
             YPos = yPos;
-            sBatch.Draw(CardTexture, CardRectangle, Color.White);
+            sBatch.Draw(CardTexture, new Vector2(100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
             switch (eventCardTurnState)
             {
                 case EventCardTurnState.INITIAL_ROLL:

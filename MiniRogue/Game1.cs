@@ -23,10 +23,13 @@ namespace MiniRogue
 
     enum CurrentTurnState
     {
-        SETUP,
+        PRETURN1,
         TURN1,
+        PRETURN2,
         TURN2,
+        PRETURN3,
         TURN3,
+        PRETURN4,
         TURN4,
 
     }
@@ -56,13 +59,20 @@ namespace MiniRogue
         Texture2D titleScreen;
         Texture2D difficultyScreen;
         Texture2D door;
+        Texture2D doorGrayed;
+        Texture2D die1;
+        Texture2D die2;
+        Texture2D die3;
+        Texture2D die4;
+        Texture2D die5;
+        Texture2D die6;
         SpriteFont font;
         Vector2 position;
 
         Player player;
         Hand playerHand;
         Dice playerDice;
-        Turn playerTurn;
+        Card currentCard;
         Difficulty difficulty;
         int currentRoll;
 
@@ -125,14 +135,20 @@ namespace MiniRogue
             titleScreen = Content.Load<Texture2D>("TitleScreen");
             difficultyScreen = Content.Load<Texture2D>("DifficultySelectScreen");
             door = Content.Load<Texture2D>("Door");
+            doorGrayed = Content.Load<Texture2D>("DoorGrayed");
+            die1 = Content.Load<Texture2D>("Die1");
+            die2 = Content.Load<Texture2D>("Die2");
+            die3 = Content.Load<Texture2D>("Die3");
+            die4 = Content.Load<Texture2D>("Die4");
+            die5 = Content.Load<Texture2D>("Die5");
+            die6 = Content.Load<Texture2D>("Die6");
             font = Content.Load<SpriteFont>("Font");
             position = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
             graphics.GraphicsDevice.Viewport.Height / 2);
             playerDice = new Dice();
             difficulty = new Difficulty();
-            playerTurn = new Turn();
             gamestate = Gamestate.TITILESCREEN;
-            currentTurnState = CurrentTurnState.SETUP;
+            currentTurnState = CurrentTurnState.PRETURN1;
             
 
         }
@@ -248,19 +264,21 @@ namespace MiniRogue
 
                     switch (currentTurnState)
                     {
-                        case CurrentTurnState.SETUP:
+                        case CurrentTurnState.PRETURN1:
 
                             if (SingleMouseClick())
                             {
                                 if (position.X > 75 && position.X < 175 && position.Y > 260 && position.Y < 360)
                                 {
-                                    
-                                    playerHand.RevealCard
+
+                                    currentCard = playerHand.RevealCard();
+                                    currentTurnState = CurrentTurnState.TURN1;
                                 }
                             }
 
                             break;
                         case CurrentTurnState.TURN1:
+                            currentCard.HandleCard(player);
                             break;
                         case CurrentTurnState.TURN2:
                             break;
@@ -362,23 +380,67 @@ namespace MiniRogue
 
                     switch (currentTurnState)
                     {
-                        case CurrentTurnState.SETUP:
+                        case CurrentTurnState.PRETURN1:
 
                             spriteBatch.Draw(door, new Vector2(75, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(door, new Vector2(300, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(door, new Vector2(300, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(door, new Vector2(525, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(door, new Vector2(750, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(door, new Vector2(750, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(door, new Vector2(975, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(300, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(300, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(525, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(750, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(750, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(975, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
 
                             break;
                         case CurrentTurnState.TURN1:
+                            currentCard.DrawCard(spriteBatch, font, 100, 100);
+                            spriteBatch.Draw(die1, new Vector2(1100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(die2, new Vector2(1100, 250), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(die3, new Vector2(1100, 400), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(die4, new Vector2(1100, 550), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                             break;
+
+                        case CurrentTurnState.PRETURN2:
+
+                            spriteBatch.Draw(doorGrayed, new Vector2(75, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(door, new Vector2(300, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(door, new Vector2(300, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(525, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(750, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(750, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(975, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+
+                            break;
+
                         case CurrentTurnState.TURN2:
                             break;
+
+                        case CurrentTurnState.PRETURN3:
+
+                            spriteBatch.Draw(doorGrayed, new Vector2(75, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(300, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(300, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(door, new Vector2(525, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(750, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(750, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(975, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+
+                            break;
+
                         case CurrentTurnState.TURN3:
                             break;
+
+                        case CurrentTurnState.PRETURN4:
+
+                            spriteBatch.Draw(doorGrayed, new Vector2(75, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(300, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(300, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(525, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(door, new Vector2(750, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(door, new Vector2(750, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(975, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+
+                            break;
+
                         case CurrentTurnState.TURN4:
                             break;
                         default:
