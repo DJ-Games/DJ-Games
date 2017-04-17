@@ -42,7 +42,7 @@ namespace MiniRogue
 
 
         //---------------------- METHODS -----------------------------
-        public override bool HandleCard(Player player)
+        public override bool HandleCard(Player player, MouseState current, MouseState previous, float xPos, float yPos)
         {
             PreviousKbState = CurrentKbState;
 

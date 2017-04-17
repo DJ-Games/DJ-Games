@@ -16,6 +16,7 @@ namespace MiniRogue
     {
         INITIAL_ROLL,
         SKILL_CHECK,
+        ADJUSTOPTION,
         HANDLE_EVENT,
         FIGHT_MONSTER,
         COMPLETE,
@@ -49,7 +50,7 @@ namespace MiniRogue
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public override bool HandleCard(Player player)
+        public override bool HandleCard(Player player, MouseState current, MouseState previous, float xPos, float yPos)
         {
             PreviousKbState = CurrentKbState;
 
@@ -57,62 +58,88 @@ namespace MiniRogue
             {
                 case EventCardTurnState.INITIAL_ROLL:
 
-                    if (SingleKeyPress(Keys.Space))
+
+                    if (SingleMouseClick())
                     {
-                        switch (player.playerDice.RollDice())
+                        if (xPos > 700 && xPos < 948 && yPos > 575 && yPos < 648)
                         {
 
-                            case 1:
-                                Option = 1;
-                                break;
 
-                            case 2:
-                                Option = 2;
-                                break;
+                            switch (player.playerDice.RollDice())
+                            {
 
-                            case 3:
-                                Option = 3;
-                                break;
+                                case 1:
+                                    Option = 1;
+                                    break;
 
-                            case 4:
-                                Option = 4;
-                                break;
+                                case 2:
+                                    Option = 2;
+                                    break;
 
-                            case 5:
-                                Option = 5;
-                                break;
+                                case 3:
+                                    Option = 3;
+                                    break;
 
-                            case 6:
-                                Option = 6;
-                                break;
+                                case 4:
+                                    Option = 4;
+                                    break;
 
-                            default:
-                                break;
+                                case 5:
+                                    Option = 5;
+                                    break;
+
+                                case 6:
+                                    Option = 6;
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                            eventCardTurnState = EventCardTurnState.SKILL_CHECK;
+
                         }
-                        eventCardTurnState = EventCardTurnState.SKILL_CHECK;
                     }
 
 
                     break;
                 case EventCardTurnState.SKILL_CHECK:
 
-                    if (SingleKeyPress(Keys.Space))
+
+                    if (SingleMouseClick())
                     {
-                        if (player.playerDice.RollDice() <= player.Rank)
+                        if (xPos > 700 && xPos < 948 && yPos > 575 && yPos < 648)
                         {
 
-                            if (SingleKeyPress(Keys.Q))
+                            if (player.playerDice.RollDice() <= player.Rank)
                             {
-                                Option += 1;
+
+                                eventCardTurnState = EventCardTurnState.ADJUSTOPTION;
+
                             }
-                            if (SingleKeyPress(Keys.W))
+                            else
                             {
-                                Option -= 1;
+                                eventCardTurnState = EventCardTurnState.HANDLE_EVENT;
                             }
                         }
-                        eventCardTurnState = EventCardTurnState.HANDLE_EVENT;
                     }
+
+
                     break;
+
+                case EventCardTurnState.ADJUSTOPTION:
+
+                    if (SingleMouseClick())
+                    {
+                        if (xPos > 700 && xPos < 948 && yPos > 575 && yPos < 648)
+                        {
+
+
+
+                        }
+                    }
+
+
+                            break;
 
                 case EventCardTurnState.HANDLE_EVENT:
 
@@ -189,13 +216,19 @@ namespace MiniRogue
             switch (eventCardTurnState)
             {
                 case EventCardTurnState.INITIAL_ROLL:
-                    sBatch.DrawString(font, "Press Space to roll for event.", new Vector2(50, 800), Color.White);
+                    sBatch.DrawString(font, "Press Space to roll for event.", new Vector2(500, 200), Color.White);
                     break;
                 case EventCardTurnState.SKILL_CHECK:
-                    sBatch.DrawString(font, "Press Space to roll for skill check.", new Vector2(50, 800), Color.White);
+                    sBatch.DrawString(font, "Press Space to roll for skill check.", new Vector2(500, 200), Color.White);
                     break;
+
+                case EventCardTurnState.ADJUSTOPTION:
+
+
+                    break
+
                 case EventCardTurnState.HANDLE_EVENT:
-                    sBatch.DrawString(font, "Press + to add 1 and - to subtract 1.", new Vector2(50, 800), Color.White);
+                    sBatch.DrawString(font, "Press + to add 1 and - to subtract 1.", new Vector2(500, 200), Color.White);
                     break;
 
                 case EventCardTurnState.FIGHT_MONSTER:

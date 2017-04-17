@@ -66,8 +66,10 @@ namespace MiniRogue
         Texture2D die4;
         Texture2D die5;
         Texture2D die6;
+        Texture2D rollDieButton;
         SpriteFont font;
         Vector2 position;
+        Button rollDie;
 
         Player player;
         Hand playerHand;
@@ -142,6 +144,7 @@ namespace MiniRogue
             die4 = Content.Load<Texture2D>("Die4");
             die5 = Content.Load<Texture2D>("Die5");
             die6 = Content.Load<Texture2D>("Die6");
+            rollDieButton = Content.Load<Texture2D>("RollDieButton");
             font = Content.Load<SpriteFont>("Font");
             position = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
             graphics.GraphicsDevice.Viewport.Height / 2);
@@ -261,6 +264,7 @@ namespace MiniRogue
                 // -------------- Delve Game State Update -------------------
 
                 case Gamestate.DELVE:
+                    rollDie = new Button(rollDieButton, "Roll Button");
 
                     switch (currentTurnState)
                     {
@@ -278,7 +282,7 @@ namespace MiniRogue
 
                             break;
                         case CurrentTurnState.TURN1:
-                            currentCard.HandleCard(player);
+                            currentCard.HandleCard(player, mouseState, prevMouseState, position.X, position.Y);
                             break;
                         case CurrentTurnState.TURN2:
                             break;
@@ -393,6 +397,9 @@ namespace MiniRogue
                             break;
                         case CurrentTurnState.TURN1:
                             currentCard.DrawCard(spriteBatch, font, 100, 100);
+
+                            rollDie.DrawButtons(spriteBatch);
+
                             spriteBatch.Draw(die1, new Vector2(1100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                             spriteBatch.Draw(die2, new Vector2(1100, 250), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                             spriteBatch.Draw(die3, new Vector2(1100, 400), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);

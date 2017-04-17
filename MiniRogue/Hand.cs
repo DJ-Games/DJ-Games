@@ -35,9 +35,9 @@ namespace MiniRogue
         public void DrawNewHand(Texture2D enemyTex, Texture2D eventTex, Texture2D merchantTex,
             Texture2D restingTex, Texture2D trapTex, Texture2D treasureTex)
         {
-            playerHand.Add(new Enemy("Enemy", enemyTex ));
+            //playerHand.Add(new Enemy("Enemy", enemyTex ));
 
-            //playerHand.Add(new EventCard("EventCard", eventTex));
+            playerHand.Add(new EventCard("EventCard", eventTex));
 
             //playerHand.Add(new Merchant("Merchant", merchantTex));
 

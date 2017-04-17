@@ -49,7 +49,7 @@ namespace MiniRogue
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public override bool HandleCard(Player player)
+        public override bool HandleCard(Player player, MouseState current, MouseState previous, float xPos, float yPos)
         {
             PreviousKbState = CurrentKbState;
 

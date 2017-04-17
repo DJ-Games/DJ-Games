@@ -78,9 +78,10 @@ namespace MiniRogue
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public override bool HandleCard(Player player)
+        public override bool HandleCard(Player player, MouseState current, MouseState previous, float xPos, float yPos)
         {
             PreviousKbState = CurrentKbState;
+            PreviousMouseState = CurrentMouseState;
 
             switch (player.DungeonLevel)
             {
@@ -125,11 +126,23 @@ namespace MiniRogue
             {
                 case EnemyTurnState.MONSTER_HEALTH_ROLL:
 
-                    if (SingleKeyPress(Keys.Space))
+                    if (SingleMouseClick())
                     {
-                        health = player.DungeonArea + player.playerDice.RollDice();
-                        enemyTurnState = EnemyTurnState.DAMAGE_ROLL;
+                        if (xPos > 700 && xPos < 948 && yPos > 575 && yPos < 648)
+                        {
+                            health = player.DungeonArea + player.playerDice.RollDice();
+                            enemyTurnState = EnemyTurnState.DAMAGE_ROLL;
+
+                        }
                     }
+
+                    //if (SingleKeyPress(Keys.Space))
+                    //{
+                    //    health = player.DungeonArea + player.playerDice.RollDice();
+                    //    enemyTurnState = EnemyTurnState.DAMAGE_ROLL;
+                    //}
+
+
                     return false;
 
                 case EnemyTurnState.DAMAGE_ROLL:
@@ -138,51 +151,104 @@ namespace MiniRogue
                     if (Health > 0)
                     {
 
-                        if (SingleKeyPress(Keys.Space))
+
+                        if (SingleMouseClick())
                         {
-
-
-
-
-                            switch (player.Rank)
+                            if (xPos > 700 && xPos < 948 && yPos > 575 && yPos < 648)
                             {
-                                case 1:
+                                switch (player.Rank)
+                                {
+                                    case 1:
 
-                                    DamageRoll1 = player.playerDice.RollDice();
+                                        DamageRoll1 = player.playerDice.RollDice();
+                                        enemyTurnState = EnemyTurnState.DAMAGE_ROLL_MAXIMIZE;
 
-                                    break;
-
-
-                                case 2:
-
-                                    DamageRoll1 = player.playerDice.RollDice();
-                                    DamageRoll2 = player.playerDice.RollDice();
-
-                                    break;
+                                        break;
 
 
-                                case 3:
+                                    case 2:
 
-                                    DamageRoll1 = player.playerDice.RollDice();
-                                    DamageRoll2 = player.playerDice.RollDice();
-                                    DamageRoll3 = player.playerDice.RollDice();
+                                        DamageRoll1 = player.playerDice.RollDice();
+                                        DamageRoll2 = player.playerDice.RollDice();
 
-                                    break;
+                                        break;
 
 
-                                case 4:
+                                    case 3:
 
-                                    DamageRoll1 = player.playerDice.RollDice();
-                                    DamageRoll2 = player.playerDice.RollDice();
-                                    DamageRoll3 = player.playerDice.RollDice();
-                                    DamageRoll4 = player.playerDice.RollDice();
+                                        DamageRoll1 = player.playerDice.RollDice();
+                                        DamageRoll2 = player.playerDice.RollDice();
+                                        DamageRoll3 = player.playerDice.RollDice();
 
-                                    break;
+                                        break;
 
-                                default:
-                                    break;
+
+                                    case 4:
+
+                                        DamageRoll1 = player.playerDice.RollDice();
+                                        DamageRoll2 = player.playerDice.RollDice();
+                                        DamageRoll3 = player.playerDice.RollDice();
+                                        DamageRoll4 = player.playerDice.RollDice();
+
+                                        break;
+
+                                    default:
+                                        break;
+                                }
+
                             }
                         }
+
+
+
+
+
+
+                        //if (SingleKeyPress(Keys.Space))
+                        //{
+
+
+
+
+                        //    switch (player.Rank)
+                        //    {
+                        //        case 1:
+
+                        //            DamageRoll1 = player.playerDice.RollDice();
+
+                        //            break;
+
+
+                        //        case 2:
+
+                        //            DamageRoll1 = player.playerDice.RollDice();
+                        //            DamageRoll2 = player.playerDice.RollDice();
+
+                        //            break;
+
+
+                        //        case 3:
+
+                        //            DamageRoll1 = player.playerDice.RollDice();
+                        //            DamageRoll2 = player.playerDice.RollDice();
+                        //            DamageRoll3 = player.playerDice.RollDice();
+
+                        //            break;
+
+
+                        //        case 4:
+
+                        //            DamageRoll1 = player.playerDice.RollDice();
+                        //            DamageRoll2 = player.playerDice.RollDice();
+                        //            DamageRoll3 = player.playerDice.RollDice();
+                        //            DamageRoll4 = player.playerDice.RollDice();
+
+                        //            break;
+
+                        //        default:
+                        //            break;
+                        //    }
+                        //}
                     } 
                     return false;
                 case EnemyTurnState.DAMAGE_ROLL_MAXIMIZE:
@@ -237,7 +303,7 @@ namespace MiniRogue
                             default:
                                 break;
                         }
-    player.HasFoughtMonster = true;
+                        player.HasFoughtMonster = true;
                         enemyTurnState = EnemyTurnState.COMPLETE;
                     }
 
@@ -270,11 +336,14 @@ namespace MiniRogue
 
         public override void DrawCard(SpriteBatch sBatch,SpriteFont font, int xPos, int yPos)
         {
-            XPos = xPos;
-            YPos = yPos;
+            //XPos = xPos;
+            //YPos = yPos;
             //sBatch.Draw(CardTexture, CardRectangle, Color.White);
 
             sBatch.Draw(CardTexture, new Vector2(100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+
+
+
 
             sBatch.DrawString(font, "Press Space to roll for monster difficulty.", new Vector2(500, 200), Color.White);
             sBatch.DrawString(font, "Monster Health: " + Health, new Vector2(500, 250), Color.White);

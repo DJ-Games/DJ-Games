@@ -50,6 +50,10 @@ namespace MiniRogue
 
         public KeyboardState PreviousKbState { get; set; }
 
+        public MouseState CurrentMouseState { get; set; }
+
+        public MouseState PreviousMouseState { get; set; }
+
         public Dice Dice { get; set; }
 
 
@@ -72,10 +76,7 @@ namespace MiniRogue
 
         public abstract void DrawCard(SpriteBatch sBatch,SpriteFont font, int xPos, int yPos);
 
-        public abstract bool HandleCard(Player player);
-
-
-
+        public abstract bool HandleCard(Player player, MouseState current, MouseState previous, float xPos, float yPos);
 
 
         public bool SingleKeyPress(Keys key)
@@ -88,6 +89,15 @@ namespace MiniRogue
             return false;
         }
 
+        public bool SingleMouseClick()
+        {
+            CurrentMouseState = Mouse.GetState();
+            if (CurrentMouseState.LeftButton == ButtonState.Pressed && PreviousMouseState.LeftButton == ButtonState.Released)
+            {
+                return true;
+            }
+            return false;
+        }
 
 
 
