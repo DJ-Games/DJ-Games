@@ -225,7 +225,7 @@ namespace MiniRogue
                 case EventCardTurnState.ADJUSTOPTION:
 
 
-                    break
+                    break;
 
                 case EventCardTurnState.HANDLE_EVENT:
                     sBatch.DrawString(font, "Press + to add 1 and - to subtract 1.", new Vector2(500, 200), Color.White);

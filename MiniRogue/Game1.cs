@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Threading;
+using System.Collections.Generic;
+
 
 namespace MiniRogue
 {
@@ -40,6 +42,8 @@ namespace MiniRogue
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        Dictionary<string, Button> buttonDictionay;
+
         Gamestate gamestate;
         CurrentTurnState currentTurnState;
         KeyboardState kbState;
@@ -47,6 +51,7 @@ namespace MiniRogue
         MouseState mouseState;
         MouseState prevMouseState;
 
+        // Initialize textures
         Texture2D bossMonsterCard;
         Texture2D characterStatsCard;
         Texture2D eventCard;
@@ -66,10 +71,22 @@ namespace MiniRogue
         Texture2D die4;
         Texture2D die5;
         Texture2D die6;
-        Texture2D rollDieButton;
+        Texture2D rollDieBtnTex;
+        Texture2D foundLootBtnTex;
+        Texture2D foundLootBtnHLTex;
+        Texture2D foundRationBtnTex;
+        Texture2D foundRationBtnHLTex;
+        Texture2D foundShieldBtnTex;
+        Texture2D foundShieldBtnHLTex;
+        Texture2D healthPotionBtnTex;
+        Texture2D healthPotionBtnHLTex;
+        Texture2D monsterBtnTex;
+        Texture2D monsterBtnHLTex;
+        Texture2D whetstoneBtnTex;
+        Texture2D whetstoneBtnHLTex;
         SpriteFont font;
         Vector2 position;
-        Button rollDie;
+
 
         Player player;
         Hand playerHand;
@@ -144,15 +161,46 @@ namespace MiniRogue
             die4 = Content.Load<Texture2D>("Die4");
             die5 = Content.Load<Texture2D>("Die5");
             die6 = Content.Load<Texture2D>("Die6");
-            rollDieButton = Content.Load<Texture2D>("RollDieButton");
+            rollDieBtnTex = Content.Load<Texture2D>("RollDieButton");
+            foundLootBtnTex = Content.Load<Texture2D>("Found_Loot_Button");
+            foundLootBtnHLTex = Content.Load<Texture2D>("Found_Loot_Button_Highlight");
+            foundRationBtnTex = Content.Load<Texture2D>("Found_Ration_Button");
+            foundRationBtnHLTex = Content.Load<Texture2D>("Found_Loot_Button_Highlight");
+            foundShieldBtnTex = Content.Load<Texture2D>("Found_Shield_Button");
+            foundShieldBtnHLTex = Content.Load<Texture2D>("Found_Shield_Button_Highlight");
+            healthPotionBtnTex = Content.Load<Texture2D>("Health_Potion_Button");
+            healthPotionBtnHLTex = Content.Load<Texture2D>("Health_Potion_Button_Highlight");
+            monsterBtnTex = Content.Load<Texture2D>("Monster_Button");
+            monsterBtnHLTex = Content.Load<Texture2D>("Monster_Button_Highlight");
+            whetstoneBtnTex = Content.Load<Texture2D>("Whetstone_Button");
+            whetstoneBtnHLTex = Content.Load<Texture2D>("Whetstone_Button_Highlight");
             font = Content.Load<SpriteFont>("Font");
             position = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
             graphics.GraphicsDevice.Viewport.Height / 2);
             playerDice = new Dice();
             difficulty = new Difficulty();
+            buttonDictionay = new Dictionary<string, Button>();
             gamestate = Gamestate.TITILESCREEN;
             currentTurnState = CurrentTurnState.PRETURN1;
-            
+
+
+            // Fill Button dictionary
+
+            buttonDictionay.Add("Die Roll", new Button(rollDieBtnTex, "Die Roll"));
+            buttonDictionay.Add("Found Loot", new Button(foundLootBtnTex, "Found Loot"));
+            buttonDictionay.Add("Found Loot Highlight", new Button(foundLootBtnHLTex, "Found Loot Highlight"));
+            buttonDictionay.Add("Found Ration", new Button(foundRationBtnTex, "Found Ration"));
+            buttonDictionay.Add("Found Ration Highlight", new Button(foundRationBtnHLTex, "Found Ration Highlight"));
+            buttonDictionay.Add("Found Shield", new Button(foundShieldBtnTex, "Found Shield"));
+            buttonDictionay.Add("Found Shield Highlight", new Button(foundShieldBtnHLTex, "Found Shield Highlight"));
+            buttonDictionay.Add("Health Potion", new Button(healthPotionBtnHLTex, "Health Potion"));
+            buttonDictionay.Add("Health Potion Highlight", new Button(healthPotionBtnHLTex, "Health Potion Highlight"));
+            buttonDictionay.Add("Whetstone", new Button(whetstoneBtnTex, "Whetstone"));
+            buttonDictionay.Add("WhetStone Highlight", new Button(whetstoneBtnHLTex, "Whetstone Highlight"));
+
+
+
+
 
         }
 
@@ -264,7 +312,6 @@ namespace MiniRogue
                 // -------------- Delve Game State Update -------------------
 
                 case Gamestate.DELVE:
-                    rollDie = new Button(rollDieButton, "Roll Button");
 
                     switch (currentTurnState)
                     {
@@ -398,7 +445,7 @@ namespace MiniRogue
                         case CurrentTurnState.TURN1:
                             currentCard.DrawCard(spriteBatch, font, 100, 100);
 
-                            rollDie.DrawButtons(spriteBatch);
+                            buttonDictionay["Die Roll"].DrawButtons(spriteBatch);
 
                             spriteBatch.Draw(die1, new Vector2(1100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                             spriteBatch.Draw(die2, new Vector2(1100, 250), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
