@@ -40,6 +40,7 @@ namespace MiniRogue
         {
             eventCardTurnState = new EventCardTurnState();
             CurrentButtons = new List<Button>();
+            Success = false;
         }
 
         //---------------------- METHODS -----------------------------
@@ -54,7 +55,6 @@ namespace MiniRogue
         /// <returns></returns>
         public override bool HandleCard(Player player, MouseState current, MouseState previous, float xPos, float yPos)
         {
-            PreviousKbState = CurrentKbState;
             XPos = xPos;
             YPos = yPos;
 
@@ -80,18 +80,16 @@ namespace MiniRogue
                     break;
                 case EventCardTurnState.SKILL_CHECK:
 
-
                     if (SingleMouseClick())
                     {
                         if (xPos > 700 && xPos < 948 && yPos > 575 && yPos < 648)
                         {
-
-                            if (player.playerDice.RollDice() <= player.Rank)
+                            if (player.playerDice.RollDice() > 0)
+                            //if (player.playerDice.RollDice() <= player.Rank)
                             {
                                 CurrentButtons.Clear();
                                 LoadSkillCheckButtons();
-
-
+                                Success = true;
 
                                 eventCardTurnState = EventCardTurnState.ADJUSTOPTION;
 
@@ -108,67 +106,17 @@ namespace MiniRogue
 
                 case EventCardTurnState.ADJUSTOPTION:
 
-                    if (SingleMouseClick())
-                    {
-                        if (xPos > 700 && xPos < 948 && yPos > 575 && yPos < 648)
-                        {
-
-
-
-                        }
-                    }
-
+                    HandleButtons(player);
 
                     break;
 
                 case EventCardTurnState.HANDLE_EVENT:
 
-                    switch (player.playerDice.RollDice())
-                    {
+                    HandleButtons(player);
 
-                        case 1:
-                            player.Food++;
-                            break;
-
-                        case 2:
-                            player.Health += 2;
-                            break;
-
-                        case 3:
-                            player.Gold++;
-                            break;
-
-                        case 4:
-                            player.Experience += 2;
-                            break;
-
-                        case 5:
-                            player.Armor++;
-                            break;
-
-                        case 6:
-                            eventCardTurnState = EventCardTurnState.FIGHT_MONSTER;
-
-
-
-                            break;
-
-                        default:
-                            break;
-                    }
-                    eventCardTurnState = EventCardTurnState.COMPLETE;
                     break;
 
                 case EventCardTurnState.FIGHT_MONSTER:
-
-
-
-
-
-
-
-
-
 
 
                     break;
@@ -182,8 +130,6 @@ namespace MiniRogue
             }
 
             return true;
-
-
 
 
         }
@@ -209,8 +155,6 @@ namespace MiniRogue
                         counter += 80;
                     }
 
-
-
                     break;
 
                 case EventCardTurnState.ADJUSTOPTION:
@@ -227,13 +171,19 @@ namespace MiniRogue
                     break;
 
                 case EventCardTurnState.HANDLE_EVENT:
-                    sBatch.DrawString(font, "Press + to add 1 and - to subtract 1.", new Vector2(500, 200), Color.White);
+
+                    int counter3 = 550;
+                    foreach (var item in CurrentButtons)
+                    {
+                        sBatch.Draw(item.ButtonTexture, new Vector2(counter3, 475), new Rectangle?(), Color.White, 0f, new Vector2(), .50f, SpriteEffects.None, 1);
+                        counter3 += 80;
+                    }
+
                     break;
 
                 case EventCardTurnState.FIGHT_MONSTER:
 
                     break;
-
 
                 case EventCardTurnState.COMPLETE:
                     break;
@@ -400,217 +350,209 @@ namespace MiniRogue
             }
         }
 
-        public void HandleButtons()
+        // NEED TO ADD CODE FOR FIGHTING MONSTER
+        public void HandleButtons(Player player)
         {
             switch (eventCardTurnState)
             {
-                //case EventCardTurnState.INITIAL_ROLL:
-                //    break;
-                //case EventCardTurnState.SKILL_CHECK:
-                //    break;
-                //case EventCardTurnState.ADJUSTOPTION:
-                //    break;
-                case EventCardTurnState.HANDLE_EVENT:
+                case EventCardTurnState.ADJUSTOPTION:
+
 
                     if (SingleMouseClick())
                     {
-                        if (Success)
+                        switch (Option)
                         {
-                            switch (Option)
-                            {
-                                case 1:
+                            case 1:
 
 
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
+                                if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
+                                {
 
-                                    }
+                                }
 
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
+                                if (XPos > 630 && XPos < 710 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Food++;
+                                }
 
-                                    }
+                                if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Health += 2;
+                                }
 
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
-
-                                    }
-
-                                    break;
-                                case 2:
-
-
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
-
-                                    }
-
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
-
-                                    }
-
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
-
-                                    }
-
-                                    break;
-                                case 3:
+                                break;
+                            case 2:
 
 
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
+                                if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Food++;
+                                }
 
-                                    }
+                                if (XPos > 630 && XPos < 710 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Health += 2;
+                                }
 
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
+                                if (XPos > 710 && XPos < 790 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Gold++;
+                                }
 
-                                    }
-
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
-
-                                    }
-
-                                    break;
-                                case 4:
-
-
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
-
-                                    }
-
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
-
-                                    }
-
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
-
-                                    }
-
-                                    break;
-                                case 5:
+                                break;
+                            case 3:
 
 
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
+                                if (XPos > 630 && XPos < 710 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Health += 2;
+                                }
 
-                                    }
+                                if (XPos > 710 && XPos < 790 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Gold++;
+                                }
 
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
+                                if (XPos > 790 && XPos < 870 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Experience += 2;
+                                }
 
-                                    }
-
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
-
-                                    }
-
-                                    break;
-                                case 6:
+                                break;
+                            case 4:
 
 
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
+                                if (XPos > 710 && XPos < 790 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Gold++;
+                                }
 
-                                    }
+                                if (XPos > 790 && XPos < 870 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Experience += 2;
+                                }
 
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
+                                if (XPos > 870 && XPos < 950 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Armor++;
+                                }
 
-                                    }
+                                break;
+                            case 5:
 
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
 
-                                    }
+                                if (XPos > 790 && XPos < 870 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Experience += 2;
+                                }
 
-                                    break;
+                                if (XPos > 870 && XPos < 950 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Armor++;
+                                }
 
-                                default:
-                                    break;
-                            }
+                                if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
+                                {
+
+                                }
+
+                                break;
+                            case 6:
+
+
+                                if (XPos > 870 && XPos < 950 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Armor++;
+                                }
+
+                                if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
+                                {
+
+                                }
+
+                                if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Food++;
+                                }
+
+                                break;
+
+                            default:
+                                break;
                         }
-                    
 
-                        else
-                        {
-                            switch (Option)
-                            {
-                                case 1:
-
-
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
-
-                                    }
-
-                                    break;
-                                case 2:
-
-
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
-
-                                    }
-
-
-                                    break;
-                                case 3:
-
-
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
-
-                                    }
-
-                                    break;
-                                case 4:
-
-
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
-
-                                    }
-
-                                    break;
-                                case 5:
-
-
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
-
-                                    }
-
-                                    break;
-                                case 6:
-
-
-                                    if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
-                                    {
-
-                                    }
-
-                                    break;
-
-                                default:
-                                    break;
-                            }
-                        }
+                        eventCardTurnState = EventCardTurnState.COMPLETE;
 
                     }
 
                     break;
-                //case EventCardTurnState.FIGHT_MONSTER:
-                //    break;
-                //case EventCardTurnState.COMPLETE:
-                //    break;
+
+                case EventCardTurnState.HANDLE_EVENT:
+
+                    if (SingleMouseClick())
+                    {
+                        
+                        switch (Option)
+                        {
+                            case 1:
+                            
+                                if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Food++;
+                                }
+                           
+                                break;
+                            case 2:
+
+                                if (XPos > 630 && XPos < 710 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Health += 2;
+                                }
+
+                                break;
+                            case 3:
+
+                                if (XPos > 710 && XPos < 790 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Gold++;
+                                }
+                         
+                                break;
+                            case 4:
+
+                                if (XPos > 790 && XPos < 870 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Experience += 2;
+                                }
+
+                                break;
+                            case 5:
+
+                                if (XPos > 870 && XPos < 950 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Armor++;
+                                }
+
+                                break;
+                            case 6:
+
+                                if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
+                                {
+                              
+                                }
+
+                                break;
+
+                            default:
+                                break;
+                        }
+
+                        eventCardTurnState = EventCardTurnState.COMPLETE;
+
+                        }
+
+                    break;
+
                 default:
                     break;
             }
