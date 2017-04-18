@@ -18,7 +18,7 @@ namespace MiniRogue
 
 
 
-        public Boss(string name, Texture2D cardTexture) : base(name, cardTexture)
+        public Boss(string name, Texture2D cardTexture, Dictionary<string, Button> buttons) : base(name, cardTexture, buttons)
         {
 
         }

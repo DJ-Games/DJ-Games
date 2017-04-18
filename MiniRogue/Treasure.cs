@@ -35,7 +35,7 @@ namespace MiniRogue
 
         TreasureTurnState treasureTurnState;
 
-        public Treasure(string name, Texture2D cardTexture) : base(name, cardTexture)
+        public Treasure(string name, Texture2D cardTexture, Dictionary<string, Button> buttons) : base(name, cardTexture, buttons)
         {
             treasureTurnState = TreasureTurnState.GOLD_AWARD;
         }

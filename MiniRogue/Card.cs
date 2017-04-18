@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace MiniRogue
 {
@@ -56,19 +57,20 @@ namespace MiniRogue
 
         public Dice Dice { get; set; }
 
-
+        public Dictionary<string, Button> Buttons { get; set; }
 
 
 
 
         // Constructors
-        public Card(string name, Texture2D cardTexture)
+        public Card(string name, Texture2D cardTexture, Dictionary<string, Button> buttons)
         {
 
             CardTexture = cardTexture;
             CardRectangle = new Rectangle(0, 0, 494, 708);
             Dice = new Dice();
             Name = name;
+            Buttons = buttons;
             
         }
 

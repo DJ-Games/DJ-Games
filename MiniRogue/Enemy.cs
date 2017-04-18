@@ -59,7 +59,7 @@ namespace MiniRogue
 
         //----------------------CONSTRUCTORS -------------------------
 
-        public Enemy(string name, Texture2D cardTexture) : base(name, cardTexture)
+        public Enemy(string name, Texture2D cardTexture, Dictionary<string, Button> buttons) : base(name, cardTexture, buttons)
         {
 
         }

@@ -28,6 +28,7 @@ namespace MiniRogue
     class EventCard : Card
     {
 
+        public List<Button> CurrentButtons { get; set; }
 
         public bool Success { get; set; }
 
@@ -35,9 +36,10 @@ namespace MiniRogue
 
         EventCardTurnState eventCardTurnState;
 
-        public EventCard(string name, Texture2D cardTexture) : base(name, cardTexture)
+        public EventCard(string name, Texture2D cardTexture, Dictionary<string, Button> buttons) : base(name, cardTexture, buttons)
         {
             eventCardTurnState = new EventCardTurnState();
+            CurrentButtons = new List<Button>();
         }
 
         //---------------------- METHODS -----------------------------
@@ -69,32 +71,80 @@ namespace MiniRogue
                             {
 
                                 case 1:
+                                    CurrentButtons.Add(Buttons["Found Ration Highlight"]);
+                                    CurrentButtons.Add(Buttons["Health Potion"]);
+                                    CurrentButtons.Add(Buttons["Found Loot"]);
+                                    CurrentButtons.Add(Buttons["Whetstone"]);
+                                    CurrentButtons.Add(Buttons["Found Shield"]);
+                                    CurrentButtons.Add(Buttons["Monster"]);
+
                                     Option = 1;
                                     break;
 
                                 case 2:
+
+                                    CurrentButtons.Add(Buttons["Found Ration"]);
+                                    CurrentButtons.Add(Buttons["Health Potion Highlight"]);
+                                    CurrentButtons.Add(Buttons["Found Loot"]);
+                                    CurrentButtons.Add(Buttons["Whetstone"]);
+                                    CurrentButtons.Add(Buttons["Found Shield"]);
+                                    CurrentButtons.Add(Buttons["Monster"]);
+
                                     Option = 2;
                                     break;
 
                                 case 3:
+
+                                    CurrentButtons.Add(Buttons["Found Ration"]);
+                                    CurrentButtons.Add(Buttons["Health Potion"]);
+                                    CurrentButtons.Add(Buttons["Found Loot Highlight"]);
+                                    CurrentButtons.Add(Buttons["Whetstone"]);
+                                    CurrentButtons.Add(Buttons["Found Shield"]);
+                                    CurrentButtons.Add(Buttons["Monster"]);
+
                                     Option = 3;
                                     break;
 
                                 case 4:
+
+                                    CurrentButtons.Add(Buttons["Found Ration"]);
+                                    CurrentButtons.Add(Buttons["Health Potion"]);
+                                    CurrentButtons.Add(Buttons["Found Loot"]);
+                                    CurrentButtons.Add(Buttons["Whetstone Highlight"]);
+                                    CurrentButtons.Add(Buttons["Found Shield"]);
+                                    CurrentButtons.Add(Buttons["Monster"]);
+
                                     Option = 4;
                                     break;
 
                                 case 5:
+
+                                    CurrentButtons.Add(Buttons["Found Ration"]);
+                                    CurrentButtons.Add(Buttons["Health Potion"]);
+                                    CurrentButtons.Add(Buttons["Found Loot"]);
+                                    CurrentButtons.Add(Buttons["Whetstone"]);
+                                    CurrentButtons.Add(Buttons["Found Shield Highlight"]);
+                                    CurrentButtons.Add(Buttons["Monster"]);
+
                                     Option = 5;
                                     break;
 
                                 case 6:
+
+                                    CurrentButtons.Add(Buttons["Found Ration"]);
+                                    CurrentButtons.Add(Buttons["Health Potion"]);
+                                    CurrentButtons.Add(Buttons["Found Loot"]);
+                                    CurrentButtons.Add(Buttons["Whetstone"]);
+                                    CurrentButtons.Add(Buttons["Found Shield"]);
+                                    CurrentButtons.Add(Buttons["Monster Highlight"]);
+
                                     Option = 6;
                                     break;
 
                                 default:
                                     break;
                             }
+                            Thread.Sleep(500);
                             eventCardTurnState = EventCardTurnState.SKILL_CHECK;
 
                         }
@@ -216,14 +266,27 @@ namespace MiniRogue
             switch (eventCardTurnState)
             {
                 case EventCardTurnState.INITIAL_ROLL:
-                    sBatch.DrawString(font, "Press Space to roll for event.", new Vector2(500, 200), Color.White);
+                    sBatch.DrawString(font, "Roll for event.", new Vector2(500, 200), Color.White);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 575), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    
                     break;
                 case EventCardTurnState.SKILL_CHECK:
-                    sBatch.DrawString(font, "Press Space to roll for skill check.", new Vector2(500, 200), Color.White);
+                    sBatch.DrawString(font, "Roll for skill check.", new Vector2(500, 200), Color.White);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 575), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+
+                    //int counter = 450;
+                    //foreach (var item in CurrentButtons)
+                    //{
+                    //    sBatch.Draw(item.ButtonTexture, new Vector2(counter, 475), new Rectangle?(), Color.White, 0f, new Vector2(), .50f, SpriteEffects.None, 1);
+                    //    counter += 80;
+                    //}
+
+
+
                     break;
 
                 case EventCardTurnState.ADJUSTOPTION:
-
+                    //sBatch.Draw(buttons["Found Loot"].ButtonTexture, new Vector2(900, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
 
                     break;
 
