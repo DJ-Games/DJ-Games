@@ -160,17 +160,100 @@ namespace MiniRogue
                         if (xPos > 700 && xPos < 948 && yPos > 575 && yPos < 648)
                         {
 
-                            if (player.playerDice.RollDice() <= player.Rank)
-                            {
+                            //if (player.playerDice.RollDice() <= player.Rank)
+                            if (player.playerDice.RollDice() > 0)
+                                {
+                                CurrentButtons.Clear();
+                                switch (player.playerDice.RollDice())
+                                {
+                                    
+                                    case 1:
+                                        CurrentButtons.Add(Buttons["Found Ration Highlight"]);
+                                        CurrentButtons.Add(Buttons["Health Potion Highlight"]);
+                                        CurrentButtons.Add(Buttons["Found Loot"]);
+                                        CurrentButtons.Add(Buttons["Whetstone"]);
+                                        CurrentButtons.Add(Buttons["Found Shield"]);
+                                        CurrentButtons.Add(Buttons["Monster Highlight"]);
+
+                                        break;
+
+                                    case 2:
+
+                                        CurrentButtons.Add(Buttons["Found Ration Highlight"]);
+                                        CurrentButtons.Add(Buttons["Health Potion Highlight"]);
+                                        CurrentButtons.Add(Buttons["Found Loot Highlight"]);
+                                        CurrentButtons.Add(Buttons["Whetstone"]);
+                                        CurrentButtons.Add(Buttons["Found Shield"]);
+                                        CurrentButtons.Add(Buttons["Monster"]);
+
+                                        Option = 2;
+                                        break;
+
+                                    case 3:
+
+                                        CurrentButtons.Add(Buttons["Found Ration"]);
+                                        CurrentButtons.Add(Buttons["Health Potion Highlight"]);
+                                        CurrentButtons.Add(Buttons["Found Loot Highlight"]);
+                                        CurrentButtons.Add(Buttons["Whetstone Highlight"]);
+                                        CurrentButtons.Add(Buttons["Found Shield"]);
+                                        CurrentButtons.Add(Buttons["Monster"]);
+
+                                        break;
+
+                                    case 4:
+
+                                        CurrentButtons.Add(Buttons["Found Ration"]);
+                                        CurrentButtons.Add(Buttons["Health Potion"]);
+                                        CurrentButtons.Add(Buttons["Found Loot Highlight"]);
+                                        CurrentButtons.Add(Buttons["Whetstone Highlight"]);
+                                        CurrentButtons.Add(Buttons["Found Shield Highlight"]);
+                                        CurrentButtons.Add(Buttons["Monster"]);
+
+                                        break;
+
+                                    case 5:
+
+                                        CurrentButtons.Add(Buttons["Found Ration"]);
+                                        CurrentButtons.Add(Buttons["Health Potion"]);
+                                        CurrentButtons.Add(Buttons["Found Loot"]);
+                                        CurrentButtons.Add(Buttons["Whetstone Highlight"]);
+                                        CurrentButtons.Add(Buttons["Found Shield Highlight"]);
+                                        CurrentButtons.Add(Buttons["Monster Highlight"]);
+
+                                        break;
+
+                                    case 6:
+
+                                        CurrentButtons.Add(Buttons["Found Ration Highlight"]);
+                                        CurrentButtons.Add(Buttons["Health Potion"]);
+                                        CurrentButtons.Add(Buttons["Found Loot"]);
+                                        CurrentButtons.Add(Buttons["Whetstone"]);
+                                        CurrentButtons.Add(Buttons["Found Shield Highlight"]);
+                                        CurrentButtons.Add(Buttons["Monster Highlight"]);
+
+                                        break;
+
+                                    default:
+                                        break;
+                                }
+
+
+
+
+
+
+
+
 
                                 eventCardTurnState = EventCardTurnState.ADJUSTOPTION;
 
                             }
-                            else
-                            {
-                                eventCardTurnState = EventCardTurnState.HANDLE_EVENT;
-                            }
+                            //else
+                            //{
+                            //    eventCardTurnState = EventCardTurnState.HANDLE_EVENT;
+                            //}
                         }
+                        eventCardTurnState = EventCardTurnState.ADJUSTOPTION;
                     }
 
 
@@ -274,19 +357,27 @@ namespace MiniRogue
                     sBatch.DrawString(font, "Roll for skill check.", new Vector2(500, 200), Color.White);
                     sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 575), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
 
-                    //int counter = 450;
-                    //foreach (var item in CurrentButtons)
-                    //{
-                    //    sBatch.Draw(item.ButtonTexture, new Vector2(counter, 475), new Rectangle?(), Color.White, 0f, new Vector2(), .50f, SpriteEffects.None, 1);
-                    //    counter += 80;
-                    //}
+                    int counter = 550;
+                    foreach (var item in CurrentButtons)
+                    {
+                        sBatch.Draw(item.ButtonTexture, new Vector2(counter, 475), new Rectangle?(), Color.White, 0f, new Vector2(), .50f, SpriteEffects.None, 1);
+                        counter += 80;
+                    }
 
 
 
                     break;
 
                 case EventCardTurnState.ADJUSTOPTION:
-                    //sBatch.Draw(buttons["Found Loot"].ButtonTexture, new Vector2(900, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    
+                    int counter2 = 550;
+                    foreach (var item in CurrentButtons)
+                    {
+                        sBatch.Draw(item.ButtonTexture, new Vector2(counter2, 475), new Rectangle?(), Color.White, 0f, new Vector2(), .50f, SpriteEffects.None, 1);
+                        counter2 += 80;
+                    }
+                    sBatch.DrawString(font, "Adjustment", new Vector2(500, 200), Color.White);
+
 
                     break;
 

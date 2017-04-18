@@ -193,12 +193,12 @@ namespace MiniRogue
             buttonDictionay.Add("Found Ration Highlight", new Button(foundRationBtnHLTex, "Found Ration Highlight"));
             buttonDictionay.Add("Found Shield", new Button(foundShieldBtnTex, "Found Shield"));
             buttonDictionay.Add("Found Shield Highlight", new Button(foundShieldBtnHLTex, "Found Shield Highlight"));
-            buttonDictionay.Add("Health Potion", new Button(healthPotionBtnHLTex, "Health Potion"));
+            buttonDictionay.Add("Health Potion", new Button(healthPotionBtnTex, "Health Potion"));
             buttonDictionay.Add("Health Potion Highlight", new Button(healthPotionBtnHLTex, "Health Potion Highlight"));
             buttonDictionay.Add("Whetstone", new Button(whetstoneBtnTex, "Whetstone"));
             buttonDictionay.Add("Whetstone Highlight", new Button(whetstoneBtnHLTex, "Whetstone Highlight"));
-            buttonDictionay.Add("Monster", new Button(whetstoneBtnTex, "Monster"));
-            buttonDictionay.Add("Monster Highlight", new Button(whetstoneBtnHLTex, "Monster Highlight"));
+            buttonDictionay.Add("Monster", new Button(monsterBtnTex, "Monster"));
+            buttonDictionay.Add("Monster Highlight", new Button(monsterBtnHLTex, "Monster Highlight"));
 
 
 
