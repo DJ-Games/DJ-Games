@@ -31,21 +31,9 @@ namespace MiniRogue
 
         public Texture2D CardTexture { get; set; }
 
-        private int xPos;
+        public float XPos { get; set; }
 
-        public int XPos
-        {
-            get { return xPos; }
-            set { cardRectangle.X = value; }
-        }
-
-        private int yPos;
-
-        public int YPos
-        {
-            get { return yPos; }
-            set { cardRectangle.Y = value; }
-        }
+        public float YPos { get; set; }
 
         public KeyboardState CurrentKbState { get; set; }
 
@@ -76,7 +64,7 @@ namespace MiniRogue
 
         // Methods
 
-        public abstract void DrawCard(SpriteBatch sBatch,SpriteFont font, int xPos, int yPos);
+        public abstract void DrawCard(SpriteBatch sBatch,SpriteFont font);
 
         public abstract bool HandleCard(Player player, MouseState current, MouseState previous, float xPos, float yPos);
 

@@ -165,7 +165,7 @@ namespace MiniRogue
             foundLootBtnTex = Content.Load<Texture2D>("Found_Loot_Button");
             foundLootBtnHLTex = Content.Load<Texture2D>("Found_Loot_Button_Highlight");
             foundRationBtnTex = Content.Load<Texture2D>("Found_Ration_Button");
-            foundRationBtnHLTex = Content.Load<Texture2D>("Found_Loot_Button_Highlight");
+            foundRationBtnHLTex = Content.Load<Texture2D>("Found_Ration_Button_Highlight");
             foundShieldBtnTex = Content.Load<Texture2D>("Found_Shield_Button");
             foundShieldBtnHLTex = Content.Load<Texture2D>("Found_Shield_Button_Highlight");
             healthPotionBtnTex = Content.Load<Texture2D>("Health_Potion_Button");
@@ -451,7 +451,7 @@ namespace MiniRogue
 
                             break;
                         case CurrentTurnState.TURN1:
-                            currentCard.DrawCard(spriteBatch, font, 100, 100);
+                            currentCard.DrawCard(spriteBatch, font);
 
                             spriteBatch.Draw(die1, new Vector2(1100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                             spriteBatch.Draw(die2, new Vector2(1100, 250), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);

@@ -142,10 +142,8 @@ namespace MiniRogue
 
 
 
-        public override void DrawCard(SpriteBatch sBatch, SpriteFont font, int xPos, int yPos)
+        public override void DrawCard(SpriteBatch sBatch, SpriteFont font)
         {
-            XPos = xPos;
-            YPos = yPos;
             sBatch.Draw(CardTexture, new Vector2(100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
 
             switch (treasureTurnState)
