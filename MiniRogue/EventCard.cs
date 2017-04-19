@@ -28,6 +28,7 @@ namespace MiniRogue
 
         public int Option { get; set; }
 
+
         EventCardTurnState eventCardTurnState;
 
         public EventCard(string name, Texture2D cardTexture, Dictionary<string, Button> buttons) : base(name, cardTexture, buttons)
@@ -43,7 +44,6 @@ namespace MiniRogue
             XPos = xPos;
             YPos = yPos;
 
-
             switch (eventCardTurnState)
             {
                 case EventCardTurnState.INITIAL_ROLL:
@@ -54,7 +54,8 @@ namespace MiniRogue
                         if (xPos > 700 && xPos < 948 && yPos > 575 && yPos < 648)
                         {
 
-                            LoadInitialRollButtons(player.playerDice.RollDice());
+                            Option = player.playerDice.RollDice();
+                            LoadInitialRollButtons(Option);
                             
                             Thread.Sleep(500);
                             eventCardTurnState = EventCardTurnState.SKILL_CHECK;
@@ -103,14 +104,16 @@ namespace MiniRogue
                     break;
 
                 case EventCardTurnState.COMPLETE:
-                    break;
+
+                    return true;
+
 
 
                 default:
                     break;
             }
 
-            return true;
+            return false;
 
 
         }
@@ -159,6 +162,8 @@ namespace MiniRogue
                         sBatch.Draw(item.ButtonTexture, new Vector2(counter3, 475), new Rectangle?(), Color.White, 0f, new Vector2(), .50f, SpriteEffects.None, 1);
                         counter3 += 80;
                     }
+                    sBatch.DrawString(font, "Failed skill check", new Vector2(500, 200), Color.White);
+
 
                     break;
 
@@ -338,7 +343,6 @@ namespace MiniRogue
             {
                 case EventCardTurnState.ADJUSTOPTION:
 
-
                     if (SingleMouseClick())
                     {
                         switch (Option)
@@ -348,17 +352,19 @@ namespace MiniRogue
 
                                 if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
                                 {
-
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 if (XPos > 630 && XPos < 710 && YPos > 475 && YPos < 555)
                                 {
                                     player.Food++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
                                 {
                                     player.Health += 2;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 break;
@@ -368,16 +374,19 @@ namespace MiniRogue
                                 if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
                                 {
                                     player.Food++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 if (XPos > 630 && XPos < 710 && YPos > 475 && YPos < 555)
                                 {
                                     player.Health += 2;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 if (XPos > 710 && XPos < 790 && YPos > 475 && YPos < 555)
                                 {
                                     player.Gold++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 break;
@@ -387,16 +396,19 @@ namespace MiniRogue
                                 if (XPos > 630 && XPos < 710 && YPos > 475 && YPos < 555)
                                 {
                                     player.Health += 2;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 if (XPos > 710 && XPos < 790 && YPos > 475 && YPos < 555)
                                 {
                                     player.Gold++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 if (XPos > 790 && XPos < 870 && YPos > 475 && YPos < 555)
                                 {
                                     player.Experience += 2;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 break;
@@ -406,16 +418,19 @@ namespace MiniRogue
                                 if (XPos > 710 && XPos < 790 && YPos > 475 && YPos < 555)
                                 {
                                     player.Gold++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 if (XPos > 790 && XPos < 870 && YPos > 475 && YPos < 555)
                                 {
                                     player.Experience += 2;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 if (XPos > 870 && XPos < 950 && YPos > 475 && YPos < 555)
                                 {
                                     player.Armor++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 break;
@@ -425,16 +440,18 @@ namespace MiniRogue
                                 if (XPos > 790 && XPos < 870 && YPos > 475 && YPos < 555)
                                 {
                                     player.Experience += 2;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 if (XPos > 870 && XPos < 950 && YPos > 475 && YPos < 555)
                                 {
                                     player.Armor++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
                                 {
-
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 break;
@@ -444,16 +461,18 @@ namespace MiniRogue
                                 if (XPos > 870 && XPos < 950 && YPos > 475 && YPos < 555)
                                 {
                                     player.Armor++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
                                 {
-
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
                                 {
                                     player.Food++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 break;
@@ -461,10 +480,8 @@ namespace MiniRogue
                             default:
                                 break;
                         }
-
-                        eventCardTurnState = EventCardTurnState.COMPLETE;
-
                     }
+
 
                     break;
 
@@ -480,6 +497,7 @@ namespace MiniRogue
                                 if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
                                 {
                                     player.Food++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
                            
                                 break;
@@ -488,6 +506,7 @@ namespace MiniRogue
                                 if (XPos > 630 && XPos < 710 && YPos > 475 && YPos < 555)
                                 {
                                     player.Health += 2;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 break;
@@ -496,6 +515,7 @@ namespace MiniRogue
                                 if (XPos > 710 && XPos < 790 && YPos > 475 && YPos < 555)
                                 {
                                     player.Gold++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
                          
                                 break;
@@ -504,6 +524,7 @@ namespace MiniRogue
                                 if (XPos > 790 && XPos < 870 && YPos > 475 && YPos < 555)
                                 {
                                     player.Experience += 2;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 break;
@@ -512,6 +533,7 @@ namespace MiniRogue
                                 if (XPos > 870 && XPos < 950 && YPos > 475 && YPos < 555)
                                 {
                                     player.Armor++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 break;
@@ -519,7 +541,7 @@ namespace MiniRogue
 
                                 if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
                                 {
-                              
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 break;
@@ -528,14 +550,12 @@ namespace MiniRogue
                                 break;
                         }
 
-                        eventCardTurnState = EventCardTurnState.COMPLETE;
+
 
                         }
 
                     break;
 
-                default:
-                    break;
             }
 
         }

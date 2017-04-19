@@ -337,8 +337,18 @@ namespace MiniRogue
 
                             break;
                         case CurrentTurnState.TURN1:
-                            currentCard.HandleCard(player, mouseState, prevMouseState, position.X, position.Y);
+                            if(currentCard.HandleCard(player, mouseState, prevMouseState, position.X, position.Y))
+                            {
+                                currentTurnState = CurrentTurnState.PRETURN2;
+                            }
+
                             break;
+
+                        case CurrentTurnState.PRETURN2:
+
+
+                            break;
+
                         case CurrentTurnState.TURN2:
                             break;
                         case CurrentTurnState.TURN3:
@@ -349,7 +359,6 @@ namespace MiniRogue
                             break;
                     }
 
-                    //playerTurn.ResolveTurn(mouseState, prevMouseState, position, player, playerHand);
 
                     
 
