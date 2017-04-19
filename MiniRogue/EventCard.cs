@@ -10,8 +10,7 @@ using Microsoft.Xna.Framework.Input;
 
 
 namespace MiniRogue
-{
-
+{ 
     enum EventCardTurnState
     {
         INITIAL_ROLL,
@@ -22,15 +21,10 @@ namespace MiniRogue
         COMPLETE,
     }
 
-
-
-
     class EventCard : Card
     {
 
         public List<Button> CurrentButtons { get; set; }
-
-        public bool Success { get; set; }
 
         public int Option { get; set; }
 
@@ -40,19 +34,10 @@ namespace MiniRogue
         {
             eventCardTurnState = new EventCardTurnState();
             CurrentButtons = new List<Button>();
-            Success = false;
         }
 
         //---------------------- METHODS -----------------------------
 
-
-        /// <summary>
-        /// Event card handler.!!! Come back to add option for skill check later!!!!
-        /// Add Monster event and recognition of results on skill check and 
-        /// complete state.
-        /// </summary>
-        /// <param name="player"></param>
-        /// <returns></returns>
         public override bool HandleCard(Player player, MouseState current, MouseState previous, float xPos, float yPos)
         {
             XPos = xPos;
@@ -84,15 +69,11 @@ namespace MiniRogue
                     {
                         if (xPos > 700 && xPos < 948 && yPos > 575 && yPos < 648)
                         {
-                            if (player.playerDice.RollDice() > 0)
-                            //if (player.playerDice.RollDice() <= player.Rank)
+                            if (player.playerDice.RollDice() <= player.Rank)
                             {
                                 CurrentButtons.Clear();
                                 LoadSkillCheckButtons();
-                                Success = true;
-
                                 eventCardTurnState = EventCardTurnState.ADJUSTOPTION;
-
                             }
                             else
                             {
