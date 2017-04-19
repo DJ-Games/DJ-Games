@@ -28,7 +28,7 @@ namespace MiniRogue
         RestingTurnState restingTurnState = new RestingTurnState();
 
 
-        public Resting(string name, Texture2D cardTexture) : base(name, cardTexture)
+        public Resting(string name, Texture2D cardTexture, Dictionary<string, Button> buttons) : base(name, cardTexture, buttons)
         {
             restingTurnState = RestingTurnState.SELECTION;
 
@@ -76,11 +76,10 @@ namespace MiniRogue
 
         }
 
-        public override void DrawCard(SpriteBatch sBatch, SpriteFont font, int xPos, int yPos)
+        public override void DrawCard(SpriteBatch sBatch, SpriteFont font)
         {
 
-            XPos = xPos;
-            YPos = yPos;
+
             sBatch.Draw(CardTexture, new Vector2(100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
             sBatch.DrawString(font, "Select a number.", new Vector2(50, 800), Color.White);
 

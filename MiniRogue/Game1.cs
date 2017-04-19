@@ -165,7 +165,7 @@ namespace MiniRogue
             foundLootBtnTex = Content.Load<Texture2D>("Found_Loot_Button");
             foundLootBtnHLTex = Content.Load<Texture2D>("Found_Loot_Button_Highlight");
             foundRationBtnTex = Content.Load<Texture2D>("Found_Ration_Button");
-            foundRationBtnHLTex = Content.Load<Texture2D>("Found_Loot_Button_Highlight");
+            foundRationBtnHLTex = Content.Load<Texture2D>("Found_Ration_Button_Highlight");
             foundShieldBtnTex = Content.Load<Texture2D>("Found_Shield_Button");
             foundShieldBtnHLTex = Content.Load<Texture2D>("Found_Shield_Button_Highlight");
             healthPotionBtnTex = Content.Load<Texture2D>("Health_Potion_Button");
@@ -186,17 +186,19 @@ namespace MiniRogue
 
             // Fill Button dictionary
 
-            buttonDictionay.Add("Die Roll", new Button(rollDieBtnTex, "Die Roll"));
+            buttonDictionay.Add("Roll Die", new Button(rollDieBtnTex, "Roll Die"));
             buttonDictionay.Add("Found Loot", new Button(foundLootBtnTex, "Found Loot"));
             buttonDictionay.Add("Found Loot Highlight", new Button(foundLootBtnHLTex, "Found Loot Highlight"));
             buttonDictionay.Add("Found Ration", new Button(foundRationBtnTex, "Found Ration"));
             buttonDictionay.Add("Found Ration Highlight", new Button(foundRationBtnHLTex, "Found Ration Highlight"));
             buttonDictionay.Add("Found Shield", new Button(foundShieldBtnTex, "Found Shield"));
             buttonDictionay.Add("Found Shield Highlight", new Button(foundShieldBtnHLTex, "Found Shield Highlight"));
-            buttonDictionay.Add("Health Potion", new Button(healthPotionBtnHLTex, "Health Potion"));
+            buttonDictionay.Add("Health Potion", new Button(healthPotionBtnTex, "Health Potion"));
             buttonDictionay.Add("Health Potion Highlight", new Button(healthPotionBtnHLTex, "Health Potion Highlight"));
             buttonDictionay.Add("Whetstone", new Button(whetstoneBtnTex, "Whetstone"));
-            buttonDictionay.Add("WhetStone Highlight", new Button(whetstoneBtnHLTex, "Whetstone Highlight"));
+            buttonDictionay.Add("Whetstone Highlight", new Button(whetstoneBtnHLTex, "Whetstone Highlight"));
+            buttonDictionay.Add("Monster", new Button(monsterBtnTex, "Monster"));
+            buttonDictionay.Add("Monster Highlight", new Button(monsterBtnHLTex, "Monster Highlight"));
 
 
 
@@ -257,6 +259,12 @@ namespace MiniRogue
                 // Player is created, hand is created, new hand is draw, and player stats
                 // set based on difficulty selection. 
 
+
+                //_________________________________________________________________
+                //  MAYBE MAKE A DICTIONARY OF TEXTURES TO SEND IN INSTEAD
+                //  OF INDIVIDUAL TEXTURES???
+                //_________________________________________________________________
+
                 case Gamestate.DIFFICULTY_SELECT:
 
                     //----- Begin Mouse controls -----
@@ -267,7 +275,7 @@ namespace MiniRogue
                         {
                             player = new Player(1, 5, 5, 6);
                             playerHand = new Hand();
-                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
+                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, buttonDictionay);
                             gamestate = Gamestate.DELVE;
                         }
                     }
@@ -278,7 +286,7 @@ namespace MiniRogue
                         {
                             player = new Player(0, 5, 3, 6);
                             playerHand = new Hand();
-                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
+                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, buttonDictionay);
                             gamestate = Gamestate.DELVE;
                         }
                     }
@@ -289,7 +297,7 @@ namespace MiniRogue
                         {
                             player = new Player(0, 4, 2, 5);
                             playerHand = new Hand();
-                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
+                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, buttonDictionay);
                             gamestate = Gamestate.DELVE;
                         }
                     }
@@ -300,7 +308,7 @@ namespace MiniRogue
                         {
                             player = new Player(0, 3, 1, 3);
                             playerHand = new Hand();
-                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard);
+                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, buttonDictionay);
                             gamestate = Gamestate.DELVE;
                         }
                     }
@@ -329,8 +337,18 @@ namespace MiniRogue
 
                             break;
                         case CurrentTurnState.TURN1:
-                            currentCard.HandleCard(player, mouseState, prevMouseState, position.X, position.Y);
+                            if(currentCard.HandleCard(player, mouseState, prevMouseState, position.X, position.Y))
+                            {
+                                currentTurnState = CurrentTurnState.PRETURN2;
+                            }
+
                             break;
+
+                        case CurrentTurnState.PRETURN2:
+
+
+                            break;
+
                         case CurrentTurnState.TURN2:
                             break;
                         case CurrentTurnState.TURN3:
@@ -341,7 +359,6 @@ namespace MiniRogue
                             break;
                     }
 
-                    //playerTurn.ResolveTurn(mouseState, prevMouseState, position, player, playerHand);
 
                     
 
@@ -443,9 +460,7 @@ namespace MiniRogue
 
                             break;
                         case CurrentTurnState.TURN1:
-                            currentCard.DrawCard(spriteBatch, font, 100, 100);
-
-                            buttonDictionay["Die Roll"].DrawButtons(spriteBatch);
+                            currentCard.DrawCard(spriteBatch, font);
 
                             spriteBatch.Draw(die1, new Vector2(1100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                             spriteBatch.Draw(die2, new Vector2(1100, 250), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);

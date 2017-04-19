@@ -33,19 +33,19 @@ namespace MiniRogue
 
 
         public void DrawNewHand(Texture2D enemyTex, Texture2D eventTex, Texture2D merchantTex,
-            Texture2D restingTex, Texture2D trapTex, Texture2D treasureTex)
+            Texture2D restingTex, Texture2D trapTex, Texture2D treasureTex, Dictionary<string, Button> buttons)
         {
-            //playerHand.Add(new Enemy("Enemy", enemyTex ));
+            //playerHand.Add(new Enemy("Enemy", enemyTex, buttons));
 
-            playerHand.Add(new EventCard("EventCard", eventTex));
+            playerHand.Add(new EventCard("EventCard", eventTex, buttons));
 
-            //playerHand.Add(new Merchant("Merchant", merchantTex));
+            //playerHand.Add(new Merchant("Merchant", merchantTex, buttons));
 
-            //playerHand.Add(new Resting("Resting", restingTex));
+            //playerHand.Add(new Resting("Resting", restingTex, buttons));
 
-            //playerHand.Add(new Trap("Trap", trapTex));
+            //playerHand.Add(new Trap("Trap", trapTex, buttons));
 
-            //playerHand.Add(new Treasure("Treasure", treasureTex));
+            //playerHand.Add(new Treasure("Treasure", treasureTex, buttons));
         }
 
 

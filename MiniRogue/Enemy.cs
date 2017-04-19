@@ -59,7 +59,7 @@ namespace MiniRogue
 
         //----------------------CONSTRUCTORS -------------------------
 
-        public Enemy(string name, Texture2D cardTexture) : base(name, cardTexture)
+        public Enemy(string name, Texture2D cardTexture, Dictionary<string, Button> buttons) : base(name, cardTexture, buttons)
         {
 
         }
@@ -334,11 +334,8 @@ namespace MiniRogue
 
 
 
-        public override void DrawCard(SpriteBatch sBatch,SpriteFont font, int xPos, int yPos)
+        public override void DrawCard(SpriteBatch sBatch,SpriteFont font)
         {
-            //XPos = xPos;
-            //YPos = yPos;
-            //sBatch.Draw(CardTexture, CardRectangle, Color.White);
 
             sBatch.Draw(CardTexture, new Vector2(100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
 

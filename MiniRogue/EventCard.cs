@@ -10,8 +10,7 @@ using Microsoft.Xna.Framework.Input;
 
 
 namespace MiniRogue
-{
-
+{ 
     enum EventCardTurnState
     {
         INITIAL_ROLL,
@@ -22,37 +21,28 @@ namespace MiniRogue
         COMPLETE,
     }
 
-
-
-
     class EventCard : Card
     {
 
-
-        public bool Success { get; set; }
+        public List<Button> CurrentButtons { get; set; }
 
         public int Option { get; set; }
 
+
         EventCardTurnState eventCardTurnState;
 
-        public EventCard(string name, Texture2D cardTexture) : base(name, cardTexture)
+        public EventCard(string name, Texture2D cardTexture, Dictionary<string, Button> buttons) : base(name, cardTexture, buttons)
         {
             eventCardTurnState = new EventCardTurnState();
+            CurrentButtons = new List<Button>();
         }
 
         //---------------------- METHODS -----------------------------
 
-
-        /// <summary>
-        /// Event card handler.!!! Come back to add option for skill check later!!!!
-        /// Add Monster event and recognition of results on skill check and 
-        /// complete state.
-        /// </summary>
-        /// <param name="player"></param>
-        /// <returns></returns>
         public override bool HandleCard(Player player, MouseState current, MouseState previous, float xPos, float yPos)
         {
-            PreviousKbState = CurrentKbState;
+            XPos = xPos;
+            YPos = yPos;
 
             switch (eventCardTurnState)
             {
@@ -64,57 +54,27 @@ namespace MiniRogue
                         if (xPos > 700 && xPos < 948 && yPos > 575 && yPos < 648)
                         {
 
-
-                            switch (player.playerDice.RollDice())
-                            {
-
-                                case 1:
-                                    Option = 1;
-                                    break;
-
-                                case 2:
-                                    Option = 2;
-                                    break;
-
-                                case 3:
-                                    Option = 3;
-                                    break;
-
-                                case 4:
-                                    Option = 4;
-                                    break;
-
-                                case 5:
-                                    Option = 5;
-                                    break;
-
-                                case 6:
-                                    Option = 6;
-                                    break;
-
-                                default:
-                                    break;
-                            }
+                            Option = player.playerDice.RollDice();
+                            LoadInitialRollButtons(Option);
+                            
+                            Thread.Sleep(500);
                             eventCardTurnState = EventCardTurnState.SKILL_CHECK;
 
                         }
                     }
 
-
                     break;
                 case EventCardTurnState.SKILL_CHECK:
-
 
                     if (SingleMouseClick())
                     {
                         if (xPos > 700 && xPos < 948 && yPos > 575 && yPos < 648)
                         {
-
                             if (player.playerDice.RollDice() <= player.Rank)
                             {
-
+                                CurrentButtons.Clear();
+                                LoadSkillCheckButtons();
                                 eventCardTurnState = EventCardTurnState.ADJUSTOPTION;
-
                             }
                             else
                             {
@@ -128,113 +88,88 @@ namespace MiniRogue
 
                 case EventCardTurnState.ADJUSTOPTION:
 
-                    if (SingleMouseClick())
-                    {
-                        if (xPos > 700 && xPos < 948 && yPos > 575 && yPos < 648)
-                        {
+                    HandleButtons(player);
 
-
-
-                        }
-                    }
-
-
-                            break;
+                    break;
 
                 case EventCardTurnState.HANDLE_EVENT:
 
-                    switch (player.playerDice.RollDice())
-                    {
+                    HandleButtons(player);
 
-                        case 1:
-                            player.Food++;
-                            break;
-
-                        case 2:
-                            player.Health += 2;
-                            break;
-
-                        case 3:
-                            player.Gold++;
-                            break;
-
-                        case 4:
-                            player.Experience += 2;
-                            break;
-
-                        case 5:
-                            player.Armor++;
-                            break;
-
-                        case 6:
-                            eventCardTurnState = EventCardTurnState.FIGHT_MONSTER;
-
-
-
-                            break;
-
-                        default:
-                            break;
-                    }
-                    eventCardTurnState = EventCardTurnState.COMPLETE;
                     break;
 
                 case EventCardTurnState.FIGHT_MONSTER:
 
 
-
-                    
-
-
-
-
-
-
-
                     break;
 
                 case EventCardTurnState.COMPLETE:
-                    break;
+
+                    return true;
+
 
 
                 default:
                     break;
             }
 
-            return true;
-
-
+            return false;
 
 
         }
 
-        public override void DrawCard(SpriteBatch sBatch, SpriteFont font, int xPos, int yPos)
+        public override void DrawCard(SpriteBatch sBatch, SpriteFont font)
         {
-            XPos = xPos;
-            YPos = yPos;
             sBatch.Draw(CardTexture, new Vector2(100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
             switch (eventCardTurnState)
             {
                 case EventCardTurnState.INITIAL_ROLL:
-                    sBatch.DrawString(font, "Press Space to roll for event.", new Vector2(500, 200), Color.White);
+                    sBatch.DrawString(font, "Roll for event.", new Vector2(500, 200), Color.White);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 575), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+
                     break;
                 case EventCardTurnState.SKILL_CHECK:
-                    sBatch.DrawString(font, "Press Space to roll for skill check.", new Vector2(500, 200), Color.White);
+                    sBatch.DrawString(font, "Roll for skill check.", new Vector2(500, 200), Color.White);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 575), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+
+                    int counter = 550;
+                    foreach (var item in CurrentButtons)
+                    {
+                        sBatch.Draw(item.ButtonTexture, new Vector2(counter, 475), new Rectangle?(), Color.White, 0f, new Vector2(), .50f, SpriteEffects.None, 1);
+                        counter += 80;
+                    }
+
                     break;
 
                 case EventCardTurnState.ADJUSTOPTION:
+
+                    int counter2 = 550;
+                    foreach (var item in CurrentButtons)
+                    {
+                        sBatch.Draw(item.ButtonTexture, new Vector2(counter2, 475), new Rectangle?(), Color.White, 0f, new Vector2(), .50f, SpriteEffects.None, 1);
+                        counter2 += 80;
+                    }
+                    sBatch.DrawString(font, "Adjustment", new Vector2(500, 200), Color.White);
 
 
                     break;
 
                 case EventCardTurnState.HANDLE_EVENT:
-                    sBatch.DrawString(font, "Press + to add 1 and - to subtract 1.", new Vector2(500, 200), Color.White);
+
+                    int counter3 = 550;
+                    foreach (var item in CurrentButtons)
+                    {
+                        sBatch.Draw(item.ButtonTexture, new Vector2(counter3, 475), new Rectangle?(), Color.White, 0f, new Vector2(), .50f, SpriteEffects.None, 1);
+                        counter3 += 80;
+                    }
+                    sBatch.DrawString(font, "Failed skill check", new Vector2(500, 200), Color.White);
+
+
                     break;
 
                 case EventCardTurnState.FIGHT_MONSTER:
 
                     break;
-
 
                 case EventCardTurnState.COMPLETE:
                     break;
@@ -244,6 +179,386 @@ namespace MiniRogue
 
         }
 
+        public void LoadInitialRollButtons(int roll)
+        {
+            switch (roll)
+            {
+
+                case 1:
+                    CurrentButtons.Add(Buttons["Found Ration Highlight"]);
+                    CurrentButtons.Add(Buttons["Health Potion"]);
+                    CurrentButtons.Add(Buttons["Found Loot"]);
+                    CurrentButtons.Add(Buttons["Whetstone"]);
+                    CurrentButtons.Add(Buttons["Found Shield"]);
+                    CurrentButtons.Add(Buttons["Monster"]);
+
+                    Option = 1;
+                    break;
+
+                case 2:
+
+                    CurrentButtons.Add(Buttons["Found Ration"]);
+                    CurrentButtons.Add(Buttons["Health Potion Highlight"]);
+                    CurrentButtons.Add(Buttons["Found Loot"]);
+                    CurrentButtons.Add(Buttons["Whetstone"]);
+                    CurrentButtons.Add(Buttons["Found Shield"]);
+                    CurrentButtons.Add(Buttons["Monster"]);
+
+                    Option = 2;
+                    break;
+
+                case 3:
+
+                    CurrentButtons.Add(Buttons["Found Ration"]);
+                    CurrentButtons.Add(Buttons["Health Potion"]);
+                    CurrentButtons.Add(Buttons["Found Loot Highlight"]);
+                    CurrentButtons.Add(Buttons["Whetstone"]);
+                    CurrentButtons.Add(Buttons["Found Shield"]);
+                    CurrentButtons.Add(Buttons["Monster"]);
+
+                    Option = 3;
+                    break;
+
+                case 4:
+
+                    CurrentButtons.Add(Buttons["Found Ration"]);
+                    CurrentButtons.Add(Buttons["Health Potion"]);
+                    CurrentButtons.Add(Buttons["Found Loot"]);
+                    CurrentButtons.Add(Buttons["Whetstone Highlight"]);
+                    CurrentButtons.Add(Buttons["Found Shield"]);
+                    CurrentButtons.Add(Buttons["Monster"]);
+
+                    Option = 4;
+                    break;
+
+                case 5:
+
+                    CurrentButtons.Add(Buttons["Found Ration"]);
+                    CurrentButtons.Add(Buttons["Health Potion"]);
+                    CurrentButtons.Add(Buttons["Found Loot"]);
+                    CurrentButtons.Add(Buttons["Whetstone"]);
+                    CurrentButtons.Add(Buttons["Found Shield Highlight"]);
+                    CurrentButtons.Add(Buttons["Monster"]);
+
+                    Option = 5;
+                    break;
+
+                case 6:
+
+                    CurrentButtons.Add(Buttons["Found Ration"]);
+                    CurrentButtons.Add(Buttons["Health Potion"]);
+                    CurrentButtons.Add(Buttons["Found Loot"]);
+                    CurrentButtons.Add(Buttons["Whetstone"]);
+                    CurrentButtons.Add(Buttons["Found Shield"]);
+                    CurrentButtons.Add(Buttons["Monster Highlight"]);
+
+                    Option = 6;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        public void LoadSkillCheckButtons()
+        {
+            switch (Option)
+            {
+
+                case 1:
+                    CurrentButtons.Add(Buttons["Found Ration Highlight"]);
+                    CurrentButtons.Add(Buttons["Health Potion Highlight"]);
+                    CurrentButtons.Add(Buttons["Found Loot"]);
+                    CurrentButtons.Add(Buttons["Whetstone"]);
+                    CurrentButtons.Add(Buttons["Found Shield"]);
+                    CurrentButtons.Add(Buttons["Monster Highlight"]);
+
+                    break;
+
+                case 2:
+
+                    CurrentButtons.Add(Buttons["Found Ration Highlight"]);
+                    CurrentButtons.Add(Buttons["Health Potion Highlight"]);
+                    CurrentButtons.Add(Buttons["Found Loot Highlight"]);
+                    CurrentButtons.Add(Buttons["Whetstone"]);
+                    CurrentButtons.Add(Buttons["Found Shield"]);
+                    CurrentButtons.Add(Buttons["Monster"]);
+
+                    Option = 2;
+                    break;
+
+                case 3:
+
+                    CurrentButtons.Add(Buttons["Found Ration"]);
+                    CurrentButtons.Add(Buttons["Health Potion Highlight"]);
+                    CurrentButtons.Add(Buttons["Found Loot Highlight"]);
+                    CurrentButtons.Add(Buttons["Whetstone Highlight"]);
+                    CurrentButtons.Add(Buttons["Found Shield"]);
+                    CurrentButtons.Add(Buttons["Monster"]);
+
+                    break;
+
+                case 4:
+
+                    CurrentButtons.Add(Buttons["Found Ration"]);
+                    CurrentButtons.Add(Buttons["Health Potion"]);
+                    CurrentButtons.Add(Buttons["Found Loot Highlight"]);
+                    CurrentButtons.Add(Buttons["Whetstone Highlight"]);
+                    CurrentButtons.Add(Buttons["Found Shield Highlight"]);
+                    CurrentButtons.Add(Buttons["Monster"]);
+
+                    break;
+
+                case 5:
+
+                    CurrentButtons.Add(Buttons["Found Ration"]);
+                    CurrentButtons.Add(Buttons["Health Potion"]);
+                    CurrentButtons.Add(Buttons["Found Loot"]);
+                    CurrentButtons.Add(Buttons["Whetstone Highlight"]);
+                    CurrentButtons.Add(Buttons["Found Shield Highlight"]);
+                    CurrentButtons.Add(Buttons["Monster Highlight"]);
+
+                    break;
+
+                case 6:
+
+                    CurrentButtons.Add(Buttons["Found Ration Highlight"]);
+                    CurrentButtons.Add(Buttons["Health Potion"]);
+                    CurrentButtons.Add(Buttons["Found Loot"]);
+                    CurrentButtons.Add(Buttons["Whetstone"]);
+                    CurrentButtons.Add(Buttons["Found Shield Highlight"]);
+                    CurrentButtons.Add(Buttons["Monster Highlight"]);
+
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        // NEED TO ADD CODE FOR FIGHTING MONSTER
+        public void HandleButtons(Player player)
+        {
+            switch (eventCardTurnState)
+            {
+                case EventCardTurnState.ADJUSTOPTION:
+
+                    if (SingleMouseClick())
+                    {
+                        switch (Option)
+                        {
+                            case 1:
+
+
+                                if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
+                                {
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                if (XPos > 630 && XPos < 710 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Food++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Health += 2;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                break;
+                            case 2:
+
+
+                                if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Food++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                if (XPos > 630 && XPos < 710 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Health += 2;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                if (XPos > 710 && XPos < 790 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Gold++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                break;
+                            case 3:
+
+
+                                if (XPos > 630 && XPos < 710 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Health += 2;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                if (XPos > 710 && XPos < 790 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Gold++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                if (XPos > 790 && XPos < 870 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Experience += 2;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                break;
+                            case 4:
+
+
+                                if (XPos > 710 && XPos < 790 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Gold++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                if (XPos > 790 && XPos < 870 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Experience += 2;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                if (XPos > 870 && XPos < 950 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Armor++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                break;
+                            case 5:
+
+
+                                if (XPos > 790 && XPos < 870 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Experience += 2;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                if (XPos > 870 && XPos < 950 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Armor++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
+                                {
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                break;
+                            case 6:
+
+
+                                if (XPos > 870 && XPos < 950 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Armor++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
+                                {
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Food++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
+
+
+                    break;
+
+                case EventCardTurnState.HANDLE_EVENT:
+
+                    if (SingleMouseClick())
+                    {
+                        
+                        switch (Option)
+                        {
+                            case 1:
+                            
+                                if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Food++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+                           
+                                break;
+                            case 2:
+
+                                if (XPos > 630 && XPos < 710 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Health += 2;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                break;
+                            case 3:
+
+                                if (XPos > 710 && XPos < 790 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Gold++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+                         
+                                break;
+                            case 4:
+
+                                if (XPos > 790 && XPos < 870 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Experience += 2;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                break;
+                            case 5:
+
+                                if (XPos > 870 && XPos < 950 && YPos > 475 && YPos < 555)
+                                {
+                                    player.Armor++;
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                break;
+                            case 6:
+
+                                if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
+                                {
+                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                }
+
+                                break;
+
+                            default:
+                                break;
+                        }
+
+
+
+                        }
+
+                    break;
+
+            }
+
+        }
 
     }
 }
