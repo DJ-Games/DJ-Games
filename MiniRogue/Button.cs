@@ -26,7 +26,5 @@ namespace MiniRogue
         {
             sBatch.Draw(ButtonTexture, new Vector2(700, 575), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
         }
-
-
     }
 }
