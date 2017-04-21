@@ -79,7 +79,7 @@ namespace MiniRogue
                     return false;
 
                 case MerchantTurnState.CONFIRMBUY:
-
+                    HandleButtons(player);
                     return false;
                 case MerchantTurnState.CONFIRMSELL:
 
@@ -223,12 +223,42 @@ namespace MiniRogue
 
                         if (XPos > 534 && XPos < 780 && YPos > 420 && YPos < 490)
                         {
+                            switch (Selection)
+                            {
+                                case "Buy Ration":
 
+                                    player.Food++;
+                                    merchantTurnState = MerchantTurnState.BUY;
+                                    break;
+
+                                case "Buy Potion":
+
+                                    player.Health++;
+                                    merchantTurnState = MerchantTurnState.BUY;
+                                    break;
+
+                                case "Buy Big Potion":
+
+                                    player.Health += 4;
+                                    merchantTurnState = MerchantTurnState.BUY;
+                                    break;
+
+                                case "Buy Armor":
+
+                                    player.Armor++;
+                                    merchantTurnState = MerchantTurnState.BUY;
+                                    break;
+
+
+
+                                default:
+                                    break;
+                            }
                         }
 
                         if (XPos > 820 && XPos < 1070 && YPos > 420 && YPos < 490)
                         {
-
+                            merchantTurnState = MerchantTurnState.BUY;
                         }
 
                         break;
