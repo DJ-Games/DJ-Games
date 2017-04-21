@@ -176,7 +176,7 @@ namespace MiniRogue
             whetstoneBtnHLTex = Content.Load<Texture2D>("Whetstone_Button_Highlight");
             font = Content.Load<SpriteFont>("Font");
             position = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
-            graphics.GraphicsDevice.Viewport.Height / 2);
+                graphics.GraphicsDevice.Viewport.Height / 2);
             playerDice = new Dice();
             difficulty = new Difficulty();
             buttonDictionay = new Dictionary<string, Button>();
