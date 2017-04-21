@@ -14,7 +14,9 @@ namespace MiniRogue
     {
         BUY,
         BUYSPELL,
+        CONFIRMBUY,
         SELLSPELL,
+        CONFIRMSELL,
         COMPLETE,
     }
         
@@ -74,6 +76,12 @@ namespace MiniRogue
 
                     return false;
 
+                case MerchantTurnState.CONFIRMBUY:
+
+                    return false;
+                case MerchantTurnState.CONFIRMSELL:
+
+                    return false;
 
                 case MerchantTurnState.COMPLETE:
 
@@ -118,7 +126,12 @@ namespace MiniRogue
                     break;
                 case MerchantTurnState.SELLSPELL:
 
-
+                    break;
+                case MerchantTurnState.CONFIRMBUY:
+                    sBatch.Draw(Buttons["Confirm Purchase Menu"].ButtonTexture, new Vector2(500, 320), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    break;
+                case MerchantTurnState.CONFIRMSELL:
+                    sBatch.Draw(Buttons["Confirm Sale Menu"].ButtonTexture, new Vector2(800, 320), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     break;
                 case MerchantTurnState.COMPLETE:
                     break;
@@ -164,24 +177,29 @@ namespace MiniRogue
                         {
                             player.Gold--;
                             player.Food++;
+                            merchantTurnState = MerchantTurnState.CONFIRMBUY;
+                            
                         }
 
                         if (XPos > 525 && XPos < 773 && YPos > 320 && YPos < 392)
                         {
                             player.Gold--;
                             player.Health++;
+                            merchantTurnState = MerchantTurnState.CONFIRMBUY;
                         }
 
                         if (XPos > 525 && XPos < 773 && YPos > 400 && YPos < 472)
                         {
                             player.Gold -= 3;
                             player.Health += 4;
+                            merchantTurnState = MerchantTurnState.CONFIRMBUY;
                         }
 
                         if (XPos > 525 && XPos < 773 && YPos > 480 && YPos < 552)
                         {
                             player.Gold -= 6;
                             player.Armor++;
+                            merchantTurnState = MerchantTurnState.CONFIRMBUY;
                         }
 
                         if (XPos > 525 && XPos < 773 && YPos > 560 && YPos < 632)
@@ -193,22 +211,35 @@ namespace MiniRogue
                         {
                             player.Gold += 3;
                             player.Armor--;
+                            merchantTurnState = MerchantTurnState.CONFIRMSELL;
                         }
 
                         if (XPos > 800 && XPos < 1048 && YPos > 320 && YPos < 392)
                         {
-
+                            
                         }
 
 
                         break;
+
+                    case MerchantTurnState.CONFIRMBUY:
+
+
+                        break;
+
                     case MerchantTurnState.BUYSPELL:
 
+
+                        break;
                     case MerchantTurnState.SELLSPELL:
 
 
                         break;
 
+                    case MerchantTurnState.CONFIRMSELL:
+
+
+                        break;
 
                         break;
                     case MerchantTurnState.COMPLETE:
