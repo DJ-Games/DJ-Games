@@ -24,7 +24,7 @@ namespace MiniRogue
     class EventCard : Card
     {
 
-        public List<Button> CurrentButtons { get; set; }
+        
 
         public int Option { get; set; }
 

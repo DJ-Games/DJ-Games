@@ -84,6 +84,17 @@ namespace MiniRogue
         Texture2D monsterBtnHLTex;
         Texture2D whetstoneBtnTex;
         Texture2D whetstoneBtnHLTex;
+        Texture2D rationButtonTex;
+        Texture2D healthPotionButtonTex;
+        Texture2D bigHealthPotionButtonTex;
+        Texture2D ArmorPieceButtonTex;
+        Texture2D fireballSpellButtonTex;
+        Texture2D iceSpellSpellButtonTex;
+        Texture2D poisonSpellButtonTex;
+        Texture2D healingSpellButtonTex;
+        Texture2D spellsButtonTex;
+        Texture2D confirmPurchaseMenu;
+        Texture2D confirmSaleMenu;
         SpriteFont font;
         Vector2 position;
 
@@ -174,6 +185,17 @@ namespace MiniRogue
             monsterBtnHLTex = Content.Load<Texture2D>("Monster_Button_Highlight");
             whetstoneBtnTex = Content.Load<Texture2D>("Whetstone_Button");
             whetstoneBtnHLTex = Content.Load<Texture2D>("Whetstone_Button_Highlight");
+            rationButtonTex = Content.Load<Texture2D>("RationButton");
+            healthPotionButtonTex = Content.Load<Texture2D>("HealthPotionButton");
+            bigHealthPotionButtonTex = Content.Load<Texture2D>("BigHPPotionButton");
+            ArmorPieceButtonTex = Content.Load<Texture2D>("ArmorPieceButton");
+            fireballSpellButtonTex = Content.Load<Texture2D>("FireSpellButton");
+            iceSpellSpellButtonTex = Content.Load<Texture2D>("IceSpellButton");
+            poisonSpellButtonTex = Content.Load<Texture2D>("PoisonSpellButton");
+            healingSpellButtonTex = Content.Load<Texture2D>("HealingSpellButton");
+            spellsButtonTex = Content.Load<Texture2D>("SpellsButton");
+            confirmPurchaseMenu = Content.Load<Texture2D>("Confirm_Purchase_menu");
+            confirmSaleMenu = Content.Load<Texture2D>("Confirm_Sale_Menu");
             font = Content.Load<SpriteFont>("Font");
             position = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
                 graphics.GraphicsDevice.Viewport.Height / 2);
@@ -199,9 +221,17 @@ namespace MiniRogue
             buttonDictionay.Add("Whetstone Highlight", new Button(whetstoneBtnHLTex, "Whetstone Highlight"));
             buttonDictionay.Add("Monster", new Button(monsterBtnTex, "Monster"));
             buttonDictionay.Add("Monster Highlight", new Button(monsterBtnHLTex, "Monster Highlight"));
-
-
-
+            buttonDictionay.Add("Green Ration Button", new Button(rationButtonTex, "Green Ration Button"));
+            buttonDictionay.Add("Green Health Potion Button", new Button(healthPotionButtonTex, "Green Health Potion Button"));
+            buttonDictionay.Add("Green Big Health Potion Button", new Button(bigHealthPotionButtonTex, "Green Big Health Potion Button"));
+            buttonDictionay.Add("Green Armor Piece Button", new Button(ArmorPieceButtonTex, "Green Armor Piece Button"));
+            buttonDictionay.Add("Green Fireball Spell Button", new Button(fireballSpellButtonTex, "Green Fireball Spell Button"));
+            buttonDictionay.Add("Green Ice Spell Button", new Button(iceSpellSpellButtonTex, "Green Ice Spell Button"));
+            buttonDictionay.Add("Green Poison Spell Button", new Button(poisonSpellButtonTex, "Green Poison Spell Button"));
+            buttonDictionay.Add("Green Healing Spell Button", new Button(healingSpellButtonTex, "Green Health Spell Button"));
+            buttonDictionay.Add("Green Spells Button", new Button(spellsButtonTex, "Green Spells Button"));
+            buttonDictionay.Add("Confirm Purchase Menu", new Button(confirmPurchaseMenu, "Confirm Purchase Menu"));
+            buttonDictionay.Add("Confirm Sale Menu", new Button(confirmSaleMenu, "Confirm Sale Menu"));
 
 
         }
@@ -462,10 +492,10 @@ namespace MiniRogue
                         case CurrentTurnState.TURN1:
                             currentCard.DrawCard(spriteBatch, font);
 
-                            spriteBatch.Draw(die1, new Vector2(1100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(die2, new Vector2(1100, 250), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(die3, new Vector2(1100, 400), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(die4, new Vector2(1100, 550), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(die1, new Vector2(1130, 100), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(die2, new Vector2(1130, 250), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(die3, new Vector2(1130, 400), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(die4, new Vector2(1130, 550), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                             break;
 
                         case CurrentTurnState.PRETURN2:
