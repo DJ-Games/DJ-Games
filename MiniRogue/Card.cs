@@ -47,7 +47,7 @@ namespace MiniRogue
 
         public Dictionary<string, Button> Buttons { get; set; }
 
-
+        public List<Button> CurrentButtons { get; set; }
 
 
         // Constructors
