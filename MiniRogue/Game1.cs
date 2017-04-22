@@ -95,6 +95,8 @@ namespace MiniRogue
         Texture2D spellsButtonTex;
         Texture2D confirmPurchaseMenu;
         Texture2D confirmSaleMenu;
+        Texture2D reinforceButton;
+        Texture2D healButton; 
         SpriteFont font;
         Vector2 position;
 
@@ -196,6 +198,8 @@ namespace MiniRogue
             spellsButtonTex = Content.Load<Texture2D>("SpellsButton");
             confirmPurchaseMenu = Content.Load<Texture2D>("Confirm_Purchase_menu");
             confirmSaleMenu = Content.Load<Texture2D>("Confirm_Sale_Menu");
+            reinforceButton = Content.Load<Texture2D>("ReinforceButton");
+            healButton = Content.Load<Texture2D>("HealButton");
             font = Content.Load<SpriteFont>("Font");
             position = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
                 graphics.GraphicsDevice.Viewport.Height / 2);
@@ -232,6 +236,8 @@ namespace MiniRogue
             buttonDictionay.Add("Green Spells Button", new Button(spellsButtonTex, "Green Spells Button"));
             buttonDictionay.Add("Confirm Purchase Menu", new Button(confirmPurchaseMenu, "Confirm Purchase Menu"));
             buttonDictionay.Add("Confirm Sale Menu", new Button(confirmSaleMenu, "Confirm Sale Menu"));
+            buttonDictionay.Add("Reinforce Button", new Button(reinforceButton, "Reinforce Button"));
+            buttonDictionay.Add("Heal Button", new Button(healButton, "Heal Button"));
 
 
         }
