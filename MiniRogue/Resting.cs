@@ -27,7 +27,7 @@ namespace MiniRogue
 
         RestingTurnState restingTurnState = new RestingTurnState();
 
-
+        // Constuctor
         public Resting(string name, Texture2D cardTexture, Dictionary<string, Button> buttons) : base(name, cardTexture, buttons)
         {
             restingTurnState = RestingTurnState.SELECTION;
@@ -42,23 +42,9 @@ namespace MiniRogue
             switch (restingTurnState)
             {
                 case RestingTurnState.SELECTION:
+                    LoadRestingButtons(); 
 
-
-                    if (SingleKeyPress(Keys.D1))
-                    {
-                        player.Experience++;
-                        restingTurnState = RestingTurnState.REVIEW;
-                    }
-                    if (SingleKeyPress(Keys.D2))
-                    {
-                        player.Food++;
-                        restingTurnState = RestingTurnState.REVIEW;
-                    }
-                    if (SingleKeyPress(Keys.D3))
-                    {
-                        player.Health += 2;
-                        restingTurnState = RestingTurnState.REVIEW;
-                    }
+                    
                     return false;
 
                 case RestingTurnState.REVIEW:
@@ -81,12 +67,17 @@ namespace MiniRogue
 
 
             sBatch.Draw(CardTexture, new Vector2(100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
-            sBatch.DrawString(font, "Select a number.", new Vector2(50, 800), Color.White);
+
 
             switch (restingTurnState)
             {
                 case RestingTurnState.SELECTION:
-                    sBatch.DrawString(font, "1:  +1XP  2:  +1FOOD   3:  +2HP", new Vector2(50, 825), Color.White);
+                    int counter = 200; 
+                    //foreach (var item in CurrentButtons)
+                    //{
+                    //    sBatch.Draw(item.ButtonTexture, new Vector2(800, counter), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    //    counter += 80; 
+                    //}
                     break;
                 case RestingTurnState.REVIEW:
                     break;
@@ -101,5 +92,17 @@ namespace MiniRogue
 
         }
 
+
+        public void LoadRestingButtons()
+        {
+            CurrentButtons.Add(Buttons["Reinforce"]);
+            CurrentButtons.Add(Buttons["Green Ration Button"]);
+            CurrentButtons.Add(Buttons["Heal"]);
+
+
+
+
+
+        }
     }
 }

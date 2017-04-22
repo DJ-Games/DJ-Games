@@ -31,6 +31,9 @@ namespace MiniRogue
 
         EventCardTurnState eventCardTurnState;
 
+        // Constructor
+
+
         public EventCard(string name, Texture2D cardTexture, Dictionary<string, Button> buttons) : base(name, cardTexture, buttons)
         {
             eventCardTurnState = new EventCardTurnState();
