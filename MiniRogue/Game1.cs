@@ -138,7 +138,7 @@ namespace MiniRogue
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            // TODD: Add your initialization logic here
 
             base.Initialize();
             this.IsMouseVisible = true;
@@ -153,7 +153,7 @@ namespace MiniRogue
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            // TODD: use this.Content to load your game content here
 
 
             bossMonsterCard = Content.Load<Texture2D>("Boss_Monster");
@@ -249,7 +249,7 @@ namespace MiniRogue
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            // TODD: Unload any non ContentManager content here
         }
 
         /// <summary>
@@ -262,7 +262,7 @@ namespace MiniRogue
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            // TODD: Add your update logic here
 
             mouseState = Mouse.GetState();
             position.X = mouseState.X;
@@ -363,7 +363,7 @@ namespace MiniRogue
 
                             if (SingleMouseClick())
                             {
-                                if (position.X > 75 && position.X < 175 && position.Y > 260 && position.Y < 360)
+                                if (position.X > 75 && position.X < 579 && position.Y > 260 && position.Y < 968)
                                 {
 
                                     currentCard = playerHand.RevealCard();
@@ -443,7 +443,7 @@ namespace MiniRogue
         {
             GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
+            // TODD: Add your drawing code here
 
             spriteBatch.Begin();
 
