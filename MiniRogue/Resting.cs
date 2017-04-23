@@ -23,7 +23,7 @@ namespace MiniRogue
     {
 
 
-        public int PlayerChoice { get; set; }
+        public string PlayerChoice { get; set; }
 
         RestingTurnState restingTurnState = new RestingTurnState();
 
@@ -31,23 +31,27 @@ namespace MiniRogue
         public Resting(string name, Texture2D cardTexture, Dictionary<string, Button> buttons) : base(name, cardTexture, buttons)
         {
             restingTurnState = RestingTurnState.SELECTION;
+            CurrentButtons = new List<Button>();
 
         }
 
         //---------------------- METHODS -----------------------------
         public override bool HandleCard(Player player, MouseState current, MouseState previous, float xPos, float yPos)
         {
-            PreviousKbState = CurrentKbState;
+            XPos = xPos;
+            YPos = yPos;
 
             switch (restingTurnState)
             {
                 case RestingTurnState.SELECTION:
-                    LoadRestingButtons(); 
+                    LoadRestingButtons();
+                    HandleButtons(player);
 
-                    
                     return false;
 
                 case RestingTurnState.REVIEW:
+                    HandleButtons(player);
+
                     return false;
 
                 case RestingTurnState.COMPLETE:
@@ -73,14 +77,17 @@ namespace MiniRogue
             {
                 case RestingTurnState.SELECTION:
                     int counter = 200; 
-                    //foreach (var item in CurrentButtons)
-                    //{
-                    //    sBatch.Draw(item.ButtonTexture, new Vector2(800, counter), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
-                    //    counter += 80; 
-                    //}
+                    foreach (var item in CurrentButtons)
+                    {
+                        sBatch.Draw(item.ButtonTexture, new Vector2(500, counter), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                        counter += 150; 
+                    }
                     break;
+
                 case RestingTurnState.REVIEW:
+                    sBatch.Draw(Buttons["Confirm Purchase Menu"].ButtonTexture, new Vector2(500, 320), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     break;
+
                 case RestingTurnState.COMPLETE:
                     break;
                 default:
@@ -95,14 +102,78 @@ namespace MiniRogue
 
         public void LoadRestingButtons()
         {
-            CurrentButtons.Add(Buttons["Reinforce"]);
+            CurrentButtons.Clear();
+            CurrentButtons.Add(Buttons["Reinforce Button"]);
             CurrentButtons.Add(Buttons["Green Ration Button"]);
-            CurrentButtons.Add(Buttons["Heal"]);
-
-
-
-
-
+            CurrentButtons.Add(Buttons["Heal Button"]);
         }
+
+        public void HandleButtons(Player player)
+        {
+            if (SingleMouseClick())
+            {
+                switch (restingTurnState)
+                {
+                    case RestingTurnState.SELECTION:
+
+                        if (XPos > 500 && XPos < 751 && YPos > 200 && YPos < 272)
+                        {
+                            PlayerChoice = "Reinforce Weapon";
+                            restingTurnState = RestingTurnState.REVIEW;
+                        }
+
+                        if (XPos > 500 && XPos < 751 && YPos > 350 && YPos < 422)
+                        {
+                            PlayerChoice = "Ration";
+                            restingTurnState = RestingTurnState.REVIEW;
+                        }
+
+                        if (XPos > 500 && XPos < 751 && YPos > 500 && YPos < 572)
+                        {
+                            PlayerChoice = "Heal";
+                            restingTurnState = RestingTurnState.REVIEW;
+                        }
+
+                        break;
+
+                    case RestingTurnState.REVIEW:
+
+                        if (XPos > 534 && XPos < 780 && YPos > 420 && YPos < 490)
+                        {
+                            switch (PlayerChoice)
+                            {
+                                case "Reinforce Weapon":
+
+                                    player.Experience++;
+                                    restingTurnState = RestingTurnState.COMPLETE;
+                                    break;
+
+                                case "Ration":
+
+                                    player.Food++;
+                                    restingTurnState = RestingTurnState.COMPLETE;
+                                    break;
+
+                                case "Heal":
+
+                                    player.Health+=2;
+                                    restingTurnState = RestingTurnState.COMPLETE;
+                                    break;
+
+
+
+
+                            }
+                        }
+                                    break;
+
+
+                }
+            }
+        }
+
+
+
+
     }
 }
