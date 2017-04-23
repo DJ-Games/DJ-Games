@@ -363,7 +363,7 @@ namespace MiniRogue
 
                             if (SingleMouseClick())
                             {
-                                if (position.X > 75 && position.X < 579 && position.Y > 260 && position.Y < 968)
+                                if (position.X > 75 && position.X < 270 && position.Y > 260 && position.Y < 535)
                                 {
 
                                     currentCard = playerHand.RevealCard();
