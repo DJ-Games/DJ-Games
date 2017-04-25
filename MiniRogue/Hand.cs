@@ -39,7 +39,7 @@ namespace MiniRogue
 
             //playerHand.Add(new EventCard("EventCard", eventTex, buttons));
 
-            //playerHand.Add(new Merchant("Merchant", merchantTex, buttons));
+            playerHand.Add(new Merchant("Merchant", merchantTex, buttons));
 
             playerHand.Add(new Resting("Resting", restingTex, buttons));
 
