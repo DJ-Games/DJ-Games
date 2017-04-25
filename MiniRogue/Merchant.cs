@@ -65,7 +65,6 @@ namespace MiniRogue
                     LoadMerchantButtons();
                     HandleButtons(player);
                     
-
                     return false;
 
                 case MerchantTurnState.BUYSPELL:
@@ -80,13 +79,20 @@ namespace MiniRogue
 
                 case MerchantTurnState.CONFIRMBUY:
                     HandleButtons(player);
+
+                    if (player.Gold < 0)
+                    {
+                      return true;
+                    }
+
+                    else 
                     return false;
+
                 case MerchantTurnState.CONFIRMSELL:
 
                     return false;
 
                 case MerchantTurnState.COMPLETE:
-
 
                     return true;
 
@@ -228,24 +234,28 @@ namespace MiniRogue
                                 case "Buy Ration":
 
                                     player.Food++;
+                                    player.Gold -= 1;
                                     merchantTurnState = MerchantTurnState.BUY;
                                     break;
 
                                 case "Buy Potion":
 
                                     player.Health++;
+                                    player.Gold -= 1;
                                     merchantTurnState = MerchantTurnState.BUY;
                                     break;
 
                                 case "Buy Big Potion":
 
                                     player.Health += 4;
+                                    player.Gold -= 3;
                                     merchantTurnState = MerchantTurnState.BUY;
                                     break;
 
                                 case "Buy Armor":
 
                                     player.Armor++;
+                                    player.Gold -= 6;
                                     merchantTurnState = MerchantTurnState.BUY;
                                     break;
 
