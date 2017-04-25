@@ -383,15 +383,15 @@ namespace MiniRogue
 
                         case CurrentTurnState.PRETURN2:
 
-                            if (SingleMouseClick())
-                            {
-                                if (position.X > 300 && position.X < 495 && position.Y > 100 && position.Y < 375)
-                                {
-                                    currentCard = playerHand.RevealCard();
-                                    //currentTurnState = CurrentTurnState.TURN2;
+                           // if (SingleMouseClick())
+                           // {
+                           //     if (position.X > 300 && position.X < 495 && position.Y > 100 && position.Y < 375)
+                           //     {
+                          //          currentCard = playerHand.RevealCard();
+                           //         //currentTurnState = CurrentTurnState.TURN2;
 
-                                }
-                            }
+                           //     }
+                          //  }
 
                            // if (position.X > 300 && position.X < 495 && position.Y > 400 && position.Y < 575)
                           //  {

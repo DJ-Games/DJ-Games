@@ -136,11 +136,11 @@ namespace MiniRogue
                         }
                     }
 
-                    //if (SingleKeyPress(Keys.Space))
-                    //{
-                    //    health = player.DungeonArea + player.playerDice.RollDice();
-                    //    enemyTurnState = EnemyTurnState.DAMAGE_ROLL;
-                    //}
+                    if (SingleKeyPress(Keys.Space))
+                    {
+                        health = player.DungeonArea + player.playerDice.RollDice();
+                       enemyTurnState = EnemyTurnState.DAMAGE_ROLL;
+                    }
 
 
                     return false;
@@ -204,51 +204,51 @@ namespace MiniRogue
 
 
 
-                        //if (SingleKeyPress(Keys.Space))
-                        //{
+                        if (SingleKeyPress(Keys.Space))
+                        {
 
 
 
 
-                        //    switch (player.Rank)
-                        //    {
-                        //        case 1:
+                          switch (player.Rank)
+                           {
+                                case 1:
 
-                        //            DamageRoll1 = player.playerDice.RollDice();
+                                    DamageRoll1 = player.playerDice.RollDice();
 
-                        //            break;
-
-
-                        //        case 2:
-
-                        //            DamageRoll1 = player.playerDice.RollDice();
-                        //            DamageRoll2 = player.playerDice.RollDice();
-
-                        //            break;
+                                    break;
 
 
-                        //        case 3:
+                                case 2:
 
-                        //            DamageRoll1 = player.playerDice.RollDice();
-                        //            DamageRoll2 = player.playerDice.RollDice();
-                        //            DamageRoll3 = player.playerDice.RollDice();
+                                    DamageRoll1 = player.playerDice.RollDice();
+                                    DamageRoll2 = player.playerDice.RollDice();
 
-                        //            break;
+                                    break;
 
 
-                        //        case 4:
+                                case 3:
 
-                        //            DamageRoll1 = player.playerDice.RollDice();
-                        //            DamageRoll2 = player.playerDice.RollDice();
-                        //            DamageRoll3 = player.playerDice.RollDice();
-                        //            DamageRoll4 = player.playerDice.RollDice();
+                                    DamageRoll1 = player.playerDice.RollDice();
+                                    DamageRoll2 = player.playerDice.RollDice();
+                                    DamageRoll3 = player.playerDice.RollDice();
 
-                        //            break;
+                                    break;
 
-                        //        default:
-                        //            break;
-                        //    }
-                        //}
+
+                                case 4:
+
+                                    DamageRoll1 = player.playerDice.RollDice();
+                                    DamageRoll2 = player.playerDice.RollDice();
+                                    DamageRoll3 = player.playerDice.RollDice();
+                                    DamageRoll4 = player.playerDice.RollDice();
+
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
                     } 
                     return false;
                 case EnemyTurnState.DAMAGE_ROLL_MAXIMIZE:
@@ -263,7 +263,8 @@ namespace MiniRogue
 
                     if (Health > 0)
                     {
-                        player.Health -= Damage;
+                        Damage -= player.Armor;
+                        player.Health -= Damage; 
                     }
         
                     else
