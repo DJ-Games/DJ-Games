@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -222,6 +223,7 @@ namespace MiniRogue
                             
                         }
 
+                        Thread.Sleep(500);
 
                         break;
 
@@ -259,7 +261,7 @@ namespace MiniRogue
                                     merchantTurnState = MerchantTurnState.BUY;
                                     break;
 
-
+                                    Thread.Sleep(500);
 
                                 default:
                                     break;
@@ -284,7 +286,7 @@ namespace MiniRogue
 
                     case MerchantTurnState.CONFIRMSELL:
 
-
+                        
                         break;
                     case MerchantTurnState.COMPLETE:
                         break;
