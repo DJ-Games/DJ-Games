@@ -88,6 +88,40 @@ namespace MiniRogue
         }
 
         // Methods
+
+        public bool SpendGold(int cost)
+        {
+            if (Gold >= cost)
+            {
+                Gold -= cost;
+                return true; 
+                
+            }
+
+            return false; 
+        }
+
+        public  bool AddSpell(string spell)
+        {
+            if (Spells.Count < 2)
+            {
+                Spells.Add(spell);
+                return true;
+            }
+            else return false; 
+        }
+
+        public bool RemoveSpell(string spell)
+        {
+            if (Spells.Count > 0)
+            {
+                Spells.Remove(spell);
+                return true;
+            }
+            else return false; 
+
+        }
+
         public void FallBelow()
         {
             switch (Rank)

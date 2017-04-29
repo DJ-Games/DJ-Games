@@ -18,6 +18,7 @@ namespace MiniRogue
         CONFIRMBUY,
         SELLSPELL,
         CONFIRMSELL,
+        INSUFFICENTFUNDS,
         COMPLETE,
     }
         
@@ -62,11 +63,20 @@ namespace MiniRogue
 
             switch (merchantTurnState)
             {
+              
                 case MerchantTurnState.BUY:
                     LoadMerchantButtons();
                     HandleButtons(player);
                     
                     return false;
+
+
+                case MerchantTurnState.INSUFFICENTFUNDS:
+                    Thread.Sleep(500);
+
+                    merchantTurnState = MerchantTurnState.BUY;
+                    return false;
+
 
                 case MerchantTurnState.BUYSPELL:
                     LoadSpellsButtons();
@@ -223,7 +233,7 @@ namespace MiniRogue
                             
                         }
 
-                        Thread.Sleep(500);
+                       
 
                         break;
 
@@ -235,37 +245,54 @@ namespace MiniRogue
                             {
                                 case "Buy Ration":
 
-                                    player.Food++;
-                                    player.Gold -= 1;
-                                    merchantTurnState = MerchantTurnState.BUY;
+                                 
+                                    if (player.SpendGold(1))
+                                    {
+                                        player.Food++;
+                                        merchantTurnState = MerchantTurnState.BUY;
+                                    }
+
+                                    else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
+
                                     break;
 
                                 case "Buy Potion":
+                                    if (player.SpendGold(1))
+                                    {
+                                        player.Health++;
+                                        merchantTurnState = MerchantTurnState.BUY;
+                                    }
 
-                                    player.Health++;
-                                    player.Gold -= 1;
-                                    merchantTurnState = MerchantTurnState.BUY;
+                                    else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
+
                                     break;
 
                                 case "Buy Big Potion":
+                                    if (player.SpendGold(3))
+                                    {
+                                        player.Health+=4;
+                                        merchantTurnState = MerchantTurnState.BUY;
+                                    }
+                                   
+                                   else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
 
-                                    player.Health += 4;
-                                    player.Gold -= 3;
-                                    merchantTurnState = MerchantTurnState.BUY;
                                     break;
 
                                 case "Buy Armor":
+                                    if (player.SpendGold(6))
+                                    {
+                                        player.Armor += 1;
+                                        merchantTurnState = MerchantTurnState.BUY;
+                                    }
 
-                                    player.Armor++;
-                                    player.Gold -= 6;
-                                    merchantTurnState = MerchantTurnState.BUY;
+                                    else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
+
                                     break;
-
-                                    Thread.Sleep(500);
 
                                 default:
                                     break;
                             }
+                            Thread.Sleep(500);
                         }
 
                         if (XPos > 820 && XPos < 1070 && YPos > 420 && YPos < 490)
@@ -274,6 +301,8 @@ namespace MiniRogue
                         }
 
                         break;
+
+
 
                     case MerchantTurnState.BUYSPELL:
 
