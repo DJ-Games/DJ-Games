@@ -13,7 +13,7 @@ namespace MiniRogue
 
     enum MerchantTurnState
     {
-        BUY,
+        BUYSELL,
         BUYSPELL,
         CONFIRMBUY,
         SELLSPELL,
@@ -22,8 +22,6 @@ namespace MiniRogue
         COMPLETE,
     }
         
-
-
 
     class Merchant : Card
     {
@@ -35,6 +33,8 @@ namespace MiniRogue
         public int BuyCost { get; set; }
 
         public string Selection { get; set; }
+
+        public int SpellCount { get; set; }
 
         MerchantTurnState merchantTurnState;
 
@@ -60,11 +60,12 @@ namespace MiniRogue
         {
             XPos = xPos;
             YPos = yPos;
+            SpellCount = player.Spells.Count;
 
             switch (merchantTurnState)
             {
               
-                case MerchantTurnState.BUY:
+                case MerchantTurnState.BUYSELL:
                     LoadMerchantButtons();
                     HandleButtons(player);
                     
@@ -74,12 +75,13 @@ namespace MiniRogue
                 case MerchantTurnState.INSUFFICENTFUNDS:
                     Thread.Sleep(500);
 
-                    merchantTurnState = MerchantTurnState.BUY;
+                    merchantTurnState = MerchantTurnState.BUYSELL;
                     return false;
 
 
                 case MerchantTurnState.BUYSPELL:
                     LoadSpellsButtons();
+                    HandleButtons(player);
 
                     return false;
 
@@ -122,7 +124,7 @@ namespace MiniRogue
             switch (merchantTurnState)
             {
                          
-                case MerchantTurnState.BUY:
+                case MerchantTurnState.BUYSELL:
                     sBatch.DrawString(font, "What would you like to buy or sell?", new Vector2(500, 200), Color.White);
                     int counter = 240;
                     foreach (var item in CurrentButtons)
@@ -145,6 +147,7 @@ namespace MiniRogue
                     break;
                 case MerchantTurnState.SELLSPELL:
 
+
                     break;
                 case MerchantTurnState.CONFIRMBUY:
                     sBatch.Draw(Buttons["Confirm Purchase Menu"].ButtonTexture, new Vector2(500, 320), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
@@ -163,7 +166,9 @@ namespace MiniRogue
 
         }
 
-
+        /// <summary>
+        /// Load Merchant Buttons Method
+        /// </summary>
         public void LoadMerchantButtons()
         {
             CurrentButtons.Clear();
@@ -174,6 +179,9 @@ namespace MiniRogue
             CurrentButtons.Add(Buttons["Green Spells Button"]);
         }
 
+        /// <summary>
+        /// Load Spells Buttons Method
+        /// </summary>
         public void LoadSpellsButtons()
         {
             CurrentButtons.Clear();
@@ -183,14 +191,19 @@ namespace MiniRogue
             CurrentButtons.Add(Buttons["Green Healing Spell Button"]);
         }
 
+        /// <summary>
+        /// Handle Buttons Method
+        /// </summary>
+        /// <param name="player"></param>
         public void HandleButtons(Player player)
         {
+            // If player clicks left mouse button. 
             if (SingleMouseClick())
             {
                 switch (merchantTurnState)
                 {
-                    case MerchantTurnState.BUY:
-
+                    // ------- BUY / SELL STATE -------
+                    case MerchantTurnState.BUYSELL:
 
                         if (XPos > 525 && XPos < 773 && YPos > 240 && YPos < 312)
                         {
@@ -230,13 +243,16 @@ namespace MiniRogue
 
                         if (XPos > 800 && XPos < 1048 && YPos > 320 && YPos < 392)
                         {
-                            
+                            if (player.Spells.Count > 0)
+                            {
+                                merchantTurnState = MerchantTurnState.SELLSPELL;
+                            }
+                            else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
                         }
-
-                       
-
+               
                         break;
-
+                 
+                    // ------- CONFIRM BUY STATE -------
                     case MerchantTurnState.CONFIRMBUY:
 
                         if (XPos > 534 && XPos < 780 && YPos > 420 && YPos < 490)
@@ -249,7 +265,7 @@ namespace MiniRogue
                                     if (player.SpendGold(1))
                                     {
                                         player.Food++;
-                                        merchantTurnState = MerchantTurnState.BUY;
+                                        merchantTurnState = MerchantTurnState.BUYSELL;
                                     }
 
                                     else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
@@ -260,7 +276,7 @@ namespace MiniRogue
                                     if (player.SpendGold(1))
                                     {
                                         player.Health++;
-                                        merchantTurnState = MerchantTurnState.BUY;
+                                        merchantTurnState = MerchantTurnState.BUYSELL;
                                     }
 
                                     else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
@@ -271,7 +287,7 @@ namespace MiniRogue
                                     if (player.SpendGold(3))
                                     {
                                         player.Health+=4;
-                                        merchantTurnState = MerchantTurnState.BUY;
+                                        merchantTurnState = MerchantTurnState.BUYSELL;
                                     }
                                    
                                    else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
@@ -282,9 +298,53 @@ namespace MiniRogue
                                     if (player.SpendGold(6))
                                     {
                                         player.Armor += 1;
-                                        merchantTurnState = MerchantTurnState.BUY;
+                                        merchantTurnState = MerchantTurnState.BUYSELL;
                                     }
 
+                                    else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
+
+                                    break;
+
+                                case "Buy Fire Spell":
+
+                                    if (player.SpendGold(8))
+                                    {
+                                        player.AddSpell("Fire Spell");
+                                        merchantTurnState = MerchantTurnState.BUYSELL;
+                                    }
+                                    else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
+
+                                    break;
+
+                                case "Buy Ice Spell":
+
+                                    if (player.SpendGold(8))
+                                    {
+                                        player.AddSpell("Ice Spell");
+                                        merchantTurnState = MerchantTurnState.BUYSELL;
+                                    }
+                                    else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
+
+                                    break;
+
+                                case "Buy Poison Spell":
+
+                                    if (player.SpendGold(8))
+                                    {
+                                        player.AddSpell("Poison Spell");
+                                        merchantTurnState = MerchantTurnState.BUYSELL;
+                                    }
+                                    else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
+
+                                    break;
+
+                                case "Buy Healing Spell":
+
+                                    if (player.SpendGold(8))
+                                    {
+                                        player.AddSpell("Healing Spell");
+                                        merchantTurnState = MerchantTurnState.BUYSELL;
+                                    }
                                     else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
 
                                     break;
@@ -297,26 +357,123 @@ namespace MiniRogue
 
                         if (XPos > 820 && XPos < 1070 && YPos > 420 && YPos < 490)
                         {
-                            merchantTurnState = MerchantTurnState.BUY;
+                            merchantTurnState = MerchantTurnState.BUYSELL;
+                        }
+
+                        break;
+                    
+                    // ------- BUY SPELL STATE -------
+                    case MerchantTurnState.BUYSPELL:
+
+                        if (XPos > 525 && XPos < 773 && YPos > 240 && YPos < 312)
+                        {
+                            Selection = "Buy Fire Spell";
+                            merchantTurnState = MerchantTurnState.CONFIRMBUY;
+
+                        }
+
+                        if (XPos > 525 && XPos < 773 && YPos > 320 && YPos < 392)
+                        {
+                            Selection = "Buy Ice Spell";
+                            merchantTurnState = MerchantTurnState.CONFIRMBUY;
+                        }
+
+                        if (XPos > 525 && XPos < 773 && YPos > 400 && YPos < 472)
+                        {
+                            Selection = "Buy Poison Spell";
+                            merchantTurnState = MerchantTurnState.CONFIRMBUY;
+                        }
+
+                        if (XPos > 525 && XPos < 773 && YPos > 480 && YPos < 552)
+                        {
+                            Selection = "Buy Healing Spell";
+                            merchantTurnState = MerchantTurnState.CONFIRMBUY;
                         }
 
                         break;
 
-
-
-                    case MerchantTurnState.BUYSPELL:
-
-
-                        break;
+                    // ------- SELL SPELL STATE -------
                     case MerchantTurnState.SELLSPELL:
 
 
                         break;
 
+                    // ------- CONFIRM SALE STATE -------
                     case MerchantTurnState.CONFIRMSELL:
+                        if (XPos > 534 && XPos < 780 && YPos > 420 && YPos < 490)
+                        {
+                            switch (Selection)
+                            {
+                                case "Sell Armor":
 
-                        
+                                    if (player.RemoveArmor())
+                                    {
+                                        merchantTurnState = MerchantTurnState.BUYSELL;
+                                    }
+                                    else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
+
+                                    break;
+
+                                case "Sell Fire Spell":
+                                    if (player.Spells.Contains("Fire Spell"))
+                                    {
+                                        player.RemoveSpell("Fire Spell");
+                                        merchantTurnState = MerchantTurnState.BUYSELL;
+                                    }
+
+                                    else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
+
+                                    break;
+
+                                case "Sell Ice Spell":
+                                    if (player.Spells.Contains("Ice Spell"))
+                                    {
+                                        player.RemoveSpell("Ice Spell");
+                                        merchantTurnState = MerchantTurnState.BUYSELL;
+                                    }
+
+                                    else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
+
+                                    break;
+
+                                case "Sell Poison Spell":
+                                    if (player.Spells.Contains("Poison Spell"))
+                                    {
+                                        player.RemoveSpell("Poison Spell");
+                                        merchantTurnState = MerchantTurnState.BUYSELL;
+                                    }
+
+                                    else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
+
+                                    break;
+
+                                case "Sell Healing Spell":
+
+                                    if (player.Spells.Contains("Healing spell"))
+                                    {
+                                        player.RemoveSpell("Healing Spell");
+                                        merchantTurnState = MerchantTurnState.BUYSELL;
+                                    }
+                                    else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
+
+                                    break;
+
+                               
+                                default:
+                                    break;
+                            }
+                            Thread.Sleep(500);
+                        }
+
+                        if (XPos > 820 && XPos < 1070 && YPos > 420 && YPos < 490)
+                        {
+                            merchantTurnState = MerchantTurnState.BUYSELL;
+                        }
+
                         break;
+
+
+                    // ------- COMPLETE -------
                     case MerchantTurnState.COMPLETE:
                         break;
                     default:

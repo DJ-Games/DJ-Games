@@ -101,7 +101,17 @@ namespace MiniRogue
             return false; 
         }
 
-        public  bool AddSpell(string spell)
+        public bool RemoveArmor()
+        {
+            if (Armor >= 1)
+            {
+                Armor--;
+                return true;
+            }
+            else return false;
+        }
+
+        public bool AddSpell(string spell)
         {
             if (Spells.Count < 2)
             {
