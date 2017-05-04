@@ -147,7 +147,6 @@ namespace MiniRogue
                     break;
                 case MerchantTurnState.SELLSPELL:
 
-
                     break;
                 case MerchantTurnState.CONFIRMBUY:
                     sBatch.Draw(Buttons["Confirm Purchase Menu"].ButtonTexture, new Vector2(500, 320), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
