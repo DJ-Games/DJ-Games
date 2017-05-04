@@ -34,7 +34,7 @@ namespace MiniRogue
 
         public string Selection { get; set; }
 
-        public int SpellCount { get; set; }
+       
 
         MerchantTurnState merchantTurnState;
 
@@ -60,7 +60,8 @@ namespace MiniRogue
         {
             XPos = xPos;
             YPos = yPos;
-            SpellCount = player.Spells.Count;
+            
+
 
             switch (merchantTurnState)
             {

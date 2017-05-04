@@ -155,8 +155,9 @@ namespace MiniRogue
 
             // TODD: use this.Content to load your game content here
 
+            //Load Content
 
-            bossMonsterCard = Content.Load<Texture2D>("Boss_Monster");
+          bossMonsterCard = Content.Load<Texture2D>("Boss_Monster");
             characterStatsCard = Content.Load<Texture2D>("Character_Stats");
             eventCard = Content.Load<Texture2D>("Event");
             merchantCard = Content.Load<Texture2D>("Merchant");
@@ -500,6 +501,15 @@ namespace MiniRogue
                     spriteBatch.DrawString(font, "Spell2: ", new Vector2(820, 20), Color.White);
                     spriteBatch.DrawString(font, "Dungeon Level: " + player.DungeonLevel, new Vector2(1120, 20), Color.White);
                     spriteBatch.DrawString(font, "Dungeon Area: " + player.DungeonArea, new Vector2(1120, 40), Color.White);
+
+                    if (player.Spells.Count == 1)
+                    {
+                        if (player.Spells[0]== "Fire Spell")
+                        {
+                            spriteBatch.Draw(fireballSpellButtonTex, new Vector2(625, 20), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                        }
+                    }
+
 
                     switch (currentTurnState)
                     {
