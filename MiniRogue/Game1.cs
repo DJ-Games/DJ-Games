@@ -96,7 +96,8 @@ namespace MiniRogue
         Texture2D confirmPurchaseMenu;
         Texture2D confirmSaleMenu;
         Texture2D reinforceButton;
-        Texture2D healButton; 
+        Texture2D healButton;
+        Texture2D doneButton; 
         SpriteFont font;
         Vector2 position;
 
@@ -209,7 +210,7 @@ namespace MiniRogue
             buttonDictionay = new Dictionary<string, Button>();
             gamestate = Gamestate.TITILESCREEN;
             currentTurnState = CurrentTurnState.PRETURN1;
-
+            doneButton = Content.Load<Texture2D>("DoneButton"); 
 
             // Fill Button dictionary
 
@@ -239,7 +240,7 @@ namespace MiniRogue
             buttonDictionay.Add("Confirm Sale Menu", new Button(confirmSaleMenu, "Confirm Sale Menu"));
             buttonDictionay.Add("Reinforce Button", new Button(reinforceButton, "Reinforce Button"));
             buttonDictionay.Add("Heal Button", new Button(healButton, "Heal Button"));
-
+            buttonDictionay.Add("Done Button", new Button(doneButton, "Done Button"));
 
         }
 
@@ -310,7 +311,7 @@ namespace MiniRogue
                     {
                         if (position.X > 800 && position.X < 1050 && position.Y > 167 && position.Y < 241)
                         {
-                            player = new Player(1, 5, 20, 6);
+                            player = new Player(1, 5, 5, 6);
                             playerHand = new Hand();
                             playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, buttonDictionay);
                             gamestate = Gamestate.DELVE;

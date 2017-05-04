@@ -126,8 +126,9 @@ namespace MiniRogue
 
             switch (merchantTurnState)
             {
-                         
+
                 case MerchantTurnState.BUYSELL:
+                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(660, 100), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);  
                     sBatch.DrawString(font, "What would you like to buy or sell?", new Vector2(500, 200), Color.White);
                     int counter = 240;
                     foreach (var item in CurrentButtons)
@@ -137,7 +138,7 @@ namespace MiniRogue
                     }
                     sBatch.Draw(Buttons["Green Armor Piece Button"].ButtonTexture, new Vector2(800, 240), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     sBatch.Draw(Buttons["Green Spells Button"].ButtonTexture, new Vector2(800, 320), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-
+                    
                     break;
                 case MerchantTurnState.BUYSPELL:
                     int counter2 = 240;
@@ -179,6 +180,7 @@ namespace MiniRogue
             CurrentButtons.Add(Buttons["Green Big Health Potion Button"]);
             CurrentButtons.Add(Buttons["Green Armor Piece Button"]);
             CurrentButtons.Add(Buttons["Green Spells Button"]);
+            
         }
 
         /// <summary>
@@ -207,6 +209,11 @@ namespace MiniRogue
                     // ------- BUY / SELL STATE -------
                     case MerchantTurnState.BUYSELL:
 
+                        if (XPos > 660 && XPos < 908 && YPos > 100 && YPos < 172)
+                        {
+                            merchantTurnState = MerchantTurnState.COMPLETE; 
+
+                        }
                         if (XPos > 525 && XPos < 773 && YPos > 240 && YPos < 312)
                         {
                             Selection = "Buy Ration";

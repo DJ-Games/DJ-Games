@@ -134,6 +134,8 @@ namespace MiniRogue
 
         public void FallBelow()
         {
+            Health -= 2; 
+
             switch (Rank)
             {
                 case 1:
