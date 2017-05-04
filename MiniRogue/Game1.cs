@@ -506,22 +506,22 @@ namespace MiniRogue
                     {
                         if (player.Spells[0]== "Fire Spell")
                         {
-                            spriteBatch.Draw(fireballSpellButtonTex, new Vector2(625, 20), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(fireballSpellButtonTex, new Vector2(700, 15), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
                         }
 
                         if (player.Spells[0] == "Ice Spell")
                         {
-                            spriteBatch.Draw(iceSpellSpellButtonTex, new Vector2(625, 20), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(iceSpellSpellButtonTex, new Vector2(700, 15), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
                         }
 
                         if (player.Spells[0] == "Poison Spell")
                         {
-                            spriteBatch.Draw(poisonSpellButtonTex, new Vector2(625, 20), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(poisonSpellButtonTex, new Vector2(700, 15), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
                         }
 
                         if (player.Spells[0] == "Healing Spell")
                         {
-                            spriteBatch.Draw(healingSpellButtonTex, new Vector2(625, 20), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(healingSpellButtonTex, new Vector2(700, 15), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
                         }
 
                    }
@@ -530,22 +530,42 @@ namespace MiniRogue
                     {
                         if (player.Spells[0] == "Fire Spell")
                         {
-                            spriteBatch.Draw(fireballSpellButtonTex, new Vector2(625, 20), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(fireballSpellButtonTex, new Vector2(700, 15), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
                         }
 
                         if (player.Spells[0] == "Ice Spell")
                         {
-                            spriteBatch.Draw(iceSpellSpellButtonTex, new Vector2(625, 20), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(iceSpellSpellButtonTex, new Vector2(700, 15), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
                         }
 
                         if (player.Spells[0] == "Poison Spell")
                         {
-                            spriteBatch.Draw(poisonSpellButtonTex, new Vector2(625, 20), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(poisonSpellButtonTex, new Vector2(700, 15), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
                         }
 
                         if (player.Spells[0] == "Healing Spell")
                         {
-                            spriteBatch.Draw(healingSpellButtonTex, new Vector2(625, 20), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(healingSpellButtonTex, new Vector2(700, 15), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                        }
+
+                        if (player.Spells[1] == "Fire Spell")
+                        {
+                            spriteBatch.Draw(fireballSpellButtonTex, new Vector2(900, 15), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                        }
+
+                        if (player.Spells[1] == "Ice Spell")
+                        {
+                            spriteBatch.Draw(iceSpellSpellButtonTex, new Vector2(900, 15), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                        }
+
+                        if (player.Spells[1] == "Poison Spell")
+                        {
+                            spriteBatch.Draw(poisonSpellButtonTex, new Vector2(900, 15), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                        }
+
+                        if (player.Spells[1] == "Healing Spell")
+                        {
+                            spriteBatch.Draw(healingSpellButtonTex, new Vector2(900, 15), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
                         }
                     }
 
