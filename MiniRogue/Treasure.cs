@@ -51,7 +51,7 @@ namespace MiniRogue
             switch (treasureTurnState)
             {
                 case TreasureTurnState.GOLD_AWARD:
-                    
+
                     if (player.HasFoughtMonster)
                     {
                         player.Gold += 2;
@@ -65,89 +65,27 @@ namespace MiniRogue
                     return false;
 
                 case TreasureTurnState.EXTRA_TREASURE_ROLL:
+                    HandleButtons(player);
 
-                    if (SingleMouseClick())
-                    {
-                        if (xPos > 700 && xPos < 948 && yPos > 575 && yPos < 648)
-                        {
-                            ExtTreasureResult = player.playerDice.RollDice();
-                        }
-                            
-
-                        if (ExtTreasureResult >= 5)
-                        {
-                            treasureTurnState = TreasureTurnState.TREASURE_ROLL;
-                        }
-                        else
-                        {
-                            treasureTurnState = TreasureTurnState.REVIEW;
-                        }
-
-                    }
 
                     return false;
-
+            
                 case TreasureTurnState.TREASURE_ROLL:
+                    HandleButtons(player);
 
-                    if (SingleMouseClick())
-                    {
-                        if (xPos > 700 && xPos < 948 && yPos > 575 && yPos < 648)
-                        {
-                            TreasureResult = player.playerDice.RollDice();
-                        }
-                        
 
-                        switch (TreasureResult)
-                        {
-
-                            case 1:
-                                player.Armor++;
-                                break;
-
-                            case 2:
-                                player.Experience += 2;
-                                break;
-
-                            case 3:
-                                player.Spells.Add("Fire Spell");
-                                break;
-
-                            case 4:
-                                player.Spells.Add("Ice Spell");
-                                break;
-
-                            case 5:
-                                player.Spells.Add("Poison Spell");
-                                break;
-
-                            case 6:
-                                player.Spells.Add("Healing Spell");
-                                break;
-                            default:
-                                break;
-
-                           
-                        }
-
-                        treasureTurnState = TreasureTurnState.REVIEW;
-
-                    }
+                   
 
                     return false;
 
                 case TreasureTurnState.REVIEW:
-                    if (SingleMouseClick())
-                    {
-                        if (xPos > 700 && xPos < 948 && yPos > 775 && yPos < 848)
-                        {
-                            treasureTurnState = TreasureTurnState.COMPLETE;
-                        }
-                    }
-                    
+                    HandleButtons(player);
+
 
                     return false;
 
                 case TreasureTurnState.COMPLETE:
+                    HandleButtons(player);
 
                     return true;
 
@@ -192,8 +130,95 @@ namespace MiniRogue
             }
 
         }
-        
 
+        public void HandleButtons(Player player)
+        {
+            switch (treasureTurnState)
+            {
+                case TreasureTurnState.GOLD_AWARD:
+                    break;
+                case TreasureTurnState.EXTRA_TREASURE_ROLL:
+
+                    if (SingleMouseClick())
+                    {
+                        if (XPos > 700 && YPos < 948 && YPos > 575 && XPos < 648)
+                        {
+                            ExtTreasureResult = player.playerDice.RollDice();
+                        }
+
+
+                        if (ExtTreasureResult >= 5)
+                        {
+                            treasureTurnState = TreasureTurnState.TREASURE_ROLL;
+                        }
+                        else
+                        {
+                            treasureTurnState = TreasureTurnState.REVIEW;
+                        }
+
+                    }
+                    break;
+
+                case TreasureTurnState.TREASURE_ROLL:
+
+                    if (SingleMouseClick())
+                    {
+                        if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
+                        {
+                            TreasureResult = player.playerDice.RollDice();
+                        }
+                    }
+                    switch (TreasureResult)
+                    {
+
+                        case 1:
+                            player.Armor++;
+                            break;
+
+                        case 2:
+                            player.Experience += 2;
+                            break;
+
+                        case 3:
+                            player.Spells.Add("Fire Spell");
+                            break;
+
+                        case 4:
+                            player.Spells.Add("Ice Spell");
+                            break;
+
+                        case 5:
+                            player.Spells.Add("Poison Spell");
+                            break;
+
+                        case 6:
+                            player.Spells.Add("Healing Spell");
+                            break;
+                        default:
+                            break;
+                    }
+
+                    treasureTurnState = TreasureTurnState.REVIEW;
+                    break;
+            
+        
+            case TreasureTurnState.REVIEW:
+            if (SingleMouseClick())
+            {
+                if (XPos > 700 && XPos < 948 && YPos > 775 && YPos < 848)
+                {
+                    treasureTurnState = TreasureTurnState.COMPLETE;
+                }
+            }
+
+            break;
+
+                case TreasureTurnState.COMPLETE:
+                    break;
+                default:
+                    break;
+            }
+        }
 
 
 
