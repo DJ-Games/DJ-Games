@@ -595,3 +595,9 @@
 /processorParam:TextureFormat=Color
 /build:DoneButton.png
 
+#begin Dungeon.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Dungeon.spritefont
+

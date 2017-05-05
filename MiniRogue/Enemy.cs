@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+
 namespace MiniRogue
 {
     enum EnemyTurnState
@@ -29,7 +30,7 @@ namespace MiniRogue
 
         public int ExpReward { get; set; }
 
-        private int health;
+        private int monsterHealth;
 
         public int DamageRoll1 { get; set; }
         public int DamageRoll2 { get; set; }
@@ -38,16 +39,16 @@ namespace MiniRogue
 
         public int Health
         {
-            get { return health; }
+            get { return monsterHealth; }
             set
             {
-                if((health = value) < 0)
+                if((monsterHealth = value) < 0)
                 {
-                    health = 0;
+                    monsterHealth = 0;
                 }
                 else
                 {
-                    health = value;
+                    monsterHealth = value;
                 }
                 
 
@@ -80,8 +81,10 @@ namespace MiniRogue
         /// <returns></returns>
         public override bool HandleCard(Player player, MouseState current, MouseState previous, float xPos, float yPos)
         {
-            PreviousKbState = CurrentKbState;
-            PreviousMouseState = CurrentMouseState;
+
+            XPos = xPos;
+            YPos = yPos;
+
 
             switch (player.DungeonLevel)
             {
@@ -120,202 +123,52 @@ namespace MiniRogue
                     break;
             }
 
+            
+
+
+
 
 
             switch (enemyTurnState)
             {
                 case EnemyTurnState.MONSTER_HEALTH_ROLL:
 
-                    if (SingleMouseClick())
-                    {
-                        if (xPos > 700 && xPos < 948 && yPos > 575 && yPos < 648)
-                        {
-                            health = player.DungeonArea + player.playerDice.RollDice();
-                            enemyTurnState = EnemyTurnState.DAMAGE_ROLL;
-
-                        }
-                    }
-
-                    if (SingleKeyPress(Keys.Space))
-                    {
-                        health = player.DungeonArea + player.playerDice.RollDice();
-                       enemyTurnState = EnemyTurnState.DAMAGE_ROLL;
-                    }
-
+                    HandleButtons(player);
 
                     return false;
 
                 case EnemyTurnState.DAMAGE_ROLL:
 
-
-                    if (Health > 0)
-                    {
+                    HandleButtons(player);
 
 
-                        if (SingleMouseClick())
-                        {
-                            if (xPos > 700 && xPos < 948 && yPos > 575 && yPos < 648)
-                            {
-                                switch (player.Rank)
-                                {
-                                    case 1:
-
-                                        DamageRoll1 = player.playerDice.RollDice();
-                                        enemyTurnState = EnemyTurnState.DAMAGE_ROLL_MAXIMIZE;
-
-                                        break;
-
-
-                                    case 2:
-
-                                        DamageRoll1 = player.playerDice.RollDice();
-                                        DamageRoll2 = player.playerDice.RollDice();
-
-                                        break;
-
-
-                                    case 3:
-
-                                        DamageRoll1 = player.playerDice.RollDice();
-                                        DamageRoll2 = player.playerDice.RollDice();
-                                        DamageRoll3 = player.playerDice.RollDice();
-
-                                        break;
-
-
-                                    case 4:
-
-                                        DamageRoll1 = player.playerDice.RollDice();
-                                        DamageRoll2 = player.playerDice.RollDice();
-                                        DamageRoll3 = player.playerDice.RollDice();
-                                        DamageRoll4 = player.playerDice.RollDice();
-
-                                        break;
-
-                                    default:
-                                        break;
-                                }
-
-                            }
-                        }
-
-
-
-
-
-
-                        if (SingleKeyPress(Keys.Space))
-                        {
-
-
-
-
-                          switch (player.Rank)
-                           {
-                                case 1:
-
-                                    DamageRoll1 = player.playerDice.RollDice();
-
-                                    break;
-
-
-                                case 2:
-
-                                    DamageRoll1 = player.playerDice.RollDice();
-                                    DamageRoll2 = player.playerDice.RollDice();
-
-                                    break;
-
-
-                                case 3:
-
-                                    DamageRoll1 = player.playerDice.RollDice();
-                                    DamageRoll2 = player.playerDice.RollDice();
-                                    DamageRoll3 = player.playerDice.RollDice();
-
-                                    break;
-
-
-                                case 4:
-
-                                    DamageRoll1 = player.playerDice.RollDice();
-                                    DamageRoll2 = player.playerDice.RollDice();
-                                    DamageRoll3 = player.playerDice.RollDice();
-                                    DamageRoll4 = player.playerDice.RollDice();
-
-                                    break;
-
-                                default:
-                                    break;
-                            }
-                        }
-                    } 
                     return false;
-                case EnemyTurnState.DAMAGE_ROLL_MAXIMIZE:
+
+
+
+
+
+
 
                     
+                case EnemyTurnState.DAMAGE_ROLL_MAXIMIZE:
 
 
 
 
 
 
+                    return false;
 
-                    if (Health > 0)
-                    {
-                        Damage -= player.Armor;
-                        player.Health -= Damage; 
-                    }
-        
-                    else
-                    {
-                        switch (player.DungeonLevel)
-                        {
-                            case 1:
 
-                                player.Experience += 1;
-
-                                break;
-
-                            case 2:
-
-                                player.Experience += 2; 
-
-                                break;
-
-                            case 3:
-
-                                player.Experience += 2;
-
-                                break;
-
-                            case 4:
-
-                                player.Experience += 3;
-
-                                break;
-
-                            case 5:
-
-                                player.Experience += 3;
-
-                                break;
-
-                            default:
-                                break;
-                        }
-                        player.HasFoughtMonster = true;
-                        enemyTurnState = EnemyTurnState.COMPLETE;
-                    }
-
-                    return false; 
+               
 
                 case EnemyTurnState.REVIEW:
                     return false;
 
 
                 case EnemyTurnState.COMPLETE:
-                    Thread.Sleep(2000);
+
                     return true;
 
                 default:
@@ -335,26 +188,33 @@ namespace MiniRogue
 
 
 
-        public override void DrawCard(SpriteBatch sBatch,SpriteFont font)
+        public override void DrawCard(SpriteBatch sBatch,SpriteFont dungeonFont)
         {
 
             sBatch.Draw(CardTexture, new Vector2(100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
-
-
-
-
-            sBatch.DrawString(font, "Press Space to roll for monster difficulty.", new Vector2(500, 200), Color.White);
-            sBatch.DrawString(font, "Monster Health: " + Health, new Vector2(500, 250), Color.White);
+            sBatch.DrawString(dungeonFont, "Monster Health: " + monsterHealth, new Vector2(600, 50), Color.Green, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
 
             switch (enemyTurnState)
             {
                 case EnemyTurnState.MONSTER_HEALTH_ROLL:
+
+                    sBatch.DrawString(dungeonFont, "Roll for moster hit points", new Vector2(575, 100), Color.Green, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+
                     break;
+
                 case EnemyTurnState.DAMAGE_ROLL:
+
+                    sBatch.DrawString(dungeonFont, "Roll for damage", new Vector2(575, 100), Color.Green, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+
                     break;
+
+
                 case EnemyTurnState.DAMAGE_ROLL_MAXIMIZE:
-                    
-                    //sBatch.DrawString(font, "Player Die")
+                   
+
+
 
 
 
@@ -372,6 +232,83 @@ namespace MiniRogue
 
         }
 
+        public void HandleButtons(Player player)
+        {
+
+            if (SingleMouseClick())
+            {
+                switch (enemyTurnState)
+                {
+                    case EnemyTurnState.MONSTER_HEALTH_ROLL:
+
+
+                        if (XPos > 700 && XPos < 948 && YPos > 500 && YPos < 572)
+                        {
+                            monsterHealth = player.DungeonArea + player.playerDice.RollDice();
+                            enemyTurnState = EnemyTurnState.DAMAGE_ROLL;
+
+                        }
+
+                        break;
+                    case EnemyTurnState.DAMAGE_ROLL:
+
+                        if (XPos > 700 && XPos < 948 && YPos > 500 && YPos < 572)
+                        {
+                            switch (player.Rank)
+                            {
+                                case 1:
+                                    DamageRoll1 = player.playerDice.RollDice();
+                                    break;
+
+                                case 2:
+                                    DamageRoll1 = player.playerDice.RollDice();
+                                    DamageRoll2 = player.playerDice.RollDice();
+
+                                    break;
+
+                                case 3:
+                                    DamageRoll1 = player.playerDice.RollDice();
+                                    DamageRoll2 = player.playerDice.RollDice();
+                                    DamageRoll3 = player.playerDice.RollDice();
+
+                                    break;
+
+                                case 4:
+                                    DamageRoll1 = player.playerDice.RollDice();
+                                    DamageRoll2 = player.playerDice.RollDice();
+                                    DamageRoll3 = player.playerDice.RollDice();
+                                    DamageRoll4 = player.playerDice.RollDice();
+
+                                    break;
+                                    
+                                default:
+                                    break;
+                            }
+
+                        }
+
+                        break;
+
+                    case EnemyTurnState.DAMAGE_ROLL_MAXIMIZE:
+
+
+
+
+
+                        break;
+                    case EnemyTurnState.REVIEW:
+                        break;
+                    case EnemyTurnState.COMPLETE:
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+
+
+
+       }
 
 
     }
