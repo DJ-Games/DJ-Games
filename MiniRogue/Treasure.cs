@@ -192,8 +192,7 @@ namespace MiniRogue
             }
 
         }
-
-        //public void MyProperty { get; set; }
+        
 
 
 
