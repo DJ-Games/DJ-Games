@@ -38,18 +38,20 @@ namespace MiniRogue
         public Treasure(string name, Texture2D cardTexture, Dictionary<string, Button> buttons) : base(name, cardTexture, buttons)
         {
             treasureTurnState = TreasureTurnState.GOLD_AWARD;
+            CurrentButtons = new List<Button>(); 
         }
 
 
         //---------------------- METHODS -----------------------------
         public override bool HandleCard(Player player, MouseState current, MouseState previous, float xPos, float yPos)
         {
-            PreviousKbState = CurrentKbState;
+            XPos = xPos;
+            YPos = yPos;
 
             switch (treasureTurnState)
             {
                 case TreasureTurnState.GOLD_AWARD:
-
+                    
                     if (player.HasFoughtMonster)
                     {
                         player.Gold += 2;
@@ -64,9 +66,13 @@ namespace MiniRogue
 
                 case TreasureTurnState.EXTRA_TREASURE_ROLL:
 
-                    if (SingleKeyPress(Keys.Space))
+                    if (SingleMouseClick())
                     {
-                        ExtTreasureResult = player.playerDice.RollDice();
+                        if (xPos > 700 && xPos < 948 && yPos > 575 && yPos < 648)
+                        {
+                            ExtTreasureResult = player.playerDice.RollDice();
+                        }
+                            
 
                         if (ExtTreasureResult >= 5)
                         {
@@ -83,9 +89,13 @@ namespace MiniRogue
 
                 case TreasureTurnState.TREASURE_ROLL:
 
-                    if (SingleKeyPress(Keys.Space))
+                    if (SingleMouseClick())
                     {
-                        TreasureResult = player.playerDice.RollDice();
+                        if (xPos > 700 && xPos < 948 && yPos > 575 && yPos < 648)
+                        {
+                            TreasureResult = player.playerDice.RollDice();
+                        }
+                        
 
                         switch (TreasureResult)
                         {
@@ -101,20 +111,24 @@ namespace MiniRogue
                             case 3:
                                 player.Spells.Add("Fire Spell");
                                 break;
+
                             case 4:
                                 player.Spells.Add("Ice Spell");
                                 break;
+
                             case 5:
                                 player.Spells.Add("Poison Spell");
                                 break;
+
                             case 6:
                                 player.Spells.Add("Healing Spell");
                                 break;
                             default:
                                 break;
 
-
+                           
                         }
+
                         treasureTurnState = TreasureTurnState.REVIEW;
 
                     }
@@ -122,8 +136,14 @@ namespace MiniRogue
                     return false;
 
                 case TreasureTurnState.REVIEW:
-
-                    treasureTurnState = TreasureTurnState.COMPLETE;
+                    if (SingleMouseClick())
+                    {
+                        if (xPos > 700 && xPos < 948 && yPos > 775 && yPos < 848)
+                        {
+                            treasureTurnState = TreasureTurnState.COMPLETE;
+                        }
+                    }
+                    
 
                     return false;
 
@@ -145,6 +165,8 @@ namespace MiniRogue
         public override void DrawCard(SpriteBatch sBatch, SpriteFont font)
         {
             sBatch.Draw(CardTexture, new Vector2(100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+            sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 575), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+            sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(700, 775), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
 
             switch (treasureTurnState)
             {
@@ -152,12 +174,12 @@ namespace MiniRogue
                     break;
                 case TreasureTurnState.EXTRA_TREASURE_ROLL:
 
-                    sBatch.DrawString(font, "Press Space. Roll 5+ to revceive extra treasure.", new Vector2(50, 800), Color.White);
+                    sBatch.DrawString(font, "Press Space. Roll 5+ to revceive extra treasure.", new Vector2(700, 400), Color.White);
 
                     break;
                 case TreasureTurnState.TREASURE_ROLL:
 
-                    sBatch.DrawString(font, "Press Space to roll for Treasure.", new Vector2(50, 800), Color.White);
+                    sBatch.DrawString(font, "Press Space to roll for Treasure.", new Vector2(700, 400), Color.White);
 
                     break;
                 case TreasureTurnState.REVIEW:
@@ -166,9 +188,16 @@ namespace MiniRogue
                     break;
                 default:
                     break;
+
             }
 
         }
+
+        //public void MyProperty { get; set; }
+
+
+
+
 
     }
 }
