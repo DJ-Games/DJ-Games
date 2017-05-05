@@ -49,11 +49,11 @@ namespace MiniRogue
                 else
                 {
                     monsterHealth = value;
-                }
-                
-
+                } 
             }
         }
+
+        public List<Texture2D> DiceRolls { get; set; }
 
 
         EnemyTurnState enemyTurnState = new EnemyTurnState();
@@ -62,16 +62,11 @@ namespace MiniRogue
 
         public Enemy(string name, Texture2D cardTexture, Dictionary<string, Button> buttons) : base(name, cardTexture, buttons)
         {
+            DiceRolls = new List<Texture2D>();
 
         }
 
-
-
-
         //---------------------- METHODS -----------------------------
-
-
-
 
 
         /// <summary>
@@ -212,8 +207,13 @@ namespace MiniRogue
 
 
                 case EnemyTurnState.DAMAGE_ROLL_MAXIMIZE:
-                   
 
+                    int counter = 150;
+                    foreach (var item in DiceRolls)
+                    {
+                        sBatch.Draw(item, new Vector2(1150, counter), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                        counter += 100;
+                    }
 
 
 
@@ -245,6 +245,7 @@ namespace MiniRogue
                         if (XPos > 700 && XPos < 948 && YPos > 500 && YPos < 572)
                         {
                             monsterHealth = player.DungeonArea + player.playerDice.RollDice();
+                            Thread.Sleep(500);
                             enemyTurnState = EnemyTurnState.DAMAGE_ROLL;
 
                         }
@@ -258,26 +259,40 @@ namespace MiniRogue
                             {
                                 case 1:
                                     DamageRoll1 = player.playerDice.RollDice();
+                                    DiceRolls.Add(Buttons["Die Roll " + DamageRoll1].ButtonTexture);
+                                    enemyTurnState = EnemyTurnState.DAMAGE_ROLL_MAXIMIZE;
                                     break;
 
                                 case 2:
                                     DamageRoll1 = player.playerDice.RollDice();
+                                    DiceRolls.Add(Buttons["Die Roll " + DamageRoll1].ButtonTexture);
                                     DamageRoll2 = player.playerDice.RollDice();
+                                    DiceRolls.Add(Buttons["Die Roll " + DamageRoll2].ButtonTexture);
+                                    enemyTurnState = EnemyTurnState.DAMAGE_ROLL_MAXIMIZE;
 
                                     break;
 
                                 case 3:
                                     DamageRoll1 = player.playerDice.RollDice();
+                                    DiceRolls.Add(Buttons["Die Roll " + DamageRoll1].ButtonTexture);
                                     DamageRoll2 = player.playerDice.RollDice();
+                                    DiceRolls.Add(Buttons["Die Roll " + DamageRoll2].ButtonTexture);
                                     DamageRoll3 = player.playerDice.RollDice();
+                                    DiceRolls.Add(Buttons["Die Roll " + DamageRoll3].ButtonTexture);
+                                    enemyTurnState = EnemyTurnState.DAMAGE_ROLL_MAXIMIZE;
 
                                     break;
 
                                 case 4:
                                     DamageRoll1 = player.playerDice.RollDice();
+                                    DiceRolls.Add(Buttons["Die Roll " + DamageRoll1].ButtonTexture);
                                     DamageRoll2 = player.playerDice.RollDice();
+                                    DiceRolls.Add(Buttons["Die Roll " + DamageRoll2].ButtonTexture);
                                     DamageRoll3 = player.playerDice.RollDice();
+                                    DiceRolls.Add(Buttons["Die Roll " + DamageRoll3].ButtonTexture);
                                     DamageRoll4 = player.playerDice.RollDice();
+                                    DiceRolls.Add(Buttons["Die Roll " + DamageRoll4].ButtonTexture);
+                                    enemyTurnState = EnemyTurnState.DAMAGE_ROLL_MAXIMIZE;
 
                                     break;
                                     
