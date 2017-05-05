@@ -99,6 +99,7 @@ namespace MiniRogue
         Texture2D healButton;
         Texture2D doneButton; 
         SpriteFont font;
+        SpriteFont dungeonFont;
         Vector2 position;
 
 
@@ -203,6 +204,7 @@ namespace MiniRogue
             reinforceButton = Content.Load<Texture2D>("ReinforceButton");
             healButton = Content.Load<Texture2D>("HealButton");
             font = Content.Load<SpriteFont>("Font");
+            dungeonFont = Content.Load<SpriteFont>("Dungeon");
             position = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
                 graphics.GraphicsDevice.Viewport.Height / 2);
             playerDice = new Dice();
@@ -585,7 +587,7 @@ namespace MiniRogue
 
                             break;
                         case CurrentTurnState.TURN1:
-                            currentCard.DrawCard(spriteBatch, font);
+                            currentCard.DrawCard(spriteBatch, dungeonFont);
 
                             spriteBatch.Draw(die1, new Vector2(1130, 100), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                             spriteBatch.Draw(die2, new Vector2(1130, 250), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
