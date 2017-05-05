@@ -243,6 +243,15 @@ namespace MiniRogue
             buttonDictionay.Add("Reinforce Button", new Button(reinforceButton, "Reinforce Button"));
             buttonDictionay.Add("Heal Button", new Button(healButton, "Heal Button"));
             buttonDictionay.Add("Done Button", new Button(doneButton, "Done Button"));
+            buttonDictionay.Add("Die Roll 1", new Button(die1, "Die Roll 1"));
+            buttonDictionay.Add("Die Roll 2", new Button(die2, "Die Roll 2"));
+            buttonDictionay.Add("Die Roll 3", new Button(die3, "Die Roll 3"));
+            buttonDictionay.Add("Die Roll 4", new Button(die4, "Die Roll 4"));
+            buttonDictionay.Add("Die Roll 5", new Button(die5, "Die Roll 5"));
+            buttonDictionay.Add("Die Roll 6", new Button(die6, "Die Roll 6"));
+
+
+
 
         }
 
@@ -588,11 +597,6 @@ namespace MiniRogue
                             break;
                         case CurrentTurnState.TURN1:
                             currentCard.DrawCard(spriteBatch, dungeonFont);
-
-                            spriteBatch.Draw(die1, new Vector2(1130, 100), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(die2, new Vector2(1130, 250), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(die3, new Vector2(1130, 400), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(die4, new Vector2(1130, 550), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                             break;
 
                         case CurrentTurnState.PRETURN2:
