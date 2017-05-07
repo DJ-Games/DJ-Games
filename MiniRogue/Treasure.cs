@@ -152,7 +152,7 @@ namespace MiniRogue
 
                         if (XPos > 700 && XPos < 948 && YPos > 275 && YPos < 348)
                         {
-                            ExtTreasureResult = 5; // player.playerDice.RollDice();
+                            ExtTreasureResult = player.playerDice.RollDice();
 
                             if (ExtTreasureResult >= 5)
                             {
