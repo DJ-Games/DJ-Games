@@ -187,20 +187,20 @@ namespace MiniRogue
         {
 
             sBatch.Draw(CardTexture, new Vector2(100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
-            sBatch.DrawString(dungeonFont, "Monster Health: " + monsterHealth, new Vector2(600, 50), Color.Green, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+            sBatch.DrawString(dungeonFont, "Monster Health: " + monsterHealth, new Vector2(600, 50), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
 
             switch (enemyTurnState)
             {
                 case EnemyTurnState.MONSTER_HEALTH_ROLL:
 
-                    sBatch.DrawString(dungeonFont, "Roll for moster hit points", new Vector2(575, 100), Color.Green, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    sBatch.DrawString(dungeonFont, "Roll for moster hit points", new Vector2(575, 100), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
                     sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
 
                 case EnemyTurnState.DAMAGE_ROLL:
 
-                    sBatch.DrawString(dungeonFont, "Roll for damage", new Vector2(575, 100), Color.Green, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    sBatch.DrawString(dungeonFont, "Roll for damage", new Vector2(575, 100), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
                     sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
@@ -214,8 +214,6 @@ namespace MiniRogue
                         sBatch.Draw(item, new Vector2(1150, counter), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                         counter += 100;
                     }
-
-
 
 
                     break;
@@ -320,10 +318,9 @@ namespace MiniRogue
                 }
             }
 
-
-
-
        }
+
+
 
 
     }

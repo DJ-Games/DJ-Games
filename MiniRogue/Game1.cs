@@ -97,7 +97,9 @@ namespace MiniRogue
         Texture2D confirmSaleMenu;
         Texture2D reinforceButton;
         Texture2D healButton;
-        Texture2D doneButton; 
+        Texture2D doneButton;
+        Texture2D checkBoxEmpty;
+        Texture2D checkBoxFull; 
         SpriteFont font;
         SpriteFont dungeonFont;
         Vector2 position;
@@ -249,6 +251,8 @@ namespace MiniRogue
             buttonDictionay.Add("Die Roll 4", new Button(die4, "Die Roll 4"));
             buttonDictionay.Add("Die Roll 5", new Button(die5, "Die Roll 5"));
             buttonDictionay.Add("Die Roll 6", new Button(die6, "Die Roll 6"));
+            buttonDictionay.Add("Check Box Empty", new Button(checkBoxEmpty, "Check Box Empty"));
+            buttonDictionay.Add("Check Box Full", new Button(checkBoxFull, "Check Box Full"));
 
 
 
