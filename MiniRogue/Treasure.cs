@@ -90,8 +90,8 @@ namespace MiniRogue
         public override void DrawCard(SpriteBatch sBatch, SpriteFont font)
         {
             sBatch.Draw(CardTexture, new Vector2(100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
-            sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 575), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
-            sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(700, 650), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+            sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 275), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+            
 
             switch (treasureTurnState)
             {
@@ -99,22 +99,23 @@ namespace MiniRogue
                     break;
                 case TreasureTurnState.EXTRA_TREASURE_ROLL:
 
-                    sBatch.DrawString(font, "Roll 5+ to find a treasure.", new Vector2(700, 400), Color.White);
+                    sBatch.DrawString(font, "Roll 5+ to find a treasure.", new Vector2(680, 200), Color.White);
                    
 
                     break;
                 case TreasureTurnState.TREASURE_ROLL:
 
-                    sBatch.DrawString(font, "Roll to determine what treasure you find.", new Vector2(700, 400), Color.White);
-
+                    sBatch.DrawString(font, "You found a treasure! Roll to determine what treasure you found.", new Vector2(520, 230), Color.White);
+                    sBatch.DrawString(font, "You Rolled a:  " + ExtTreasureResult, new Vector2(725, 200), Color.White);
                     break;
                 case TreasureTurnState.REVIEW:
-                    sBatch.DrawString(font, "You Rolled:  " + ExtTreasureResult, new Vector2(700, 425), Color.White);
+                    
 
                     if (ExtTreasureResult >= 5)
                     {
-                        sBatch.DrawString(font, "You Rolled:  " + TreasureResult, new Vector2(700, 425), Color.White);
+                        sBatch.DrawString(font, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White);
                     }
+                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(700, 275), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
 
                     break;
 
@@ -149,7 +150,7 @@ namespace MiniRogue
                     case TreasureTurnState.EXTRA_TREASURE_ROLL:
                         Thread.Sleep(500);
 
-                        if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
+                        if (XPos > 700 && XPos < 948 && YPos > 275 && YPos < 348)
                         {
                             ExtTreasureResult = 5; // player.playerDice.RollDice();
 
@@ -167,7 +168,7 @@ namespace MiniRogue
 
                     case TreasureTurnState.TREASURE_ROLL:
 
-                        if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
+                        if (XPos > 700 && XPos < 948 && YPos > 275 && YPos < 348)
                         {
                                 TreasureResult = player.playerDice.RollDice();  
                         }
@@ -200,15 +201,16 @@ namespace MiniRogue
                             default:
                                 break;
                         }
-
+                        Thread.Sleep(500);
                         treasureTurnState = TreasureTurnState.REVIEW;
                         break;
 
 
                     case TreasureTurnState.REVIEW:
+                        
                         if (SingleMouseClick())
                         {
-                            if (XPos > 700 && XPos < 948 && YPos > 650 && YPos < 723)
+                            if (XPos > 700 && XPos < 948 && YPos > 275 && YPos < 348)
                             {
                                 treasureTurnState = TreasureTurnState.COMPLETE;
                             }
