@@ -21,6 +21,7 @@ namespace MiniRogue
         RECOUP,
         GAME_OVER,
         CREDITS,
+        COMBATTESTING,
     }
 
     enum CurrentTurnState
@@ -99,7 +100,8 @@ namespace MiniRogue
         Texture2D healButton;
         Texture2D doneButton;
         Texture2D checkBoxEmpty;
-        Texture2D checkBoxFull; 
+        Texture2D checkBoxFull;
+        Texture2D dieBlank;
         SpriteFont font;
         SpriteFont dungeonFont;
         Vector2 position;
@@ -115,6 +117,13 @@ namespace MiniRogue
         int deviceWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
         int deviceHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
+        //----------------------- FOR TESTING COMBAT --------------------------
+
+        Combat combat;
+        Dictionary<string, Texture2D> dieTextures;
+        Dictionary<string, CombatDice> combatDice; 
+
+        // --------------------------------------------------------------------
 
 
 
@@ -214,7 +223,30 @@ namespace MiniRogue
             buttonDictionay = new Dictionary<string, Button>();
             gamestate = Gamestate.TITILESCREEN;
             currentTurnState = CurrentTurnState.PRETURN1;
-            doneButton = Content.Load<Texture2D>("DoneButton"); 
+            doneButton = Content.Load<Texture2D>("DoneButton");
+
+            //----------------------- FOR TESTING COMBAT --------------------------
+
+            combat = new Combat(buttonDictionay);
+
+            dieTextures = new Dictionary<string, Texture2D>();
+
+            combatDice = new Dictionary<string, CombatDice>();
+
+            dieTextures.Add("Roll 1", die1);
+            dieTextures.Add("Roll 2", die2);
+            dieTextures.Add("Roll 3", die3);
+            dieTextures.Add("Roll 4", die4);
+            dieTextures.Add("Roll 5", die5);
+            dieTextures.Add("Roll 6", die6);
+            dieTextures.Add("Blank", dieBlank);
+
+            combatDice.Add("Combat Die 1", new CombatDice(dieTextures));
+            combatDice.Add("Combat Die 2", new CombatDice(dieTextures));
+            combatDice.Add("Combat Die 3", new CombatDice(dieTextures));
+            combatDice.Add("Combat Die 4", new CombatDice(dieTextures));
+
+            // --------------------------------------------------------------------
 
             // Fill Button dictionary
 
@@ -291,12 +323,6 @@ namespace MiniRogue
             {
                 case Gamestate.TITILESCREEN:
 
-                    if (SingleKeyPress(Keys.Space)) 
-                    {
-                        gamestate = Gamestate.DIFFICULTY_SELECT;
-
-                    }
-
                     if (SingleMouseClick())
                     {
                         if (position.X > 800 && position.X < 1050 && position.Y > 372 && position.Y < 446)
@@ -304,6 +330,19 @@ namespace MiniRogue
                             gamestate = Gamestate.DIFFICULTY_SELECT;
                         }
                     }
+
+                    //----------------------- FOR TESTING COMBAT --------------------------
+
+                    if (SingleMouseClick())
+                    {
+                        if (position.X > 0 && position.X < 100 && position.Y > 0 && position.Y < 100)
+                        {
+                            player = new Player(0, 10, 10, 10);
+                            gamestate = Gamestate.COMBATTESTING;
+                        }
+                    }
+
+                    // --------------------------------------------------------------------
 
                     break;
 
@@ -426,6 +465,9 @@ namespace MiniRogue
                             break;
                         case CurrentTurnState.TURN4:
                             break;
+
+                        
+
                         default:
                             break;
                     
@@ -459,6 +501,17 @@ namespace MiniRogue
                 case Gamestate.CREDITS:
 
                     break;
+
+                //----------------------- FOR TESTING COMBAT --------------------------
+
+                case Gamestate.COMBATTESTING:
+
+                    combat.HandleCombat(player, mouseState, prevMouseState, position.X, position.Y);
+
+
+                    break;
+
+                // --------------------------------------------------------------------
 
                 default:
 
@@ -669,6 +722,18 @@ namespace MiniRogue
                 case Gamestate.CREDITS:
 
                     break;
+
+
+                //----------------------- FOR TESTING COMBAT --------------------------
+
+                case Gamestate.COMBATTESTING:
+
+                    combat.DrawCombat(spriteBatch, dungeonFont);
+
+
+                    break;
+
+                // --------------------------------------------------------------------
 
                 default:
 
