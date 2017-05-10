@@ -129,7 +129,7 @@ namespace MiniRogue
 
                 case MerchantTurnState.BUYSELL:
                     sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(660, 100), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);  
-                    sBatch.DrawString(font, "What would you like to buy or sell?", new Vector2(500, 200), Color.White);
+                    sBatch.DrawString(font, "Would you like to buy or sell?", new Vector2(500, 200), Color.White);
                     int counter = 240;
                     foreach (var item in CurrentButtons)
                     {
