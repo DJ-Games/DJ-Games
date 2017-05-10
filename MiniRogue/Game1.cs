@@ -188,6 +188,7 @@ namespace MiniRogue
             die4 = Content.Load<Texture2D>("Die4");
             die5 = Content.Load<Texture2D>("Die5");
             die6 = Content.Load<Texture2D>("Die6");
+            dieBlank = Content.Load<Texture2D>("DieBlank");
             rollDieBtnTex = Content.Load<Texture2D>("RollDieButton");
             foundLootBtnTex = Content.Load<Texture2D>("Found_Loot_Button");
             foundLootBtnHLTex = Content.Load<Texture2D>("Found_Loot_Button_Highlight");
@@ -227,7 +228,6 @@ namespace MiniRogue
 
             //----------------------- FOR TESTING COMBAT --------------------------
 
-            combat = new Combat(buttonDictionay);
 
             dieTextures = new Dictionary<string, Texture2D>();
 
@@ -245,6 +245,8 @@ namespace MiniRogue
             combatDice.Add("Combat Die 2", new CombatDice(dieTextures));
             combatDice.Add("Combat Die 3", new CombatDice(dieTextures));
             combatDice.Add("Combat Die 4", new CombatDice(dieTextures));
+
+            combat = new Combat(buttonDictionay, combatDice);
 
             // --------------------------------------------------------------------
 

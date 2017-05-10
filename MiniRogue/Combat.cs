@@ -44,6 +44,8 @@ namespace MiniRogue
 
         public Dictionary<string, Button> CombatButtons { get; set; }
 
+        public Dictionary<string, CombatDice> CombatDice { get; set; }
+
 
         public int Damage { get; set; }
 
@@ -72,9 +74,10 @@ namespace MiniRogue
 
         //----------------------CONSTRUCTORS -------------------------
 
-        public Combat(Dictionary<string, Button> combatButtons)
+        public Combat(Dictionary<string, Button> combatButtons, Dictionary<string, CombatDice> combatDice)
         {
             CombatButtons = combatButtons;
+            CombatDice = combatDice;
         }
 
         //---------------------- METHODS ------------------------
@@ -152,7 +155,7 @@ namespace MiniRogue
         public void DrawCombat(SpriteBatch sBatch, SpriteFont dungeonFont)
         {
        
-            sBatch.DrawString(dungeonFont, "Monster Health: " + monsterHealth, new Vector2(600, 50), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+            sBatch.DrawString(dungeonFont, "Monster Health: " + monsterHealth, new Vector2(425, 50), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
 
 
             switch (combatState)
@@ -170,6 +173,14 @@ namespace MiniRogue
 
                     break;
                 case CombatState.RESOLVEDIE:
+
+
+                    sBatch.Draw(CombatDice["Combat Die 1"].DieTextures["Roll 1"], new Vector2(250, 450), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(CombatDice["Combat Die 2"].DieTextures["Blank"], new Vector2(450, 450), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(CombatDice["Combat Die 3"].DieTextures["Blank"], new Vector2(650, 450), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(CombatDice["Combat Die 4"].DieTextures["Blank"], new Vector2(850, 450), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+
+
                     break;
                 case CombatState.USEFEAT:
                     break;
