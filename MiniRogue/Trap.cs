@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -14,6 +15,7 @@ namespace MiniRogue
     {
         ROLL_FOR_TRAP,
         SKILL_CHECK,
+        RESOLVE_TRAP,
         REVIEW,
         COMPLETE,
     }
@@ -34,7 +36,7 @@ namespace MiniRogue
         }
 
         public int Result { get; set; }
-
+        public int TrapResult { get; set; }
         TrapTurnState trapTurnState;
 
 
@@ -61,6 +63,10 @@ namespace MiniRogue
                     HandleButtons(player);
                     return false;
 
+                case TrapTurnState.RESOLVE_TRAP:
+                    HandleButtons(player);
+                    return false; 
+
                 case TrapTurnState.REVIEW:
                     HandleButtons(player);
                     return false;
@@ -80,7 +86,16 @@ namespace MiniRogue
             {
                 switch (trapTurnState)
                 {
+                    case TrapTurnState.ROLL_FOR_TRAP:
+                        if (XPos > 700 && XPos < 948 && YPos > 275 && YPos < 348)
+                        {
+                            TrapResult = player.playerDice.RollDice();
+                            trapTurnState = TrapTurnState.SKILL_CHECK; 
+                        }
+                        break; 
+
                     case TrapTurnState.SKILL_CHECK:
+                        Thread.Sleep(500);
 
                         if (XPos > 700 && XPos < 948 && YPos > 275 && YPos < 348)
                         {
@@ -93,19 +108,19 @@ namespace MiniRogue
                             else
                             {
                                 success = false;
-                                trapTurnState = TrapTurnState.ROLL_FOR_TRAP;
+                                trapTurnState = TrapTurnState.RESOLVE_TRAP;
                             }
                         }
 
                         break;
                         
-                    case TrapTurnState.ROLL_FOR_TRAP:
+                    case TrapTurnState.RESOLVE_TRAP:
+                        Thread.Sleep(500);
+                        // if (SingleKeyPress(Keys.Space))
+                        //  {
+                        //    Result = player.playerDice.RollDice();
 
-                        if (SingleKeyPress(Keys.Space))
-                        {
-                            Result = player.playerDice.RollDice();
-
-                            switch (Result)
+                        switch (TrapResult)
                             {
                                 case 1:
 
@@ -153,7 +168,7 @@ namespace MiniRogue
 
                             trapTurnState = TrapTurnState.COMPLETE;
 
-                        }
+                        //}
 
                         break;
 
@@ -225,15 +240,50 @@ namespace MiniRogue
 
             switch (trapTurnState)
             {
+                case TrapTurnState.ROLL_FOR_TRAP:
+                    sBatch.DrawString(font, "Roll to determine the trap you face", new Vector2(680, 200), Color.White);
+                    sBatch.DrawString(font, "You Rolled a:  " + TrapResult, new Vector2(725, 225), Color.White);
+
+                    switch (TrapResult)
+                    {
+                        case 1:
+                            sBatch.DrawString(font, "Mildew: You Lose a Food", new Vector2(750, 200), Color.White);
+                            break;
+
+                        case 2:
+                            sBatch.DrawString(font, "TripWire: You Lose a Gold", new Vector2(750, 200), Color.White);
+                            break;
+
+                        case 3:
+                            sBatch.DrawString(font, "Acid Mist: You Lose a Armor Piece or Two Health", new Vector2(750, 200), Color.White);
+                            break;
+
+                        case 4:
+                            sBatch.DrawString(font, "Spring Blades: You Lose a Health", new Vector2(750, 200), Color.White);
+                            break;
+
+                        case 5:
+                            sBatch.DrawString(font, "Moving Walls: You Lose a XP", new Vector2(750, 200), Color.White);
+                            break;
+
+                        case 6:
+                            sBatch.DrawString(font, "Pit: You Lose Two Health and have fallen deeper into the darkness", new Vector2(750, 200), Color.White);
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    break; 
+
                 case TrapTurnState.SKILL_CHECK:
 
-                    sBatch.DrawString(font, "Roll for skill check.", new Vector2(50, 800), Color.White);
-
+                    sBatch.DrawString(font, "Roll a skill check to evade the trap", new Vector2(680, 200), Color.White);
+                    sBatch.DrawString(font, "You Rolled a:  " + TrapResult, new Vector2(725, 200), Color.White);
                     break;
 
-                case TrapTurnState.ROLL_FOR_TRAP:
-
-                    break;
+                case TrapTurnState.RESOLVE_TRAP:
+                    break; 
 
                 case TrapTurnState.REVIEW:
 
@@ -260,7 +310,7 @@ namespace MiniRogue
 
 
 
-            sBatch.DrawString(font, "Press Space to roll for skill check.", new Vector2(50, 800), Color.White);
+        
         }
 
     }

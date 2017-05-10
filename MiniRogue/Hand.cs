@@ -43,7 +43,7 @@ namespace MiniRogue
 
             //playerHand.Add(new Resting("Resting", restingTex, buttons));
 
-            //playerHand.Add(new Trap("Trap", trapTex, buttons));
+            playerHand.Add(new Trap("Trap", trapTex, buttons));
 
             //playerHand.Add(new Treasure("Treasure", treasureTex, buttons));
         }
