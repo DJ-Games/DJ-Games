@@ -15,7 +15,24 @@ namespace MiniRogue
 
         public String Name { get; set; }
 
-        public int Roll { get; set; }
+        private int roll;
+
+        public int Roll
+        {
+            get { return roll; }
+            set
+            {
+                if (value == 1)
+                {
+                    roll = 0;
+                }
+                else { roll = value; }
+            }
+        }
+
+
+
+        //public int Roll { get; set; }
 
         public Texture2D CurrentTexture { get; set; }
 
