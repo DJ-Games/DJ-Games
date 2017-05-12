@@ -14,7 +14,6 @@ namespace MiniRogue
     enum TrapTurnState
     {
         ROLL_FOR_TRAP,
-        TRAP_REVIEW,
         SKILL_CHECK,
         RESOLVE_TRAP,
         REVIEW,
@@ -61,23 +60,20 @@ namespace MiniRogue
                     HandleButtons(player);
                     return false;
 
-                case TrapTurnState.TRAP_REVIEW:             
-                    return false;
-
                 case TrapTurnState.SKILL_CHECK:
-                    HandleButtons(player);
+                    
                     return false;
 
                 case TrapTurnState.RESOLVE_TRAP:
-                    HandleButtons(player);
+                    
                     return false; 
 
                 case TrapTurnState.REVIEW:
-                    HandleButtons(player);
+                  
                     return false;
 
                 case TrapTurnState.COMPLETE:
-                    HandleButtons(player);
+                   
                     return true;
 
                 default:
@@ -95,18 +91,14 @@ namespace MiniRogue
                         if (XPos > 700 && XPos < 948 && YPos > 275 && YPos < 348)
                         {
                             TrapResult = player.playerDice.RollDice();
-                            trapTurnState = TrapTurnState.TRAP_REVIEW; 
+                            trapTurnState = TrapTurnState.SKILL_CHECK; 
                         }
                         break;
 
-                    case TrapTurnState.TRAP_REVIEW:
-                        trapTurnState = TrapTurnState.SKILL_CHECK; 
-                        break; 
-
                     case TrapTurnState.SKILL_CHECK:
-                        Thread.Sleep(1000);
+                        
 
-                        if (XPos > 700 && XPos < 948 && YPos > 275 && YPos < 348)
+                        if (XPos > 700 && XPos < 948 && YPos > 375 && YPos < 448)
                         {
                             
                             if (player.playerDice.RollDice() <= player.Rank)
@@ -124,7 +116,7 @@ namespace MiniRogue
                         break;
                         
                     case TrapTurnState.RESOLVE_TRAP:
-                        Thread.Sleep(500);
+                    
          
 
                         switch (TrapResult)
@@ -215,8 +207,11 @@ namespace MiniRogue
                     
                     break;
 
-                case TrapTurnState.TRAP_REVIEW:
+                case TrapTurnState.SKILL_CHECK:
+                    
                     sBatch.DrawString(font, "You Rolled a:  " + TrapResult, new Vector2(725, 200), Color.White);
+                    sBatch.DrawString(font, "Roll a skill check to evade the trap", new Vector2(680, 50), Color.White);
+
                     switch (TrapResult)
                     {
                         case 1:
@@ -246,12 +241,7 @@ namespace MiniRogue
                         default:
                             break;
                     }
-                    
-                    break; 
-
-                case TrapTurnState.SKILL_CHECK:
-
-                    sBatch.DrawString(font, "Roll a skill check to evade the trap", new Vector2(680, 200), Color.White);
+                   
                     sBatch.DrawString(font, "You Rolled a:  " + TrapResult, new Vector2(725, 200), Color.White);
                     trapTurnState = TrapTurnState.RESOLVE_TRAP; 
                     break;
@@ -270,7 +260,9 @@ namespace MiniRogue
                     {
 
                     }
+
                     trapTurnState = TrapTurnState.COMPLETE;
+                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(700, 75), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
                     break;
 
              
