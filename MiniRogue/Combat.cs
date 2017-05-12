@@ -263,27 +263,34 @@ namespace MiniRogue
                             int die3Roll;
                             int die4Roll;
 
-                            die1Roll = Rng.Next(6) + 1;
-                            CombatDice["Combat Die 1"].Roll = die1Roll;
-                            CombatDice["Combat Die 1"].CurrentTexture = CombatDice["Combat Die 1"].DieTextures["Roll " + die1Roll];
+                            if (ActiveDie > 0 && CheckBoxes["Check Box 1"].Checked)
+                            {
+                                die1Roll = Rng.Next(6) + 1;
+                                CombatDice["Combat Die 1"].Roll = die1Roll;
+                                CombatDice["Combat Die 1"].CurrentTexture = CombatDice["Combat Die 1"].DieTextures["Roll " + die1Roll];
+                                CheckBoxes["Check Box 1"].Checked = false;
+                            }
 
                             if (ActiveDie > 1 && CheckBoxes["Check Box 2"].Checked)
                             {
                                 die2Roll = Rng.Next(6) + 1;
                                 CombatDice["Combat Die 2"].Roll = die2Roll;
                                 CombatDice["Combat Die 2"].CurrentTexture = CombatDice["Combat Die 2"].DieTextures["Roll " + die2Roll];
+                                CheckBoxes["Check Box 2"].Checked = false;
                             }
                             if (ActiveDie > 2 && CheckBoxes["Check Box 3"].Checked)
                             {
                                 die3Roll = Rng.Next(6) + 1;
                                 CombatDice["Combat Die 3"].Roll = die3Roll;
                                 CombatDice["Combat Die 3"].CurrentTexture = CombatDice["Combat Die 3"].DieTextures["Roll " + die3Roll];
+                                CheckBoxes["Check Box 3"].Checked = false;
                             }
                             if (ActiveDie > 3 && CheckBoxes["Check Box 4"].Checked)
                             {
                                 die4Roll = Rng.Next(6) + 1;
                                 CombatDice["Combat Die 4"].Roll = die4Roll;
                                 CombatDice["Combat Die 4"].CurrentTexture = CombatDice["Combat Die 4"].DieTextures["Roll " + die4Roll];
+                                CheckBoxes["Check Box 4"].Checked = false;
                             }
 
                             combatState = CombatState.RESOLVEDIE;
@@ -309,8 +316,12 @@ namespace MiniRogue
                                 CheckBoxes["Check Box 1"].CurrentTexture = CheckBoxes["Check Box 1"].CheckedTexture;
                                 CheckBoxes["Check Box 1"].Checked = true;
                             }
-                            else { CheckBoxes["Check Box 1"].CurrentTexture = CheckBoxes["Check Box 1"].UncheckedTexture; }
-                            CheckBoxes["Check Box 1"].Checked = false;
+                            else
+                            {
+                                CheckBoxes["Check Box 1"].CurrentTexture = CheckBoxes["Check Box 1"].UncheckedTexture;
+                                CheckBoxes["Check Box 1"].Checked = false;
+                            }
+
                             
                         }
 
@@ -322,8 +333,12 @@ namespace MiniRogue
                                 CheckBoxes["Check Box 2"].CurrentTexture = CheckBoxes["Check Box 2"].CheckedTexture;
                                 CheckBoxes["Check Box 2"].Checked = true;
                             }
-                            else { CheckBoxes["Check Box 2"].CurrentTexture = CheckBoxes["Check Box 2"].UncheckedTexture; }
-                            CheckBoxes["Check Box 2"].Checked = false;
+                            else
+                            {
+                                CheckBoxes["Check Box 2"].CurrentTexture = CheckBoxes["Check Box 2"].UncheckedTexture;
+                                CheckBoxes["Check Box 2"].Checked = false;
+                            }
+                            
                             
                         }
 
@@ -334,8 +349,12 @@ namespace MiniRogue
                                 CheckBoxes["Check Box 3"].CurrentTexture = CheckBoxes["Check Box 3"].CheckedTexture;
                                 CheckBoxes["Check Box 3"].Checked = true;
                             }
-                            else { CheckBoxes["Check Box 3"].CurrentTexture = CheckBoxes["Check Box 3"].UncheckedTexture; }
-                            CheckBoxes["Check Box 3"].Checked = false;
+                            else
+                            {
+                                CheckBoxes["Check Box 3"].CurrentTexture = CheckBoxes["Check Box 3"].UncheckedTexture;
+                                CheckBoxes["Check Box 3"].Checked = false;
+                            }
+                            
                             
                         }
 
@@ -346,8 +365,12 @@ namespace MiniRogue
                                 CheckBoxes["Check Box 4"].CurrentTexture = CheckBoxes["Check Box 4"].CheckedTexture;
                                 CheckBoxes["Check Box 4"].Checked = true;
                             }
-                            else { CheckBoxes["Check Box 4"].CurrentTexture = CheckBoxes["Check Box 4"].UncheckedTexture; }
-                            CheckBoxes["Check Box 4"].Checked = false;
+                            else
+                            {
+                                CheckBoxes["Check Box 4"].CurrentTexture = CheckBoxes["Check Box 4"].UncheckedTexture;
+                                CheckBoxes["Check Box 4"].Checked = false;
+                            }
+                            
                             
                         }
 
