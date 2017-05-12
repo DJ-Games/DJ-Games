@@ -435,6 +435,12 @@ namespace MiniRogue
             }
 
             // Activate die and check boxes based on number of active die
+            if (ActiveDie > 3)
+            {
+                CombatDice["Combat Die 1"].Active = true;
+                CheckBoxes["Check Box 1"].Active = true;
+            }
+
             if (ActiveDie > 1)
             {
                 CombatDice["Combat Die 2"].Active = true;
