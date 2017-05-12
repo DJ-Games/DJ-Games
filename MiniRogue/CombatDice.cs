@@ -17,12 +17,38 @@ namespace MiniRogue
 
         public int Roll { get; set; }
 
+        public Texture2D CurrentTexture { get; set; }
+
         public Dictionary<string, Texture2D> DieTextures { get; set; }
 
+        public bool Active { get; set; }
 
-        public CombatDice(Dictionary<string, Texture2D> dieTextures)
+        public int Xpos { get; set; }
+
+        public int Ypos { get; set; }
+
+
+
+
+        public CombatDice(Dictionary<string, Texture2D> dieTextures, int xPos, int yPos)
         {
             DieTextures = dieTextures;
+            CurrentTexture = dieTextures["Blank"];
+            Xpos = xPos;
+            Ypos = yPos;
+
         }
+
+        public void HandleCombatDie()
+        {
+
+        }
+
+        public void DrawCombatDie(SpriteBatch sBatch)
+        {
+            sBatch.Draw(CurrentTexture, new Vector2(Xpos, Ypos), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+        }
+
+
     }
 }

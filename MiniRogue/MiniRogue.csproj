@@ -41,6 +41,7 @@
     <Compile Include="Boss.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Card.cs" />
+    <Compile Include="CheckBox.cs" />
     <Compile Include="Combat.cs" />
     <Compile Include="CombatDice.cs" />
     <Compile Include="Dice.cs" />

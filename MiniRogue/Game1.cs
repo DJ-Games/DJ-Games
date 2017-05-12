@@ -102,6 +102,7 @@ namespace MiniRogue
         Texture2D checkBoxEmpty;
         Texture2D checkBoxFull;
         Texture2D dieBlank;
+        Texture2D useFeatButton;
         SpriteFont font;
         SpriteFont dungeonFont;
         Vector2 position;
@@ -112,7 +113,6 @@ namespace MiniRogue
         Dice playerDice;
         Card currentCard;
         Difficulty difficulty;
-        int currentRoll;
 
         int deviceWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
         int deviceHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
@@ -121,7 +121,8 @@ namespace MiniRogue
 
         Combat combat;
         Dictionary<string, Texture2D> dieTextures;
-        Dictionary<string, CombatDice> combatDice; 
+        Dictionary<string, CombatDice> combatDice;
+        Dictionary<string, CheckBox> checkBoxes;
 
         // --------------------------------------------------------------------
 
@@ -170,7 +171,7 @@ namespace MiniRogue
 
             //Load Content
 
-          bossMonsterCard = Content.Load<Texture2D>("Boss_Monster");
+            bossMonsterCard = Content.Load<Texture2D>("Boss_Monster");
             characterStatsCard = Content.Load<Texture2D>("Character_Stats");
             eventCard = Content.Load<Texture2D>("Event");
             merchantCard = Content.Load<Texture2D>("Merchant");
@@ -215,6 +216,7 @@ namespace MiniRogue
             confirmSaleMenu = Content.Load<Texture2D>("Confirm_Sale_Menu");
             reinforceButton = Content.Load<Texture2D>("ReinforceButton");
             healButton = Content.Load<Texture2D>("HealButton");
+            useFeatButton = Content.Load<Texture2D>("UseFeatButton");
             font = Content.Load<SpriteFont>("Font");
             dungeonFont = Content.Load<SpriteFont>("Dungeon");
             position = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
@@ -225,6 +227,8 @@ namespace MiniRogue
             gamestate = Gamestate.TITILESCREEN;
             currentTurnState = CurrentTurnState.PRETURN1;
             doneButton = Content.Load<Texture2D>("DoneButton");
+            checkBoxFull = Content.Load<Texture2D>("CheckFull");
+            checkBoxEmpty = Content.Load<Texture2D>("CheckEmpty");
 
             //----------------------- FOR TESTING COMBAT --------------------------
 
@@ -232,6 +236,8 @@ namespace MiniRogue
             dieTextures = new Dictionary<string, Texture2D>();
 
             combatDice = new Dictionary<string, CombatDice>();
+
+            checkBoxes = new Dictionary<string, CheckBox>();
 
             dieTextures.Add("Roll 1", die1);
             dieTextures.Add("Roll 2", die2);
@@ -241,12 +247,17 @@ namespace MiniRogue
             dieTextures.Add("Roll 6", die6);
             dieTextures.Add("Blank", dieBlank);
 
-            combatDice.Add("Combat Die 1", new CombatDice(dieTextures));
-            combatDice.Add("Combat Die 2", new CombatDice(dieTextures));
-            combatDice.Add("Combat Die 3", new CombatDice(dieTextures));
-            combatDice.Add("Combat Die 4", new CombatDice(dieTextures));
+            combatDice.Add("Combat Die 1", new CombatDice(dieTextures, 250, 450));
+            combatDice.Add("Combat Die 2", new CombatDice(dieTextures, 450, 450));
+            combatDice.Add("Combat Die 3", new CombatDice(dieTextures, 650, 450));
+            combatDice.Add("Combat Die 4", new CombatDice(dieTextures, 850, 450));
 
-            combat = new Combat(buttonDictionay, combatDice);
+            checkBoxes.Add("Check Box 1", new CheckBox(checkBoxFull, checkBoxEmpty, 275, 380));
+            checkBoxes.Add("Check Box 2", new CheckBox(checkBoxFull, checkBoxEmpty, 475, 380));
+            checkBoxes.Add("Check Box 3", new CheckBox(checkBoxFull, checkBoxEmpty, 675, 380));
+            checkBoxes.Add("Check Box 4", new CheckBox(checkBoxFull, checkBoxEmpty, 875, 380));
+
+            combat = new Combat(buttonDictionay, combatDice, checkBoxes);
 
             // --------------------------------------------------------------------
 
@@ -287,6 +298,7 @@ namespace MiniRogue
             buttonDictionay.Add("Die Roll 6", new Button(die6, "Die Roll 6"));
             buttonDictionay.Add("Check Box Empty", new Button(checkBoxEmpty, "Check Box Empty"));
             buttonDictionay.Add("Check Box Full", new Button(checkBoxFull, "Check Box Full"));
+            buttonDictionay.Add("Use Feat Button", new Button(useFeatButton, "Use Feat Button"));
 
 
 

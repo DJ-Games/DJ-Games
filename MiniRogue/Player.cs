@@ -71,7 +71,7 @@ namespace MiniRogue
             Health = health;
             Gold = gold;
             Food = food;
-            Rank = 1; 
+            Rank = 3; 
 
             DungeonLevel = 1;
             DungeonArea = 1;
