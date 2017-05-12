@@ -103,6 +103,7 @@ namespace MiniRogue
         Texture2D checkBoxFull;
         Texture2D dieBlank;
         Texture2D useFeatButton;
+        Texture2D acceptButton;
         SpriteFont font;
         SpriteFont dungeonFont;
         Vector2 position;
@@ -217,6 +218,7 @@ namespace MiniRogue
             reinforceButton = Content.Load<Texture2D>("ReinforceButton");
             healButton = Content.Load<Texture2D>("HealButton");
             useFeatButton = Content.Load<Texture2D>("UseFeatButton");
+            acceptButton = Content.Load<Texture2D>("AcceptButton");
             font = Content.Load<SpriteFont>("Font");
             dungeonFont = Content.Load<SpriteFont>("Dungeon");
             position = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
@@ -299,7 +301,7 @@ namespace MiniRogue
             buttonDictionay.Add("Check Box Empty", new Button(checkBoxEmpty, "Check Box Empty"));
             buttonDictionay.Add("Check Box Full", new Button(checkBoxFull, "Check Box Full"));
             buttonDictionay.Add("Use Feat Button", new Button(useFeatButton, "Use Feat Button"));
-
+            buttonDictionay.Add("Accept Button", new Button(acceptButton, "Accept Button"));
 
 
 

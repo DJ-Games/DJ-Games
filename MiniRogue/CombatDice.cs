@@ -27,6 +27,8 @@ namespace MiniRogue
 
         public int Ypos { get; set; }
 
+        public bool FeatUsed { get; set; }
+
 
 
 

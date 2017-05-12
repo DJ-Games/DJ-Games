@@ -19,6 +19,7 @@ namespace MiniRogue
         USEFEAT,
         DEALDAMAGE,
         USESPELL,
+        DAMAGEPLAYER,
     }
 
     class Combat
@@ -152,9 +153,30 @@ namespace MiniRogue
 
                     break;
                 case CombatState.DEALDAMAGE:
+
+                    Health -= (CombatDice["Combat Die 1"].Roll + CombatDice["Combat Die 2"].Roll + CombatDice["Combat Die 3"].Roll + CombatDice["Combat Die 4"].Roll);
+                    combatState = CombatState.USESPELL;
+
+
                     break;
                 case CombatState.USESPELL:
+
+                    combatState = CombatState.DAMAGEPLAYER;
+
                     break;
+
+                case CombatState.DAMAGEPLAYER:
+
+                    player.Health -= Damage;
+
+                    if (player.Health > 0)
+                    {
+                        combatState = CombatState.ROLLDIE;
+                    }
+
+
+                    break;
+                
                 default:
                     break;
             }
@@ -192,7 +214,27 @@ namespace MiniRogue
                     CombatDice["Combat Die 4"].DrawCombatDie(sBatch);
 
                     sBatch.Draw(CombatButtons["Use Feat Button"].ButtonTexture, new Vector2(500, 250), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(CombatButtons["Accept Button"].ButtonTexture, new Vector2(900, 250), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
+                    if (CombatDice["Combat Die 1"].Active)
+                    {
+                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 1"].Roll.ToString(), new Vector2(250, 600), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    }
+
+                    if (CombatDice["Combat Die 2"].Active)
+                    {
+                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 2"].Roll.ToString(), new Vector2(450, 600), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    }
+
+                    if (CombatDice["Combat Die 3"].Active)
+                    {
+                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 3"].Roll.ToString(), new Vector2(650, 600), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    }
+
+                    if (CombatDice["Combat Die 4"].Active)
+                    {
+                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 4"].Roll.ToString(), new Vector2(850, 600), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    }
 
 
                     break;
@@ -216,6 +258,12 @@ namespace MiniRogue
                     break;
                 case CombatState.USESPELL:
                     break;
+
+                case CombatState.DAMAGEPLAYER:
+
+                    break;
+
+
                 default:
                     break;
             }
@@ -233,7 +281,6 @@ namespace MiniRogue
         }
 
 
-
         public void HandleButtons(Player player)
         {
 
@@ -246,7 +293,8 @@ namespace MiniRogue
 
                         if (XPos > 700 && XPos < 948 && YPos > 500 && YPos < 572)
                         {
-                            monsterHealth = player.DungeonArea + player.playerDice.RollDice();
+                            // 100 Helath added to monster health for testing
+                            monsterHealth = player.DungeonArea + player.playerDice.RollDice() + 100;
                             Thread.Sleep(500);
                             combatState = CombatState.ROLLDIE;
 
@@ -305,7 +353,14 @@ namespace MiniRogue
                             combatState = CombatState.USEFEAT;
                         }
 
-                            break;
+                        if (XPos > 900 && XPos < 1148 && YPos > 250 && YPos < 322)
+                        {
+                            combatState = CombatState.DEALDAMAGE;
+                        }
+
+
+
+                        break;
                     case CombatState.USEFEAT:
 
 
@@ -413,9 +468,19 @@ namespace MiniRogue
 
                         break;
                     case CombatState.DEALDAMAGE:
+
+
+
+
+
                         break;
                     case CombatState.USESPELL:
                         break;
+
+                    case CombatState.DAMAGEPLAYER:
+
+                        break;
+
                     default:
                         break;
                 }
@@ -435,6 +500,12 @@ namespace MiniRogue
             }
 
             // Activate die and check boxes based on number of active die
+            if (ActiveDie > 3)
+            {
+                CombatDice["Combat Die 1"].Active = true;
+                CheckBoxes["Check Box 1"].Active = true;
+            }
+
             if (ActiveDie > 1)
             {
                 CombatDice["Combat Die 2"].Active = true;
