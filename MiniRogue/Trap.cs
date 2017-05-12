@@ -61,19 +61,19 @@ namespace MiniRogue
                     return false;
 
                 case TrapTurnState.SKILL_CHECK:
-                    
+                    HandleButtons(player);
                     return false;
 
                 case TrapTurnState.RESOLVE_TRAP:
-                    
+                    HandleButtons(player);
                     return false; 
 
                 case TrapTurnState.REVIEW:
-                  
+                    HandleButtons(player);
                     return false;
 
                 case TrapTurnState.COMPLETE:
-                   
+                    HandleButtons(player);
                     return true;
 
                 default:
@@ -96,9 +96,8 @@ namespace MiniRogue
                         break;
 
                     case TrapTurnState.SKILL_CHECK:
-                        
-
-                        if (XPos > 700 && XPos < 948 && YPos > 375 && YPos < 448)
+ 
+                        if (XPos > 700 && XPos < 948 && YPos > 75 && YPos < 148)
                         {
                             
                             if (player.playerDice.RollDice() <= player.Rank)
@@ -198,20 +197,20 @@ namespace MiniRogue
         public override void DrawCard(SpriteBatch sBatch, SpriteFont font)
         {
             sBatch.Draw(CardTexture, new Vector2(100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
-            sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 275), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+            
 
             switch (trapTurnState)
             {
                 case TrapTurnState.ROLL_FOR_TRAP:
-                    sBatch.DrawString(font, "Roll to determine the trap you face", new Vector2(680, 200), Color.White);
-                    
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 275), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    sBatch.DrawString(font, "Roll to determine the trap you face", new Vector2(680, 200), Color.White);          
                     break;
 
                 case TrapTurnState.SKILL_CHECK:
                     
                     sBatch.DrawString(font, "You Rolled a:  " + TrapResult, new Vector2(725, 200), Color.White);
                     sBatch.DrawString(font, "Roll a skill check to evade the trap", new Vector2(680, 50), Color.White);
-
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 275), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
                     switch (TrapResult)
                     {
                         case 1:
