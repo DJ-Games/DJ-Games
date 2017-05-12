@@ -146,6 +146,10 @@ namespace MiniRogue
 
                     break;
                 case CombatState.USEFEAT:
+
+                    HandleButtons(player);
+
+
                     break;
                 case CombatState.DEALDAMAGE:
                     break;
@@ -294,6 +298,57 @@ namespace MiniRogue
 
                             break;
                     case CombatState.USEFEAT:
+
+
+                        if (XPos > 275 && XPos < 300 && YPos > 380 && YPos < 430)
+                        {
+                            if (CheckBoxes["Check Box 1"].CurrentTexture == CheckBoxes["Check Box 1"].UncheckedTexture)
+                            {
+                                CheckBoxes["Check Box 1"].CurrentTexture = CheckBoxes["Check Box 1"].CheckedTexture;
+                                CheckBoxes["Check Box 1"].Checked = true;
+                            }
+                            else { CheckBoxes["Check Box 1"].CurrentTexture = CheckBoxes["Check Box 1"].UncheckedTexture; }
+                            CheckBoxes["Check Box 1"].Checked = false;
+                            
+                        }
+
+
+                        if (XPos > 475 && XPos < 500 && YPos > 380 && YPos < 430)
+                        {
+                            if (CheckBoxes["Check Box 2"].CurrentTexture == CheckBoxes["Check Box 2"].UncheckedTexture)
+                            {
+                                CheckBoxes["Check Box 2"].CurrentTexture = CheckBoxes["Check Box 2"].CheckedTexture;
+                                CheckBoxes["Check Box 2"].Checked = true;
+                            }
+                            else { CheckBoxes["Check Box 2"].CurrentTexture = CheckBoxes["Check Box 2"].UncheckedTexture; }
+                            CheckBoxes["Check Box 2"].Checked = false;
+                            
+                        }
+
+                        if (XPos > 675 && XPos < 700 && YPos > 380 && YPos < 430)
+                        {
+                            if (CheckBoxes["Check Box 3"].CurrentTexture == CheckBoxes["Check Box 3"].UncheckedTexture)
+                            {
+                                CheckBoxes["Check Box 3"].CurrentTexture = CheckBoxes["Check Box 3"].CheckedTexture;
+                                CheckBoxes["Check Box 3"].Checked = true;
+                            }
+                            else { CheckBoxes["Check Box 3"].CurrentTexture = CheckBoxes["Check Box 3"].UncheckedTexture; }
+                            CheckBoxes["Check Box 3"].Checked = false;
+                            
+                        }
+
+                        if (XPos > 875 && XPos < 900 && YPos > 380 && YPos < 430)
+                        {
+                            if (CheckBoxes["Check Box 4"].CurrentTexture == CheckBoxes["Check Box 4"].UncheckedTexture)
+                            {
+                                CheckBoxes["Check Box 4"].CurrentTexture = CheckBoxes["Check Box 4"].CheckedTexture;
+                                CheckBoxes["Check Box 4"].Checked = true;
+                            }
+                            else { CheckBoxes["Check Box 4"].CurrentTexture = CheckBoxes["Check Box 4"].UncheckedTexture; }
+                            CheckBoxes["Check Box 4"].Checked = false;
+                            
+                        }
+
                         break;
                     case CombatState.DEALDAMAGE:
                         break;

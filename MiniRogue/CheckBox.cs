@@ -40,6 +40,9 @@ namespace MiniRogue
         public void HandleCheckBoxes()
         {
 
+
+
+
         }
 
         public void DrawCheckBoxes(SpriteBatch sBatch)
