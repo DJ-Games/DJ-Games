@@ -216,6 +216,26 @@ namespace MiniRogue
                     sBatch.Draw(CombatButtons["Use Feat Button"].ButtonTexture, new Vector2(500, 250), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     sBatch.Draw(CombatButtons["Accept Button"].ButtonTexture, new Vector2(900, 250), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
+                    if (CombatDice["Combat Die 1"].Active)
+                    {
+                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 1"].Roll.ToString(), new Vector2(250, 600), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    }
+
+                    if (CombatDice["Combat Die 2"].Active)
+                    {
+                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 2"].Roll.ToString(), new Vector2(450, 600), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    }
+
+                    if (CombatDice["Combat Die 3"].Active)
+                    {
+                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 3"].Roll.ToString(), new Vector2(650, 600), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    }
+
+                    if (CombatDice["Combat Die 4"].Active)
+                    {
+                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 4"].Roll.ToString(), new Vector2(850, 600), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    }
+
 
                     break;
                 case CombatState.USEFEAT:
