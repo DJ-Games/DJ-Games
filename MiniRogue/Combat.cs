@@ -208,6 +208,8 @@ namespace MiniRogue
                     CheckBoxes["Check Box 3"].DrawCheckBoxes(sBatch);
                     CheckBoxes["Check Box 4"].DrawCheckBoxes(sBatch);
 
+                    sBatch.Draw(CombatButtons["Roll Die"].ButtonTexture, new Vector2(800, 100), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+
 
                     break;
                 case CombatState.DEALDAMAGE:
@@ -265,19 +267,19 @@ namespace MiniRogue
                             CombatDice["Combat Die 1"].Roll = die1Roll;
                             CombatDice["Combat Die 1"].CurrentTexture = CombatDice["Combat Die 1"].DieTextures["Roll " + die1Roll];
 
-                            if (ActiveDie > 1)
+                            if (ActiveDie > 1 && CheckBoxes["Check Box 2"].Checked)
                             {
                                 die2Roll = Rng.Next(6) + 1;
                                 CombatDice["Combat Die 2"].Roll = die2Roll;
                                 CombatDice["Combat Die 2"].CurrentTexture = CombatDice["Combat Die 2"].DieTextures["Roll " + die2Roll];
                             }
-                            if (ActiveDie > 2)
+                            if (ActiveDie > 2 && CheckBoxes["Check Box 3"].Checked)
                             {
                                 die3Roll = Rng.Next(6) + 1;
                                 CombatDice["Combat Die 3"].Roll = die3Roll;
                                 CombatDice["Combat Die 3"].CurrentTexture = CombatDice["Combat Die 3"].DieTextures["Roll " + die3Roll];
                             }
-                            if (ActiveDie > 3)
+                            if (ActiveDie > 3 && CheckBoxes["Check Box 4"].Checked)
                             {
                                 die4Roll = Rng.Next(6) + 1;
                                 CombatDice["Combat Die 4"].Roll = die4Roll;
@@ -300,7 +302,7 @@ namespace MiniRogue
                     case CombatState.USEFEAT:
 
 
-                        if (XPos > 275 && XPos < 300 && YPos > 380 && YPos < 430)
+                        if (XPos > 275 && XPos < 325 && YPos > 380 && YPos < 430)
                         {
                             if (CheckBoxes["Check Box 1"].CurrentTexture == CheckBoxes["Check Box 1"].UncheckedTexture)
                             {
@@ -313,7 +315,7 @@ namespace MiniRogue
                         }
 
 
-                        if (XPos > 475 && XPos < 500 && YPos > 380 && YPos < 430)
+                        if (XPos > 475 && XPos < 525 && YPos > 380 && YPos < 430)
                         {
                             if (CheckBoxes["Check Box 2"].CurrentTexture == CheckBoxes["Check Box 2"].UncheckedTexture)
                             {
@@ -325,7 +327,7 @@ namespace MiniRogue
                             
                         }
 
-                        if (XPos > 675 && XPos < 700 && YPos > 380 && YPos < 430)
+                        if (XPos > 675 && XPos < 725 && YPos > 380 && YPos < 430)
                         {
                             if (CheckBoxes["Check Box 3"].CurrentTexture == CheckBoxes["Check Box 3"].UncheckedTexture)
                             {
@@ -337,7 +339,7 @@ namespace MiniRogue
                             
                         }
 
-                        if (XPos > 875 && XPos < 900 && YPos > 380 && YPos < 430)
+                        if (XPos > 875 && XPos < 925 && YPos > 380 && YPos < 430)
                         {
                             if (CheckBoxes["Check Box 4"].CurrentTexture == CheckBoxes["Check Box 4"].UncheckedTexture)
                             {
@@ -348,6 +350,43 @@ namespace MiniRogue
                             CheckBoxes["Check Box 4"].Checked = false;
                             
                         }
+
+                        if (XPos > 800 && XPos < 1048 && YPos > 100 && YPos < 172)
+                        {
+                           
+
+                            int die1Roll;
+                            int die2Roll;
+                            int die3Roll;
+                            int die4Roll;
+
+                            die1Roll = Rng.Next(6) + 1;
+                            CombatDice["Combat Die 1"].Roll = die1Roll;
+                            CombatDice["Combat Die 1"].CurrentTexture = CombatDice["Combat Die 1"].DieTextures["Roll " + die1Roll];
+
+                            if (ActiveDie > 1 && CheckBoxes["Check Box 2"].Checked)
+                            {
+                                die2Roll = Rng.Next(6) + 1;
+                                CombatDice["Combat Die 2"].Roll = die2Roll;
+                                CombatDice["Combat Die 2"].CurrentTexture = CombatDice["Combat Die 2"].DieTextures["Roll " + die2Roll];
+                            }
+                            if (ActiveDie > 2 && CheckBoxes["Check Box 3"].Checked)
+                            {
+                                die3Roll = Rng.Next(6) + 1;
+                                CombatDice["Combat Die 3"].Roll = die3Roll;
+                                CombatDice["Combat Die 3"].CurrentTexture = CombatDice["Combat Die 3"].DieTextures["Roll " + die3Roll];
+                            }
+                            if (ActiveDie > 3 && CheckBoxes["Check Box 4"].Checked)
+                            {
+                                die4Roll = Rng.Next(6) + 1;
+                                CombatDice["Combat Die 4"].Roll = die4Roll;
+                                CombatDice["Combat Die 4"].CurrentTexture = CombatDice["Combat Die 4"].DieTextures["Roll " + die4Roll];
+                            }
+
+                            combatState = CombatState.RESOLVEDIE;
+
+                        }
+
 
                         break;
                     case CombatState.DEALDAMAGE:
@@ -369,7 +408,7 @@ namespace MiniRogue
             for (int i = 0; i < 3; i++)
             {
                 CombatDice["Combat Die " + (i+2)].Active = false;
-                CheckBoxes["Check Box " + (i + 2)].Active = false;
+                CheckBoxes["Check Box " + (i+2)].Active = false;
             }
 
             // Activate die and check boxes based on number of active die

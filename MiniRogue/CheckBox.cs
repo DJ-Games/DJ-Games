@@ -32,6 +32,8 @@ namespace MiniRogue
             CheckedTexture = checkedTexture;
             UncheckedTexture = uncheckedTexture;
             CurrentTexture = UncheckedTexture;
+            Active = false;
+            Checked = true;
             Xpos = xPos;
             Ypos = yPos;
 
