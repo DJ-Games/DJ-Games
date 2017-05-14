@@ -312,6 +312,8 @@ namespace MiniRogue
                         break;
                     case CombatState.ROLLDIE:
 
+
+
                         if (XPos > 450 && XPos < 698 && YPos > 250 && YPos < 322)
                         {
 
@@ -326,6 +328,7 @@ namespace MiniRogue
                                 CombatDice["Combat Die 1"].Roll = die1Roll;
                                 CombatDice["Combat Die 1"].CurrentTexture = CombatDice["Combat Die 1"].DieTextures["Roll " + die1Roll];
                                 CheckBoxes["Check Box 1"].Checked = false;
+                                CombatDice["Combat Die 1"].FeatUsed = false;
                             }
 
                             if (ActiveDie > 1 && CheckBoxes["Check Box 2"].Checked)
@@ -334,6 +337,7 @@ namespace MiniRogue
                                 CombatDice["Combat Die 2"].Roll = die2Roll;
                                 CombatDice["Combat Die 2"].CurrentTexture = CombatDice["Combat Die 2"].DieTextures["Roll " + die2Roll];
                                 CheckBoxes["Check Box 2"].Checked = false;
+                                CombatDice["Combat Die 2"].FeatUsed = false;
                             }
                             if (ActiveDie > 2 && CheckBoxes["Check Box 3"].Checked)
                             {
@@ -341,6 +345,7 @@ namespace MiniRogue
                                 CombatDice["Combat Die 3"].Roll = die3Roll;
                                 CombatDice["Combat Die 3"].CurrentTexture = CombatDice["Combat Die 3"].DieTextures["Roll " + die3Roll];
                                 CheckBoxes["Check Box 3"].Checked = false;
+                                CombatDice["Combat Die 3"].FeatUsed = false;
                             }
                             if (ActiveDie > 3 && CheckBoxes["Check Box 4"].Checked)
                             {
@@ -348,6 +353,7 @@ namespace MiniRogue
                                 CombatDice["Combat Die 4"].Roll = die4Roll;
                                 CombatDice["Combat Die 4"].CurrentTexture = CombatDice["Combat Die 4"].DieTextures["Roll " + die4Roll];
                                 CheckBoxes["Check Box 4"].Checked = false;
+                                CombatDice["Combat Die 4"].FeatUsed = false;
                             }
 
                             combatState = CombatState.RESOLVEDIE;
@@ -364,11 +370,29 @@ namespace MiniRogue
                         CheckBoxes["Check Box 3"].Checked = false;
                         CheckBoxes["Check Box 4"].Checked = false;
 
-                        CheckBoxes["Check Box 1"].CurrentTexture = CheckBoxes["Check Box 1"].UncheckedTexture;
-                        CheckBoxes["Check Box 2"].CurrentTexture = CheckBoxes["Check Box 2"].UncheckedTexture;
-                        CheckBoxes["Check Box 3"].CurrentTexture = CheckBoxes["Check Box 3"].UncheckedTexture;
-                        CheckBoxes["Check Box 4"].CurrentTexture = CheckBoxes["Check Box 4"].UncheckedTexture;
-                        //---------------------------------------------------------------------------------------------
+                        if (CombatDice["Combat Die 1"].FeatUsed)
+                        {
+                            CheckBoxes["Check Box 1"].CurrentTexture = CheckBoxes["Check Box 1"].GrayedTexture;
+                        }
+                        else { CheckBoxes["Check Box 1"].CurrentTexture = CheckBoxes["Check Box 1"].UncheckedTexture; }
+                        if (CombatDice["Combat Die 2"].FeatUsed)
+                        {
+                            CheckBoxes["Check Box 2"].CurrentTexture = CheckBoxes["Check Box 2"].GrayedTexture;
+                        }
+                        else { CheckBoxes["Check Box 2"].CurrentTexture = CheckBoxes["Check Box 2"].UncheckedTexture; }
+                        if (CombatDice["Combat Die 3"].FeatUsed)
+                        {
+                            CheckBoxes["Check Box 3"].CurrentTexture = CheckBoxes["Check Box 3"].GrayedTexture;
+                        }
+                        else { CheckBoxes["Check Box 3"].CurrentTexture = CheckBoxes["Check Box 3"].UncheckedTexture; }
+                        if (CombatDice["Combat Die 4"].FeatUsed)
+                        {
+                            CheckBoxes["Check Box 4"].CurrentTexture = CheckBoxes["Check Box 4"].GrayedTexture;
+                        }
+                        else { CheckBoxes["Check Box 4"].CurrentTexture = CheckBoxes["Check Box 4"].UncheckedTexture; }
+
+                        //----------------------------------------------------------------------------------------------
+
 
                         if (XPos > 300 && XPos < 548 && YPos > 250 && YPos < 322)
                         {
@@ -384,9 +408,9 @@ namespace MiniRogue
 
                         break;
                     case CombatState.USEFEAT:
+                        
 
-
-                        if (XPos > 275 && XPos < 325 && YPos > 380 && YPos < 430)
+                        if (XPos > 275 && XPos < 325 && YPos > 380 && YPos < 430 && !CombatDice["Combat Die 1"].FeatUsed)
                         {
                             if (CheckBoxes["Check Box 1"].CurrentTexture == CheckBoxes["Check Box 1"].UncheckedTexture)
                             {
@@ -409,7 +433,7 @@ namespace MiniRogue
                         }
 
 
-                        if (XPos > 475 && XPos < 525 && YPos > 380 && YPos < 430)
+                        if (XPos > 475 && XPos < 525 && YPos > 380 && YPos < 430 && !CombatDice["Combat Die 2"].FeatUsed)
                         {
                             if (CheckBoxes["Check Box 2"].CurrentTexture == CheckBoxes["Check Box 2"].UncheckedTexture)
                             {
@@ -431,7 +455,7 @@ namespace MiniRogue
                             
                         }
 
-                        if (XPos > 675 && XPos < 725 && YPos > 380 && YPos < 430)
+                        if (XPos > 675 && XPos < 725 && YPos > 380 && YPos < 430 && !CombatDice["Combat Die 3"].FeatUsed)
                         {
                             if (CheckBoxes["Check Box 3"].CurrentTexture == CheckBoxes["Check Box 3"].UncheckedTexture)
                             {
@@ -453,7 +477,7 @@ namespace MiniRogue
                             
                         }
 
-                        if (XPos > 875 && XPos < 925 && YPos > 380 && YPos < 430)
+                        if (XPos > 875 && XPos < 925 && YPos > 380 && YPos < 430 && !CombatDice["Combat Die 4"].FeatUsed)
                         {
                             if (CheckBoxes["Check Box 4"].CurrentTexture == CheckBoxes["Check Box 4"].UncheckedTexture)
                             {
@@ -572,6 +596,7 @@ namespace MiniRogue
                     CombatDice["Combat Die 1"].Roll = die1Roll;
                 }
                 CombatDice["Combat Die 1"].CurrentTexture = CombatDice["Combat Die 1"].DieTextures["Roll " + die1Roll];
+                CombatDice["Combat Die 1"].FeatUsed = true;
                 CheckBoxes["Check Box 1"].Checked = false;
             }
 
@@ -587,6 +612,7 @@ namespace MiniRogue
                     CombatDice["Combat Die 2"].Roll = die2Roll;
                 }
                 CombatDice["Combat Die 2"].CurrentTexture = CombatDice["Combat Die 2"].DieTextures["Roll " + die2Roll];
+                CombatDice["Combat Die 2"].FeatUsed = true;
                 CheckBoxes["Check Box 2"].Checked = false;
 
             }
@@ -602,6 +628,7 @@ namespace MiniRogue
                     CombatDice["Combat Die 3"].Roll = die3Roll;
                 }
                 CombatDice["Combat Die 3"].CurrentTexture = CombatDice["Combat Die 3"].DieTextures["Roll " + die3Roll];
+                CombatDice["Combat Die 3"].FeatUsed = true;
                 CheckBoxes["Check Box 3"].Checked = false;
             }
             if (ActiveDie > 3 && CheckBoxes["Check Box 4"].Checked)
@@ -616,9 +643,11 @@ namespace MiniRogue
                     CombatDice["Combat Die 4"].Roll = die4Roll;
                 }
                 CombatDice["Combat Die 4"].CurrentTexture = CombatDice["Combat Die 4"].DieTextures["Roll " + die4Roll];
+                CombatDice["Combat Die 4"].FeatUsed = true;
                 CheckBoxes["Check Box 4"].Checked = false;
             }
 
+            OneBoxChecked = false;
             combatState = CombatState.RESOLVEDIE;
 
         }

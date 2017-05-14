@@ -101,12 +101,13 @@ namespace MiniRogue
         Texture2D doneButton;
         Texture2D checkBoxEmpty;
         Texture2D checkBoxFull;
+        Texture2D checkBoxGray;
         Texture2D dieBlank;
         Texture2D useFeatButton;
         Texture2D acceptButton;
         Texture2D useSpellButton;
         Texture2D spend2HPButton;
-        Texture2D spend1XPButton;
+        Texture2D spend1XPButton; 
         SpriteFont font;
         SpriteFont dungeonFont;
         Vector2 position;
@@ -239,6 +240,7 @@ namespace MiniRogue
             doneButton = Content.Load<Texture2D>("DoneButton");
             checkBoxFull = Content.Load<Texture2D>("CheckFull");
             checkBoxEmpty = Content.Load<Texture2D>("CheckEmpty");
+            checkBoxGray = Content.Load<Texture2D>("CheckGrayed");
 
             //----------------------- FOR TESTING COMBAT --------------------------
 
@@ -262,10 +264,10 @@ namespace MiniRogue
             combatDice.Add("Combat Die 3", new CombatDice(dieTextures, 650, 450));
             combatDice.Add("Combat Die 4", new CombatDice(dieTextures, 850, 450));
 
-            checkBoxes.Add("Check Box 1", new CheckBox(checkBoxFull, checkBoxEmpty, 275, 380));
-            checkBoxes.Add("Check Box 2", new CheckBox(checkBoxFull, checkBoxEmpty, 475, 380));
-            checkBoxes.Add("Check Box 3", new CheckBox(checkBoxFull, checkBoxEmpty, 675, 380));
-            checkBoxes.Add("Check Box 4", new CheckBox(checkBoxFull, checkBoxEmpty, 875, 380));
+            checkBoxes.Add("Check Box 1", new CheckBox(checkBoxFull, checkBoxEmpty, checkBoxGray, 275, 380));
+            checkBoxes.Add("Check Box 2", new CheckBox(checkBoxFull, checkBoxEmpty, checkBoxGray, 475, 380));
+            checkBoxes.Add("Check Box 3", new CheckBox(checkBoxFull, checkBoxEmpty, checkBoxGray, 675, 380));
+            checkBoxes.Add("Check Box 4", new CheckBox(checkBoxFull, checkBoxEmpty, checkBoxGray, 875, 380));
 
             combat = new Combat(buttonDictionay, combatDice, checkBoxes);
 

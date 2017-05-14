@@ -21,16 +21,19 @@ namespace MiniRogue
 
         public Texture2D CheckedTexture { get; set; }
 
+        public Texture2D GrayedTexture { get; set; }
+
         public Texture2D UncheckedTexture { get; set; }
 
         public int Xpos { get; set; }
 
         public int Ypos { get; set; }
 
-        public CheckBox(Texture2D checkedTexture, Texture2D uncheckedTexture, int xPos, int yPos)
+        public CheckBox(Texture2D checkedTexture, Texture2D uncheckedTexture, Texture2D checkboxGrayed, int xPos, int yPos)
         {
             CheckedTexture = checkedTexture;
             UncheckedTexture = uncheckedTexture;
+            GrayedTexture = checkboxGrayed;
             CurrentTexture = UncheckedTexture;
             Active = false;
             Checked = true;
