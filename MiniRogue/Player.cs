@@ -50,7 +50,9 @@ namespace MiniRogue
 
         public int Rank { get; set; }
 
-        public List<string> Spells { get; set; }
+        public List<string> SpellsString { get; set; }
+
+        public List<Spell> Spells { get; set; }
 
         public int Level { get; set; }
 
@@ -79,7 +81,7 @@ namespace MiniRogue
             HasFoughtMonster = false;
 
             playerDice = new Dice();
-            Spells = new List<string>();
+            SpellsString = new List<string>();
         }
 
         public Player()
@@ -111,21 +113,21 @@ namespace MiniRogue
             else return false;
         }
 
-        public bool AddSpell(string spell)
+        public bool AddSpellString(string spell)
         {
-            if (Spells.Count < 2)
+            if (SpellsString.Count < 2)
             {
-                Spells.Add(spell);
+                SpellsString.Add(spell);
                 return true;
             }
             else return false; 
         }
 
-        public bool RemoveSpell(string spell)
+        public bool RemoveSpellString(string spell)
         {
-            if (Spells.Count > 0)
+            if (SpellsString.Count > 0)
             {
-                Spells.Remove(spell);
+                SpellsString.Remove(spell);
                 return true;
             }
             else return false; 

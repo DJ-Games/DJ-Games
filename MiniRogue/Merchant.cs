@@ -252,7 +252,7 @@ namespace MiniRogue
 
                         if (XPos > 800 && XPos < 1048 && YPos > 320 && YPos < 392)
                         {
-                            if (player.Spells.Count > 0)
+                            if (player.SpellsString.Count > 0)
                             {
                                 merchantTurnState = MerchantTurnState.SELLSPELL;
                             }
@@ -318,7 +318,7 @@ namespace MiniRogue
 
                                     if (player.SpendGold(8))
                                     {
-                                        player.AddSpell("Fire Spell");
+                                        player.AddSpellString("Fire Spell");
                                         merchantTurnState = MerchantTurnState.BUYSELL;
                                     }
                                     else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
@@ -329,7 +329,7 @@ namespace MiniRogue
 
                                     if (player.SpendGold(8))
                                     {
-                                        player.AddSpell("Ice Spell");
+                                        player.AddSpellString("Ice Spell");
                                         merchantTurnState = MerchantTurnState.BUYSELL;
                                     }
                                     else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
@@ -340,7 +340,7 @@ namespace MiniRogue
 
                                     if (player.SpendGold(8))
                                     {
-                                        player.AddSpell("Poison Spell");
+                                        player.AddSpellString("Poison Spell");
                                         merchantTurnState = MerchantTurnState.BUYSELL;
                                     }
                                     else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
@@ -351,7 +351,7 @@ namespace MiniRogue
 
                                     if (player.SpendGold(8))
                                     {
-                                        player.AddSpell("Healing Spell");
+                                        player.AddSpellString("Healing Spell");
                                         merchantTurnState = MerchantTurnState.BUYSELL;
                                     }
                                     else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
@@ -408,13 +408,13 @@ namespace MiniRogue
 
                         if (XPos > 700 && XPos < 807 && YPos > 15 && YPos < 46)
                         {
-                            Selection = "Sell " + player.Spells[0];
+                            Selection = "Sell " + player.SpellsString[0];
                             merchantTurnState = MerchantTurnState.CONFIRMSELL; 
                         }
 
                         if (XPos > 900 && XPos < 1007 && YPos > 15 && YPos < 46)
                         {
-                            Selection = "Sell " + player.Spells[1];
+                            Selection = "Sell " + player.SpellsString[1];
                             merchantTurnState = MerchantTurnState.CONFIRMSELL;
                         }
 
@@ -439,9 +439,9 @@ namespace MiniRogue
                                     break;
 
                                 case "Sell Fire Spell":
-                                    if (player.Spells.Contains("Fire Spell"))
+                                    if (player.SpellsString.Contains("Fire Spell"))
                                     {
-                                        player.RemoveSpell("Fire Spell");
+                                        player.RemoveSpellString("Fire Spell");
                                         player.Gold += 4;
                                         merchantTurnState = MerchantTurnState.BUYSELL;
                                     }
@@ -451,9 +451,9 @@ namespace MiniRogue
                                     break;
 
                                 case "Sell Ice Spell":
-                                    if (player.Spells.Contains("Ice Spell"))
+                                    if (player.SpellsString.Contains("Ice Spell"))
                                     {
-                                        player.RemoveSpell("Ice Spell");
+                                        player.RemoveSpellString("Ice Spell");
                                         player.Gold += 4;
                                         merchantTurnState = MerchantTurnState.BUYSELL;
                                     }
@@ -463,9 +463,9 @@ namespace MiniRogue
                                     break;
 
                                 case "Sell Poison Spell":
-                                    if (player.Spells.Contains("Poison Spell"))
+                                    if (player.SpellsString.Contains("Poison Spell"))
                                     {
-                                        player.RemoveSpell("Poison Spell");
+                                        player.RemoveSpellString("Poison Spell");
                                         player.Gold += 4;
                                         merchantTurnState = MerchantTurnState.BUYSELL;
                                     }
@@ -476,9 +476,9 @@ namespace MiniRogue
 
                                 case "Sell Healing Spell":
 
-                                    if (player.Spells.Contains("Healing Spell"))
+                                    if (player.SpellsString.Contains("Healing Spell"))
                                     {
-                                        player.RemoveSpell("Healing Spell");
+                                        player.RemoveSpellString("Healing Spell");
                                         player.Gold += 4;
                                         merchantTurnState = MerchantTurnState.BUYSELL;
                                     }

@@ -55,6 +55,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resting.cs" />
+    <Compile Include="Spell.cs" />
     <Compile Include="Trap.cs" />
     <Compile Include="Treasure.cs" />
   </ItemGroup>
