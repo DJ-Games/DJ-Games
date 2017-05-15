@@ -44,7 +44,7 @@ namespace MiniRogue
 
 
         public void DrawNewHand(Texture2D enemyTex, Texture2D eventTex, Texture2D merchantTex,
-            Texture2D restingTex, Texture2D trapTex, Texture2D treasureTex, Dictionary<string, Button> buttons,
+            Texture2D restingTex, Texture2D trapTex, Texture2D treasureTex, Texture2D bossTex, Dictionary<string, Button> buttons,
             Dictionary<string, CombatDice> combatDice, Dictionary<string, CheckBox> checkBoxes)
         {
             playerHand.Add(new Enemy("Enemy", enemyTex, buttons, combatDice, checkBoxes));
@@ -60,6 +60,8 @@ namespace MiniRogue
             playerHand.Add(new Treasure("Treasure", treasureTex, buttons));
 
             ShuffleHand();
+
+            PlayerHand.Add(new Boss("Boss", bossTex, buttons, combatDice, checkBoxes));
         }
 
 

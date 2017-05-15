@@ -240,6 +240,7 @@ namespace MiniRogue
                 graphics.GraphicsDevice.Viewport.Height / 2);
             playerDice = new Dice();
             difficulty = new Difficulty();
+            playerHand = new Hand();
             buttonDictionay = new Dictionary<string, Button>();
             gamestate = Gamestate.TITILESCREEN;
             currentTurnState = CurrentTurnState.PRETURN1;
@@ -396,41 +397,28 @@ namespace MiniRogue
                         if (position.X > 800 && position.X < 1050 && position.Y > 167 && position.Y < 241)
                         {
                             player = new Player(1, 5, 5, 6);
-                            playerHand = new Hand();
-                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, buttonDictionay, combatDice, checkBoxes);
+                            DrawNewHand();
                             gamestate = Gamestate.DELVE;
                         }
-                    }
 
-                    if (SingleMouseClick())
-                    {
                         if (position.X > 800 && position.X < 1050 && position.Y > 270 && position.Y < 344)
                         {
                             player = new Player(0, 5, 3, 6);
-                            playerHand = new Hand();
-                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, buttonDictionay, combatDice, checkBoxes);
+                            DrawNewHand();
                             gamestate = Gamestate.DELVE;
                         }
-                    }
 
-                    if (SingleMouseClick())
-                    {
                         if (position.X > 800 && position.X < 1050 && position.Y > 373 && position.Y < 447)
                         {
                             player = new Player(0, 4, 2, 5);
-                            playerHand = new Hand();
-                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, buttonDictionay, combatDice, checkBoxes);
+                            DrawNewHand();
                             gamestate = Gamestate.DELVE;
                         }
-                    }
 
-                    if (SingleMouseClick())
-                    {
                         if (position.X > 800 && position.X < 1050 && position.Y > 476 && position.Y < 550)
                         {
                             player = new Player(0, 3, 1, 3);
-                            playerHand = new Hand();
-                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, buttonDictionay, combatDice, checkBoxes);
+                            DrawNewHand();
                             gamestate = Gamestate.DELVE;
                         }
                     }
@@ -879,6 +867,10 @@ namespace MiniRogue
             return false;
         }
 
+        public void DrawNewHand()
+        {
+            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, bossMonsterCard, buttonDictionay, combatDice, checkBoxes);
+        } 
 
     }
 }
