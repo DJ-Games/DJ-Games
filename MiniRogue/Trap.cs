@@ -88,16 +88,17 @@ namespace MiniRogue
                 switch (trapTurnState)
                 {
                     case TrapTurnState.ROLL_FOR_TRAP:
-                        if (XPos > 700 && XPos < 948 && YPos > 275 && YPos < 348)
+                        if (XPos > 700 && XPos < 948 && YPos > 225 && YPos < 313)
                         {
-                            TrapResult = player.playerDice.RollDice();
-                            trapTurnState = TrapTurnState.SKILL_CHECK; 
+                            TrapResult = 1; //player.playerDice.RollDice();
+                            trapTurnState = TrapTurnState.SKILL_CHECK;
                         }
+                       
                         break;
-
+                   
                     case TrapTurnState.SKILL_CHECK:
  
-                        if (XPos > 700 && XPos < 948 && YPos > 75 && YPos < 148)
+                        if (XPos > 700 && XPos < 948 && YPos > 420 && YPos < 493)
                         {
                             
                             if (player.playerDice.RollDice() <= player.Rank)
@@ -163,16 +164,22 @@ namespace MiniRogue
                                 default:
                                     break;
                             }
-
+                        if (XPos > 700 && XPos < 948 && YPos > 550 && YPos < 623)
+                        {
                             trapTurnState = TrapTurnState.COMPLETE;
+                        }
+                           
 
                        
 
                         break;
 
                     case TrapTurnState.REVIEW:
-
-                        trapTurnState = TrapTurnState.COMPLETE;
+                        if (XPos > 700 && XPos < 948 && YPos > 550 && YPos < 623)
+                        {
+                            trapTurnState = TrapTurnState.COMPLETE;
+                        }
+                        
                         break;
 
 
@@ -202,81 +209,136 @@ namespace MiniRogue
             switch (trapTurnState)
             {
                 case TrapTurnState.ROLL_FOR_TRAP:
-                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 275), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
-                    sBatch.DrawString(font, "Roll to determine the trap you face", new Vector2(680, 200), Color.White);          
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 240), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    sBatch.DrawString(font, "Roll to determine the trap you face", new Vector2(660, 200), Color.White);          
                     break;
 
                 case TrapTurnState.SKILL_CHECK:
-                    
-                    sBatch.DrawString(font, "You Rolled a:  " + TrapResult, new Vector2(725, 200), Color.White);
-                    sBatch.DrawString(font, "Roll a skill check to evade the trap", new Vector2(680, 50), Color.White);
-                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 275), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    sBatch.DrawString(font, "Roll to determine the trap you face", new Vector2(660, 200), Color.White);
+                    sBatch.DrawString(font, "You Rolled a:  " + TrapResult, new Vector2(725, 300), Color.White);
+                    sBatch.DrawString(font, "Roll a skill check to evade the trap", new Vector2(660, 380), Color.White);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 240), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 420), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
                     switch (TrapResult)
                     {
                         case 1:
-                            sBatch.DrawString(font, "Mildew: You Lose a Food", new Vector2(750, 225), Color.White);
+                            sBatch.DrawString(font, "Mildew: You Lose a Food", new Vector2(660, 340), Color.White);
                             break;
 
                         case 2:
-                            sBatch.DrawString(font, "TripWire: You Lose a Gold", new Vector2(750, 225), Color.White);
+                            sBatch.DrawString(font, "TripWire: You Lose a Gold", new Vector2(660, 340), Color.White);
                             break;
 
                         case 3:
-                            sBatch.DrawString(font, "Acid Mist: You Lose a Armor Piece or Two Health", new Vector2(750, 225), Color.White);
+                            sBatch.DrawString(font, "Acid Mist: You Lose a Armor Piece or Two Health", new Vector2(660, 340), Color.White);
                             break;
 
                         case 4:
-                            sBatch.DrawString(font, "Spring Blades: You Lose a Health", new Vector2(750, 225), Color.White);
+                            sBatch.DrawString(font, "Spring Blades: You Lose a Health", new Vector2(660, 340), Color.White);
                             break;
 
                         case 5:
-                            sBatch.DrawString(font, "Moving Walls: You Lose a XP", new Vector2(750, 225), Color.White);
+                            sBatch.DrawString(font, "Moving Walls: You Lose a XP", new Vector2(660, 340), Color.White);
                             break;
 
                         case 6:
-                            sBatch.DrawString(font, "Pit: You Lose Two Health and have fallen deeper into the darkness", new Vector2(750, 225), Color.White);
+                            sBatch.DrawString(font, "Pit: You Lose Two Health and have fallen deeper into the darkness", new Vector2(580, 340), Color.White);
                             break;
 
                         default:
                             break;
                     }
-                   
-                    sBatch.DrawString(font, "You Rolled a:  " + TrapResult, new Vector2(725, 200), Color.White);
-                    trapTurnState = TrapTurnState.RESOLVE_TRAP; 
+                  
                     break;
 
                 case TrapTurnState.RESOLVE_TRAP:
-                    
-                    break; 
 
-                case TrapTurnState.REVIEW:
+                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(700, 550), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    sBatch.DrawString(font, "Roll to determine the trap you face", new Vector2(660, 200), Color.White);
+                    sBatch.DrawString(font, "You Rolled a:  " + TrapResult, new Vector2(725, 300), Color.White);
+                    sBatch.DrawString(font, "Roll a skill check to evade the trap", new Vector2(660, 380), Color.White);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 240), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 420), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    sBatch.DrawString(font, "You Failed, accept your fate", new Vector2(660, 480), Color.White);
+                    sBatch.DrawString(font, "Resolve_Trap", new Vector2(660, 100), Color.White);
 
-                    if (success)
+                    switch (TrapResult)
                     {
-
-                    }
-                    else
-                    {
-
-                    }
-
-                    trapTurnState = TrapTurnState.COMPLETE;
-                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(700, 75), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                        case 1:
+                    sBatch.DrawString(font, "Mildew: You Lose a Food", new Vector2(660, 340), Color.White);
                     break;
 
-             
+                case 2:
+                    sBatch.DrawString(font, "TripWire: You Lose a Gold", new Vector2(660, 340), Color.White);
+                    break;
+
+                case 3:
+                    sBatch.DrawString(font, "Acid Mist: You Lose a Armor Piece or Two Health", new Vector2(660, 340), Color.White);
+                    break;
+
+                case 4:
+                    sBatch.DrawString(font, "Spring Blades: You Lose a Health", new Vector2(660, 340), Color.White);
+                    break;
+
+                case 5:
+                    sBatch.DrawString(font, "Moving Walls: You Lose a XP", new Vector2(660, 340), Color.White);
+                    break;
+
+                case 6:
+                    sBatch.DrawString(font, "Pit: You Lose Two Health and have fallen deeper into the darkness", new Vector2(580, 340), Color.White);
+                    break;
+
+                default:
+                    break;
+            }
+            break; 
+
+                case TrapTurnState.REVIEW:
+                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(700, 550), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    sBatch.DrawString(font, "Success! You avoided the trap", new Vector2(660, 480), Color.White);
+                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(700, 550), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    sBatch.DrawString(font, "Roll to determine the trap you face", new Vector2(660, 200), Color.White);
+                    sBatch.DrawString(font, "You Rolled a:  " + TrapResult, new Vector2(725, 300), Color.White);
+                    sBatch.DrawString(font, "Roll a skill check to evade the trap", new Vector2(660, 380), Color.White);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 240), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 420), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+
+                    switch (TrapResult)
+                    {
+                        case 1:
+                            sBatch.DrawString(font, "Mildew: You Lose a Food", new Vector2(660, 340), Color.White);
+                            break;
+
+                        case 2:
+                            sBatch.DrawString(font, "TripWire: You Lose a Gold", new Vector2(660, 340), Color.White);
+                            break;
+
+                        case 3:
+                            sBatch.DrawString(font, "Acid Mist: You Lose a Armor Piece or Two Health", new Vector2(660, 340), Color.White);
+                            break;
+
+                        case 4:
+                            sBatch.DrawString(font, "Spring Blades: You Lose a Health", new Vector2(660, 340), Color.White);
+                            break;
+
+                        case 5:
+                            sBatch.DrawString(font, "Moving Walls: You Lose a XP", new Vector2(660, 340), Color.White);
+                            break;
+
+                        case 6:
+                            sBatch.DrawString(font, "Pit: You Lose Two Health and have fallen deeper into the darkness", new Vector2(580, 340), Color.White);
+                            break;
+
+                        default:
+                            break;
+                    }
 
                     break;
 
                 default:
                     break;
             }
-
-
-
-
-
-        
+     
         }
 
     }
