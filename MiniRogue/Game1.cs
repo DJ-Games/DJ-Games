@@ -16,9 +16,8 @@ namespace MiniRogue
     {
         TITILESCREEN,
         DIFFICULTY_SELECT,
-        DELVE,
-        BOSS,
-        RECOUP,
+        HACKANDSLASH,
+        DELVING,
         GAME_OVER,
         CREDITS,
         COMBATTESTING,
@@ -34,6 +33,8 @@ namespace MiniRogue
         TURN3,
         PRETURN4,
         TURN4,
+        PREBOSS,
+        BOSS,
 
     }
 
@@ -398,28 +399,28 @@ namespace MiniRogue
                         {
                             player = new Player(1, 5, 5, 6);
                             DrawNewHand();
-                            gamestate = Gamestate.DELVE;
+                            gamestate = Gamestate.HACKANDSLASH;
                         }
 
                         if (position.X > 800 && position.X < 1050 && position.Y > 270 && position.Y < 344)
                         {
                             player = new Player(0, 5, 3, 6);
                             DrawNewHand();
-                            gamestate = Gamestate.DELVE;
+                            gamestate = Gamestate.HACKANDSLASH;
                         }
 
                         if (position.X > 800 && position.X < 1050 && position.Y > 373 && position.Y < 447)
                         {
                             player = new Player(0, 4, 2, 5);
                             DrawNewHand();
-                            gamestate = Gamestate.DELVE;
+                            gamestate = Gamestate.HACKANDSLASH;
                         }
 
                         if (position.X > 800 && position.X < 1050 && position.Y > 476 && position.Y < 550)
                         {
                             player = new Player(0, 3, 1, 3);
                             DrawNewHand();
-                            gamestate = Gamestate.DELVE;
+                            gamestate = Gamestate.HACKANDSLASH;
                         }
                     }
 
@@ -429,7 +430,7 @@ namespace MiniRogue
 
                 // -------------- Delve Game State Update -------------------
 
-                case Gamestate.DELVE:
+                case Gamestate.HACKANDSLASH:
 
                     switch (currentTurnState)
                     {
@@ -531,38 +532,51 @@ namespace MiniRogue
 
 
                         case CurrentTurnState.TURN4:
-                            break;
 
                             if (currentCard.HandleCard(player, mouseState, prevMouseState, position.X, position.Y))
                             {
-                                currentTurnState = CurrentTurnState.PRETURN4;
+                                if (player.DungeonArea == 2 || player.DungeonArea == 4 || player.DungeonArea == 7 || player.DungeonArea == 10 || player.DungeonArea == 14)
+                                {
+                                    currentTurnState = CurrentTurnState.PREBOSS;
+                                }
+                                gamestate = Gamestate.DELVING;
                             }
+
+                            break;
+
+                        case CurrentTurnState.PREBOSS:
+
+                            break;
+
+
+                        case CurrentTurnState.BOSS:
+
+
+                            break;
+
 
                         default:
                             break;
                     
             }
 
-
-                    
-
-
-
-
-
-
-
-
-
-
-
-
-
                     break;
 
-                case Gamestate.RECOUP:
+                case Gamestate.DELVING:
 
-                    break;
+                    if (SingleMouseClick())
+                    {
+                        if (position.X > 600 && position.X < 848 && position.Y > 500 && position.Y < 572)
+                        {
+                            player.DungeonArea++;
+                            DrawNewHand();
+                            gamestate = Gamestate.HACKANDSLASH;
+                            currentTurnState = CurrentTurnState.PRETURN1;
+                        }
+
+                    }
+
+                            break;
 
                 case Gamestate.GAME_OVER:
 
@@ -632,7 +646,7 @@ namespace MiniRogue
 
                 // -------------- Delve Game State Draw -------------------
 
-                case Gamestate.DELVE:
+                case Gamestate.HACKANDSLASH:
 
                     spriteBatch.DrawString(font, "Health: " + player.Health, new Vector2(20, 20), Color.White);
                     spriteBatch.DrawString(font, "Armor: " + player.Armor, new Vector2(120, 20), Color.White);
@@ -790,6 +804,17 @@ namespace MiniRogue
                             currentCard.DrawCard(spriteBatch, dungeonFont);
 
                             break;
+
+                        case CurrentTurnState.PREBOSS:
+
+
+                            break;
+
+                        case CurrentTurnState.BOSS:
+
+
+                            break;
+
                         default:
                             break;
                     }
@@ -797,11 +822,10 @@ namespace MiniRogue
                     break;
 
 
-                case Gamestate.BOSS:
+                case Gamestate.DELVING:
 
-                    break;
-
-                case Gamestate.RECOUP:
+                    spriteBatch.DrawString(font, "You have completed area " + player.DungeonArea + "!", new Vector2(660, 200), Color.White);
+                    spriteBatch.Draw(acceptButton, new Vector2(600, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
 
@@ -871,6 +895,12 @@ namespace MiniRogue
         {
             playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, bossMonsterCard, buttonDictionay, combatDice, checkBoxes);
         } 
+
+        public void PreparePhase()
+        {
+            currentTurnState = CurrentTurnState.PRETURN1;
+            
+        }
 
     }
 }
