@@ -451,8 +451,7 @@ namespace MiniRogue
                             {
                                 if (position.X > 75 && position.X < 270 && position.Y > 260 && position.Y < 535)
                                 {
-
-                                    currentCard = playerHand.RevealCard();
+                                    currentCard = playerHand.Card1;
                                     currentTurnState = CurrentTurnState.TURN1;
                                 }
                             }
@@ -469,34 +468,87 @@ namespace MiniRogue
 
                         case CurrentTurnState.PRETURN2:
 
-                           // if (SingleMouseClick())
-                           // {
-                           //     if (position.X > 300 && position.X < 495 && position.Y > 100 && position.Y < 375)
-                           //     {
-                          //          currentCard = playerHand.RevealCard();
-                           //         //currentTurnState = CurrentTurnState.TURN2;
+                            if (SingleMouseClick())
+                            {
+                                if (position.X > 300 && position.X < 495 && position.Y > 100 && position.Y < 375)
+                                {
+                                    currentCard = playerHand.Card2;
+                                    currentTurnState = CurrentTurnState.TURN2;
 
-                           //     }
-                          //  }
+                                }
 
-                           // if (position.X > 300 && position.X < 495 && position.Y > 400 && position.Y < 575)
-                          //  {
-                           //     currentCard = playerHand.RevealCard();
-                          //  }
-                            
-                            break;
-                    
+                                if (position.X > 300 && position.X < 495 && position.Y > 400 && position.Y < 575)
+                                {
+                                    currentCard = playerHand.Card3;
+                                    currentTurnState = CurrentTurnState.TURN2;
+                                }
+                            }
 
-                   
+
+
+                            break;          
 
                         case CurrentTurnState.TURN2:
+
+                            if (currentCard.HandleCard(player, mouseState, prevMouseState, position.X, position.Y))
+                            {
+                                currentTurnState = CurrentTurnState.PRETURN3;
+                            }
+
                             break;
+
+                        case CurrentTurnState.PRETURN3:
+
+                            if (SingleMouseClick())
+                            {
+                                if (position.X > 525 && position.X < 720 && position.Y > 260 && position.Y < 535)
+                                {
+                                    currentCard = playerHand.Card4;
+                                    currentTurnState = CurrentTurnState.TURN3;
+                                }
+                            }
+
+                            break;
+
                         case CurrentTurnState.TURN3:
+
+                            if (currentCard.HandleCard(player, mouseState, prevMouseState, position.X, position.Y))
+                            {
+                                currentTurnState = CurrentTurnState.PRETURN4;
+                            }
+
                             break;
+
+                        case CurrentTurnState.PRETURN4:
+
+                            if (SingleMouseClick())
+                            {
+                                if (position.X > 750 && position.X < 945 && position.Y > 100 && position.Y < 375)
+                                {
+                                    currentCard = playerHand.Card5;
+                                    currentTurnState = CurrentTurnState.TURN4;
+
+                                }
+
+
+                                if (position.X > 750 && position.X < 945 && position.Y > 400 && position.Y < 575)
+                                {
+                                    currentCard = playerHand.Card6;
+                                    currentTurnState = CurrentTurnState.TURN4;
+                                }
+                            }
+
+
+                            break;
+
+
                         case CurrentTurnState.TURN4:
                             break;
 
-                        
+                            if (currentCard.HandleCard(player, mouseState, prevMouseState, position.X, position.Y))
+                            {
+                                currentTurnState = CurrentTurnState.PRETURN4;
+                            }
 
                         default:
                             break;
@@ -677,6 +729,8 @@ namespace MiniRogue
                     {
                         case CurrentTurnState.PRETURN1:
 
+                            playerHand.Card1.Flipped = true;
+
                             spriteBatch.Draw(door, new Vector2(75, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
                             spriteBatch.Draw(doorGrayed, new Vector2(300, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
                             spriteBatch.Draw(doorGrayed, new Vector2(300, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
@@ -685,12 +739,17 @@ namespace MiniRogue
                             spriteBatch.Draw(doorGrayed, new Vector2(750, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
                             spriteBatch.Draw(doorGrayed, new Vector2(975, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
 
+                            playerHand.DrawHand(spriteBatch);
+
                             break;
                         case CurrentTurnState.TURN1:
                             currentCard.DrawCard(spriteBatch, dungeonFont);
                             break;
 
                         case CurrentTurnState.PRETURN2:
+
+                            playerHand.Card2.Flipped = true;
+                            playerHand.Card3.Flipped = true;
 
                             spriteBatch.Draw(doorGrayed, new Vector2(75, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
                             spriteBatch.Draw(door, new Vector2(300, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
@@ -700,9 +759,12 @@ namespace MiniRogue
                             spriteBatch.Draw(doorGrayed, new Vector2(750, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
                             spriteBatch.Draw(doorGrayed, new Vector2(975, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
 
+                            playerHand.DrawHand(spriteBatch);
+
                             break;
 
                         case CurrentTurnState.TURN2:
+                            currentCard.DrawCard(spriteBatch, dungeonFont);
                             break;
 
                         case CurrentTurnState.PRETURN3:
@@ -718,6 +780,9 @@ namespace MiniRogue
                             break;
 
                         case CurrentTurnState.TURN3:
+
+                            currentCard.DrawCard(spriteBatch, dungeonFont);
+
                             break;
 
                         case CurrentTurnState.PRETURN4:
@@ -733,6 +798,9 @@ namespace MiniRogue
                             break;
 
                         case CurrentTurnState.TURN4:
+
+                            currentCard.DrawCard(spriteBatch, dungeonFont);
+
                             break;
                         default:
                             break;

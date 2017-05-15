@@ -35,6 +35,10 @@ namespace MiniRogue
 
         public float YPos { get; set; }
 
+        public float LevelXpos { get; set; }
+
+        public float LevelYPos { get; set; }
+
         public KeyboardState CurrentKbState { get; set; }
 
         public KeyboardState PreviousKbState { get; set; }
