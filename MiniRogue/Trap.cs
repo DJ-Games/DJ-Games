@@ -116,10 +116,11 @@ namespace MiniRogue
                         break;
                         
                     case TrapTurnState.RESOLVE_TRAP:
-                    
-         
 
-                        switch (TrapResult)
+                        if (XPos > 700 && XPos < 948 && YPos > 550 && YPos < 623)
+                        { 
+
+                            switch (TrapResult)
                             {
                                 case 1:
 
@@ -164,8 +165,7 @@ namespace MiniRogue
                                 default:
                                     break;
                             }
-                        if (XPos > 700 && XPos < 948 && YPos > 550 && YPos < 623)
-                        {
+                       
                             trapTurnState = TrapTurnState.COMPLETE;
                         }
                            
