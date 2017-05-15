@@ -13,10 +13,8 @@ namespace MiniRogue
 {
     enum EnemyTurnState
     {
-        MONSTER_HEALTH_ROLL,
-        DAMAGE_ROLL,
-        DAMAGE_ROLL_MAXIMIZE,
-        REVIEW,
+        STARTCOMBAT,
+        COMBAT,
         COMPLETE,
 
     }
@@ -26,34 +24,11 @@ namespace MiniRogue
 
         //---------------------- PROPERTIES --------------------------
 
-        public int Damage { get; set; }
+        public Combat CurrentCombat { get; set; }
 
-        public int ExpReward { get; set; }
+        public Dictionary<string, CombatDice> CombatDice { get; set; }
 
-        private int monsterHealth;
-
-        public int DamageRoll1 { get; set; }
-        public int DamageRoll2 { get; set; }
-        public int DamageRoll3 { get; set; }
-        public int DamageRoll4 { get; set; }
-
-        public int Health
-        {
-            get { return monsterHealth; }
-            set
-            {
-                if((monsterHealth = value) < 0)
-                {
-                    monsterHealth = 0;
-                }
-                else
-                {
-                    monsterHealth = value;
-                } 
-            }
-        }
-
-        public List<Texture2D> DiceRolls { get; set; }
+        public Dictionary<string, CheckBox> CheckBoxes { get; set; }
 
 
         EnemyTurnState enemyTurnState = new EnemyTurnState();
@@ -62,9 +37,17 @@ namespace MiniRogue
 
         public Enemy(string name, Texture2D cardTexture, Dictionary<string, Button> buttons) : base(name, cardTexture, buttons)
         {
-            DiceRolls = new List<Texture2D>();
 
         }
+
+        public Enemy(string name, Texture2D cardTexture, Dictionary<string, Button> buttons, Dictionary<string, CombatDice> combatDice, Dictionary<string, CheckBox> checkBoxes) : base(name, cardTexture, buttons)
+        {
+            Buttons = buttons;
+            CombatDice = combatDice;
+            CheckBoxes = checkBoxes;
+
+        }
+
 
         //---------------------- METHODS -----------------------------
 
@@ -80,85 +63,19 @@ namespace MiniRogue
             XPos = xPos;
             YPos = yPos;
 
-
-            switch (player.DungeonLevel)
-            {
-                case 1:
-
-                    Damage = 2;
-
-                    break;
-
-                case 2:
-
-                    Damage = 4;
-
-                    break;
-
-                case 3:
-
-                    Damage = 6;
-
-                    break;
-
-                case 4:
-
-                    Damage = 8;
-
-                    break;
-
-                case 5:
-
-                    Damage = 10;
-
-                    break;
-
-                
-                default:
-                    break;
-            }
-
-            
-
-
-
-
-
             switch (enemyTurnState)
             {
-                case EnemyTurnState.MONSTER_HEALTH_ROLL:
 
+                case EnemyTurnState.STARTCOMBAT:
                     HandleButtons(player);
-
                     return false;
 
-                case EnemyTurnState.DAMAGE_ROLL:
+                case EnemyTurnState.COMBAT:
 
-                    HandleButtons(player);
-
-
-                    return false;
-
-
-
-
-
-
-
+                    CurrentCombat.HandleCombat(player, CurrentMouseState, PreviousMouseState, XPos, yPos);
                     
-                case EnemyTurnState.DAMAGE_ROLL_MAXIMIZE:
 
 
-
-
-
-
-                    return false;
-
-
-               
-
-                case EnemyTurnState.REVIEW:
                     return false;
 
 
@@ -173,60 +90,29 @@ namespace MiniRogue
         }
 
 
-
-
-
-
-
-
-
-
-
-
         public override void DrawCard(SpriteBatch sBatch,SpriteFont dungeonFont)
         {
 
             sBatch.Draw(CardTexture, new Vector2(100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
-            sBatch.DrawString(dungeonFont, "Monster Health: " + monsterHealth, new Vector2(600, 50), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
 
             switch (enemyTurnState)
             {
-                case EnemyTurnState.MONSTER_HEALTH_ROLL:
+                case EnemyTurnState.STARTCOMBAT:
 
-                    sBatch.DrawString(dungeonFont, "Roll for moster hit points", new Vector2(575, 100), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
-                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-
-                    break;
-
-                case EnemyTurnState.DAMAGE_ROLL:
-
-                    sBatch.DrawString(dungeonFont, "Roll for damage", new Vector2(575, 100), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
-                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Combat Button"].ButtonTexture, new Vector2(700, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    
 
                     break;
 
+                case EnemyTurnState.COMBAT:
 
-                case EnemyTurnState.DAMAGE_ROLL_MAXIMIZE:
-
-                    int counter = 150;
-                    foreach (var item in DiceRolls)
-                    {
-                        sBatch.Draw(item, new Vector2(1150, counter), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                        counter += 100;
-                    }
-
-
-                    break;
-                case EnemyTurnState.REVIEW:
+                    CurrentCombat.DrawCombat(sBatch, dungeonFont);
                     break;
                 case EnemyTurnState.COMPLETE:
                     break;
                 default:
                     break;
             }
-
-
-
 
         }
 
@@ -237,79 +123,19 @@ namespace MiniRogue
             {
                 switch (enemyTurnState)
                 {
-                    case EnemyTurnState.MONSTER_HEALTH_ROLL:
+                    case EnemyTurnState.STARTCOMBAT:
 
 
                         if (XPos > 700 && XPos < 948 && YPos > 500 && YPos < 572)
                         {
-                            monsterHealth = player.DungeonArea + player.playerDice.RollDice();
-                            Thread.Sleep(500);
-                            enemyTurnState = EnemyTurnState.DAMAGE_ROLL;
+
+                            CurrentCombat = new Combat(Buttons, CombatDice, CheckBoxes);
+                            enemyTurnState = EnemyTurnState.COMBAT;
 
                         }
 
                         break;
-                    case EnemyTurnState.DAMAGE_ROLL:
-
-                        if (XPos > 700 && XPos < 948 && YPos > 500 && YPos < 572)
-                        {
-                            switch (player.Rank)
-                            {
-                                case 1:
-                                    DamageRoll1 = player.playerDice.RollDice();
-                                    DiceRolls.Add(Buttons["Die Roll " + DamageRoll1].ButtonTexture);
-                                    enemyTurnState = EnemyTurnState.DAMAGE_ROLL_MAXIMIZE;
-                                    break;
-
-                                case 2:
-                                    DamageRoll1 = player.playerDice.RollDice();
-                                    DiceRolls.Add(Buttons["Die Roll " + DamageRoll1].ButtonTexture);
-                                    DamageRoll2 = player.playerDice.RollDice();
-                                    DiceRolls.Add(Buttons["Die Roll " + DamageRoll2].ButtonTexture);
-                                    enemyTurnState = EnemyTurnState.DAMAGE_ROLL_MAXIMIZE;
-
-                                    break;
-
-                                case 3:
-                                    DamageRoll1 = player.playerDice.RollDice();
-                                    DiceRolls.Add(Buttons["Die Roll " + DamageRoll1].ButtonTexture);
-                                    DamageRoll2 = player.playerDice.RollDice();
-                                    DiceRolls.Add(Buttons["Die Roll " + DamageRoll2].ButtonTexture);
-                                    DamageRoll3 = player.playerDice.RollDice();
-                                    DiceRolls.Add(Buttons["Die Roll " + DamageRoll3].ButtonTexture);
-                                    enemyTurnState = EnemyTurnState.DAMAGE_ROLL_MAXIMIZE;
-
-                                    break;
-
-                                case 4:
-                                    DamageRoll1 = player.playerDice.RollDice();
-                                    DiceRolls.Add(Buttons["Die Roll " + DamageRoll1].ButtonTexture);
-                                    DamageRoll2 = player.playerDice.RollDice();
-                                    DiceRolls.Add(Buttons["Die Roll " + DamageRoll2].ButtonTexture);
-                                    DamageRoll3 = player.playerDice.RollDice();
-                                    DiceRolls.Add(Buttons["Die Roll " + DamageRoll3].ButtonTexture);
-                                    DamageRoll4 = player.playerDice.RollDice();
-                                    DiceRolls.Add(Buttons["Die Roll " + DamageRoll4].ButtonTexture);
-                                    enemyTurnState = EnemyTurnState.DAMAGE_ROLL_MAXIMIZE;
-
-                                    break;
-                                    
-                                default:
-                                    break;
-                            }
-
-                        }
-
-                        break;
-
-                    case EnemyTurnState.DAMAGE_ROLL_MAXIMIZE:
-
-
-
-
-
-                        break;
-                    case EnemyTurnState.REVIEW:
+                    case EnemyTurnState.COMBAT:
                         break;
                     case EnemyTurnState.COMPLETE:
                         break;

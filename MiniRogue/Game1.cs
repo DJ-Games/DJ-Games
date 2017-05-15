@@ -107,7 +107,8 @@ namespace MiniRogue
         Texture2D acceptButton;
         Texture2D useSpellButton;
         Texture2D spend2HPButton;
-        Texture2D spend1XPButton; 
+        Texture2D spend1XPButton;
+        Texture2D combatButton;
         SpriteFont font;
         SpriteFont dungeonFont;
         Vector2 position;
@@ -176,7 +177,6 @@ namespace MiniRogue
             // TODD: use this.Content to load your game content here
 
             //Load Content
-
             bossMonsterCard = Content.Load<Texture2D>("Boss_Monster");
             characterStatsCard = Content.Load<Texture2D>("Character_Stats");
             eventCard = Content.Load<Texture2D>("Event");
@@ -227,9 +227,15 @@ namespace MiniRogue
             useSpellButton = Content.Load<Texture2D>("UseSpellButton");
             spend2HPButton = Content.Load<Texture2D>("Spend2HPButton");
             spend1XPButton = Content.Load<Texture2D>("Spend1XPButton");
-
+            doneButton = Content.Load<Texture2D>("DoneButton");
+            checkBoxFull = Content.Load<Texture2D>("CheckFull");
+            checkBoxEmpty = Content.Load<Texture2D>("CheckEmpty");
+            checkBoxGray = Content.Load<Texture2D>("CheckGrayed");
+            combatButton = Content.Load<Texture2D>("CombatButton");
             font = Content.Load<SpriteFont>("Font");
             dungeonFont = Content.Load<SpriteFont>("Dungeon");
+
+
             position = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
                 graphics.GraphicsDevice.Viewport.Height / 2);
             playerDice = new Dice();
@@ -237,10 +243,7 @@ namespace MiniRogue
             buttonDictionay = new Dictionary<string, Button>();
             gamestate = Gamestate.TITILESCREEN;
             currentTurnState = CurrentTurnState.PRETURN1;
-            doneButton = Content.Load<Texture2D>("DoneButton");
-            checkBoxFull = Content.Load<Texture2D>("CheckFull");
-            checkBoxEmpty = Content.Load<Texture2D>("CheckEmpty");
-            checkBoxGray = Content.Load<Texture2D>("CheckGrayed");
+
 
             //----------------------- FOR TESTING COMBAT --------------------------
 
@@ -269,12 +272,9 @@ namespace MiniRogue
             checkBoxes.Add("Check Box 3", new CheckBox(checkBoxFull, checkBoxEmpty, checkBoxGray, 675, 380));
             checkBoxes.Add("Check Box 4", new CheckBox(checkBoxFull, checkBoxEmpty, checkBoxGray, 875, 380));
 
-            combat = new Combat(buttonDictionay, combatDice, checkBoxes);
-
             // --------------------------------------------------------------------
 
-            // Fill Button dictionary
-
+            // Fill Button Dictionary
             buttonDictionay.Add("Roll Die", new Button(rollDieBtnTex, "Roll Die"));
             buttonDictionay.Add("Found Loot", new Button(foundLootBtnTex, "Found Loot"));
             buttonDictionay.Add("Found Loot Highlight", new Button(foundLootBtnHLTex, "Found Loot Highlight"));
@@ -315,6 +315,7 @@ namespace MiniRogue
             buttonDictionay.Add("Use Spell Button", new Button(useSpellButton, "Use Spell Button"));
             buttonDictionay.Add("Spend 2 HP Button", new Button(spend2HPButton, "Spend 2 HP Button"));
             buttonDictionay.Add("Spend 1 XP Button", new Button(spend1XPButton, "Spend 1 XP Button"));
+            buttonDictionay.Add("Combat Button", new Button(combatButton, "Combat Button"));
 
 
         }
@@ -365,6 +366,7 @@ namespace MiniRogue
                     {
                         if (position.X > 0 && position.X < 100 && position.Y > 0 && position.Y < 100)
                         {
+                            combat = new Combat(buttonDictionay, combatDice, checkBoxes);
                             player = new Player(0, 10, 10, 10);
                             gamestate = Gamestate.COMBATTESTING;
                         }
@@ -395,7 +397,7 @@ namespace MiniRogue
                         {
                             player = new Player(1, 5, 5, 6);
                             playerHand = new Hand();
-                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, buttonDictionay);
+                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, buttonDictionay, combatDice, checkBoxes);
                             gamestate = Gamestate.DELVE;
                         }
                     }
@@ -406,7 +408,7 @@ namespace MiniRogue
                         {
                             player = new Player(0, 5, 3, 6);
                             playerHand = new Hand();
-                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, buttonDictionay);
+                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, buttonDictionay, combatDice, checkBoxes);
                             gamestate = Gamestate.DELVE;
                         }
                     }
@@ -417,7 +419,7 @@ namespace MiniRogue
                         {
                             player = new Player(0, 4, 2, 5);
                             playerHand = new Hand();
-                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, buttonDictionay);
+                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, buttonDictionay, combatDice, checkBoxes);
                             gamestate = Gamestate.DELVE;
                         }
                     }
@@ -428,7 +430,7 @@ namespace MiniRogue
                         {
                             player = new Player(0, 3, 1, 3);
                             playerHand = new Hand();
-                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, buttonDictionay);
+                            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, buttonDictionay, combatDice, checkBoxes);
                             gamestate = Gamestate.DELVE;
                         }
                     }
@@ -534,7 +536,11 @@ namespace MiniRogue
 
                 case Gamestate.COMBATTESTING:
 
-                    combat.HandleCombat(player, mouseState, prevMouseState, position.X, position.Y);
+                    if (combat.HandleCombat(player, mouseState, prevMouseState, position.X, position.Y))
+                    {
+                        gamestate = Gamestate.TITILESCREEN;
+                    }
+                    
 
 
                     break;
