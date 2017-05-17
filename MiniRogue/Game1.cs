@@ -771,6 +771,8 @@ namespace MiniRogue
 
                         case CurrentTurnState.PRETURN3:
 
+                            playerHand.Card4.Flipped = true;
+
                             spriteBatch.Draw(doorGrayed, new Vector2(75, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
                             spriteBatch.Draw(doorGrayed, new Vector2(300, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
                             spriteBatch.Draw(doorGrayed, new Vector2(300, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
@@ -779,15 +781,22 @@ namespace MiniRogue
                             spriteBatch.Draw(doorGrayed, new Vector2(750, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
                             spriteBatch.Draw(doorGrayed, new Vector2(975, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
 
+                            playerHand.DrawHand(spriteBatch);
+
                             break;
 
                         case CurrentTurnState.TURN3:
+
 
                             currentCard.DrawCard(spriteBatch, dungeonFont);
 
                             break;
 
                         case CurrentTurnState.PRETURN4:
+
+
+                            playerHand.Card5.Flipped = true;
+                            playerHand.Card6.Flipped = true;
 
                             spriteBatch.Draw(doorGrayed, new Vector2(75, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
                             spriteBatch.Draw(doorGrayed, new Vector2(300, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
@@ -797,9 +806,12 @@ namespace MiniRogue
                             spriteBatch.Draw(door, new Vector2(750, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
                             spriteBatch.Draw(doorGrayed, new Vector2(975, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
 
+                            playerHand.DrawHand(spriteBatch);
+
                             break;
 
                         case CurrentTurnState.TURN4:
+
 
                             currentCard.DrawCard(spriteBatch, dungeonFont);
 

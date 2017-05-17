@@ -54,6 +54,7 @@ namespace MiniRogue
             XPos = xPos;
             YPos = yPos;
 
+
             switch (trapTurnState)
             {
                 case TrapTurnState.ROLL_FOR_TRAP:
