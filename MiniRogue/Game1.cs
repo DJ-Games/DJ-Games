@@ -569,7 +569,14 @@ namespace MiniRogue
                         if (position.X > 600 && position.X < 848 && position.Y > 500 && position.Y < 572)
                         {
                             player.DungeonArea++;
-                            DrawNewHand();
+                            playerHand.ShuffleHand();
+                            playerHand.Card1.Flipped = false;
+                            playerHand.Card2.Flipped = false;
+                            playerHand.Card3.Flipped = false;
+                            playerHand.Card4.Flipped = false;
+                            playerHand.Card5.Flipped = false;
+                            playerHand.Card6.Flipped = false;
+                            //playerHand.Card7.Flipped = false;
                             gamestate = Gamestate.HACKANDSLASH;
                             currentTurnState = CurrentTurnState.PRETURN1;
                         }
@@ -905,11 +912,22 @@ namespace MiniRogue
 
         public void DrawNewHand()
         {
+
             playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, bossMonsterCard, buttonDictionay, combatDice, checkBoxes);
+
+
         } 
 
         public void PreparePhase()
         {
+            playerHand.ShuffleHand();
+            playerHand.Card1.Flipped = false;
+            playerHand.Card2.Flipped = false;
+            playerHand.Card3.Flipped = false;
+            playerHand.Card4.Flipped = false;
+            playerHand.Card5.Flipped = false;
+            playerHand.Card6.Flipped = false;
+            //playerHand.Card7.Flipped = false;
             currentTurnState = CurrentTurnState.PRETURN1;
             
         }
