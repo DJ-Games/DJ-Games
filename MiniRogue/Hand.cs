@@ -62,19 +62,6 @@ namespace MiniRogue
             ShuffleHand();
 
             PlayerHand.Add(new Boss("Boss", bossTex, buttons, combatDice, checkBoxes));
-        }
-
-
-        public void ShuffleHand()
-        {
-           
-            for (int i = 0; i < 20; i++)
-            {
-                int TempRNumber = rGen.Next(PlayerHand.Count - 1);
-                Card tempCard = playerHand[TempRNumber];
-                PlayerHand.RemoveAt(TempRNumber);
-                playerHand.Insert(rGen.Next(playerHand.Count - 1), tempCard);
-            }
 
             Card1 = playerHand[0];
             Card2 = playerHand[1];
@@ -82,6 +69,7 @@ namespace MiniRogue
             Card4 = playerHand[3];
             Card5 = playerHand[4];
             Card6 = playerHand[5];
+            Card7 = playerHand[6];
 
             Card1.LevelXpos = 75;
             Card1.LevelYPos = 260;
@@ -95,7 +83,22 @@ namespace MiniRogue
             Card5.LevelYPos = 100;
             Card6.LevelXpos = 750;
             Card6.LevelYPos = 400;
-            //Card7 = playerHand[6];
+            Card7.LevelXpos = 975;
+            Card7.LevelYPos = 260;
+        }
+
+
+        public void ShuffleHand()
+        {
+           
+            for (int i = 0; i < 20; i++)
+            {
+                int TempRNumber = rGen.Next(PlayerHand.Count - 1);
+                Card tempCard = playerHand[TempRNumber];
+                PlayerHand.RemoveAt(TempRNumber);
+                playerHand.Insert(rGen.Next(playerHand.Count - 1), tempCard);
+            }
+            
         }
     
 

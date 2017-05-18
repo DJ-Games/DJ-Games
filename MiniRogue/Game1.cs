@@ -539,7 +539,11 @@ namespace MiniRogue
                                 {
                                     currentTurnState = CurrentTurnState.PREBOSS;
                                 }
-                                gamestate = Gamestate.DELVING;
+                                else
+                                {
+                                    gamestate = Gamestate.DELVING;
+                                }
+                                
                             }
 
                             break;
@@ -569,7 +573,9 @@ namespace MiniRogue
                         if (position.X > 600 && position.X < 848 && position.Y > 500 && position.Y < 572)
                         {
                             player.DungeonArea++;
-                            playerHand.ShuffleHand();
+                            playerHand = new Hand();
+                            DrawNewHand();
+                            //playerHand.ShuffleHand();
                             playerHand.Card1.Flipped = false;
                             playerHand.Card2.Flipped = false;
                             playerHand.Card3.Flipped = false;
@@ -826,6 +832,17 @@ namespace MiniRogue
 
                         case CurrentTurnState.PREBOSS:
 
+                            playerHand.Card7.Flipped = true;
+
+                            spriteBatch.Draw(doorGrayed, new Vector2(75, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(300, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(300, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(525, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(door, new Vector2(750, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(door, new Vector2(750, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(doorGrayed, new Vector2(975, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
+
+                            playerHand.DrawHand(spriteBatch);
 
                             break;
 
