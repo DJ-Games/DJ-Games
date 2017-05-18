@@ -49,6 +49,8 @@ namespace MiniRogue
 
         public int ExpReward { get; set; }
 
+        public int GoldReward { get; set; }
+
         public bool InsufficientHealth { get; set; }
 
         public bool InsufficientXP { get; set; }
@@ -72,6 +74,9 @@ namespace MiniRogue
                 }
             }
         }
+
+        public bool BossFight { get; set; }
+
 
         CombatState combatState = new CombatState();
 
@@ -99,11 +104,17 @@ namespace MiniRogue
             ActiveDie = player.Rank;
             SetDieActivations();
             PreviousMouseState = CurrentMouseState;
-            SetDamageAndEXP(player);
+            SetMonsterStats(player);
 
             switch (combatState)
             {
                 case CombatState.ENEMYHEALTHROLL:
+
+                    if (BossFight)
+                    {
+                        combatState = CombatState.ROLLDIE;
+                        return false;
+                    }
 
                     HandleButtons(player);
                     return false;
@@ -613,42 +624,83 @@ namespace MiniRogue
 
         }
 
-        public void SetDamageAndEXP(Player player)
+        public void SetMonsterStats(Player player)
         {
             switch (player.DungeonLevel)
             {
                 case 1:
 
+                    if (BossFight)
+                    {
+                        Damage = 3;
+                        ExpReward = 2;
+                        GoldReward = 2;
+                        MonsterHealth = 10;
+                    }
+
                     Damage = 2;
                     ExpReward = 1;
+                    GoldReward = 0;
 
                     break;
 
                 case 2:
 
+                    if (BossFight)
+                    {
+                        Damage = 5;
+                        ExpReward = 2;
+                        GoldReward = 2;
+                        monsterHealth = 15;
+                    }
                     Damage = 4;
                     ExpReward = 2;
+                    GoldReward = 0;
 
                     break;
 
                 case 3:
 
+                    if (BossFight)
+                    {
+                        Damage = 7;
+                        ExpReward = 2;
+                        GoldReward = 3;
+                        monsterHealth = 20;
+                    }
                     Damage = 6;
                     ExpReward = 2;
+                    GoldReward = 0;
 
                     break;
 
                 case 4:
 
+                    if (BossFight)
+                    {
+                        Damage = 9;
+                        ExpReward = 2;
+                        GoldReward = 3;
+                        monsterHealth = 25;
+                    }
                     Damage = 8;
                     ExpReward = 3;
+                    GoldReward = 0;
 
                     break;
 
                 case 5:
 
+                    if (BossFight)
+                    {
+                        Damage = 12;
+                        ExpReward = 0;
+                        GoldReward = 0;
+                        monsterHealth = 30;        
+                    }
                     Damage = 10;
                     ExpReward = 3;
+                    GoldReward = 0;
 
                     break;
 
