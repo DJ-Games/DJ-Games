@@ -573,6 +573,7 @@ namespace MiniRogue
                         if (position.X > 600 && position.X < 848 && position.Y > 500 && position.Y < 572)
                         {
                             player.DungeonArea++;
+                            player.HasFoughtMonster = false;
                             playerHand = new Hand();
                             DrawNewHand();
                             //playerHand.ShuffleHand();

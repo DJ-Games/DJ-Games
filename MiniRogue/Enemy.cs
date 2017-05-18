@@ -84,7 +84,7 @@ namespace MiniRogue
 
 
                 case EnemyTurnState.COMPLETE:
-
+                    player.HasFoughtMonster = true;
                     return true;
 
                 default:

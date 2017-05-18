@@ -20,7 +20,8 @@ namespace MiniRogue
         DEALDAMAGE,
         USESPELL,
         DAMAGEPLAYER,
-        GAMEOVER,
+        RESULTS,
+        COMPLETE,
     }
 
     class Combat
@@ -98,7 +99,7 @@ namespace MiniRogue
             ActiveDie = player.Rank;
             SetDieActivations();
             PreviousMouseState = CurrentMouseState;
-            SetMonsterDamage(player);
+            SetDamageAndEXP(player);
 
             switch (combatState)
             {
@@ -126,9 +127,10 @@ namespace MiniRogue
                     MonsterHealth -= (CombatDice["Combat Die 1"].Roll + CombatDice["Combat Die 2"].Roll + CombatDice["Combat Die 3"].Roll + CombatDice["Combat Die 4"].Roll);
                     if (MonsterHealth <= 0)
                     {
-                        return true;
+                        player.Experience += ExpReward;
+                        combatState = CombatState.RESULTS;
                     }
-                    combatState = CombatState.USESPELL;
+                    else { combatState = CombatState.USESPELL; } 
                     return false;
 
                 case CombatState.USESPELL:
@@ -138,7 +140,7 @@ namespace MiniRogue
 
                 case CombatState.DAMAGEPLAYER:
 
-                    player.Health -= Damage;
+                    player.Health -= (Damage - player.Armor);
 
                     if (player.Health > 0)
                     {
@@ -151,13 +153,21 @@ namespace MiniRogue
 
                     else
                     {
-                        combatState = CombatState.GAMEOVER;
+                        combatState = CombatState.RESULTS;
                     }
                     return false;
 
-                case CombatState.GAMEOVER:
+                case CombatState.RESULTS:
+
+                    HandleButtons(player);
+
+                    return false;
+
+
+                case CombatState.COMPLETE:
+
                     return true;
-                
+
                 default:
 
                     return false;
@@ -247,6 +257,13 @@ namespace MiniRogue
 
                     break;
 
+
+                case CombatState.RESULTS:
+
+                    sBatch.DrawString(dungeonFont, "You killed the monster", new Vector2(650, 250), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    sBatch.DrawString(dungeonFont, "You gained " + ExpReward + " EXP!", new Vector2(650, 300), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    sBatch.Draw(CombatButtons["Accept Button"].ButtonTexture, new Vector2(300, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    break;
 
                 default:
                     break;
@@ -460,6 +477,15 @@ namespace MiniRogue
 
                         break;
 
+                    case CombatState.RESULTS:
+
+                        if (XPos > 300 && XPos < 548 && YPos > 600 && YPos < 672)
+                        {
+                            combatState = CombatState.COMPLETE;
+                        }
+                            break;
+
+
                     default:
                         break;
                 }
@@ -587,37 +613,42 @@ namespace MiniRogue
 
         }
 
-        public void SetMonsterDamage(Player player)
+        public void SetDamageAndEXP(Player player)
         {
             switch (player.DungeonLevel)
             {
                 case 1:
 
                     Damage = 2;
+                    ExpReward = 1;
 
                     break;
 
                 case 2:
 
                     Damage = 4;
+                    ExpReward = 2;
 
                     break;
 
                 case 3:
 
                     Damage = 6;
+                    ExpReward = 2;
 
                     break;
 
                 case 4:
 
                     Damage = 8;
+                    ExpReward = 3;
 
                     break;
 
                 case 5:
 
                     Damage = 10;
+                    ExpReward = 3;
 
                     break;
 
