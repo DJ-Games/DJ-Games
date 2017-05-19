@@ -39,6 +39,12 @@ namespace MiniRogue
 
         public override bool HandleCard(Player player, MouseState current, MouseState previous, float xPos, float yPos)
         {
+
+            XPos = xPos;
+            YPos = yPos;
+            PreviousMouseState = CurrentMouseState;
+
+
             switch (bossTurnState)
             {
                 case BossTurnState.STARTCOMBAT:
@@ -48,7 +54,7 @@ namespace MiniRogue
 
                 case BossTurnState.COMBAT:
 
-                    if (CurrentCombat.HandleCombat(player, CurrentMouseState, PreviousMouseState, XPos, yPos, false))
+                    if (CurrentCombat.HandleCombat(player, CurrentMouseState, PreviousMouseState, XPos, yPos, true))
                     {
                         bossTurnState = BossTurnState.COMPLETE;
                     }
@@ -67,6 +73,9 @@ namespace MiniRogue
 
         public override void DrawCard(SpriteBatch sBatch, SpriteFont dungeonFont)
         {
+
+            sBatch.Draw(CardTexture, new Vector2(100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+
             switch (bossTurnState)
             {
                 case BossTurnState.STARTCOMBAT:
@@ -91,7 +100,7 @@ namespace MiniRogue
             }
         }
 
-        public void HandleButtons(Player player)
+        public new void HandleButtons(Player player)
         {
             if (SingleMouseClick())
             {

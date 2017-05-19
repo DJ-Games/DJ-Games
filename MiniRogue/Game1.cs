@@ -370,6 +370,7 @@ namespace MiniRogue
                         {
                             combat = new Combat(buttonDictionay, combatDice, checkBoxes);
                             player = new Player(0, 10, 10, 10);
+                            player.Rank = 2;
                             gamestate = Gamestate.COMBATTESTING;
                         }
                     }
