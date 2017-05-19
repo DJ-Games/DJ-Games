@@ -550,11 +550,24 @@ namespace MiniRogue
 
                         case CurrentTurnState.PREBOSS:
 
+                            if (SingleMouseClick())
+                            {
+                                if (position.X > 925 && position.X < 1120 && position.Y > 260 && position.Y < 535)
+                                {
+                                    currentCard = playerHand.Card7;
+                                    currentTurnState = CurrentTurnState.BOSS;
+                                }
+                            }
+
                             break;
 
 
                         case CurrentTurnState.BOSS:
 
+                            if (currentCard.HandleCard(player, mouseState, prevMouseState, position.X, position.Y))
+                            {
+                                gamestate = Gamestate.DELVING;
+                            }
 
                             break;
 
@@ -604,7 +617,7 @@ namespace MiniRogue
 
                 case Gamestate.COMBATTESTING:
 
-                    if (combat.HandleCombat(player, mouseState, prevMouseState, position.X, position.Y))
+                    if (combat.HandleCombat(player, mouseState, prevMouseState, position.X, position.Y, true))
                     {
                         gamestate = Gamestate.TITILESCREEN;
                     }
@@ -849,6 +862,7 @@ namespace MiniRogue
 
                         case CurrentTurnState.BOSS:
 
+                            currentCard.DrawCard(spriteBatch, dungeonFont);
 
                             break;
 

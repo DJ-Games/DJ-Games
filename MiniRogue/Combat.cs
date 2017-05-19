@@ -97,19 +97,19 @@ namespace MiniRogue
 
         //---------------------- METHODS ------------------------
 
-        public bool HandleCombat(Player player, MouseState current, MouseState previous, float xPos, float yPos)
+        public bool HandleCombat(Player player, MouseState current, MouseState previous, float xPos, float yPos, bool bossFight)
         {
             XPos = xPos;
             YPos = yPos;
             ActiveDie = player.Rank;
             SetDieActivations();
             PreviousMouseState = CurrentMouseState;
-            SetMonsterStats(player);
+            BossFight = bossFight;
 
             switch (combatState)
             {
                 case CombatState.ENEMYHEALTHROLL:
-
+                    SetMonsterStats(player);
                     if (BossFight)
                     {
                         combatState = CombatState.ROLLDIE;
@@ -176,7 +176,6 @@ namespace MiniRogue
 
 
                 case CombatState.COMPLETE:
-
                     return true;
 
                 default:
@@ -637,10 +636,12 @@ namespace MiniRogue
                         GoldReward = 2;
                         MonsterHealth = 10;
                     }
-
-                    Damage = 2;
-                    ExpReward = 1;
-                    GoldReward = 0;
+                    else
+                    {
+                        Damage = 2;
+                        ExpReward = 1;
+                        GoldReward = 0;
+                    }
 
                     break;
 
@@ -653,9 +654,13 @@ namespace MiniRogue
                         GoldReward = 2;
                         monsterHealth = 15;
                     }
-                    Damage = 4;
-                    ExpReward = 2;
-                    GoldReward = 0;
+                    else
+                    {
+                        Damage = 4;
+                        ExpReward = 2;
+                        GoldReward = 0;
+                    }
+
 
                     break;
 
@@ -668,9 +673,13 @@ namespace MiniRogue
                         GoldReward = 3;
                         monsterHealth = 20;
                     }
-                    Damage = 6;
-                    ExpReward = 2;
-                    GoldReward = 0;
+                    else
+                    {
+                        Damage = 6;
+                        ExpReward = 2;
+                        GoldReward = 0;
+                    }
+
 
                     break;
 
@@ -683,9 +692,12 @@ namespace MiniRogue
                         GoldReward = 3;
                         monsterHealth = 25;
                     }
-                    Damage = 8;
-                    ExpReward = 3;
-                    GoldReward = 0;
+                    else
+                    {
+                        Damage = 8;
+                        ExpReward = 3;
+                        GoldReward = 0;
+                    }
 
                     break;
 
@@ -698,9 +710,13 @@ namespace MiniRogue
                         GoldReward = 0;
                         monsterHealth = 30;        
                     }
-                    Damage = 10;
-                    ExpReward = 3;
-                    GoldReward = 0;
+                    else
+                    {
+                        Damage = 10;
+                        ExpReward = 3;
+                        GoldReward = 0;
+                    }
+
 
                     break;
 

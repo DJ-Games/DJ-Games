@@ -42,12 +42,16 @@ namespace MiniRogue
             switch (bossTurnState)
             {
                 case BossTurnState.STARTCOMBAT:
-
+                    HandleButtons(player);
 
                     return false;
 
                 case BossTurnState.COMBAT:
 
+                    if (CurrentCombat.HandleCombat(player, CurrentMouseState, PreviousMouseState, XPos, yPos, false))
+                    {
+                        bossTurnState = BossTurnState.COMPLETE;
+                    }
 
                     return false;
                     
@@ -66,11 +70,22 @@ namespace MiniRogue
             switch (bossTurnState)
             {
                 case BossTurnState.STARTCOMBAT:
+
+                    sBatch.Draw(Buttons["Combat Button"].ButtonTexture, new Vector2(700, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+
                     break;
+
                 case BossTurnState.COMBAT:
+
+                    CurrentCombat.DrawCombat(sBatch, dungeonFont);
+
                     break;
+
                 case BossTurnState.COMPLETE:
+
+
                     break;
+
                 default:
                     break;
             }
@@ -78,7 +93,30 @@ namespace MiniRogue
 
         public void HandleButtons(Player player)
         {
+            if (SingleMouseClick())
+            {
+                switch (bossTurnState)
+                {
+                    case BossTurnState.STARTCOMBAT:
 
+
+                        if (XPos > 700 && XPos < 948 && YPos > 500 && YPos < 572)
+                        {
+
+                            CurrentCombat = new Combat(Buttons, CombatDice, CheckBoxes);
+                            bossTurnState = BossTurnState.COMBAT;
+
+                        }
+
+                        break;
+                    case BossTurnState.COMBAT:
+                        break;
+                    case BossTurnState.COMPLETE:
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }
