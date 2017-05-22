@@ -94,12 +94,13 @@ namespace AnimationTesting
 
             if (frontFacing)
             {
-                scale.X += .01f;
+                scale.X += .02f;
             }
             if (!frontFacing)
             {
-                scale.X -= .01f;
+                scale.X -= .02f;
             }
+
             if (scale.X > 1)
             {
                 frontFacing = false;
