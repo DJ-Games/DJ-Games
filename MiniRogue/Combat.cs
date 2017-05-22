@@ -151,6 +151,11 @@ namespace MiniRogue
 
                 case CombatState.USESPELL:
 
+
+
+
+
+
                     combatState = CombatState.DAMAGEPLAYER;
                     return false;
 

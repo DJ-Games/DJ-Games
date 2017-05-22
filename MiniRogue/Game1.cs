@@ -41,6 +41,7 @@ namespace MiniRogue
 
     public class Game1 : Game
     {
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -134,7 +135,18 @@ namespace MiniRogue
 
         // --------------------------------------------------------------------
 
+        // ------------------- ANIMATION TESTING ------------------------------
 
+        //Texture2D titleAnim;
+
+        //float time;
+        //float frameTime = 1f;
+        //int frameIndex = 0;
+        //const int TOTAL_FRAMES = 120;
+        //int frameHeight;
+        //int frameWidth;
+
+        // --------------------------------------------------------------------
 
         public Game1()
         {
@@ -236,6 +248,11 @@ namespace MiniRogue
             font = Content.Load<SpriteFont>("Font");
             dungeonFont = Content.Load<SpriteFont>("Dungeon");
 
+            // ------------------- ANIMATION TESTING ------------------------------
+
+            //titleAnim = Content.Load<Texture2D>("TitleAnim");
+
+            // --------------------------------------------------------------------
 
             position = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
                 graphics.GraphicsDevice.Viewport.Height / 2);
@@ -673,6 +690,29 @@ namespace MiniRogue
             switch (gamestate)
             {
                 case Gamestate.TITILESCREEN:
+
+                    // ------------------- ANIMATION TESTING ------------------------------
+
+                    //frameHeight = 1280;
+                    //frameHeight = 720;
+
+                    //time += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                    //while (time > frameTime)
+                    //{
+                    //    frameIndex++;
+                    //    time = 0f;
+                    //}
+
+                    //if (frameIndex > TOTAL_FRAMES) frameIndex = 0;
+                    //Rectangle source = new Rectangle(frameIndex * frameWidth, 0, frameWidth, frameHeight);
+                    //Vector2 position = new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
+                    //Vector2 origin = new Vector2(frameWidth / 2, frameHeight / 2);
+
+                    //spriteBatch.Draw(titleAnim, position, source, Color.White, 0.0f, origin, 1.0f, SpriteEffects.None, 0.0f);
+
+
+                    // --------------------------------------------------------------------
+
 
                     spriteBatch.Draw(titleScreen, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);                 
 
