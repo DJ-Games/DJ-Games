@@ -587,6 +587,23 @@ namespace MiniRogue
                         if (position.X > 600 && position.X < 848 && position.Y > 500 && position.Y < 572)
                         {
                             player.DungeonArea++;
+
+                            if (player.DungeonArea == 3)
+                            {
+                                player.DungeonLevel = 2;
+                            }
+                            if (player.DungeonArea == 5)
+                            {
+                                player.DungeonLevel = 3;
+                            }
+                            if (player.DungeonArea == 8)
+                            {
+                                player.DungeonLevel = 4;
+                            }
+                            if (player.DungeonArea == 11)
+                            {
+                                player.DungeonLevel = 5;
+                            }
                             player.HasFoughtMonster = false;
                             playerHand = new Hand();
                             DrawNewHand();

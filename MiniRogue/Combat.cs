@@ -101,15 +101,20 @@ namespace MiniRogue
         {
             XPos = xPos;
             YPos = yPos;
-            ActiveDie = player.Rank;
-            SetDieActivations();
             PreviousMouseState = CurrentMouseState;
-            BossFight = bossFight;
+
 
             switch (combatState)
             {
                 case CombatState.ENEMYHEALTHROLL:
+
+
+                    SetDieActivations();
+                    ActiveDie = player.Rank;
+                    BossFight = bossFight;
                     SetMonsterStats(player);
+
+
                     if (BossFight)
                     {
                         combatState = CombatState.ROLLDIE;
@@ -155,10 +160,10 @@ namespace MiniRogue
 
                     if (player.Health > 0)
                     {
-                        CheckBoxes["Check Box 1"].Checked = true;
-                        CheckBoxes["Check Box 2"].Checked = true;
-                        CheckBoxes["Check Box 3"].Checked = true;
-                        CheckBoxes["Check Box 4"].Checked = true;
+                        //CheckBoxes["Check Box 1"].Checked = true;
+                        //CheckBoxes["Check Box 2"].Checked = true;
+                        //CheckBoxes["Check Box 3"].Checked = true;
+                        //CheckBoxes["Check Box 4"].Checked = true;
                         combatState = CombatState.ROLLDIE;
                     }
 
@@ -529,22 +534,26 @@ namespace MiniRogue
             {
                 CombatDice["Combat Die 1"].Active = true;
                 CheckBoxes["Check Box 1"].Active = true;
+                CheckBoxes["Check Box 1"].Checked = true;
             }
 
             if (ActiveDie > 1)
             {
                 CombatDice["Combat Die 2"].Active = true;
                 CheckBoxes["Check Box 2"].Active = true;
+                CheckBoxes["Check Box 2"].Checked = true;
             }
             if (ActiveDie > 2)
             {
                 CombatDice["Combat Die 3"].Active = true;
                 CheckBoxes["Check Box 3"].Active = true;
+                CheckBoxes["Check Box 3"].Checked = true;
             }
             if (ActiveDie > 3)
             {
                 CombatDice["Combat Die 4"].Active = true;
                 CheckBoxes["Check Box 4"].Active = true;
+                CheckBoxes["Check Box 4"].Checked = true;
             }
         }
 

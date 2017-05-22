@@ -49,7 +49,7 @@ namespace MiniRogue
         {
             playerHand.Add(new Enemy("Enemy", enemyTex, buttons, combatDice, checkBoxes));
 
-            playerHand.Add(new EventCard("EventCard", eventTex, buttons));
+            playerHand.Add(new EventCard("EventCard", eventTex, buttons, combatDice, checkBoxes));
 
             playerHand.Add(new Merchant("Merchant", merchantTex, buttons));
 

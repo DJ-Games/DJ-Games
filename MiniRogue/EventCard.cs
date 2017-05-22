@@ -18,6 +18,7 @@ namespace MiniRogue
         ADJUSTOPTION,
         HANDLE_EVENT,
         FIGHT_MONSTER,
+        COMBAT,
         COMPLETE,
     }
 
@@ -28,6 +29,11 @@ namespace MiniRogue
 
         public int Option { get; set; }
 
+        public Combat CurrentCombat { get; set; }
+
+        public Dictionary<string, CombatDice> CombatDice { get; set; }
+
+        public Dictionary<string, CheckBox> CheckBoxes { get; set; }
 
         EventCardTurnState eventCardTurnState;
 
@@ -38,6 +44,15 @@ namespace MiniRogue
         {
             eventCardTurnState = new EventCardTurnState();
             CurrentButtons = new List<Button>();
+        }
+
+        public EventCard(string name, Texture2D cardTexture, Dictionary<string, Button> buttons, Dictionary<string, CombatDice> combatDice, Dictionary<string, CheckBox> checkBoxes) : base(name, cardTexture, buttons)
+        {
+            eventCardTurnState = new EventCardTurnState();
+            CurrentButtons = new List<Button>();
+            Buttons = buttons;
+            CombatDice = combatDice;
+            CheckBoxes = checkBoxes;
         }
 
         //---------------------- METHODS -----------------------------
@@ -104,8 +119,21 @@ namespace MiniRogue
 
                 case EventCardTurnState.FIGHT_MONSTER:
 
+                    HandleButtons(player);
+
 
                     break;
+
+                case EventCardTurnState.COMBAT:
+
+                    if (CurrentCombat.HandleCombat(player, CurrentMouseState, PreviousMouseState, XPos, yPos, false))
+                    {
+                        eventCardTurnState = EventCardTurnState.COMPLETE;
+                    }
+
+                    break;
+
+
 
                 case EventCardTurnState.COMPLETE:
 
@@ -122,18 +150,18 @@ namespace MiniRogue
 
         }
 
-        public override void DrawCard(SpriteBatch sBatch, SpriteFont font)
+        public override void DrawCard(SpriteBatch sBatch, SpriteFont dungeonFont)
         {
             sBatch.Draw(CardTexture, new Vector2(100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
             switch (eventCardTurnState)
             {
                 case EventCardTurnState.INITIAL_ROLL:
-                    sBatch.DrawString(font, "Roll for event.", new Vector2(500, 200), Color.White);
+                    sBatch.DrawString(dungeonFont, "Roll for event.", new Vector2(500, 200), Color.White);
                     sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 575), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
 
                     break;
                 case EventCardTurnState.SKILL_CHECK:
-                    sBatch.DrawString(font, "Roll for skill check.", new Vector2(500, 200), Color.White);
+                    sBatch.DrawString(dungeonFont, "Roll for skill check.", new Vector2(500, 200), Color.White);
                     sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 575), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
 
                     int counter = 550;
@@ -153,7 +181,7 @@ namespace MiniRogue
                         sBatch.Draw(item.ButtonTexture, new Vector2(counter2, 475), new Rectangle?(), Color.White, 0f, new Vector2(), .50f, SpriteEffects.None, 1);
                         counter2 += 80;
                     }
-                    sBatch.DrawString(font, "Adjustment", new Vector2(500, 200), Color.White);
+                    sBatch.DrawString(dungeonFont, "Adjustment", new Vector2(500, 200), Color.White);
 
 
                     break;
@@ -166,12 +194,21 @@ namespace MiniRogue
                         sBatch.Draw(item.ButtonTexture, new Vector2(counter3, 475), new Rectangle?(), Color.White, 0f, new Vector2(), .50f, SpriteEffects.None, 1);
                         counter3 += 80;
                     }
-                    sBatch.DrawString(font, "Failed skill check", new Vector2(500, 200), Color.White);
+                    sBatch.DrawString(dungeonFont, "Failed skill check", new Vector2(500, 200), Color.White);
 
 
                     break;
 
                 case EventCardTurnState.FIGHT_MONSTER:
+
+
+                    sBatch.Draw(Buttons["Combat Button"].ButtonTexture, new Vector2(700, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+
+                    break;
+
+                case EventCardTurnState.COMBAT:
+
+                    CurrentCombat.DrawCombat(sBatch, dungeonFont);
 
                     break;
 
@@ -340,7 +377,6 @@ namespace MiniRogue
             }
         }
 
-        // NEED TO ADD CODE FOR FIGHTING MONSTER
         public void HandleButtons(Player player)
         {
             switch (eventCardTurnState)
@@ -356,19 +392,19 @@ namespace MiniRogue
 
                                 if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
                                 {
+                                    player.Food++;
                                     eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 if (XPos > 630 && XPos < 710 && YPos > 475 && YPos < 555)
                                 {
-                                    player.Food++;
+                                    player.Health += 2;
                                     eventCardTurnState = EventCardTurnState.COMPLETE;
                                 }
 
                                 if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
                                 {
-                                    player.Health += 2;
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    eventCardTurnState = EventCardTurnState.FIGHT_MONSTER;
                                 }
 
                                 break;
@@ -455,7 +491,7 @@ namespace MiniRogue
 
                                 if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
                                 {
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    eventCardTurnState = EventCardTurnState.FIGHT_MONSTER;
                                 }
 
                                 break;
@@ -470,7 +506,7 @@ namespace MiniRogue
 
                                 if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
                                 {
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    eventCardTurnState = EventCardTurnState.FIGHT_MONSTER;
                                 }
 
                                 if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
@@ -545,18 +581,31 @@ namespace MiniRogue
 
                                 if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
                                 {
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    eventCardTurnState = EventCardTurnState.FIGHT_MONSTER;
                                 }
 
                                 break;
 
                             default:
                                 break;
-                        }
-
-
 
                         }
+
+
+
+                    }
+
+                break;
+
+                case EventCardTurnState.FIGHT_MONSTER:
+
+                    if (XPos > 700 && XPos < 948 && YPos > 500 && YPos < 572)
+                    {
+
+                        CurrentCombat = new Combat(Buttons, CombatDice, CheckBoxes);
+                        eventCardTurnState = EventCardTurnState.COMBAT;
+
+                    }
 
                     break;
 
