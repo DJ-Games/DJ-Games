@@ -9,27 +9,78 @@ namespace MiniRogue
     class Player
     {
 
-        public int Armor { get; set; }
+        private int armor;
 
-        //private int health;
+        public int Armor
+        {
+            get { return armor; }
+            set
+            {
+                if ((armor = value) < 0)
+                {
+                    armor = 0;
+                }
+                if ((armor = value) > 5)
+                {
+                    armor = 5;
+                }
+            }
+        }
 
-        //public int Health
-        //{
-        //    get { return health; }
-        //    set
-        //    {
-        //        if (health - value < 0)
-        //        {
-        //            health = 0;
-        //        }
-        //    }
-        //}
+        private int health;
 
-        public int Health { get; set; }
+        public int Health
+        {
+            get { return health; }
+            set
+            {
+                if ((health = value) < 0)
+                {
+                    health = 0;
+                }
+                if ((health = value) > 20)
+                {
+                    health = 20;
+                }
+            }
+        }
 
-        public int Gold { get; set; }
+        private int gold;
 
-        public int Food { get; set; }
+        public int Gold
+        {
+            get { return gold; }
+            set
+            {
+                if ((gold = value) < 0)
+                {
+                    gold = 0;
+                }
+                if((gold = value) > 20)
+                {
+                    gold = 20;
+                }
+            }
+        }
+
+        private int food;
+
+        public int Food
+        {
+            get { return food; }
+            set
+            {
+                if ((food = value) < 0)
+                {
+                    food = 0;
+                }
+                if ((food = value) > 6)
+                {
+                    food = 6;
+                }
+            }
+        }
+
 
         private int experience;
 
@@ -38,6 +89,14 @@ namespace MiniRogue
             get { return experience; }
             set
             {
+                if ((experience = value) < 0)
+                {
+                    experience = 0;
+                }
+                if ((experience = value) > 18)
+                {
+                    experience = 18;
+                }
                 if ((experience = value) < 6)
                 {
                     Rank = 1;

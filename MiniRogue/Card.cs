@@ -57,10 +57,6 @@ namespace MiniRogue
 
         public float LevelYPos { get; set; }
 
-        public KeyboardState CurrentKbState { get; set; }
-
-        public KeyboardState PreviousKbState { get; set; }
-
         public MouseState CurrentMouseState { get; set; }
 
         public MouseState PreviousMouseState { get; set; }
@@ -105,19 +101,9 @@ namespace MiniRogue
         public abstract bool HandleCard(Player player, MouseState current, MouseState previous, float xPos, float yPos);
 
 
-        public bool SingleKeyPress(Keys key)
-        {
-            CurrentKbState = Keyboard.GetState();
-            if (CurrentKbState.IsKeyDown(key) && PreviousKbState.IsKeyUp(key))
-            {
-                return true;
-            }
-            return false;
-        }
-
         public bool SingleMouseClick()
         {
-            CurrentMouseState = Mouse.GetState();
+            //CurrentMouseState = Mouse.GetState();
             if (CurrentMouseState.LeftButton == ButtonState.Pressed && PreviousMouseState.LeftButton == ButtonState.Released)
             {
                 return true;

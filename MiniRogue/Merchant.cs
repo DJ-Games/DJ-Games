@@ -60,8 +60,8 @@ namespace MiniRogue
         {
             XPos = xPos;
             YPos = yPos;
-            PreviousMouseState = CurrentMouseState;
-
+            CurrentMouseState = current;
+            PreviousMouseState = previous;
 
             switch (merchantTurnState)
             {

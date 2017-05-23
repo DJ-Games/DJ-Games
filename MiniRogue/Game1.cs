@@ -59,8 +59,6 @@ namespace MiniRogue
 
         Gamestate gamestate;
         CurrentTurnState currentTurnState;
-        KeyboardState kbState;
-        KeyboardState prevKbState;
         MouseState mouseState;
         MouseState prevMouseState;
 
@@ -658,14 +656,19 @@ namespace MiniRogue
                             player.HasFoughtMonster = false;
                             playerHand = new Hand();
                             DrawNewHand();
-                            //playerHand.ShuffleHand();
-                            playerHand.Card1.Flipped = false;
-                            playerHand.Card2.Flipped = false;
-                            playerHand.Card3.Flipped = false;
-                            playerHand.Card4.Flipped = false;
-                            playerHand.Card5.Flipped = false;
-                            playerHand.Card6.Flipped = false;
-                            //playerHand.Card7.Flipped = false;
+                            player.Food--;
+
+                            if (player.Food == 0)
+                            {
+                                player.Health -= 2;
+                            }
+
+                            //playerHand.Card1.Flipped = false;
+                            //playerHand.Card2.Flipped = false;
+                            //playerHand.Card3.Flipped = false;
+                            //playerHand.Card4.Flipped = false;
+                            //playerHand.Card5.Flipped = false;
+                            //playerHand.Card6.Flipped = false;
                             gamestate = Gamestate.HACKANDSLASH;
                             currentTurnState = CurrentTurnState.PRETURN1;
                         }
@@ -702,7 +705,6 @@ namespace MiniRogue
                     break;
             }
 
-            prevKbState = kbState;
             prevMouseState = mouseState;
 
             base.Update(gameTime);
@@ -944,16 +946,6 @@ namespace MiniRogue
             base.Draw(gameTime);
         }
 
-
-        private bool SingleKeyPress(Keys key)
-        {
-            kbState = Keyboard.GetState();
-            if (kbState.IsKeyDown(key) && prevKbState.IsKeyUp(key))
-            {
-                return true;
-            }
-            return false;
-        }
 
         private bool SingleMouseClick()
         {
