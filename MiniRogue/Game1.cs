@@ -439,6 +439,12 @@ namespace MiniRogue
                     {
                         case CurrentTurnState.PRETURN1:
 
+                            //TESTING CARD FLIP
+
+                            FlipCard(playerHand.Card1);
+
+                            //-----------------
+
                             if (SingleMouseClick())
                             {
                                 if (position.X > 75 && position.X < 270 && position.Y > 260 && position.Y < 535)
@@ -459,6 +465,10 @@ namespace MiniRogue
                             break;
 
                         case CurrentTurnState.PRETURN2:
+
+                            FlipCard(playerHand.Card2);
+                            FlipCard(playerHand.Card3);
+
 
                             if (SingleMouseClick())
                             {
@@ -491,6 +501,8 @@ namespace MiniRogue
 
                         case CurrentTurnState.PRETURN3:
 
+                            FlipCard(playerHand.Card4);
+
                             if (SingleMouseClick())
                             {
                                 if (position.X > 525 && position.X < 720 && position.Y > 260 && position.Y < 535)
@@ -512,6 +524,9 @@ namespace MiniRogue
                             break;
 
                         case CurrentTurnState.PRETURN4:
+
+                            FlipCard(playerHand.Card5);
+                            FlipCard(playerHand.Card6);
 
                             if (SingleMouseClick())
                             {
@@ -552,6 +567,8 @@ namespace MiniRogue
                             break;
 
                         case CurrentTurnState.PREBOSS:
+
+                            FlipCard(playerHand.Card7);
 
                             if (SingleMouseClick())
                             {
@@ -779,23 +796,6 @@ namespace MiniRogue
                     {
                         case CurrentTurnState.PRETURN1:
 
-                            playerHand.Card1.Flipped = true;
-
-                            while (playerHand.Card1.Flipped)
-                            {
-
-                            }
-
-
-
-                            spriteBatch.Draw(door, new Vector2(75, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(300, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(300, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(525, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(750, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(750, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(975, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-
                             playerHand.DrawHand(spriteBatch);
 
                             break;
@@ -804,17 +804,6 @@ namespace MiniRogue
                             break;
 
                         case CurrentTurnState.PRETURN2:
-
-                            playerHand.Card2.Flipped = true;
-                            playerHand.Card3.Flipped = true;
-
-                            spriteBatch.Draw(doorGrayed, new Vector2(75, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(door, new Vector2(300, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(door, new Vector2(300, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(525, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(750, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(750, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(975, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
 
                             playerHand.DrawHand(spriteBatch);
 
@@ -826,15 +815,6 @@ namespace MiniRogue
 
                         case CurrentTurnState.PRETURN3:
 
-                            playerHand.Card4.Flipped = true;
-
-                            spriteBatch.Draw(doorGrayed, new Vector2(75, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(300, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(300, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(door, new Vector2(525, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(750, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(750, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(975, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
 
                             playerHand.DrawHand(spriteBatch);
 
@@ -849,18 +829,6 @@ namespace MiniRogue
 
                         case CurrentTurnState.PRETURN4:
 
-
-                            playerHand.Card5.Flipped = true;
-                            playerHand.Card6.Flipped = true;
-
-                            spriteBatch.Draw(doorGrayed, new Vector2(75, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(300, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(300, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(525, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(door, new Vector2(750, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(door, new Vector2(750, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(975, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-
                             playerHand.DrawHand(spriteBatch);
 
                             break;
@@ -873,16 +841,6 @@ namespace MiniRogue
                             break;
 
                         case CurrentTurnState.PREBOSS:
-
-                            playerHand.Card7.Flipped = true;
-
-                            spriteBatch.Draw(doorGrayed, new Vector2(75, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(300, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(300, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(525, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(door, new Vector2(750, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(door, new Vector2(750, 400), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
-                            spriteBatch.Draw(doorGrayed, new Vector2(975, 260), new Rectangle?(), Color.White, 0f, new Vector2(), .43f, SpriteEffects.None, 1);
 
                             playerHand.DrawHand(spriteBatch);
 
@@ -981,16 +939,28 @@ namespace MiniRogue
         public void PreparePhase()
         {
             playerHand.ShuffleHand();
-            playerHand.Card1.Flipped = false;
-            playerHand.Card2.Flipped = false;
-            playerHand.Card3.Flipped = false;
-            playerHand.Card4.Flipped = false;
-            playerHand.Card5.Flipped = false;
-            playerHand.Card6.Flipped = false;
-            //playerHand.Card7.Flipped = false;
             currentTurnState = CurrentTurnState.PRETURN1;
             
         }
+
+        private void FlipCard(Card card)
+        {
+            if (!card.Flipped)
+            {
+                card.ScaleVector = new Vector2(card.ScaleVector.X - .01f, card.ScaleVector.Y);
+            }
+            if (card.ScaleVector.X < 0)
+            {
+                card.Flipped = true;
+            }
+            if (card.Flipped && card.ScaleVector.X < .43f)
+            {
+                card.ScaleVector = new Vector2(card.ScaleVector.X + .01f, card.ScaleVector.Y);
+            }
+
+        }
+
+
 
     }
 }

@@ -18,7 +18,23 @@ namespace MiniRogue
         // Properties
         public string Name { get; set; }
 
-        public bool Flipped { get; set; }
+        //public bool Flipped { get; set; }
+
+        private bool flipped;
+
+        public bool Flipped
+        {
+            get { return flipped; }
+            set
+            {
+                flipped = value;
+                if (value == true)
+                {
+                    CurrentTexture = CardTexture;
+                }
+                else { CurrentTexture = BackTexture; }
+            }
+        }
 
 
         private Rectangle cardRectangle;
@@ -32,6 +48,8 @@ namespace MiniRogue
         public Texture2D BackTexture { get; set; }
 
         public Texture2D CardTexture { get; set; }
+
+        public Texture2D CurrentTexture { get; set; }
 
         public float XPos { get; set; }
 
@@ -55,13 +73,25 @@ namespace MiniRogue
 
         public List<Button> CurrentButtons { get; set; }
 
-        public Vector2 ScaleVector { get; set; }
+        private Vector2 scaleVector;
+
+        public Vector2 ScaleVector
+        {
+            get { return scaleVector; }
+            set { scaleVector = value; }
+        }
+
+
+
+        //public Vector2 ScaleVector { get; set; }
 
         // Constructors
         public Card(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons)
         {
 
             CardTexture = cardTexture;
+            BackTexture = cardBack;
+            CurrentTexture = cardBack;
             CardRectangle = new Rectangle(0, 0, 494, 708);
             Dice = new Dice();
             Name = name;

@@ -117,11 +117,7 @@ namespace MiniRogue
         {
             foreach (var item in playerHand)
             {
-                if (item.Flipped)
-                {
-                    sBatch.Draw(item.CardTexture, new Vector2(item.LevelXpos, item.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(), .40f, SpriteEffects.None, 1);
-                }
-
+                sBatch.Draw(item.CurrentTexture, new Vector2(item.LevelXpos, item.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(0, 0), item.ScaleVector, SpriteEffects.None, 1);
             }
         }
 
