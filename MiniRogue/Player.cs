@@ -11,6 +11,20 @@ namespace MiniRogue
 
         public int Armor { get; set; }
 
+        //private int health;
+
+        //public int Health
+        //{
+        //    get { return health; }
+        //    set
+        //    {
+        //        if (health - value < 0)
+        //        {
+        //            health = 0;
+        //        }
+        //    }
+        //}
+
         public int Health { get; set; }
 
         public int Gold { get; set; }

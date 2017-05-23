@@ -165,16 +165,16 @@ namespace MiniRogue
 
                     if (player.Health > 0)
                     {
-                        //CheckBoxes["Check Box 1"].Checked = true;
-                        //CheckBoxes["Check Box 2"].Checked = true;
-                        //CheckBoxes["Check Box 3"].Checked = true;
-                        //CheckBoxes["Check Box 4"].Checked = true;
+                        CheckBoxes["Check Box 1"].Checked = true;
+                        CheckBoxes["Check Box 2"].Checked = true;
+                        CheckBoxes["Check Box 3"].Checked = true;
+                        CheckBoxes["Check Box 4"].Checked = true;
                         combatState = CombatState.ROLLDIE;
                     }
 
                     else
                     {
-                        combatState = CombatState.RESULTS;
+                        combatState = CombatState.COMPLETE;
                     }
                     return false;
 

@@ -350,6 +350,15 @@ namespace MiniRogue
             position.X = mouseState.X;
             position.Y = mouseState.Y;
 
+            if (gamestate == Gamestate.HACKANDSLASH)
+            {
+                if (player.Health <= 0)
+                {
+                    gamestate = Gamestate.GAME_OVER;
+                }
+            }
+
+
 
             //------------------- Switch for gamestates ------------------------
             switch (gamestate)
@@ -865,6 +874,8 @@ namespace MiniRogue
                     break;
 
                 case Gamestate.GAME_OVER:
+
+                    spriteBatch.DrawString(font, "You died. Game Over. ", new Vector2(660, 200), Color.White);
 
                     break;
 
