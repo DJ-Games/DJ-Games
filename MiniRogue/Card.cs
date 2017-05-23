@@ -18,8 +18,6 @@ namespace MiniRogue
         // Properties
         public string Name { get; set; }
 
-        //public bool Flipped { get; set; }
-
         private bool flipped;
 
         public bool Flipped

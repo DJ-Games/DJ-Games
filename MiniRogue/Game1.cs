@@ -439,8 +439,6 @@ namespace MiniRogue
                     {
                         case CurrentTurnState.PRETURN1:
 
-                            //TESTING CARD FLIP
-
                             FlipCard(playerHand.Card1);
 
                             //-----------------
@@ -947,7 +945,7 @@ namespace MiniRogue
         {
             if (!card.Flipped)
             {
-                card.ScaleVector = new Vector2(card.ScaleVector.X - .01f, card.ScaleVector.Y);
+                card.ScaleVector = new Vector2(card.ScaleVector.X - .02f, card.ScaleVector.Y);
             }
             if (card.ScaleVector.X < 0)
             {
@@ -955,7 +953,7 @@ namespace MiniRogue
             }
             if (card.Flipped && card.ScaleVector.X < .43f)
             {
-                card.ScaleVector = new Vector2(card.ScaleVector.X + .01f, card.ScaleVector.Y);
+                card.ScaleVector = new Vector2(card.ScaleVector.X + .02f, card.ScaleVector.Y);
             }
 
         }

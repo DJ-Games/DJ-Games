@@ -151,7 +151,6 @@ namespace MiniRogue
 
                                     case 6:
 
-                                        player.Health -= 2;
                                         player.FallBelow();
                                         break;
 

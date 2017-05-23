@@ -138,51 +138,33 @@ namespace MiniRogue
         {
             Health -= 2; 
 
-            switch (Rank)
+            switch (DungeonLevel)
             {
                 case 1:
+
+                    DungeonArea += 2;
+                    DungeonLevel++;
 
                     break;
 
                 case 2:
 
-                    DungeonLevel--;
-                    DungeonArea -= 2;
+                    DungeonArea += 2;
+                    DungeonLevel++;
 
                     break;
 
                 case 3:
 
-                    DungeonLevel--;
-                    if (DungeonArea == 7)
-                    {
-                        DungeonArea -= 3;
-                    }
-                    else
-                    {
-                        DungeonArea -= 2;
-                    }
+                    DungeonArea += 3;
+                    DungeonLevel++;
 
                     break;
 
                 case 4:
 
-                    DungeonLevel--;
-                    DungeonArea -= 3;
-
-                    break;
-
-                case 5:
-
-                    DungeonLevel--;
-                    if (DungeonArea == 14)
-                    {
-                        DungeonArea -= 4;
-                    }
-                    else
-                    {
-                        DungeonArea -= 3;
-                    }
+                    DungeonArea += 3;
+                    DungeonLevel++;
 
                     break;
 

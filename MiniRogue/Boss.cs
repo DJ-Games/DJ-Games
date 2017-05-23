@@ -19,10 +19,8 @@ namespace MiniRogue
 
     }
 
-
     class Boss : Enemy
     {
-
 
         public int GoldReward { get; set; }
 
