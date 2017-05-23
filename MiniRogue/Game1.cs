@@ -45,6 +45,16 @@ namespace MiniRogue
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        // Title screen animation 
+        bool doorsOpen;
+        bool eyesOnScreen;
+        int counter;
+        float eyeOpacity = 0.0f;
+        Vector2 rightdoor = new Vector2(0,0);
+        Vector2 leftDoor = new Vector2(0,0);
+        Vector2 guy = new Vector2(-450,0);
+        //-----------------------
+
         Dictionary<string, Button> buttonDictionay;
 
         Gamestate gamestate;
@@ -112,6 +122,12 @@ namespace MiniRogue
         Texture2D spend1XPButton;
         Texture2D combatButton;
         Texture2D cardBack;
+        Texture2D titleBlank;
+        Texture2D titleRightDoor;
+        Texture2D titleLeftDoor;
+        Texture2D titleEyes;
+        Texture2D titleGuy;
+        Texture2D titleBlack;
         SpriteFont font;
         SpriteFont dungeonFont;
         Vector2 position;
@@ -235,8 +251,15 @@ namespace MiniRogue
             checkBoxGray = Content.Load<Texture2D>("CheckGrayed");
             combatButton = Content.Load<Texture2D>("CombatButton");
             cardBack = Content.Load<Texture2D>("CardBack");
+            titleBlank = Content.Load<Texture2D>("TitleScreenBase");
+            titleRightDoor = Content.Load<Texture2D>("TitleScreenRightDoor");
+            titleLeftDoor = Content.Load<Texture2D>("TitleScreenLeftDoor");
+            titleEyes = Content.Load<Texture2D>("TitleScreenEyes");
+            titleGuy = Content.Load<Texture2D>("TitleScreenGuy");
+            titleBlack = Content.Load<Texture2D>("TitleScreenBlack");
             font = Content.Load<SpriteFont>("Font");
             dungeonFont = Content.Load<SpriteFont>("Dungeon");
+
 
 
             position = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
@@ -364,6 +387,8 @@ namespace MiniRogue
             switch (gamestate)
             {
                 case Gamestate.TITILESCREEN:
+
+                    TitleScreenAnim();
 
                     if (SingleMouseClick())
                     {
@@ -700,12 +725,14 @@ namespace MiniRogue
             {
                 case Gamestate.TITILESCREEN:
 
-
-                    spriteBatch.Draw(titleScreen, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);                 
-
+                    spriteBatch.Draw(titleBlack, new Vector2(0,0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(titleRightDoor, rightdoor, new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(titleLeftDoor, leftDoor, new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(titleBlank, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(titleEyes, new Vector2(0, 0), new Rectangle?(), Color.White * eyeOpacity, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(titleGuy, guy, new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
-
 
                 // -------------- Difficulty Select Screen Game State Draw -----------------
 
@@ -969,7 +996,31 @@ namespace MiniRogue
 
         }
 
-
+        public void TitleScreenAnim()
+        {
+            counter++;
+            if (counter > 30 && !doorsOpen && !(leftDoor.X < -160) && !(rightdoor.X > 160))
+            {
+                leftDoor.X -= 3;
+                rightdoor.X += 3;
+            }
+            if (leftDoor.X < -160)
+            {
+                doorsOpen = true;
+            }
+            if (doorsOpen && !eyesOnScreen)
+            {
+                eyeOpacity += .03f;
+            }
+            if (eyeOpacity > 1)
+            {
+                eyesOnScreen = true;
+            }
+            if (eyesOnScreen && guy.X < 0)
+            {
+                guy.X += 10;
+            }
+        }
 
     }
 }
