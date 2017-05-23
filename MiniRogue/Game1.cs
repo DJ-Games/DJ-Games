@@ -875,7 +875,7 @@ namespace MiniRogue
 
                 case Gamestate.GAME_OVER:
 
-                    spriteBatch.DrawString(font, "You died. Game Over. ", new Vector2(660, 200), Color.White);
+                    spriteBatch.DrawString(font, "You died. Game Over.", new Vector2(660, 200), Color.White);
 
                     break;
 
