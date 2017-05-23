@@ -13,6 +13,7 @@ namespace MiniRogue
 
     enum TreasureTurnState
     {
+        CARDFLIP,
         GOLD_AWARD,
         EXTRA_TREASURE_ROLL,
         TREASURE_ROLL,
@@ -36,7 +37,7 @@ namespace MiniRogue
 
         TreasureTurnState treasureTurnState;
 
-        public Treasure(string name, Texture2D cardTexture, Dictionary<string, Button> buttons) : base(name, cardTexture, buttons)
+        public Treasure(string name, Texture2D cardTexture, Texture2D cardBack,  Dictionary<string, Button> buttons) : base(name, cardTexture, cardBack, buttons)
         {
             treasureTurnState = TreasureTurnState.GOLD_AWARD;
             CurrentButtons = new List<Button>(); 

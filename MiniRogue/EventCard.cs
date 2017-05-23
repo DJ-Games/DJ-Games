@@ -40,13 +40,13 @@ namespace MiniRogue
         // Constructor
 
 
-        public EventCard(string name, Texture2D cardTexture, Dictionary<string, Button> buttons) : base(name, cardTexture, buttons)
+        public EventCard(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons) : base(name, cardTexture, cardBack, buttons)
         {
             eventCardTurnState = new EventCardTurnState();
             CurrentButtons = new List<Button>();
         }
 
-        public EventCard(string name, Texture2D cardTexture, Dictionary<string, Button> buttons, Dictionary<string, CombatDice> combatDice, Dictionary<string, CheckBox> checkBoxes) : base(name, cardTexture, buttons)
+        public EventCard(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons, Dictionary<string, CombatDice> combatDice, Dictionary<string, CheckBox> checkBoxes) : base(name, cardTexture, cardBack, buttons)
         {
             eventCardTurnState = new EventCardTurnState();
             CurrentButtons = new List<Button>();

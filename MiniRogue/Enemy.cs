@@ -35,12 +35,12 @@ namespace MiniRogue
 
         //----------------------CONSTRUCTORS -------------------------
 
-        public Enemy(string name, Texture2D cardTexture, Dictionary<string, Button> buttons) : base(name, cardTexture, buttons)
+        public Enemy(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons) : base(name, cardTexture, cardBack, buttons)
         {
 
         }
 
-        public Enemy(string name, Texture2D cardTexture, Dictionary<string, Button> buttons, Dictionary<string, CombatDice> combatDice, Dictionary<string, CheckBox> checkBoxes) : base(name, cardTexture, buttons)
+        public Enemy(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons, Dictionary<string, CombatDice> combatDice, Dictionary<string, CheckBox> checkBoxes) : base(name, cardTexture, cardBack, buttons)
         {
             Buttons = buttons;
             CombatDice = combatDice;

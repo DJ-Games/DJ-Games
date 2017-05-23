@@ -28,7 +28,7 @@ namespace MiniRogue
         RestingTurnState restingTurnState = new RestingTurnState();
 
         // Constuctor
-        public Resting(string name, Texture2D cardTexture, Dictionary<string, Button> buttons) : base(name, cardTexture, buttons)
+        public Resting(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons) : base(name, cardTexture, cardBack, buttons)
         {
             restingTurnState = RestingTurnState.SELECTION;
             CurrentButtons = new List<Button>();

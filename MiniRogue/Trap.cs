@@ -40,7 +40,7 @@ namespace MiniRogue
         TrapTurnState trapTurnState;
 
 
-        public Trap(string name, Texture2D cardTexture, Dictionary<string, Button> buttons) : base(name, cardTexture, buttons)
+        public Trap(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons) : base(name, cardTexture, cardBack, buttons)
         {
            
             trapTurnState = TrapTurnState.ROLL_FOR_TRAP;
