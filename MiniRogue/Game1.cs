@@ -69,7 +69,6 @@ namespace MiniRogue
         Texture2D merchantCard;
         Texture2D enemyCard;
         Texture2D restingCard;
-        Texture2D theDungeonCard;
         Texture2D trapCard;
         Texture2D treasureCard;
         Texture2D titleScreen;
@@ -126,6 +125,7 @@ namespace MiniRogue
         Texture2D titleEyes;
         Texture2D titleGuy;
         Texture2D titleBlack;
+        Texture2D gameScreen;
         SpriteFont font;
         SpriteFont dungeonFont;
         Vector2 position;
@@ -255,6 +255,7 @@ namespace MiniRogue
             titleEyes = Content.Load<Texture2D>("TitleScreenEyes");
             titleGuy = Content.Load<Texture2D>("TitleScreenGuy");
             titleBlack = Content.Load<Texture2D>("TitleScreenBlack");
+            gameScreen = Content.Load<Texture2D>("GameScreen");
             font = Content.Load<SpriteFont>("Font");
             dungeonFont = Content.Load<SpriteFont>("Dungeon");
 
@@ -432,7 +433,7 @@ namespace MiniRogue
                     {
                         if (position.X > 800 && position.X < 1050 && position.Y > 167 && position.Y < 241)
                         {
-                            player = new Player(1, 5, 5, 6);
+                            player = new Player(1, 5, 50, 6);
                             DrawNewHand();
                             gamestate = Gamestate.HACKANDSLASH;
                         }
@@ -759,6 +760,10 @@ namespace MiniRogue
                     spriteBatch.DrawString(font, "Spell2: ", new Vector2(820, 20), Color.White);
                     spriteBatch.DrawString(font, "Dungeon Level: " + player.DungeonLevel, new Vector2(1120, 20), Color.White);
                     spriteBatch.DrawString(font, "Dungeon Area: " + player.DungeonArea, new Vector2(1120, 40), Color.White);
+
+                    spriteBatch.Draw(gameScreen, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+
+
 
                     if (player.SpellsString.Count == 1)
                     {
