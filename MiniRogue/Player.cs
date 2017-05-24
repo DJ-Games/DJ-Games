@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace MiniRogue
 {
@@ -137,9 +141,11 @@ namespace MiniRogue
 
         public bool HasFoughtMonster { get; set; }
 
+        public Dictionary<string, Texture2D> SpellIcons { get; set; }
 
 
-        public Player(int armor, int health, int gold, int food)
+
+        public Player(int armor, int health, int gold, int food, Dictionary<string, Texture2D> spellIcons)
         {
 
             Armor = armor;
@@ -155,6 +161,8 @@ namespace MiniRogue
 
             playerDice = new Dice();
             SpellsString = new List<string>();
+            Spells = new List<Spell>();
+            SpellIcons = spellIcons;
         }
 
         public Player()
@@ -195,6 +203,23 @@ namespace MiniRogue
             }
             else return false; 
         }
+
+        public void AddSpell(string spell)
+        {
+            if (Spells.Count == 0)
+            {
+                Spells.Add(new Spell(spell, SpellIcons[spell + " Spell Icon"]));
+                Spells[0].IconXpos = 1130;
+                Spells[0].IconYpos = 20;
+            }
+            else 
+            {
+                Spells.Add(new Spell(spell, SpellIcons[spell + " Spell Icon"]));
+                Spells[1].IconXpos = 1180;
+                Spells[1].IconYpos = 20;
+            }
+        }
+
 
         public bool RemoveSpellString(string spell)
         {

@@ -27,10 +27,23 @@ namespace MiniRogue
 
         public int IconYpos { get; set; }
 
-        public Spell()
+        public Spell(string name, Texture2D spellIcon)
         {
-
+            Name = name;
+            IconTexture = spellIcon;
         }
+
+        public void RemoveSpell(Player player, string spell)
+        {
+            
+        }
+
+        public void DrawIcons(SpriteBatch sBatch)
+        {
+            sBatch.Draw(IconTexture, new Vector2(IconXpos, IconYpos), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+        }
+
+
 
     }
 }

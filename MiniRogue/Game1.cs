@@ -126,7 +126,12 @@ namespace MiniRogue
         Texture2D titleGuy;
         Texture2D titleBlack;
         Texture2D gameScreen;
+        Texture2D fireSpellIcon;
+        Texture2D healthSpellIcon;
+        Texture2D iceSpellIcon;
+        Texture2D poisonSpellIcon;
         SpriteFont font;
+        SpriteFont highTower;
         SpriteFont dungeonFont;
         Vector2 position;
 
@@ -136,7 +141,6 @@ namespace MiniRogue
         Hand playerHand;
         Dice playerDice;
         Card currentCard;
-        Difficulty difficulty;
 
         int deviceWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
         int deviceHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
@@ -147,6 +151,7 @@ namespace MiniRogue
         Dictionary<string, Texture2D> dieTextures;
         Dictionary<string, CombatDice> combatDice;
         Dictionary<string, CheckBox> checkBoxes;
+        Dictionary<string, Texture2D> spellIcons;
 
         // --------------------------------------------------------------------
 
@@ -256,7 +261,12 @@ namespace MiniRogue
             titleGuy = Content.Load<Texture2D>("TitleScreenGuy");
             titleBlack = Content.Load<Texture2D>("TitleScreenBlack");
             gameScreen = Content.Load<Texture2D>("GameScreen");
+            fireSpellIcon = Content.Load<Texture2D>("FireSpellIcon");
+            healthSpellIcon = Content.Load<Texture2D>("HealthSpellIcon");
+            iceSpellIcon = Content.Load<Texture2D>("IceSpellIcon");
+            poisonSpellIcon = Content.Load<Texture2D>("PoisonSpellIcon");
             font = Content.Load<SpriteFont>("Font");
+            highTower = Content.Load<SpriteFont>("HighTower");
             dungeonFont = Content.Load<SpriteFont>("Dungeon");
 
 
@@ -264,14 +274,11 @@ namespace MiniRogue
             position = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
                 graphics.GraphicsDevice.Viewport.Height / 2);
             playerDice = new Dice();
-            difficulty = new Difficulty();
             playerHand = new Hand();
             buttonDictionay = new Dictionary<string, Button>();
             gamestate = Gamestate.TITILESCREEN;
             currentTurnState = CurrentTurnState.PRETURN1;
 
-
-            //----------------------- FOR TESTING COMBAT --------------------------
 
 
             dieTextures = new Dictionary<string, Texture2D>();
@@ -279,6 +286,8 @@ namespace MiniRogue
             combatDice = new Dictionary<string, CombatDice>();
 
             checkBoxes = new Dictionary<string, CheckBox>();
+
+            spellIcons = new Dictionary<string, Texture2D>();
 
             dieTextures.Add("Roll 1", die1);
             dieTextures.Add("Roll 2", die2);
@@ -297,8 +306,6 @@ namespace MiniRogue
             checkBoxes.Add("Check Box 2", new CheckBox(checkBoxFull, checkBoxEmpty, checkBoxGray, 475, 380));
             checkBoxes.Add("Check Box 3", new CheckBox(checkBoxFull, checkBoxEmpty, checkBoxGray, 675, 380));
             checkBoxes.Add("Check Box 4", new CheckBox(checkBoxFull, checkBoxEmpty, checkBoxGray, 875, 380));
-
-            // --------------------------------------------------------------------
 
             // Fill Button Dictionary
             buttonDictionay.Add("Roll Die", new Button(rollDieBtnTex, "Roll Die"));
@@ -339,11 +346,15 @@ namespace MiniRogue
             buttonDictionay.Add("Use Feat Button", new Button(useFeatButton, "Use Feat Button"));
             buttonDictionay.Add("Accept Button", new Button(acceptButton, "Accept Button"));
             buttonDictionay.Add("Use Spell Button", new Button(useSpellButton, "Use Spell Button"));
+            buttonDictionay.Add("Combat Button", new Button(combatButton, "Combat Button"));
             buttonDictionay.Add("Spend 2 HP Button", new Button(spend2HPButton, "Spend 2 HP Button"));
             buttonDictionay.Add("Spend 1 XP Button", new Button(spend1XPButton, "Spend 1 XP Button"));
-            buttonDictionay.Add("Combat Button", new Button(combatButton, "Combat Button"));
 
-
+            spellIcons.Add("Fire Spell Icon", fireSpellIcon);
+            spellIcons.Add("Healing Spell Icon", healthSpellIcon);
+            spellIcons.Add("Ice Spell Icon", iceSpellIcon);
+            spellIcons.Add("Poison Spell Icon", poisonSpellIcon);
+ 
         }
 
 
@@ -404,7 +415,7 @@ namespace MiniRogue
                         if (position.X > 0 && position.X < 100 && position.Y > 0 && position.Y < 100)
                         {
                             combat = new Combat(buttonDictionay, combatDice, checkBoxes);
-                            player = new Player(0, 10, 10, 10);
+                            player = new Player(0, 10, 10, 10, spellIcons);
                             player.Rank = 2;
                             gamestate = Gamestate.COMBATTESTING;
                         }
@@ -433,28 +444,28 @@ namespace MiniRogue
                     {
                         if (position.X > 800 && position.X < 1050 && position.Y > 167 && position.Y < 241)
                         {
-                            player = new Player(1, 5, 50, 6);
+                            player = new Player(1, 5, 50, 6, spellIcons);
                             DrawNewHand();
                             gamestate = Gamestate.HACKANDSLASH;
                         }
 
                         if (position.X > 800 && position.X < 1050 && position.Y > 270 && position.Y < 344)
                         {
-                            player = new Player(0, 5, 3, 6);
+                            player = new Player(0, 5, 3, 6, spellIcons);
                             DrawNewHand();
                             gamestate = Gamestate.HACKANDSLASH;
                         }
 
                         if (position.X > 800 && position.X < 1050 && position.Y > 373 && position.Y < 447)
                         {
-                            player = new Player(0, 4, 2, 5);
+                            player = new Player(0, 4, 2, 5, spellIcons);
                             DrawNewHand();
                             gamestate = Gamestate.HACKANDSLASH;
                         }
 
                         if (position.X > 800 && position.X < 1050 && position.Y > 476 && position.Y < 550)
                         {
-                            player = new Player(0, 3, 1, 3);
+                            player = new Player(0, 3, 1, 3, spellIcons);
                             DrawNewHand();
                             gamestate = Gamestate.HACKANDSLASH;
                         }
@@ -750,20 +761,22 @@ namespace MiniRogue
 
                 case Gamestate.HACKANDSLASH:
 
-                    spriteBatch.DrawString(font, "Health: " + player.Health, new Vector2(20, 20), Color.White);
-                    spriteBatch.DrawString(font, "Armor: " + player.Armor, new Vector2(120, 20), Color.White);
-                    spriteBatch.DrawString(font, "Gold: " + player.Gold, new Vector2(220, 20), Color.White);
-                    spriteBatch.DrawString(font, "Food: " + player.Food, new Vector2(320, 20), Color.White);
-                    spriteBatch.DrawString(font, "XP: " + player.Experience, new Vector2(420, 20), Color.White);
-                    spriteBatch.DrawString(font, "Rank: " + player.Rank, new Vector2(520, 20), Color.White);
-                    spriteBatch.DrawString(font, "Spell1: ", new Vector2(620, 20), Color.White);
-                    spriteBatch.DrawString(font, "Spell2: ", new Vector2(820, 20), Color.White);
                     spriteBatch.DrawString(font, "Dungeon Level: " + player.DungeonLevel, new Vector2(1120, 20), Color.White);
                     spriteBatch.DrawString(font, "Dungeon Area: " + player.DungeonArea, new Vector2(1120, 40), Color.White);
 
                     spriteBatch.Draw(gameScreen, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
+                    spriteBatch.DrawString(highTower, player.Health.ToString(), new Vector2(742, 26), Color.Black);
+                    spriteBatch.DrawString(highTower, player.Armor.ToString(), new Vector2(623, 26), Color.Black);
+                    spriteBatch.DrawString(highTower, player.Gold.ToString(), new Vector2(880, 26), Color.Black);
+                    spriteBatch.DrawString(highTower, player.Food.ToString(), new Vector2(1007, 26), Color.White);
+                    spriteBatch.DrawString(highTower, player.Experience.ToString(), new Vector2(380, 26), Color.Red);
+                    spriteBatch.DrawString(highTower, player.Rank.ToString(), new Vector2(485, 26), Color.Red);
 
+                    foreach (var item in player.Spells)
+                    {
+                        item.DrawIcons(spriteBatch);
+                    }
 
                     if (player.SpellsString.Count == 1)
                     {

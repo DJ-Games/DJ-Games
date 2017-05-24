@@ -162,13 +162,16 @@ namespace MiniRogue
                                     player.Health+=2;
                                     restingTurnState = RestingTurnState.COMPLETE;
                                     break;
-
-
-
-
                             }
                         }
-                                    break;
+
+                        if (XPos > 820 && XPos < 1070 && YPos > 420 && YPos < 490)
+                        {
+                            restingTurnState = RestingTurnState.SELECTION;
+                        }
+
+
+                        break;
 
 
                 }

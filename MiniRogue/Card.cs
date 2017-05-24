@@ -103,7 +103,7 @@ namespace MiniRogue
 
         public bool SingleMouseClick()
         {
-            //CurrentMouseState = Mouse.GetState();
+           
             if (CurrentMouseState.LeftButton == ButtonState.Pressed && PreviousMouseState.LeftButton == ButtonState.Released)
             {
                 return true;
