@@ -15,6 +15,7 @@ namespace MiniRogue
     {
         STARTCOMBAT,
         COMBAT,
+        REWARDS,
         COMPLETE,
 
     }
@@ -25,6 +26,8 @@ namespace MiniRogue
         public int GoldReward { get; set; }
 
         public bool GivesItem { get; set; }
+
+        public int TreasureResult { get; set; }
 
         BossTurnState bossTurnState = new BossTurnState();
 
@@ -98,6 +101,10 @@ namespace MiniRogue
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="player"></param>
         public new void HandleButtons(Player player)
         {
             if (SingleMouseClick())
@@ -118,6 +125,47 @@ namespace MiniRogue
                         break;
                     case BossTurnState.COMBAT:
                         break;
+
+                    case BossTurnState.REWARDS:
+                        if (XPos > 700 && XPos < 948 && YPos > 275 && YPos < 348)
+                        {
+                            TreasureResult = player.playerDice.RollDice();
+                        }
+
+                        switch (TreasureResult)
+                        {
+                            case 1:
+                                player.Armor++;
+                                break;
+
+                            case 2:
+                                player.Experience += 2;
+                                break;
+
+                            case 3:
+                                player.SpellsString.Add("Fire Spell");
+                                break;
+
+                            case 4:
+                                player.SpellsString.Add("Ice Spell");
+                                break;
+
+                            case 5:
+                                player.SpellsString.Add("Poison Spell");
+                                break;
+
+                            case 6:
+                                player.SpellsString.Add("Healing Spell");
+                                break;
+                            default:
+                                break;
+                        }
+                        //Thread.Sleep(500);
+                        //treasureTurnState = TreasureTurnState.REVIEW;
+                        break;
+
+                       
+
                     case BossTurnState.COMPLETE:
                         break;
                     default:

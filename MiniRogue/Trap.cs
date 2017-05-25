@@ -119,34 +119,34 @@ namespace MiniRogue
                                 {
                                     case 1:
 
-                                        player.Food--;
+                                        player.Food-=1;
                                         break;
 
                                     case 2:
 
-                                        player.Gold--;
+                                        player.Gold-=1;
                                         break;
 
                                     case 3:
 
                                         if (player.Armor > 0)
                                         {
-                                            player.Armor--;
+                                            player.Armor-=1;
                                         }
-                                        player.Health -= 2;
+                                        player.Health -=2;
 
                                         break;
 
                                     case 4:
 
-                                        player.Health--;
+                                        player.Health-=1;
                                         break;
 
                                     case 5:
 
                                         if (player.Experience > 1)
                                         {
-                                            player.Experience--;
+                                            player.Experience-=1;
                                         }
 
                                         break;
