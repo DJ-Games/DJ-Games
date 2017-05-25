@@ -515,7 +515,7 @@ namespace MiniRogue
                         if (XPos > 1130 && XPos < 1175 && YPos > 20 && YPos < 65)
                         {
                             CastSpell(player.Spells[0].Name, player);
-                            player.Spells.RemoveAt(0);
+                            player.RemoveSpell(0);
                             if (MonsterHealth <= 0)
                             {
                                 player.Experience += ExpReward;
@@ -528,7 +528,7 @@ namespace MiniRogue
                             if (XPos > 1180 && XPos < 1225 && YPos > 20 && YPos < 65)
                             {
                                 CastSpell(player.Spells[1].Name, player);
-                                player.Spells.RemoveAt(1);
+                                player.RemoveSpell(1);
                                 if (MonsterHealth <= 0)
                                 {
                                     player.Experience += ExpReward;
