@@ -34,7 +34,9 @@ namespace MiniRogue
 
         public string Selection { get; set; }
 
-       
+        public int SpellIndex { get; set; }
+
+
 
         MerchantTurnState merchantTurnState;
 
@@ -252,7 +254,7 @@ namespace MiniRogue
 
                         if (XPos > 800 && XPos < 1048 && YPos > 320 && YPos < 392)
                         {
-                            if (player.SpellsString.Count > 0)
+                            if (player.Spells.Count > 0)
                             {
                                 merchantTurnState = MerchantTurnState.SELLSPELL;
                             }
@@ -406,22 +408,28 @@ namespace MiniRogue
 
                     case MerchantTurnState.SELLSPELL:
 
-                        if (XPos > 700 && XPos < 807 && YPos > 15 && YPos < 46)
+                        if (XPos > 1130 && XPos < 1175 && YPos > 20 && YPos < 65)
                         {
-                            Selection = "Sell " + player.SpellsString[0];
-                            merchantTurnState = MerchantTurnState.CONFIRMSELL; 
+                            SpellIndex = 0;
+                            merchantTurnState = MerchantTurnState.CONFIRMSELL;
+                            Selection = "Sell Spell";
                         }
 
-                        if (XPos > 900 && XPos < 1007 && YPos > 15 && YPos < 46)
+                        if (player.Spells.Count == 2)
                         {
-                            Selection = "Sell " + player.SpellsString[1];
-                            merchantTurnState = MerchantTurnState.CONFIRMSELL;
+                            if (XPos > 1180 && XPos < 1225 && YPos > 20 && YPos < 65)
+                            {
+                                SpellIndex = 1;
+                                merchantTurnState = MerchantTurnState.CONFIRMSELL;
+                                Selection = "Sell Spell";
+                            }
                         }
 
                         break;
 
                     // ------- CONFIRM SALE STATE -------
                     case MerchantTurnState.CONFIRMSELL:
+
                         if (XPos > 534 && XPos < 780 && YPos > 420 && YPos < 490)
                         {
                             switch (Selection)
@@ -430,7 +438,7 @@ namespace MiniRogue
 
                                     if (player.RemoveArmor())
                                     {
-                                        player.Gold += 3; 
+                                        player.Gold += 3;
                                         merchantTurnState = MerchantTurnState.BUYSELL;
 
                                     }
@@ -438,59 +446,15 @@ namespace MiniRogue
 
                                     break;
 
-                                case "Sell Fire Spell":
-                                    if (player.SpellsString.Contains("Fire Spell"))
-                                    {
-                                        player.RemoveSpellString("Fire Spell");
-                                        player.Gold += 4;
-                                        merchantTurnState = MerchantTurnState.BUYSELL;
-                                    }
+                                case "Sell Spell":
 
-                                    else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
+                                    player.RemoveSpell(SpellIndex);
+                                    player.Gold += 4;
+                                    merchantTurnState = MerchantTurnState.BUYSELL;
 
-                                    break;
 
-                                case "Sell Ice Spell":
-                                    if (player.SpellsString.Contains("Ice Spell"))
-                                    {
-                                        player.RemoveSpellString("Ice Spell");
-                                        player.Gold += 4;
-                                        merchantTurnState = MerchantTurnState.BUYSELL;
-                                    }
-
-                                    else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
-
-                                    break;
-
-                                case "Sell Poison Spell":
-                                    if (player.SpellsString.Contains("Poison Spell"))
-                                    {
-                                        player.RemoveSpellString("Poison Spell");
-                                        player.Gold += 4;
-                                        merchantTurnState = MerchantTurnState.BUYSELL;
-                                    }
-
-                                    else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
-
-                                    break;
-
-                                case "Sell Healing Spell":
-
-                                    if (player.SpellsString.Contains("Healing Spell"))
-                                    {
-                                        player.RemoveSpellString("Healing Spell");
-                                        player.Gold += 4;
-                                        merchantTurnState = MerchantTurnState.BUYSELL;
-                                    }
-                                    else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
-
-                                    break;
-
-                               
-                                default:
                                     break;
                             }
-                            Thread.Sleep(500);
                         }
 
                         if (XPos > 820 && XPos < 1070 && YPos > 420 && YPos < 490)
