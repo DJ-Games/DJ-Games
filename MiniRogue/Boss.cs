@@ -84,6 +84,7 @@ namespace MiniRogue
                     {
                         bossTurnState = BossTurnState.REMOVESPELL;
                     }
+                    else { player.AddSpell(AwardedSpell); }
                     HandleButtons(player);
 
                     return false;

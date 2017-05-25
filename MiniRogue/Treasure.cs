@@ -83,6 +83,7 @@ namespace MiniRogue
                     {
                         treasureTurnState = TreasureTurnState.REMOVESPELL;
                     }
+                    else { player.AddSpell(AwardedSpell); }
                     HandleButtons(player);
 
                     return false;
