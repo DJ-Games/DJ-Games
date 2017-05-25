@@ -319,7 +319,6 @@ namespace MiniRogue
                                     if (player.SpendGold(8))
                                     {
                                         player.AddSpell("Fire");
-                                        player.AddSpellString("Fire Spell");
                                         merchantTurnState = MerchantTurnState.BUYSELL;
                                     }
                                     else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
@@ -331,7 +330,6 @@ namespace MiniRogue
                                     if (player.SpendGold(8))
                                     {
                                         player.AddSpell("Ice");
-                                        player.AddSpellString("Ice Spell");
                                         merchantTurnState = MerchantTurnState.BUYSELL;
                                     }
                                     else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
@@ -343,7 +341,6 @@ namespace MiniRogue
                                     if (player.SpendGold(8))
                                     {
                                         player.AddSpell("Poison");
-                                        player.AddSpellString("Poison Spell");
                                         merchantTurnState = MerchantTurnState.BUYSELL;
                                     }
                                     else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
@@ -355,7 +352,6 @@ namespace MiniRogue
                                     if (player.SpendGold(8))
                                     {
                                         player.AddSpell("Healing");
-                                        player.AddSpellString("Healing Spell");
                                         merchantTurnState = MerchantTurnState.BUYSELL;
                                     }
                                     else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
