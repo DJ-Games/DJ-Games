@@ -97,6 +97,9 @@ namespace MiniRogue
                 Card tempCard = playerHand[TempRNumber];
                 PlayerHand.RemoveAt(TempRNumber);
                 playerHand.Insert(rGen.Next(playerHand.Count - 1), tempCard);
+                tempCard = playerHand[5];
+                playerHand.RemoveAt(5);
+                playerHand.Insert(3, tempCard);
             }
             
         }

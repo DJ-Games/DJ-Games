@@ -16,12 +16,6 @@ namespace MiniRogue
 
         public Texture2D ButtonTexture { get; set; }
 
-
-
-
-
-
-
         public Button(Texture2D bTexture, string name)
         {
             Name = name;

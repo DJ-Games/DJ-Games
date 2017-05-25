@@ -16,6 +16,8 @@ namespace MiniRogue
         STARTCOMBAT,
         COMBAT,
         REWARDS,
+        REMOVESPELL,
+        REVIEW,
         COMPLETE,
 
     }
@@ -28,6 +30,8 @@ namespace MiniRogue
         public bool GivesItem { get; set; }
 
         public int TreasureResult { get; set; }
+
+        public string AwardedSpell { get; set; }
 
         BossTurnState bossTurnState = new BossTurnState();
 
@@ -57,11 +61,33 @@ namespace MiniRogue
 
                     if (CurrentCombat.HandleCombat(player, CurrentMouseState, PreviousMouseState, XPos, yPos, true))
                     {
-                        bossTurnState = BossTurnState.COMPLETE;
+                        bossTurnState = BossTurnState.REWARDS;
                     }
 
                     return false;
-                    
+
+                case BossTurnState.REWARDS:
+
+                    HandleButtons(player);
+
+                    return false;
+
+                case BossTurnState.REMOVESPELL:
+
+                    HandleButtons(player);
+
+                    return false;
+
+                case BossTurnState.REVIEW:
+
+                    if (TreasureResult > 2 && player.Spells.Count == 2)
+                    {
+                        bossTurnState = BossTurnState.REMOVESPELL;
+                    }
+                    HandleButtons(player);
+
+                    return false;
+
                 case BossTurnState.COMPLETE:
 
 
@@ -88,6 +114,29 @@ namespace MiniRogue
                 case BossTurnState.COMBAT:
 
                     CurrentCombat.DrawCombat(sBatch, dungeonFont);
+
+                    break;
+
+
+                case BossTurnState.REWARDS:
+
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 275), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    sBatch.DrawString(dungeonFont, "Roll to determine your reward.", new Vector2(520, 230), Color.White);
+
+                    break;
+
+                case BossTurnState.REMOVESPELL:
+
+                    sBatch.DrawString(dungeonFont, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White);
+                    sBatch.DrawString(dungeonFont, "Click spell you would like to remove or done to keep current spells.", new Vector2(520, 230), Color.White);
+                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(700, 275), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+
+                    break;
+
+                case BossTurnState.REVIEW:
+
+                    sBatch.DrawString(dungeonFont, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White);
+                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(700, 275), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
 
                     break;
 
@@ -143,28 +192,62 @@ namespace MiniRogue
                                 break;
 
                             case 3:
-                                player.AddSpell("Fire");
+                                AwardedSpell = "Fire";
                                 break;
 
                             case 4:
-                                player.AddSpell("Ice");
+                                AwardedSpell = "Ice";
                                 break;
 
                             case 5:
-                                player.AddSpell("Poison");
+                                AwardedSpell = "Poison";
                                 break;
 
                             case 6:
-                                player.AddSpell("Healing");
+                                AwardedSpell = "Healing";
                                 break;
                             default:
                                 break;
                         }
-                        //Thread.Sleep(500);
-                        //treasureTurnState = TreasureTurnState.REVIEW;
+                        bossTurnState = BossTurnState.REVIEW;
                         break;
 
-                       
+                    case BossTurnState.REMOVESPELL:
+
+                        if (XPos > 700 && XPos < 948 && YPos > 275 && YPos < 348)
+                        {
+                            bossTurnState = BossTurnState.COMPLETE;
+                        }
+
+                        if (XPos > 1130 && XPos < 1175 && YPos > 20 && YPos < 65)
+                        {
+                            player.RemoveSpell(0);
+                            player.AddSpell(AwardedSpell);
+                            bossTurnState = BossTurnState.REVIEW;
+                        }
+
+                        if (player.Spells.Count == 2)
+                        {
+                            if (XPos > 1180 && XPos < 1225 && YPos > 20 && YPos < 65)
+                            {
+                                player.RemoveSpell(1);
+                                player.AddSpell(AwardedSpell);
+                                bossTurnState = BossTurnState.REVIEW;
+                            }
+                        }
+
+
+                        break;
+
+
+                    case BossTurnState.REVIEW:
+
+                        if (XPos > 700 && XPos < 948 && YPos > 275 && YPos < 348)
+                        {
+                            bossTurnState = BossTurnState.COMPLETE;
+                        }
+
+                        break;
 
                     case BossTurnState.COMPLETE:
                         break;
