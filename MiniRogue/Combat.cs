@@ -77,6 +77,9 @@ namespace MiniRogue
 
         public bool BossFight { get; set; }
 
+        public bool MonsterPoisoned { get; set; }
+
+        public bool MonsterFrozen { get; set; }
 
         CombatState combatState = new CombatState();
 
@@ -126,6 +129,7 @@ namespace MiniRogue
 
                 case CombatState.ROLLDIE:
 
+                    MonsterFrozen = false;
                     HandleButtons(player);
                     return false;
 
@@ -151,17 +155,16 @@ namespace MiniRogue
 
                 case CombatState.USESPELL:
 
+                    HandleButtons(player);
 
-
-
-
-
-                    combatState = CombatState.DAMAGEPLAYER;
                     return false;
 
                 case CombatState.DAMAGEPLAYER:
+                    if (MonsterFrozen)
+                    {
 
-                    player.Health -= (Damage - player.Armor);
+                    }
+                    else { player.Health -= (Damage - player.Armor); }
 
                     if (player.Health > 0)
                     {
@@ -267,10 +270,20 @@ namespace MiniRogue
                     sBatch.Draw(CombatButtons["Spend 2 HP Button"].ButtonTexture, new Vector2(300, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     sBatch.Draw(CombatButtons["Spend 1 XP Button"].ButtonTexture, new Vector2(650, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
+
                     break;
+
+
                 case CombatState.DEALDAMAGE:
+
                     break;
+
                 case CombatState.USESPELL:
+
+                    sBatch.DrawString(dungeonFont, "Click on a spell icon to use.", new Vector2(650, 250), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    sBatch.Draw(CombatButtons["Accept Button"].ButtonTexture, new Vector2(300, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+
+
                     break;
 
                 case CombatState.DAMAGEPLAYER:
@@ -490,7 +503,42 @@ namespace MiniRogue
 
 
                         break;
+
                     case CombatState.USESPELL:
+
+                        if (XPos > 300 && XPos < 548 && YPos > 600 && YPos < 672)
+                        {
+
+                            combatState = CombatState.DEALDAMAGE; 
+                        }
+
+                        if (XPos > 1130 && XPos < 1175 && YPos > 20 && YPos < 65)
+                        {
+                            CastSpell(player.Spells[0].Name, player);
+                            player.Spells.RemoveAt(0);
+                            if (MonsterHealth <= 0)
+                            {
+                                player.Experience += ExpReward;
+                                combatState = CombatState.RESULTS;
+                            }
+                        }
+
+                        if (player.Spells.Count == 2)
+                        {
+                            if (XPos > 1180 && XPos < 1225 && YPos > 20 && YPos < 65)
+                            {
+                                CastSpell(player.Spells[1].Name, player);
+                                player.Spells.RemoveAt(1);
+                                if (MonsterHealth <= 0)
+                                {
+                                    player.Experience += ExpReward;
+                                    combatState = CombatState.RESULTS;
+                                }
+                            }
+                        }
+
+
+
                         break;
 
                     case CombatState.DAMAGEPLAYER:
@@ -779,6 +827,36 @@ namespace MiniRogue
                 CombatDice["Combat Die 4"].CurrentTexture = CombatDice["Combat Die 4"].DieTextures["Roll " + die4Roll];
                 CheckBoxes["Check Box 4"].Checked = false;
                 CombatDice["Combat Die 4"].FeatUsed = false;
+            }
+        }
+
+        public void CastSpell(string spell, Player player)
+        {
+            switch (spell)
+            {
+                case "Fire":
+                    monsterHealth -= 8;
+
+                    break;
+
+                case "Healing":
+                    player.Health += 8;
+
+                    break;
+
+                case "Ice":
+                    MonsterFrozen = true;
+
+                    break;
+
+                case "Poison":
+                    MonsterPoisoned = true;
+
+                    break;
+
+
+                default:
+                    break;
             }
         }
     }
