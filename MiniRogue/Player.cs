@@ -220,6 +220,15 @@ namespace MiniRogue
             }
         }
 
+        public void RemoveSpell(int index)
+        {
+            if (index == 0)
+            {
+                Spells.RemoveAt(0);
+                Spells[0].IconXpos = 1130;
+            }
+            else { Spells.RemoveAt(index); }
+        }
 
         public bool RemoveSpellString(string spell)
         {

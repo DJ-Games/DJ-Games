@@ -509,7 +509,7 @@ namespace MiniRogue
                         if (XPos > 300 && XPos < 548 && YPos > 600 && YPos < 672)
                         {
 
-                            combatState = CombatState.DEALDAMAGE; 
+                            combatState = CombatState.DAMAGEPLAYER; 
                         }
 
                         if (XPos > 1130 && XPos < 1175 && YPos > 20 && YPos < 65)

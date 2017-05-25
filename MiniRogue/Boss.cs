@@ -143,19 +143,19 @@ namespace MiniRogue
                                 break;
 
                             case 3:
-                                player.SpellsString.Add("Fire Spell");
+                                player.AddSpell("Fire");
                                 break;
 
                             case 4:
-                                player.SpellsString.Add("Ice Spell");
+                                player.AddSpell("Ice");
                                 break;
 
                             case 5:
-                                player.SpellsString.Add("Poison Spell");
+                                player.AddSpell("Poison");
                                 break;
 
                             case 6:
-                                player.SpellsString.Add("Healing Spell");
+                                player.AddSpell("Healing");
                                 break;
                             default:
                                 break;

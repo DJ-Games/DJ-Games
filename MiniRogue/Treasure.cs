@@ -17,6 +17,7 @@ namespace MiniRogue
         GOLD_AWARD,
         EXTRA_TREASURE_ROLL,
         TREASURE_ROLL,
+        REMOVESPELL,
         REVIEW,
         COMPLETE,
     }
@@ -32,6 +33,8 @@ namespace MiniRogue
         public int ExtTreasureResult { get; set; }
 
         public int TreasureResult { get; set; }
+
+        public string AwardedSpell { get; set; }
 
 
 
@@ -70,7 +73,16 @@ namespace MiniRogue
 
                     return false;
 
+                case TreasureTurnState.REMOVESPELL:
+                    HandleButtons(player);
+
+                    return false;
+
                 case TreasureTurnState.REVIEW:
+                    if (TreasureResult > 2 && player.Spells.Count == 2)
+                    {
+                        treasureTurnState = TreasureTurnState.REMOVESPELL;
+                    }
                     HandleButtons(player);
 
                     return false;
@@ -112,9 +124,17 @@ namespace MiniRogue
                     sBatch.DrawString(font, "You found a treasure! Roll to determine what treasure you found.", new Vector2(520, 230), Color.White);
                     sBatch.DrawString(font, "You Rolled a:  " + ExtTreasureResult, new Vector2(725, 200), Color.White);
                     break;
+
+                case TreasureTurnState.REMOVESPELL:
+
+                    sBatch.DrawString(font, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White);
+                    sBatch.DrawString(font, "Click spell you would like to remove or done to keep current spells.", new Vector2(520, 230), Color.White);
+                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(700, 275), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+
+                    break;
+
                 case TreasureTurnState.REVIEW:
                     
-
                     if (ExtTreasureResult >= 5)
                     {
                         sBatch.DrawString(font, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White);
@@ -122,7 +142,7 @@ namespace MiniRogue
 
                     else
                     {
-                        sBatch.DrawString(font, "You Rolled a:  " + ExtTreasureResult, new Vector2(725, 200), Color.White);
+                        sBatch.DrawString(font, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White);
                     }
                     sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(700, 275), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
 
@@ -163,7 +183,8 @@ namespace MiniRogue
                         {
                             ExtTreasureResult = player.playerDice.RollDice();
 
-                            if (ExtTreasureResult >= 5)
+                            // Reset to 5 after testing
+                            if (ExtTreasureResult >= 0)
                             {
                                 treasureTurnState = TreasureTurnState.TREASURE_ROLL;
                             }
@@ -193,37 +214,58 @@ namespace MiniRogue
                                 break;
 
                             case 3:
-                                player.SpellsString.Add("Fire Spell");
+                                AwardedSpell = "Fire";
                                 break;
 
                             case 4:
-                                player.SpellsString.Add("Ice Spell");
+                                AwardedSpell = "Ice";
                                 break;
 
                             case 5:
-                                player.SpellsString.Add("Poison Spell");
+                                AwardedSpell = "Poison";
                                 break;
 
                             case 6:
-                                player.SpellsString.Add("Healing Spell");
+                                AwardedSpell = "Healing";
                                 break;
                             default:
                                 break;
                         }
-                        Thread.Sleep(500);
                         treasureTurnState = TreasureTurnState.REVIEW;
                         break;
 
+                    case TreasureTurnState.REMOVESPELL:
+
+                        if (XPos > 700 && XPos < 948 && YPos > 275 && YPos < 348)
+                        {
+                            treasureTurnState = TreasureTurnState.COMPLETE;
+                        }
+
+                        if (XPos > 1130 && XPos < 1175 && YPos > 20 && YPos < 65)
+                        {
+                            player.RemoveSpell(0);
+                            player.AddSpell(AwardedSpell);
+                            treasureTurnState = TreasureTurnState.REVIEW;
+                        }
+
+                        if (player.Spells.Count == 2)
+                        {
+                            if (XPos > 1180 && XPos < 1225 && YPos > 20 && YPos < 65)
+                            {
+                                player.RemoveSpell(1);
+                                player.AddSpell(AwardedSpell);
+                                treasureTurnState = TreasureTurnState.REVIEW;
+                            }
+                        }
+                            break;
 
                     case TreasureTurnState.REVIEW:
                         
-                        if (SingleMouseClick())
-                        {
                             if (XPos > 700 && XPos < 948 && YPos > 275 && YPos < 348)
                             {
                                 treasureTurnState = TreasureTurnState.COMPLETE;
                             }
-                        }
+
 
                         break;
 
