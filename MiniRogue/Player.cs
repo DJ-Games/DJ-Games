@@ -106,17 +106,17 @@ namespace MiniRogue
                     Rank = 1;
                     experience = value;
                 }
-                if ((experience = value) >= 6 && (experience = value) < 12)
+                if ((experience = value) >= 6 && (experience = value) < 18)
                 {
                     Rank = 2;
                     experience = value;
                 }
-                if ((experience = value) >= 12 && (experience = value) < 18)
+                if ((experience = value) >= 18 && (experience = value) < 36)
                 {
                     Rank = 3;
                     experience = value;
                 }
-                if ((experience = value) >= 18)
+                if ((experience = value) >= 36)
                 {
                     Rank = 4;
                     experience = value;
