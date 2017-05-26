@@ -92,7 +92,6 @@ namespace MiniRogue
                     return false;
 
                 case TreasureTurnState.COMPLETE:
-                    HandleButtons(player);
 
                     return true;
 
@@ -141,16 +140,19 @@ namespace MiniRogue
 
                 case TreasureTurnState.REVIEW:
                     
-                    if (TreasureResult > 2)
+                    if (TreasureResult == 3 || TreasureResult == 5 || TreasureResult == 6)
                     {
-                        sBatch.DrawString(font, "You gained a " + AwardedSpell + " Spell.", new Vector2(725, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
+                        sBatch.DrawString(font, "You gained a " + AwardedSpell + " Spell.", new Vector2(700, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     }
-
-                    else if(TreasureResult == 1)
+                    if (TreasureResult == 4)
+                    {
+                        sBatch.DrawString(font, "You gained an " + AwardedSpell + " Spell.", new Vector2(700, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
+                    }
+                    if(TreasureResult == 1)
                     {
                         sBatch.DrawString(font, "You gained 1 armor.", new Vector2(725, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     }
-                    else
+                    if (TreasureResult == 2)
                     {
                         sBatch.DrawString(font, "You gained 2 Experience.", new Vector2(725, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     }
@@ -158,8 +160,6 @@ namespace MiniRogue
 
                     break;
 
-                case TreasureTurnState.COMPLETE:
-                    break;
                 default:
                     break;
 
@@ -272,8 +272,6 @@ namespace MiniRogue
 
                         break;
 
-                    case TreasureTurnState.COMPLETE:
-                        break;
                     default:
                         break;
                 }
