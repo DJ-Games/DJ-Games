@@ -16,7 +16,6 @@ namespace MiniRogue
         CARDFLIP,
         GOLD_AWARD,
         EXTRA_TREASURE_ROLL,
-        TREASURE_ROLL,
         REMOVESPELL,
         REVIEW,
         COMPLETE,
@@ -30,12 +29,15 @@ namespace MiniRogue
 
         public bool Sucess { get; set; }
 
+        public int GoldAward { get; set; }
+
         public int ExtTreasureResult { get; set; }
 
         public int TreasureResult { get; set; }
 
         public string AwardedSpell { get; set; }
 
+        public bool TreasureAwarded { get; set; }
 
 
         TreasureTurnState treasureTurnState;
@@ -59,16 +61,17 @@ namespace MiniRogue
             switch (treasureTurnState)
             {
                 case TreasureTurnState.GOLD_AWARD:
+                    TreasureAwarded = false;
+                    if (player.HasFoughtMonster)
+                    {
+                        GoldAward = 2;
+                    }
+                    else { GoldAward = 1; }
                     HandleButtons(player);
 
                     return false;
 
                 case TreasureTurnState.EXTRA_TREASURE_ROLL:
-                    HandleButtons(player);
-
-                    return false;
-            
-                case TreasureTurnState.TREASURE_ROLL:
                     HandleButtons(player);
 
                     return false;
@@ -79,14 +82,10 @@ namespace MiniRogue
                     return false;
 
                 case TreasureTurnState.REVIEW:
-                    if (TreasureResult > 2 && player.Spells.Count == 2)
-                    {
-                        treasureTurnState = TreasureTurnState.REMOVESPELL;
-                    }
-                    else if (TreasureResult > 2)
+                    if (TreasureResult > 2 && !TreasureAwarded)
                     {
                         player.AddSpell(AwardedSpell);
-                        treasureTurnState = TreasureTurnState.COMPLETE;
+                        TreasureAwarded = true;
                     }
                     HandleButtons(player);
 
@@ -111,45 +110,51 @@ namespace MiniRogue
         public override void DrawCard(SpriteBatch sBatch, SpriteFont font)
         {
             sBatch.Draw(CardTexture, new Vector2(100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
-            sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 275), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
-            
-
+    
             switch (treasureTurnState)
             {
                 case TreasureTurnState.GOLD_AWARD:
+
+                    sBatch.DrawString(font, "You gained " + GoldAward + " gold!", new Vector2(730, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
+                    sBatch.DrawString(font, "Roll 5+ to find a treasure.", new Vector2(680, 250), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+
+
+
                     break;
                 case TreasureTurnState.EXTRA_TREASURE_ROLL:
 
-                    sBatch.DrawString(font, "Roll 5+ to find a treasure.", new Vector2(680, 200), Color.White);
-                   
+                    sBatch.DrawString(font, "You Rolled a:  " + ExtTreasureResult, new Vector2(725, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
+                    sBatch.DrawString(font, "You found a treasure!", new Vector2(670, 250), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
+                    sBatch.DrawString(font, "Roll for treasure.", new Vector2(715, 300), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
-                    break;
-                case TreasureTurnState.TREASURE_ROLL:
-
-                    sBatch.DrawString(font, "You found a treasure! Roll to determine what treasure you found.", new Vector2(520, 230), Color.White);
-                    sBatch.DrawString(font, "You Rolled a:  " + ExtTreasureResult, new Vector2(725, 200), Color.White);
                     break;
 
                 case TreasureTurnState.REMOVESPELL:
 
-                    sBatch.DrawString(font, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White);
-                    sBatch.DrawString(font, "Click spell you would like to remove or done to keep current spells.", new Vector2(520, 230), Color.White);
-                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(700, 275), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    sBatch.DrawString(font, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
+                    sBatch.DrawString(font, "Click spell you would like to remove or done to keep current spells.", new Vector2(520, 250), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
+                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
 
                 case TreasureTurnState.REVIEW:
                     
-                    if (ExtTreasureResult >= 5)
+                    if (TreasureResult > 2)
                     {
-                        sBatch.DrawString(font, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White);
+                        sBatch.DrawString(font, "You gained a " + AwardedSpell + " Spell.", new Vector2(725, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     }
 
+                    else if(TreasureResult == 1)
+                    {
+                        sBatch.DrawString(font, "You gained 1 armor.", new Vector2(725, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
+                    }
                     else
                     {
-                        sBatch.DrawString(font, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White);
+                        sBatch.DrawString(font, "You gained 2 Experience.", new Vector2(725, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     }
-                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(700, 275), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
 
@@ -169,74 +174,65 @@ namespace MiniRogue
                 switch (treasureTurnState)
                 {
                     case TreasureTurnState.GOLD_AWARD:
-                        if (player.HasFoughtMonster)
-                        {
-                            player.Gold += 2;
-                        }
-                        else
-                        {
-                            player.Gold++;
-                        }
 
-                        treasureTurnState = TreasureTurnState.EXTRA_TREASURE_ROLL;
-                        break;
-
-                    case TreasureTurnState.EXTRA_TREASURE_ROLL:
-                        Thread.Sleep(500);
-
-                        if (XPos > 700 && XPos < 948 && YPos > 275 && YPos < 348)
+                        player.Gold += GoldAward;
+                        if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 612)
                         {
+                            // die animation (probably make this in player?)
                             ExtTreasureResult = player.playerDice.RollDice();
-
-                            // Reset to 5 after testing
+                            // Set to zero for testing
                             if (ExtTreasureResult >= 0)
                             {
-                                treasureTurnState = TreasureTurnState.TREASURE_ROLL;
+                                treasureTurnState = TreasureTurnState.EXTRA_TREASURE_ROLL;
                             }
-                            else
+                            else { treasureTurnState = TreasureTurnState.REVIEW; }
+                            
+                        }
+                            break;
+
+                    case TreasureTurnState.EXTRA_TREASURE_ROLL:
+                        
+                        if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 612)
+                        {
+                            // add Die roll animation
+                            TreasureResult = player.playerDice.RollDice();
+
+                            switch (TreasureResult)
                             {
-                                treasureTurnState = TreasureTurnState.REVIEW;
+                                case 1:
+                                    player.Armor++;
+                                    break;
+
+                                case 2:
+                                    player.Experience += 2;
+                                    break;
+
+                                case 3:
+                                    AwardedSpell = "Fire";
+                                    break;
+
+                                case 4:
+                                    AwardedSpell = "Ice";
+                                    break;
+
+                                case 5:
+                                    AwardedSpell = "Poison";
+                                    break;
+
+                                case 6:
+                                    AwardedSpell = "Healing";
+                                    break;
+                                default:
+                                    break;
                             }
 
-                        }
-                        break;
-
-                    case TreasureTurnState.TREASURE_ROLL:
-
-                        if (XPos > 700 && XPos < 948 && YPos > 275 && YPos < 348)
-                        {
-                                TreasureResult = player.playerDice.RollDice();  
+                            if (TreasureResult > 2 && player.Spells.Count == 2)
+                            {
+                                treasureTurnState = TreasureTurnState.REMOVESPELL;
+                            }
+                            else { treasureTurnState = TreasureTurnState.REVIEW; }
                         }
 
-                        switch (TreasureResult)
-                        {
-                            case 1:
-                                player.Armor++;
-                                break;
-
-                            case 2:
-                                player.Experience += 2;
-                                break;
-
-                            case 3:
-                                AwardedSpell = "Fire";
-                                break;
-
-                            case 4:
-                                AwardedSpell = "Ice";
-                                break;
-
-                            case 5:
-                                AwardedSpell = "Poison";
-                                break;
-
-                            case 6:
-                                AwardedSpell = "Healing";
-                                break;
-                            default:
-                                break;
-                        }
-                        treasureTurnState = TreasureTurnState.REVIEW;
                         break;
 
                     case TreasureTurnState.REMOVESPELL:
@@ -250,6 +246,7 @@ namespace MiniRogue
                         {
                             player.RemoveSpell(0);
                             player.AddSpell(AwardedSpell);
+                            TreasureAwarded = true;
                             treasureTurnState = TreasureTurnState.REVIEW;
                         }
 
@@ -259,6 +256,7 @@ namespace MiniRogue
                             {
                                 player.RemoveSpell(1);
                                 player.AddSpell(AwardedSpell);
+                                TreasureAwarded = true;
                                 treasureTurnState = TreasureTurnState.REVIEW;
                             }
                         }
@@ -266,7 +264,7 @@ namespace MiniRogue
 
                     case TreasureTurnState.REVIEW:
                         
-                            if (XPos > 700 && XPos < 948 && YPos > 275 && YPos < 348)
+                            if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 612)
                             {
                                 treasureTurnState = TreasureTurnState.COMPLETE;
                             }
