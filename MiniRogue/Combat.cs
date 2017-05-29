@@ -557,9 +557,6 @@ namespace MiniRogue
                     default:
                         break;
                 }
-
-
-
             }
         }
 
