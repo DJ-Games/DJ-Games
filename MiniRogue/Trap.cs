@@ -14,15 +14,12 @@ namespace MiniRogue
     enum TrapTurnState
     {
         ROLL_FOR_TRAP,
+        ROLLANIMATION,
         SKILL_CHECK,
         RESOLVE_TRAP,
         REVIEW,
         COMPLETE,
     }
-
-
-
-
 
     class Trap : Card
     {
@@ -36,7 +33,19 @@ namespace MiniRogue
         }
 
         public int Result { get; set; }
+
         public int TrapResult { get; set; }
+
+        public int SkillCheckResult { get; set; }
+
+        public int AnimationCounter { get; set; }
+
+        public Die TrapDie { get; set; }
+
+        public Dictionary<string, Texture2D> DieTextures { get; set; }
+
+        public bool SkillCheck { get; set; }
+
         TrapTurnState trapTurnState;
 
 
@@ -45,6 +54,8 @@ namespace MiniRogue
            
             trapTurnState = TrapTurnState.ROLL_FOR_TRAP;
             CurrentButtons = new List<Button>();
+            DieTextures = dieTextures;
+            TrapDie = new Die(DieTextures, 840, 400);
         }
 
 
@@ -56,14 +67,97 @@ namespace MiniRogue
             CurrentMouseState = current;
             PreviousMouseState = previous;
 
-
             switch (trapTurnState)
             {
                 case TrapTurnState.ROLL_FOR_TRAP:
+                    SkillCheck = false;
                     HandleButtons(player);
                     return false;
 
+                case TrapTurnState.ROLLANIMATION:
+
+                    if (AnimationCounter < 60)
+                    {
+                        RollAnimation();
+                    }
+                    else
+                    {
+                        if (SkillCheck)
+                        {
+                            SkillCheckResult = player.playerDice.RollDice();
+                            TrapDie.CurrentTexture = TrapDie.DieTextures["Roll " + SkillCheckResult];
+                            if (SkillCheckResult <= player.Rank)
+                            {
+                                success = true;
+
+                                trapTurnState = TrapTurnState.REVIEW;
+                            }
+
+                            else
+                            {
+                                success = false;
+
+                                switch (TrapResult)
+                                {
+                                    case 1:
+
+                                        player.Food -= 1;
+                                        break;
+
+                                    case 2:
+
+                                        player.Gold -= 1;
+                                        break;
+
+                                    case 3:
+
+                                        if (player.Armor > 0)
+                                        {
+                                            player.Armor -= 1;
+                                        }
+                                        player.Health -= 2;
+
+                                        break;
+
+                                    case 4:
+
+                                        player.Health -= 1;
+                                        break;
+
+                                    case 5:
+
+                                        if (player.Experience > 1)
+                                        {
+                                            player.Experience -= 1;
+                                        }
+
+                                        break;
+
+                                    case 6:
+
+                                        player.FallBelow();
+                                        break;
+
+                                    default:
+                                        break;
+                                }
+
+                                trapTurnState = TrapTurnState.REVIEW;
+
+                            }
+                        }
+                        else
+                        {
+                            TrapResult = player.playerDice.RollDice();
+                            TrapDie.CurrentTexture = TrapDie.DieTextures["Roll " + TrapResult];
+                            trapTurnState = TrapTurnState.SKILL_CHECK;
+                        }
+                    }
+
+                    return false;
+
                 case TrapTurnState.SKILL_CHECK:
+                    AnimationCounter = 0;
                     HandleButtons(player);
                     return false;
 
@@ -72,6 +166,7 @@ namespace MiniRogue
                     return false; 
 
                 case TrapTurnState.REVIEW:
+                    AnimationCounter = 0;
                     HandleButtons(player);
                     return false;
 
@@ -91,84 +186,25 @@ namespace MiniRogue
                 switch (trapTurnState)
                 {
                     case TrapTurnState.ROLL_FOR_TRAP:
-                        if (XPos > 700 && XPos < 948 && YPos > 225 && YPos < 313)
+                        if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 612)
                         {
-                            TrapResult = player.playerDice.RollDice();
-                            trapTurnState = TrapTurnState.SKILL_CHECK;
+                            trapTurnState = TrapTurnState.ROLLANIMATION;
                         }
                        
                         break;
                    
                     case TrapTurnState.SKILL_CHECK:
  
-                        if (XPos > 700 && XPos < 948 && YPos > 420 && YPos < 493)
+                        if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 612)
                         {
-                            
-                            if (player.playerDice.RollDice() <= player.Rank)
-                            {
-                                success = true;
-
-                                trapTurnState = TrapTurnState.REVIEW;
-                            }
-
-                            else
-                            {
-                                success = false;
-
-                                switch (TrapResult)
-                                {
-                                    case 1:
-
-                                        player.Food-=1;
-                                        break;
-
-                                    case 2:
-
-                                        player.Gold-=1;
-                                        break;
-
-                                    case 3:
-
-                                        if (player.Armor > 0)
-                                        {
-                                            player.Armor-=1;
-                                        }
-                                        player.Health -=2;
-
-                                        break;
-
-                                    case 4:
-
-                                        player.Health-=1;
-                                        break;
-
-                                    case 5:
-
-                                        if (player.Experience > 1)
-                                        {
-                                            player.Experience-=1;
-                                        }
-
-                                        break;
-
-                                    case 6:
-
-                                        player.FallBelow();
-                                        break;
-
-                                    default:
-                                        break;
-                                }
-
-                                trapTurnState = TrapTurnState.REVIEW;
-                                
-                            }
+                            trapTurnState = TrapTurnState.ROLLANIMATION;
+                            SkillCheck = true;
                         }
 
                         break;                       
 
                     case TrapTurnState.REVIEW:
-                        if (XPos > 700 && XPos < 948 && YPos > 550 && YPos < 623)
+                        if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 612)
                         {
                             trapTurnState = TrapTurnState.COMPLETE;
                         }
@@ -195,16 +231,23 @@ namespace MiniRogue
             switch (trapTurnState)
             {
                 case TrapTurnState.ROLL_FOR_TRAP:
-                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 240), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
                     sBatch.DrawString(font, "Roll to determine the trap you face", new Vector2(660, 200), Color.White);          
                     break;
 
+                case TrapTurnState.ROLLANIMATION:
+
+                    TrapDie.DrawCombatDie(sBatch);
+
+                    break;
+
                 case TrapTurnState.SKILL_CHECK:
+
+                    
                     sBatch.DrawString(font, "Roll to determine the trap you face", new Vector2(660, 200), Color.White);
                     sBatch.DrawString(font, "You Rolled a:  " + TrapResult, new Vector2(725, 300), Color.White);
                     sBatch.DrawString(font, "Roll a skill check to evade the trap", new Vector2(660, 380), Color.White);
-                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 240), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
-                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 420), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
                     switch (TrapResult)
                     {
                         case 1:
@@ -234,17 +277,16 @@ namespace MiniRogue
                         default:
                             break;
                     }
-                  
+                    TrapDie.DrawCombatDie(sBatch);
+
                     break;
 
                 case TrapTurnState.REVIEW:
-                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(700, 550), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
-                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(700, 550), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+
+                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
                     sBatch.DrawString(font, "Roll to determine the trap you face", new Vector2(660, 200), Color.White);
                     sBatch.DrawString(font, "You Rolled a:  " + TrapResult, new Vector2(725, 300), Color.White);
                     sBatch.DrawString(font, "Roll a skill check to evade the trap", new Vector2(660, 380), Color.White);
-                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 240), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
-                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 420), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
 
                     if (success)
                     {
@@ -284,7 +326,7 @@ namespace MiniRogue
                                 break;
                         }
                     }
-
+                    TrapDie.DrawCombatDie(sBatch);
                     break;
 
                 case TrapTurnState.COMPLETE:
@@ -296,6 +338,13 @@ namespace MiniRogue
             }
      
         }
+
+        public void RollAnimation()
+        {
+            TrapDie.CurrentTexture = TrapDie.DieTextureList[Rng.Next(TrapDie.DieTextureList.Count - 1)];
+            AnimationCounter += 5;
+        }
+
 
     }
 }
