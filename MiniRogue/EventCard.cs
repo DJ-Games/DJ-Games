@@ -31,7 +31,7 @@ namespace MiniRogue
 
         public Combat CurrentCombat { get; set; }
 
-        public Dictionary<string, CombatDice> CombatDice { get; set; }
+        public Dictionary<string, Die> CombatDice { get; set; }
 
         public Dictionary<string, CheckBox> CheckBoxes { get; set; }
 
@@ -46,7 +46,7 @@ namespace MiniRogue
             CurrentButtons = new List<Button>();
         }
 
-        public EventCard(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons, Dictionary<string, CombatDice> combatDice, Dictionary<string, CheckBox> checkBoxes) : base(name, cardTexture, cardBack, buttons)
+        public EventCard(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons, Dictionary<string, Die> combatDice, Dictionary<string, CheckBox> checkBoxes) : base(name, cardTexture, cardBack, buttons)
         {
             eventCardTurnState = new EventCardTurnState();
             CurrentButtons = new List<Button>();

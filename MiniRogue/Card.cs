@@ -61,7 +61,7 @@ namespace MiniRogue
 
         public MouseState PreviousMouseState { get; set; }
 
-        public Dice Dice { get; set; }
+        public BasicDie Dice { get; set; }
 
         public Dictionary<string, Button> Buttons { get; set; }
 
@@ -87,7 +87,7 @@ namespace MiniRogue
             BackTexture = cardBack;
             CurrentTexture = cardBack;
             CardRectangle = new Rectangle(0, 0, 494, 708);
-            Dice = new Dice();
+            Dice = new BasicDie();
             Name = name;
             Buttons = buttons;
             ScaleVector = new Vector2(.43f, .43f);

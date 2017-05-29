@@ -45,7 +45,7 @@ namespace MiniRogue
 
         public void DrawNewHand(Texture2D enemyTex, Texture2D eventTex, Texture2D merchantTex,
             Texture2D restingTex, Texture2D trapTex, Texture2D treasureTex, Texture2D bossTex, Texture2D cardBack, Dictionary<string, Button> buttons,
-            Dictionary<string, CombatDice> combatDice, Dictionary<string, CheckBox> checkBoxes)
+            Dictionary<string, Die> combatDice, Dictionary<string, CheckBox> checkBoxes)
         {
             playerHand.Add(new Enemy("Enemy", enemyTex, cardBack, buttons, combatDice, checkBoxes));
 

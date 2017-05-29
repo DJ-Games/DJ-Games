@@ -139,7 +139,7 @@ namespace MiniRogue
 
         Player player;
         Hand playerHand;
-        Dice playerDice;
+        BasicDie playerDice;
         Card currentCard;
 
         int deviceWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
@@ -149,7 +149,7 @@ namespace MiniRogue
 
         Combat combat;
         Dictionary<string, Texture2D> dieTextures;
-        Dictionary<string, CombatDice> combatDice;
+        Dictionary<string, Die> combatDice;
         Dictionary<string, CheckBox> checkBoxes;
         Dictionary<string, Texture2D> spellIcons;
 
@@ -273,7 +273,7 @@ namespace MiniRogue
 
             position = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
                 graphics.GraphicsDevice.Viewport.Height / 2);
-            playerDice = new Dice();
+            playerDice = new BasicDie();
             playerHand = new Hand();
             buttonDictionay = new Dictionary<string, Button>();
             gamestate = Gamestate.TITILESCREEN;
@@ -283,7 +283,7 @@ namespace MiniRogue
 
             dieTextures = new Dictionary<string, Texture2D>();
 
-            combatDice = new Dictionary<string, CombatDice>();
+            combatDice = new Dictionary<string, Die>();
 
             checkBoxes = new Dictionary<string, CheckBox>();
 
@@ -297,10 +297,10 @@ namespace MiniRogue
             dieTextures.Add("Roll 6", die6);
             dieTextures.Add("Blank", dieBlank);
 
-            combatDice.Add("Combat Die 1", new CombatDice(dieTextures, 250, 450));
-            combatDice.Add("Combat Die 2", new CombatDice(dieTextures, 450, 450));
-            combatDice.Add("Combat Die 3", new CombatDice(dieTextures, 650, 450));
-            combatDice.Add("Combat Die 4", new CombatDice(dieTextures, 850, 450));
+            combatDice.Add("Combat Die 1", new Die(dieTextures, 250, 450));
+            combatDice.Add("Combat Die 2", new Die(dieTextures, 450, 450));
+            combatDice.Add("Combat Die 3", new Die(dieTextures, 650, 450));
+            combatDice.Add("Combat Die 4", new Die(dieTextures, 850, 450));
 
             checkBoxes.Add("Check Box 1", new CheckBox(checkBoxFull, checkBoxEmpty, checkBoxGray, 275, 380));
             checkBoxes.Add("Check Box 2", new CheckBox(checkBoxFull, checkBoxEmpty, checkBoxGray, 475, 380));

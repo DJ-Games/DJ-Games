@@ -40,7 +40,7 @@ namespace MiniRogue
 
         public Dictionary<string, Button> CombatButtons { get; set; }
 
-        public Dictionary<string, CombatDice> CombatDice { get; set; }
+        public Dictionary<string, Die> CombatDice { get; set; }
 
         public Dictionary<string, CheckBox> CheckBoxes { get; set; }
 
@@ -89,7 +89,7 @@ namespace MiniRogue
 
         //----------------------CONSTRUCTORS -------------------------
 
-        public Combat(Dictionary<string, Button> combatButtons, Dictionary<string, CombatDice> combatDice, Dictionary<string, CheckBox> checkBoxes)
+        public Combat(Dictionary<string, Button> combatButtons, Dictionary<string, Die> combatDice, Dictionary<string, CheckBox> checkBoxes)
         {
             CombatButtons = combatButtons;
             CombatDice = combatDice;

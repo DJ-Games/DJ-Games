@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MiniRogue
 {
-    class CombatDice
+    class Die
     {
 
         public String Name { get; set; }
@@ -48,7 +48,7 @@ namespace MiniRogue
 
 
 
-        public CombatDice(Dictionary<string, Texture2D> dieTextures, int xPos, int yPos)
+        public Die(Dictionary<string, Texture2D> dieTextures, int xPos, int yPos)
         {
             DieTextures = dieTextures;
             CurrentTexture = dieTextures["Blank"];
