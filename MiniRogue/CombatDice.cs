@@ -30,13 +30,11 @@ namespace MiniRogue
             }
         }
 
-
-
-        //public int Roll { get; set; }
-
         public Texture2D CurrentTexture { get; set; }
 
         public Dictionary<string, Texture2D> DieTextures { get; set; }
+
+        public List<Texture2D> DieTextureList { get; set; }
 
         public bool Active { get; set; }
 
@@ -46,6 +44,7 @@ namespace MiniRogue
 
         public bool FeatUsed { get; set; }
 
+        public Random Rng { get; set; }
 
 
 
@@ -55,7 +54,12 @@ namespace MiniRogue
             CurrentTexture = dieTextures["Blank"];
             Xpos = xPos;
             Ypos = yPos;
-
+            Rng = new Random();
+            DieTextureList = new List<Texture2D>();
+            for (int i = 1; i < 7; i++)
+            {
+                DieTextureList.Add(dieTextures["Roll " + i]);
+            }
         }
 
         public void HandleCombatDie()
@@ -66,6 +70,16 @@ namespace MiniRogue
         public void DrawCombatDie(SpriteBatch sBatch)
         {
             sBatch.Draw(CurrentTexture, new Vector2(Xpos, Ypos), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+        }
+
+        public void RollCombatDie()
+        {
+            int counter = 0;
+            while (counter < 100)
+            {
+                CurrentTexture = DieTextureList[Rng.Next(DieTextureList.Count - 1)];
+                counter++;
+            }
         }
 
 

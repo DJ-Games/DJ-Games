@@ -15,6 +15,7 @@ namespace MiniRogue
     {
         ENEMYHEALTHROLL,
         ROLLDIE,
+        ROLLANIMATION,
         RESOLVEDIE,
         USEFEAT,
         DEALDAMAGE,
@@ -83,6 +84,8 @@ namespace MiniRogue
 
         CombatState combatState = new CombatState();
 
+        public int AnimationCounter { get; set; }
+
 
         //----------------------CONSTRUCTORS -------------------------
 
@@ -133,8 +136,23 @@ namespace MiniRogue
                     HandleButtons(player);
                     return false;
 
+                case CombatState.ROLLANIMATION:
+
+                    if (AnimationCounter < 60)
+                    {
+                        RollAnimation();
+                    }
+                    else
+                    {
+                        RollInitialDie();
+                        combatState = CombatState.RESOLVEDIE;
+                    }
+
+                    return false;
+
                 case CombatState.RESOLVEDIE:
 
+                    AnimationCounter = 0;
                     HandleButtons(player);
                     return false;
 
@@ -218,9 +236,17 @@ namespace MiniRogue
                     sBatch.Draw(CombatButtons["Roll Die"].ButtonTexture, new Vector2(450, 250), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     sBatch.DrawString(dungeonFont, "Roll Combat Dice", new Vector2(400, 100), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
 
+                    break;
 
+                case CombatState.ROLLANIMATION:
+
+                    CombatDice["Combat Die 1"].DrawCombatDie(sBatch);
+                    CombatDice["Combat Die 2"].DrawCombatDie(sBatch);
+                    CombatDice["Combat Die 3"].DrawCombatDie(sBatch);
+                    CombatDice["Combat Die 4"].DrawCombatDie(sBatch);
 
                     break;
+
                 case CombatState.RESOLVEDIE:
 
                     // Develop a foreach type method for this type of thing since a normal foreach
@@ -329,11 +355,13 @@ namespace MiniRogue
 
                         break;
                     case CombatState.ROLLDIE:
+                        
+                        
 
                         if (XPos > 450 && XPos < 698 && YPos > 250 && YPos < 322)
-                        {
-                            RollInitialDie(); 
-                            combatState = CombatState.RESOLVEDIE;
+                        {                      
+                            
+                            combatState = CombatState.ROLLANIMATION;
                         }
 
                         break;
@@ -681,7 +709,7 @@ namespace MiniRogue
             }
 
             OneBoxChecked = false;
-            combatState = CombatState.RESOLVEDIE;
+            combatState = CombatState.ROLLANIMATION;
 
         }
 
@@ -796,6 +824,7 @@ namespace MiniRogue
             int die4Roll;
 
             if (ActiveDie > 0 && CheckBoxes["Check Box 1"].Checked)
+
             {
                 die1Roll = Rng.Next(6) + 1;
                 CombatDice["Combat Die 1"].Roll = die1Roll;
@@ -859,5 +888,30 @@ namespace MiniRogue
                     break;
             }
         }
+
+        public void RollAnimation()
+        {
+            if (ActiveDie > 0 && CheckBoxes["Check Box 1"].Checked)
+            {
+                CombatDice["Combat Die 1"].CurrentTexture = CombatDice["Combat Die 1"].DieTextureList[Rng.Next(CombatDice["Combat Die 1"].DieTextureList.Count - 1)];
+            }
+            if (ActiveDie > 1 && CheckBoxes["Check Box 1"].Checked)
+            {
+                CombatDice["Combat Die 2"].CurrentTexture = CombatDice["Combat Die 2"].DieTextureList[Rng.Next(CombatDice["Combat Die 2"].DieTextureList.Count - 1)];
+            }
+            if (ActiveDie > 2 && CheckBoxes["Check Box 1"].Checked)
+            {
+                CombatDice["Combat Die 3"].CurrentTexture = CombatDice["Combat Die 3"].DieTextureList[Rng.Next(CombatDice["Combat Die 3"].DieTextureList.Count - 1)];
+            }
+            if (ActiveDie > 3 && CheckBoxes["Check Box 1"].Checked)
+            {
+                CombatDice["Combat Die 4"].CurrentTexture = CombatDice["Combat Die 4"].DieTextureList[Rng.Next(CombatDice["Combat Die 4"].DieTextureList.Count - 1)];
+            }
+            AnimationCounter+=5;
+        }
+
+
+
+
     }
 }
