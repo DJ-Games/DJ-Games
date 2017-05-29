@@ -106,6 +106,7 @@ namespace MiniRogue
                             {
                                 eventCardTurnState = EventCardTurnState.HANDLE_EVENT;
                             }
+                            AnimationCounter = 0;
                         }
                         else
                         {
@@ -114,6 +115,7 @@ namespace MiniRogue
                             LoadInitialRollButtons(Option);
 
                             eventCardTurnState = EventCardTurnState.SKILL_CHECK;
+                            AnimationCounter = 0;
                         }
                     }
 

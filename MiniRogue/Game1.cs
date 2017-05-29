@@ -26,14 +26,19 @@ namespace MiniRogue
     enum CurrentTurnState
     {
         PRETURN1,
+        ANIMATECARD1,
         TURN1,
         PRETURN2,
+        ANIMATECARD2,
         TURN2,
         PRETURN3,
+        ANIMATECARD3,
         TURN3,
         PRETURN4,
+        ANIMATECARD4,
         TURN4,
         PREBOSS,
+        ANIMATEBOSSCARD,
         BOSS,
 
     }
@@ -492,8 +497,24 @@ namespace MiniRogue
                                 if (position.X > 75 && position.X < 270 && position.Y > 260 && position.Y < 535)
                                 {
                                     currentCard = playerHand.Card1;
-                                    currentTurnState = CurrentTurnState.TURN1;
+                                    playerHand.Card1.Moving = true;
+                                    currentTurnState = CurrentTurnState.ANIMATECARD1;
+                                    //currentTurnState = CurrentTurnState.TURN1;
                                 }
+                            }
+
+                            break;
+
+
+                        case CurrentTurnState.ANIMATECARD1:
+
+                            if (playerHand.Card1.Moving)
+                            {
+                                playerHand.Card1.SlideCard(1);
+                            }
+                            else
+                            {
+                                currentTurnState = CurrentTurnState.TURN1;
                             }
 
                             break;
@@ -785,7 +806,17 @@ namespace MiniRogue
                             playerHand.DrawHand(spriteBatch);
 
                             break;
+
+                        case CurrentTurnState.ANIMATECARD1:
+
+                            playerHand.DrawHand(spriteBatch);
+
+                            break;
+
                         case CurrentTurnState.TURN1:
+                            currentCard.ScaleVector = new Vector2(.43f, .43f);
+                            currentCard.LevelXpos = 75;
+                            currentCard.LevelYPos = 260;
                             currentCard.DrawCard(spriteBatch, dungeonFont);
                             break;
 
