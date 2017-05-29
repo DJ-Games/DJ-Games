@@ -148,6 +148,7 @@ namespace MiniRogue
                     if (MonsterHealth <= 0)
                     {
                         player.Experience += ExpReward;
+                        player.Gold += GoldReward;
                         combatState = CombatState.RESULTS;
                     }
                     else { combatState = CombatState.USESPELL; } 
@@ -519,6 +520,7 @@ namespace MiniRogue
                             if (MonsterHealth <= 0)
                             {
                                 player.Experience += ExpReward;
+                                player.Gold += GoldReward;
                                 combatState = CombatState.RESULTS;
                             }
                         }
@@ -532,6 +534,7 @@ namespace MiniRogue
                                 if (MonsterHealth <= 0)
                                 {
                                     player.Experience += ExpReward;
+                                    player.Gold += GoldReward; 
                                     combatState = CombatState.RESULTS;
                                 }
                             }
