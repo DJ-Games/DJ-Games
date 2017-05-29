@@ -909,7 +909,7 @@ namespace MiniRogue
         public void DrawNewHand()
         {
 
-            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, bossMonsterCard, cardBack, buttonDictionay, combatDice, checkBoxes);
+            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, bossMonsterCard, cardBack, buttonDictionay, combatDice, checkBoxes, dieTextures);
 
 
         } 

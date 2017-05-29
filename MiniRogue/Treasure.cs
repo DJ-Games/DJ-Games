@@ -13,8 +13,8 @@ namespace MiniRogue
 
     enum TreasureTurnState
     {
-        CARDFLIP,
         GOLD_AWARD,
+        ROLLANIMATION,
         EXTRA_TREASURE_ROLL,
         REMOVESPELL,
         REVIEW,
@@ -39,13 +39,22 @@ namespace MiniRogue
 
         public bool TreasureAwarded { get; set; }
 
+        public Dictionary<string, Texture2D> DieTextures { get; set; }
+
+        public Die TreasureDie { get; set; }
+
+        public int AnimationCounter { get; set; }
+
+        public bool TreasureRoll { get; set; }
 
         TreasureTurnState treasureTurnState;
 
-        public Treasure(string name, Texture2D cardTexture, Texture2D cardBack,  Dictionary<string, Button> buttons) : base(name, cardTexture, cardBack, buttons)
+        public Treasure(string name, Texture2D cardTexture, Texture2D cardBack,  Dictionary<string, Button> buttons, Dictionary<string, Texture2D> dieTextures) : base(name, cardTexture, cardBack, buttons)
         {
             treasureTurnState = TreasureTurnState.GOLD_AWARD;
-            CurrentButtons = new List<Button>(); 
+            CurrentButtons = new List<Button>();
+            DieTextures = dieTextures;
+            TreasureDie = new Die(DieTextures,840, 400);
         }
 
 
@@ -62,12 +71,79 @@ namespace MiniRogue
             {
                 case TreasureTurnState.GOLD_AWARD:
                     TreasureAwarded = false;
+                    TreasureRoll = false;
                     if (player.HasFoughtMonster)
                     {
                         GoldAward = 2;
                     }
                     else { GoldAward = 1; }
                     HandleButtons(player);
+
+                    return false;
+
+                case TreasureTurnState.ROLLANIMATION:
+
+                    if (AnimationCounter < 60)
+                    {
+                        RollAnimation();
+                    }
+                    else
+                    {
+                        if (TreasureRoll)
+                        {
+                            AnimationCounter = 0;
+                            TreasureResult = player.playerDice.RollDice();
+                            TreasureDie.CurrentTexture = TreasureDie.DieTextures["Roll " + TreasureResult];
+
+
+                            switch (TreasureResult)
+                            {
+                                case 1:
+                                    player.Armor++;
+                                    break;
+
+                                case 2:
+                                    player.Experience += 2;
+                                    break;
+
+                                case 3:
+                                    AwardedSpell = "Fire";
+                                    break;
+
+                                case 4:
+                                    AwardedSpell = "Ice";
+                                    break;
+
+                                case 5:
+                                    AwardedSpell = "Poison";
+                                    break;
+
+                                case 6:
+                                    AwardedSpell = "Healing";
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            if (TreasureResult > 2 && player.Spells.Count == 2)
+                            {
+                                treasureTurnState = TreasureTurnState.REMOVESPELL;
+                            }
+                            else { treasureTurnState = TreasureTurnState.REVIEW; }
+                        }
+                        else
+                        {
+                            AnimationCounter = 0;
+                            ExtTreasureResult = player.playerDice.RollDice();
+                            TreasureDie.CurrentTexture = TreasureDie.DieTextures["Roll " + ExtTreasureResult];
+                            // Set to zero for testing
+                            if (ExtTreasureResult >= 0)
+                            {
+                                treasureTurnState = TreasureTurnState.EXTRA_TREASURE_ROLL;
+                            }
+                            else { treasureTurnState = TreasureTurnState.REVIEW; }
+                        }
+                    }
 
                     return false;
 
@@ -118,11 +194,17 @@ namespace MiniRogue
                     sBatch.DrawString(font, "Roll 5+ to find a treasure.", new Vector2(680, 250), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
-
-
                     break;
+
+                case TreasureTurnState.ROLLANIMATION:
+
+                    TreasureDie.DrawCombatDie(sBatch);
+                   
+                    break;
+
                 case TreasureTurnState.EXTRA_TREASURE_ROLL:
 
+                    TreasureDie.DrawCombatDie(sBatch);
                     sBatch.DrawString(font, "You Rolled a:  " + ExtTreasureResult, new Vector2(725, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     sBatch.DrawString(font, "You found a treasure!", new Vector2(670, 250), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     sBatch.DrawString(font, "Roll for treasure.", new Vector2(715, 300), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
@@ -132,6 +214,7 @@ namespace MiniRogue
 
                 case TreasureTurnState.REMOVESPELL:
 
+                    TreasureDie.DrawCombatDie(sBatch);
                     sBatch.DrawString(font, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     sBatch.DrawString(font, "Click spell you would like to remove or done to keep current spells.", new Vector2(520, 250), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
@@ -139,7 +222,8 @@ namespace MiniRogue
                     break;
 
                 case TreasureTurnState.REVIEW:
-                    
+
+                    TreasureDie.DrawCombatDie(sBatch);
                     if (TreasureResult == 3 || TreasureResult == 5 || TreasureResult == 6)
                     {
                         sBatch.DrawString(font, "You gained a " + AwardedSpell + " Spell.", new Vector2(700, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
@@ -178,15 +262,7 @@ namespace MiniRogue
                         player.Gold += GoldAward;
                         if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 612)
                         {
-                            // die animation (probably make this in player?)
-                            ExtTreasureResult = player.playerDice.RollDice();
-                            // Set to zero for testing
-                            if (ExtTreasureResult >= 0)
-                            {
-                                treasureTurnState = TreasureTurnState.EXTRA_TREASURE_ROLL;
-                            }
-                            else { treasureTurnState = TreasureTurnState.REVIEW; }
-                            
+                            treasureTurnState = TreasureTurnState.ROLLANIMATION;                    
                         }
                             break;
 
@@ -194,43 +270,8 @@ namespace MiniRogue
                         
                         if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 612)
                         {
-                            // add Die roll animation
-                            TreasureResult = player.playerDice.RollDice();
-
-                            switch (TreasureResult)
-                            {
-                                case 1:
-                                    player.Armor++;
-                                    break;
-
-                                case 2:
-                                    player.Experience += 2;
-                                    break;
-
-                                case 3:
-                                    AwardedSpell = "Fire";
-                                    break;
-
-                                case 4:
-                                    AwardedSpell = "Ice";
-                                    break;
-
-                                case 5:
-                                    AwardedSpell = "Poison";
-                                    break;
-
-                                case 6:
-                                    AwardedSpell = "Healing";
-                                    break;
-                                default:
-                                    break;
-                            }
-
-                            if (TreasureResult > 2 && player.Spells.Count == 2)
-                            {
-                                treasureTurnState = TreasureTurnState.REMOVESPELL;
-                            }
-                            else { treasureTurnState = TreasureTurnState.REVIEW; }
+                            TreasureRoll = true;
+                            treasureTurnState = TreasureTurnState.ROLLANIMATION;
                         }
 
                         break;
@@ -278,7 +319,11 @@ namespace MiniRogue
             }
         }
 
-
+        public void RollAnimation()
+        {
+            TreasureDie.CurrentTexture = TreasureDie.DieTextureList[Rng.Next(TreasureDie.DieTextureList.Count - 1)];
+            AnimationCounter += 5;
+        }
 
     }
 }

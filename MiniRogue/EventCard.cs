@@ -46,7 +46,7 @@ namespace MiniRogue
             CurrentButtons = new List<Button>();
         }
 
-        public EventCard(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons, Dictionary<string, Die> combatDice, Dictionary<string, CheckBox> checkBoxes) : base(name, cardTexture, cardBack, buttons)
+        public EventCard(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons, Dictionary<string, Die> combatDice, Dictionary<string, CheckBox> checkBoxes, Dictionary<string, Texture2D> dieTextures) : base(name, cardTexture, cardBack, buttons)
         {
             eventCardTurnState = new EventCardTurnState();
             CurrentButtons = new List<Button>();

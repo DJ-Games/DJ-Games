@@ -75,6 +75,7 @@ namespace MiniRogue
             set { scaleVector = value; }
         }
 
+        public Random Rng { get; set; }
 
 
         //public Vector2 ScaleVector { get; set; }
@@ -91,6 +92,7 @@ namespace MiniRogue
             Name = name;
             Buttons = buttons;
             ScaleVector = new Vector2(.43f, .43f);
+            Rng = new Random();
             
         }
 

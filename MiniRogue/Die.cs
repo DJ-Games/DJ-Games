@@ -72,15 +72,6 @@ namespace MiniRogue
             sBatch.Draw(CurrentTexture, new Vector2(Xpos, Ypos), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
         }
 
-        public void RollCombatDie()
-        {
-            int counter = 0;
-            while (counter < 100)
-            {
-                CurrentTexture = DieTextureList[Rng.Next(DieTextureList.Count - 1)];
-                counter++;
-            }
-        }
 
 
     }
