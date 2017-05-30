@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MiniRogue
 {
-    class CombatDice
+    class Die
     {
 
         public String Name { get; set; }
@@ -30,13 +30,11 @@ namespace MiniRogue
             }
         }
 
-
-
-        //public int Roll { get; set; }
-
         public Texture2D CurrentTexture { get; set; }
 
         public Dictionary<string, Texture2D> DieTextures { get; set; }
+
+        public List<Texture2D> DieTextureList { get; set; }
 
         public bool Active { get; set; }
 
@@ -46,16 +44,22 @@ namespace MiniRogue
 
         public bool FeatUsed { get; set; }
 
+        public Random Rng { get; set; }
 
 
 
-        public CombatDice(Dictionary<string, Texture2D> dieTextures, int xPos, int yPos)
+        public Die(Dictionary<string, Texture2D> dieTextures, int xPos, int yPos)
         {
             DieTextures = dieTextures;
             CurrentTexture = dieTextures["Blank"];
             Xpos = xPos;
             Ypos = yPos;
-
+            Rng = new Random();
+            DieTextureList = new List<Texture2D>();
+            for (int i = 1; i < 7; i++)
+            {
+                DieTextureList.Add(dieTextures["Roll " + i]);
+            }
         }
 
         public void HandleCombatDie()
@@ -67,6 +71,7 @@ namespace MiniRogue
         {
             sBatch.Draw(CurrentTexture, new Vector2(Xpos, Ypos), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
         }
+
 
 
     }

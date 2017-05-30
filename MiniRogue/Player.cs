@@ -135,7 +135,7 @@ namespace MiniRogue
 
         public int DungeonArea { get; set; }
 
-        public Dice playerDice { get; set; }
+        public BasicDie playerDice { get; set; }
 
         public bool HasFoughtMonster { get; set; }
 
@@ -157,7 +157,7 @@ namespace MiniRogue
 
             HasFoughtMonster = false;
 
-            playerDice = new Dice();
+            playerDice = new BasicDie();
             Spells = new List<Spell>();
             SpellIcons = spellIcons;
         }

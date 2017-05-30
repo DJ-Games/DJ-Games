@@ -79,16 +79,19 @@ namespace MiniRogue
             switch (restingTurnState)
             {
                 case RestingTurnState.SELECTION:
-                    int counter = 200; 
+
+
+                    sBatch.DrawString(font, "You are resting. Choose an option.", new Vector2(575, 100), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
+                    int counter = 240; 
                     foreach (var item in CurrentButtons)
                     {
-                        sBatch.Draw(item.ButtonTexture, new Vector2(500, counter), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                        sBatch.Draw(item.ButtonTexture, new Vector2(770, counter), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                         counter += 150; 
                     }
                     break;
 
                 case RestingTurnState.REVIEW:
-                    sBatch.Draw(Buttons["Confirm Purchase Menu"].ButtonTexture, new Vector2(500, 320), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Confirm Purchase Menu"].ButtonTexture, new Vector2(580, 320), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     break;
 
                 case RestingTurnState.COMPLETE:
@@ -119,19 +122,19 @@ namespace MiniRogue
                 {
                     case RestingTurnState.SELECTION:
 
-                        if (XPos > 500 && XPos < 751 && YPos > 200 && YPos < 272)
+                        if (XPos > 770 && XPos < 1018 && YPos > 240 && YPos < 312)
                         {
                             PlayerChoice = "Reinforce Weapon";
                             restingTurnState = RestingTurnState.REVIEW;
                         }
 
-                        if (XPos > 500 && XPos < 751 && YPos > 350 && YPos < 422)
+                        if (XPos > 770 && XPos < 1018 && YPos > 390 && YPos < 462)
                         {
                             PlayerChoice = "Ration";
                             restingTurnState = RestingTurnState.REVIEW;
                         }
 
-                        if (XPos > 500 && XPos < 751 && YPos > 500 && YPos < 572)
+                        if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 612)
                         {
                             PlayerChoice = "Heal";
                             restingTurnState = RestingTurnState.REVIEW;
@@ -141,7 +144,7 @@ namespace MiniRogue
 
                     case RestingTurnState.REVIEW:
 
-                        if (XPos > 534 && XPos < 780 && YPos > 420 && YPos < 490)
+                        if (XPos > 614 && XPos < 860 && YPos > 420 && YPos < 490)
                         {
                             switch (PlayerChoice)
                             {
@@ -165,7 +168,7 @@ namespace MiniRogue
                             }
                         }
 
-                        if (XPos > 820 && XPos < 1070 && YPos > 420 && YPos < 490)
+                        if (XPos > 900 && XPos < 1150 && YPos > 420 && YPos < 490)
                         {
                             restingTurnState = RestingTurnState.SELECTION;
                         }

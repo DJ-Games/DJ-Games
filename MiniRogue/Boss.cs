@@ -35,7 +35,7 @@ namespace MiniRogue
 
         BossTurnState bossTurnState = new BossTurnState();
 
-        public Boss(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons, Dictionary<string, CombatDice> combatDice, Dictionary<string, CheckBox> checkBoxes) : base(name, cardTexture, cardBack, buttons)
+        public Boss(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons, Dictionary<string, Die> combatDice, Dictionary<string, CheckBox> checkBoxes) : base(name, cardTexture, cardBack, buttons)
         {
             Buttons = buttons;
             CombatDice = combatDice;

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace MiniRogue
 {
-    class Dice
+    class BasicDie
     {
 
         public int roll { get; set; }
 
         public Random rGen { get; set; }
 
-        public Dice()
+        public BasicDie()
         {
             rGen = new Random();
         }

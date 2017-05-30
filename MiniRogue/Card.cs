@@ -34,15 +34,6 @@ namespace MiniRogue
             }
         }
 
-
-        private Rectangle cardRectangle;
-
-        public Rectangle CardRectangle
-        {
-            get { return cardRectangle; }
-            set { cardRectangle = value; }
-        }
-
         public Texture2D BackTexture { get; set; }
 
         public Texture2D CardTexture { get; set; }
@@ -61,7 +52,7 @@ namespace MiniRogue
 
         public MouseState PreviousMouseState { get; set; }
 
-        public Dice Dice { get; set; }
+        public BasicDie Dice { get; set; }
 
         public Dictionary<string, Button> Buttons { get; set; }
 
@@ -75,7 +66,11 @@ namespace MiniRogue
             set { scaleVector = value; }
         }
 
+        public Random Rng { get; set; }
 
+        public int AnimationCounter { get; set; }
+
+        public bool Moving { get; set; }
 
         //public Vector2 ScaleVector { get; set; }
 
@@ -86,11 +81,11 @@ namespace MiniRogue
             CardTexture = cardTexture;
             BackTexture = cardBack;
             CurrentTexture = cardBack;
-            CardRectangle = new Rectangle(0, 0, 494, 708);
-            Dice = new Dice();
+            Dice = new BasicDie();
             Name = name;
             Buttons = buttons;
             ScaleVector = new Vector2(.43f, .43f);
+            Rng = new Random();
             
         }
 
@@ -111,7 +106,63 @@ namespace MiniRogue
             return false;
         }
 
+        public void SlideCard(int cardNumber)
+        {
+            switch (cardNumber)
+            {
+                case 1:
 
+                    ScaleVector = new Vector2(ScaleVector.X + .0107f, ScaleVector.Y + .0107f);
+                    LevelXpos += .83f;
+                    LevelYPos -= 5.3f;
+
+                    if (LevelXpos > 100)
+                    {
+                        Moving = false;
+                    }
+
+                    break;
+
+                case 2:
+                    
+
+
+                    break;
+
+                case 3:
+
+
+
+                    break;
+
+                case 4:
+
+
+
+                    break;
+
+                case 5:
+
+
+
+                    break;
+
+                case 6:
+
+
+
+                    break;
+
+                case 7:
+
+
+
+                    break;
+
+                default:
+                    break;
+            }
+        }
 
 
 

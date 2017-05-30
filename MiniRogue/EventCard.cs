@@ -14,6 +14,7 @@ namespace MiniRogue
     enum EventCardTurnState
     {
         INITIAL_ROLL,
+        ROLLANIMATION,
         SKILL_CHECK,
         ADJUSTOPTION,
         HANDLE_EVENT,
@@ -31,9 +32,19 @@ namespace MiniRogue
 
         public Combat CurrentCombat { get; set; }
 
-        public Dictionary<string, CombatDice> CombatDice { get; set; }
+        public Dictionary<string, Die> CombatDice { get; set; }
 
         public Dictionary<string, CheckBox> CheckBoxes { get; set; }
+
+        public int AnimationCounter { get; set; }
+
+        public int SkillCheckResult { get; set; }
+
+        public Die EventDie { get; set; }
+
+        public Dictionary<string, Texture2D> DieTextures { get; set; }
+
+        public bool SkillCheck { get; set; }
 
         EventCardTurnState eventCardTurnState;
 
@@ -46,13 +57,15 @@ namespace MiniRogue
             CurrentButtons = new List<Button>();
         }
 
-        public EventCard(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons, Dictionary<string, CombatDice> combatDice, Dictionary<string, CheckBox> checkBoxes) : base(name, cardTexture, cardBack, buttons)
+        public EventCard(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons, Dictionary<string, Die> combatDice, Dictionary<string, CheckBox> checkBoxes, Dictionary<string, Texture2D> dieTextures) : base(name, cardTexture, cardBack, buttons)
         {
             eventCardTurnState = new EventCardTurnState();
             CurrentButtons = new List<Button>();
             Buttons = buttons;
             CombatDice = combatDice;
             CheckBoxes = checkBoxes;
+            DieTextures = dieTextures;
+            EventDie = new Die(DieTextures, 840, 400);
         }
 
         //---------------------- METHODS -----------------------------
@@ -61,37 +74,29 @@ namespace MiniRogue
         {
             XPos = xPos;
             YPos = yPos;
-            //PreviousMouseState = CurrentMouseState;
             CurrentMouseState = current;
             PreviousMouseState = previous;
 
             switch (eventCardTurnState)
             {
                 case EventCardTurnState.INITIAL_ROLL:
+                    SkillCheck = false;
+                    HandleButtons(player);
 
+                    return false;
 
-                    if (SingleMouseClick())
+                case EventCardTurnState.ROLLANIMATION:
+
+                    if (AnimationCounter < 60)
                     {
-                        if (xPos > 700 && xPos < 948 && yPos > 575 && yPos < 648)
-                        {
-
-                            Option = player.playerDice.RollDice();
-                            LoadInitialRollButtons(Option);
-                            
-                            Thread.Sleep(500);
-                            eventCardTurnState = EventCardTurnState.SKILL_CHECK;
-
-                        }
+                        RollAnimation();
                     }
-
-                    break;
-                case EventCardTurnState.SKILL_CHECK:
-
-                    if (SingleMouseClick())
+                    else
                     {
-                        if (xPos > 700 && xPos < 948 && yPos > 575 && yPos < 648)
+                        if (SkillCheck)
                         {
-                            if (player.playerDice.RollDice() <= player.Rank)
+                            SkillCheckResult = player.playerDice.RollDice();
+                            if (SkillCheckResult <= player.Rank)
                             {
                                 CurrentButtons.Clear();
                                 LoadSkillCheckButtons();
@@ -101,30 +106,47 @@ namespace MiniRogue
                             {
                                 eventCardTurnState = EventCardTurnState.HANDLE_EVENT;
                             }
+                            AnimationCounter = 0;
+                        }
+                        else
+                        {
+                            Option = player.playerDice.RollDice();
+                            EventDie.CurrentTexture = EventDie.DieTextures["Roll " + Option];
+                            LoadInitialRollButtons(Option);
+
+                            eventCardTurnState = EventCardTurnState.SKILL_CHECK;
+                            AnimationCounter = 0;
                         }
                     }
 
 
-                    break;
+
+                    return false;
+                
+                case EventCardTurnState.SKILL_CHECK:
+
+                    HandleButtons(player);
+
+                    return false;
 
                 case EventCardTurnState.ADJUSTOPTION:
 
                     HandleButtons(player);
 
-                    break;
+                    return false;
 
                 case EventCardTurnState.HANDLE_EVENT:
 
                     HandleButtons(player);
 
-                    break;
+                    return false;
 
                 case EventCardTurnState.FIGHT_MONSTER:
 
                     HandleButtons(player);
 
 
-                    break;
+                    return false;
 
                 case EventCardTurnState.COMBAT:
 
@@ -133,7 +155,7 @@ namespace MiniRogue
                         eventCardTurnState = EventCardTurnState.COMPLETE;
                     }
 
-                    break;
+                    return false;
 
 
 
@@ -141,13 +163,9 @@ namespace MiniRogue
 
                     return true;
 
-
-
                 default:
-                    break;
+                    return false;
             }
-
-            return false;
 
 
         }
@@ -162,7 +180,16 @@ namespace MiniRogue
                     sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 575), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
 
                     break;
+
+                case EventCardTurnState.ROLLANIMATION:
+
+                    EventDie.DrawCombatDie(sBatch);
+
+                    break;
+
                 case EventCardTurnState.SKILL_CHECK:
+
+                    EventDie.DrawCombatDie(sBatch);
                     sBatch.DrawString(dungeonFont, "Roll for skill check.", new Vector2(500, 200), Color.White);
                     sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 575), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
 
@@ -177,6 +204,7 @@ namespace MiniRogue
 
                 case EventCardTurnState.ADJUSTOPTION:
 
+                    EventDie.DrawCombatDie(sBatch);
                     int counter2 = 550;
                     foreach (var item in CurrentButtons)
                     {
@@ -190,6 +218,7 @@ namespace MiniRogue
 
                 case EventCardTurnState.HANDLE_EVENT:
 
+                    EventDie.DrawCombatDie(sBatch);
                     int counter3 = 550;
                     foreach (var item in CurrentButtons)
                     {
@@ -381,238 +410,263 @@ namespace MiniRogue
 
         public void HandleButtons(Player player)
         {
-            switch (eventCardTurnState)
+            if (SingleMouseClick())
             {
-                case EventCardTurnState.ADJUSTOPTION:
+                switch (eventCardTurnState)
+                {
 
-                    if (SingleMouseClick())
-                    {
-                        switch (Option)
+                    case EventCardTurnState.INITIAL_ROLL:
+
+                        if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
                         {
-                            case 1:
 
+                            eventCardTurnState = EventCardTurnState.ROLLANIMATION;
 
-                                if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
-                                {
-                                    player.Food++;
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
-                                }
-
-                                if (XPos > 630 && XPos < 710 && YPos > 475 && YPos < 555)
-                                {
-                                    player.Health += 2;
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
-                                }
-
-                                if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
-                                {
-                                    eventCardTurnState = EventCardTurnState.FIGHT_MONSTER;
-                                }
-
-                                break;
-                            case 2:
-
-
-                                if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
-                                {
-                                    player.Food++;
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
-                                }
-
-                                if (XPos > 630 && XPos < 710 && YPos > 475 && YPos < 555)
-                                {
-                                    player.Health += 2;
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
-                                }
-
-                                if (XPos > 710 && XPos < 790 && YPos > 475 && YPos < 555)
-                                {
-                                    player.Gold++;
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
-                                }
-
-                                break;
-                            case 3:
-
-
-                                if (XPos > 630 && XPos < 710 && YPos > 475 && YPos < 555)
-                                {
-                                    player.Health += 2;
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
-                                }
-
-                                if (XPos > 710 && XPos < 790 && YPos > 475 && YPos < 555)
-                                {
-                                    player.Gold++;
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
-                                }
-
-                                if (XPos > 790 && XPos < 870 && YPos > 475 && YPos < 555)
-                                {
-                                    player.Experience += 2;
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
-                                }
-
-                                break;
-                            case 4:
-
-
-                                if (XPos > 710 && XPos < 790 && YPos > 475 && YPos < 555)
-                                {
-                                    player.Gold++;
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
-                                }
-
-                                if (XPos > 790 && XPos < 870 && YPos > 475 && YPos < 555)
-                                {
-                                    player.Experience += 2;
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
-                                }
-
-                                if (XPos > 870 && XPos < 950 && YPos > 475 && YPos < 555)
-                                {
-                                    player.Armor++;
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
-                                }
-
-                                break;
-                            case 5:
-
-
-                                if (XPos > 790 && XPos < 870 && YPos > 475 && YPos < 555)
-                                {
-                                    player.Experience += 2;
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
-                                }
-
-                                if (XPos > 870 && XPos < 950 && YPos > 475 && YPos < 555)
-                                {
-                                    player.Armor++;
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
-                                }
-
-                                if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
-                                {
-                                    eventCardTurnState = EventCardTurnState.FIGHT_MONSTER;
-                                }
-
-                                break;
-                            case 6:
-
-
-                                if (XPos > 870 && XPos < 950 && YPos > 475 && YPos < 555)
-                                {
-                                    player.Armor++;
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
-                                }
-
-                                if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
-                                {
-                                    eventCardTurnState = EventCardTurnState.FIGHT_MONSTER;
-                                }
-
-                                if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
-                                {
-                                    player.Food++;
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
-                                }
-
-                                break;
-
-                            default:
-                                break;
                         }
-                    }
+
+                        break;
+
+                    case EventCardTurnState.SKILL_CHECK:
+
+                        if (XPos > 700 && XPos < 948 && YPos > 575 && YPos < 648)
+                        {
+                            SkillCheck = true;
+                            eventCardTurnState = EventCardTurnState.ROLLANIMATION;
+                        }
+
+                        break;
+
+                    case EventCardTurnState.ADJUSTOPTION:
+
+                            switch (Option)
+                            {
+                                case 1:
 
 
-                    break;
+                                    if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
+                                    {
+                                        player.Food++;
+                                        eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    }
 
-                case EventCardTurnState.HANDLE_EVENT:
+                                    if (XPos > 630 && XPos < 710 && YPos > 475 && YPos < 555)
+                                    {
+                                        player.Health += 2;
+                                        eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    }
 
-                    if (SingleMouseClick())
-                    {
+                                    if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
+                                    {
+                                        eventCardTurnState = EventCardTurnState.FIGHT_MONSTER;
+                                    }
+
+                                    break;
+                                case 2:
+
+
+                                    if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
+                                    {
+                                        player.Food++;
+                                        eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    }
+
+                                    if (XPos > 630 && XPos < 710 && YPos > 475 && YPos < 555)
+                                    {
+                                        player.Health += 2;
+                                        eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    }
+
+                                    if (XPos > 710 && XPos < 790 && YPos > 475 && YPos < 555)
+                                    {
+                                        player.Gold++;
+                                        eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    }
+
+                                    break;
+                                case 3:
+
+
+                                    if (XPos > 630 && XPos < 710 && YPos > 475 && YPos < 555)
+                                    {
+                                        player.Health += 2;
+                                        eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    }
+
+                                    if (XPos > 710 && XPos < 790 && YPos > 475 && YPos < 555)
+                                    {
+                                        player.Gold++;
+                                        eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    }
+
+                                    if (XPos > 790 && XPos < 870 && YPos > 475 && YPos < 555)
+                                    {
+                                        player.Experience += 2;
+                                        eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    }
+
+                                    break;
+                                case 4:
+
+
+                                    if (XPos > 710 && XPos < 790 && YPos > 475 && YPos < 555)
+                                    {
+                                        player.Gold++;
+                                        eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    }
+
+                                    if (XPos > 790 && XPos < 870 && YPos > 475 && YPos < 555)
+                                    {
+                                        player.Experience += 2;
+                                        eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    }
+
+                                    if (XPos > 870 && XPos < 950 && YPos > 475 && YPos < 555)
+                                    {
+                                        player.Armor++;
+                                        eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    }
+
+                                    break;
+                                case 5:
+
+
+                                    if (XPos > 790 && XPos < 870 && YPos > 475 && YPos < 555)
+                                    {
+                                        player.Experience += 2;
+                                        eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    }
+
+                                    if (XPos > 870 && XPos < 950 && YPos > 475 && YPos < 555)
+                                    {
+                                        player.Armor++;
+                                        eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    }
+
+                                    if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
+                                    {
+                                        eventCardTurnState = EventCardTurnState.FIGHT_MONSTER;
+                                    }
+
+                                    break;
+                                case 6:
+
+
+                                    if (XPos > 870 && XPos < 950 && YPos > 475 && YPos < 555)
+                                    {
+                                        player.Armor++;
+                                        eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    }
+
+                                    if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
+                                    {
+                                        eventCardTurnState = EventCardTurnState.FIGHT_MONSTER;
+                                    }
+
+                                    if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
+                                    {
+                                        player.Food++;
+                                        eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    }
+
+                                    break;
+
+                                default:
+                                    break;
+                            }
                         
-                        switch (Option)
+
+
+                        break;
+
+                    case EventCardTurnState.HANDLE_EVENT:
+
+                            switch (Option)
+                            {
+                                case 1:
+
+                                    if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
+                                    {
+                                        player.Food++;
+                                        eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    }
+
+                                    break;
+                                case 2:
+
+                                    if (XPos > 630 && XPos < 710 && YPos > 475 && YPos < 555)
+                                    {
+                                        player.Health += 2;
+                                        eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    }
+
+                                    break;
+                                case 3:
+
+                                    if (XPos > 710 && XPos < 790 && YPos > 475 && YPos < 555)
+                                    {
+                                        player.Gold++;
+                                        eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    }
+
+                                    break;
+                                case 4:
+
+                                    if (XPos > 790 && XPos < 870 && YPos > 475 && YPos < 555)
+                                    {
+                                        player.Experience += 2;
+                                        eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    }
+
+                                    break;
+                                case 5:
+
+                                    if (XPos > 870 && XPos < 950 && YPos > 475 && YPos < 555)
+                                    {
+                                        player.Armor++;
+                                        eventCardTurnState = EventCardTurnState.COMPLETE;
+                                    }
+
+                                    break;
+                                case 6:
+
+                                    if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
+                                    {
+                                        eventCardTurnState = EventCardTurnState.FIGHT_MONSTER;
+                                    }
+
+                                    break;
+
+                                default:
+                                    break;
+
+                            }
+
+                        break;
+
+                    case EventCardTurnState.FIGHT_MONSTER:
+
+                        if (XPos > 700 && XPos < 948 && YPos > 500 && YPos < 572)
                         {
-                            case 1:
-                            
-                                if (XPos > 550 && XPos < 630 && YPos > 475 && YPos < 555)
-                                {
-                                    player.Food++;
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
-                                }
-                           
-                                break;
-                            case 2:
 
-                                if (XPos > 630 && XPos < 710 && YPos > 475 && YPos < 555)
-                                {
-                                    player.Health += 2;
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
-                                }
-
-                                break;
-                            case 3:
-
-                                if (XPos > 710 && XPos < 790 && YPos > 475 && YPos < 555)
-                                {
-                                    player.Gold++;
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
-                                }
-                         
-                                break;
-                            case 4:
-
-                                if (XPos > 790 && XPos < 870 && YPos > 475 && YPos < 555)
-                                {
-                                    player.Experience += 2;
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
-                                }
-
-                                break;
-                            case 5:
-
-                                if (XPos > 870 && XPos < 950 && YPos > 475 && YPos < 555)
-                                {
-                                    player.Armor++;
-                                    eventCardTurnState = EventCardTurnState.COMPLETE;
-                                }
-
-                                break;
-                            case 6:
-
-                                if (XPos > 950 && XPos < 1030 && YPos > 475 && YPos < 555)
-                                {
-                                    eventCardTurnState = EventCardTurnState.FIGHT_MONSTER;
-                                }
-
-                                break;
-
-                            default:
-                                break;
+                            CurrentCombat = new Combat(Buttons, CombatDice, CheckBoxes);
+                            eventCardTurnState = EventCardTurnState.COMBAT;
 
                         }
 
+                        break;
 
-
-                    }
-
-                break;
-
-                case EventCardTurnState.FIGHT_MONSTER:
-
-                    if (XPos > 700 && XPos < 948 && YPos > 500 && YPos < 572)
-                    {
-
-                        CurrentCombat = new Combat(Buttons, CombatDice, CheckBoxes);
-                        eventCardTurnState = EventCardTurnState.COMBAT;
-
-                    }
-
-                    break;
-
+                }
             }
 
+            
+
+        }
+
+
+        public void RollAnimation()
+        {
+            EventDie.CurrentTexture = EventDie.DieTextureList[Rng.Next(EventDie.DieTextureList.Count - 1)];
+            AnimationCounter += 5;
         }
 
     }

@@ -42,7 +42,7 @@ namespace MiniRogue
 
         //Constructors
 
-        public Merchant(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons) : base(name, cardTexture, cardBack, buttons)
+        public Merchant(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons, Dictionary<string, Texture2D> dieTextures) : base(name, cardTexture, cardBack, buttons)
         {
             merchantTurnState = new MerchantTurnState();
             CurrentButtons = new List<Button>();
