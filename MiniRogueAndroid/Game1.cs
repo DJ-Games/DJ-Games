@@ -5,14 +5,45 @@ using Microsoft.Xna.Framework.Input.Touch;
 
 namespace MiniRogueAndroid
 {
-    /// <summary>
-    /// This is the main type for your game.
-    /// </summary>
+
+    // Game and turn state enumerators    
+
+    enum Gamestate
+    {
+        TITILESCREEN,
+        DIFFICULTY_SELECT,
+        HACKANDSLASH,
+        DELVING,
+        GAME_OVER,
+        CREDITS,
+        COMBATTESTING,
+    }
+
+    enum TurnState
+    {
+        PRETURN1,
+        ANIMATECARD1,
+        TURN1,
+        PRETURN2,
+        ANIMATECARD2,
+        TURN2,
+        PRETURN3,
+        ANIMATECARD3,
+        TURN3,
+        PRETURN4,
+        ANIMATECARD4,
+        TURN4,
+        PREBOSS,
+        ANIMATEBOSSCARD,
+        BOSS,
+
+    }
+
+
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
 
         // Resolution Independence
         Vector2 virtualScreen = new Vector2(1280, 720);
@@ -20,15 +51,29 @@ namespace MiniRogueAndroid
         Matrix Scale;
 
         // Touch
-        TouchCollection currentTouchState;
-        TouchCollection previousTouchState;
+        TouchCollection touchState;
 
+        //States
+        Gamestate gameState;
+        TurnState turnState;
 
+        // Title Screen Animation
+        bool doorsOpen;
+        bool eyesOnScreen;
+        int counter;
+        float eyeOpacity = 0.0f;
+        Vector2 rightdoor = new Vector2(261, 141);
+        Vector2 leftDoor = new Vector2(99, 140);
+        Vector2 guy = new Vector2(-450, 250);
 
-        Texture2D backGround;
-        Texture2D titleScreen;
+        // Initialize Textures
+        Texture2D titleBlank;
+        Texture2D titleRightDoor;
+        Texture2D titleLeftDoor;
+        Texture2D titleEyes;
+        Texture2D titleGuy;
+        Texture2D titleBlack;
 
-        bool title;
 
 
         public Game1()
@@ -66,8 +111,17 @@ namespace MiniRogueAndroid
 
             // TODO: use this.Content to load your game content here
 
-            backGround = Content.Load<Texture2D>("GameScreen");
-            titleScreen = Content.Load<Texture2D>("TitleScreen");
+            // Title Screen Animation
+            titleBlank = Content.Load<Texture2D>("Title_Screen");
+            titleRightDoor = Content.Load<Texture2D>("Title_Screen_Right_Door");
+            titleLeftDoor = Content.Load<Texture2D>("Title_Screen_Left_Door");
+            titleEyes = Content.Load<Texture2D>("Title_Screen_Eyes");
+            titleGuy = Content.Load<Texture2D>("Title_Screen_Guy");
+            titleBlack = Content.Load<Texture2D>("Title_Screen_Background");
+
+
+
+
 
         }
 
@@ -87,10 +141,6 @@ namespace MiniRogueAndroid
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                Exit();
-
-            // TODO: Add your update logic here
 
             // Calculate ScalingFactor
             float widthScale = (float)GraphicsDevice.PresentationParameters.BackBufferWidth / virtualScreen.X;
@@ -98,20 +148,34 @@ namespace MiniRogueAndroid
             ScalingFactor = new Vector3(widthScale, heightScale, 1);
             Scale = Matrix.CreateScale(ScalingFactor);
 
-            currentTouchState = TouchPanel.GetState();
+            // Touch update
+            touchState = TouchPanel.GetState();
 
-            if (TouchControl())
+            switch (gameState)
             {
-                if (title)
-                {
-                    title = false;
-                }
-                else { title = true; }
+                case Gamestate.TITILESCREEN:
+
+                    TitleScreenAnim();
+
+                    break;
+                case Gamestate.DIFFICULTY_SELECT:
+                    break;
+                case Gamestate.HACKANDSLASH:
+                    break;
+                case Gamestate.DELVING:
+                    break;
+                case Gamestate.GAME_OVER:
+                    break;
+                case Gamestate.CREDITS:
+                    break;
+                case Gamestate.COMBATTESTING:
+                    break;
+                default:
+                    break;
             }
 
 
 
-            previousTouchState = currentTouchState;
 
             base.Update(gameTime);
         }
@@ -124,19 +188,35 @@ namespace MiniRogueAndroid
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
-
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, Scale);
 
-            if (title)
+            switch (gameState)
             {
-                spriteBatch.Draw(titleScreen, new Vector2(0, 0), Color.White);
-            }
-            else
-            {
-                spriteBatch.Draw(backGround, new Vector2(0, 0), Color.White);
-            }
+                case Gamestate.TITILESCREEN:
 
+                    spriteBatch.Draw(titleBlack, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(titleRightDoor, rightdoor, new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(titleLeftDoor, leftDoor, new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(titleBlank, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(titleEyes, new Vector2(165, 110), new Rectangle?(), Color.White * eyeOpacity, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(titleGuy, guy, new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+
+                    break;
+                case Gamestate.DIFFICULTY_SELECT:
+                    break;
+                case Gamestate.HACKANDSLASH:
+                    break;
+                case Gamestate.DELVING:
+                    break;
+                case Gamestate.GAME_OVER:
+                    break;
+                case Gamestate.CREDITS:
+                    break;
+                case Gamestate.COMBATTESTING:
+                    break;
+                default:
+                    break;
+            }
 
 
             spriteBatch.End();
@@ -144,9 +224,9 @@ namespace MiniRogueAndroid
             base.Draw(gameTime);
         }
 
-        public bool TouchControl()
+        public bool TouchControl(int xPos, int yPos)
         {
-            foreach (var touch in currentTouchState)
+            foreach (var touch in touchState)
             {
                 if (touch.State == TouchLocationState.Pressed && touch.Position.X > 100 && touch.Position.Y > 100)
                 {
@@ -154,6 +234,32 @@ namespace MiniRogueAndroid
                 }
             }
             return false;
+        }
+
+        public void TitleScreenAnim()
+        {
+            counter++;
+            if (counter > 60 && !doorsOpen && !(leftDoor.X < -60))
+            {
+                leftDoor.X -= 3;
+                rightdoor.X += 3;
+            }
+            if (leftDoor.X < -60)
+            {
+                doorsOpen = true;
+            }
+            if (doorsOpen && !eyesOnScreen)
+            {
+                eyeOpacity += .03f;
+            }
+            if (eyeOpacity > 1)
+            {
+                eyesOnScreen = true;
+            }
+            if (eyesOnScreen && guy.X < -20)
+            {
+                guy.X += 10;
+            }
         }
 
     }
