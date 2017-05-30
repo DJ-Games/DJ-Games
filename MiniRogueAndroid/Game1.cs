@@ -2,6 +2,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
+using System.Collections.Generic;
+
 
 namespace MiniRogueAndroid
 {
@@ -122,7 +124,6 @@ namespace MiniRogueAndroid
 
 
 
-
         }
 
         /// <summary>
@@ -148,14 +149,21 @@ namespace MiniRogueAndroid
             ScalingFactor = new Vector3(widthScale, heightScale, 1);
             Scale = Matrix.CreateScale(ScalingFactor);
 
-            // Touch update
+            // Touch update and transfrom
             touchState = TouchPanel.GetState();
+            
+                      
 
             switch (gameState)
             {
                 case Gamestate.TITILESCREEN:
 
                     TitleScreenAnim();
+
+                    if (TouchControl(800, 1050, 372, 446))
+                    {
+                        gameState = Gamestate.DIFFICULTY_SELECT;
+                    }
 
                     break;
                 case Gamestate.DIFFICULTY_SELECT:
@@ -176,6 +184,10 @@ namespace MiniRogueAndroid
 
 
 
+
+
+
+            
 
             base.Update(gameTime);
         }
@@ -224,11 +236,13 @@ namespace MiniRogueAndroid
             base.Draw(gameTime);
         }
 
-        public bool TouchControl(int xPos, int yPos)
+        public bool TouchControl(int xPosMin, int xPosMax, int yPosMin, int yPosMax)
         {
             foreach (var touch in touchState)
             {
-                if (touch.State == TouchLocationState.Pressed && touch.Position.X > 100 && touch.Position.Y > 100)
+                if (touch.State == TouchLocationState.Pressed && (touch.Position.X / ScalingFactor.X)
+                    < xPosMax && (touch.Position.X / ScalingFactor.X) > xPosMin && (touch.Position.Y / ScalingFactor.Y)
+                    < yPosMax && (touch.Position.Y / ScalingFactor.Y) > yPosMin)
                 {
                     return true;
                 }
