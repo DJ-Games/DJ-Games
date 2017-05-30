@@ -696,10 +696,11 @@ namespace MiniRogue
 
                     if (BossFight)
                     {
-                        Damage = 3;
-                        ExpReward = 2;
-                        GoldReward = 2;
                         MonsterHealth = 10;
+                        Damage = 3;
+                        GoldReward = 2;
+                        ExpReward = 2;
+
                     }
                     else
                     {
@@ -714,15 +715,15 @@ namespace MiniRogue
 
                     if (BossFight)
                     {
+                        MonsterHealth = 15;
                         Damage = 5;
-                        ExpReward = 2;
                         GoldReward = 2;
-                        monsterHealth = 15;
+                        ExpReward = 3;
                     }
                     else
                     {
                         Damage = 4;
-                        ExpReward = 2;
+                        ExpReward = 1;
                         GoldReward = 0;
                     }
 
@@ -733,10 +734,10 @@ namespace MiniRogue
 
                     if (BossFight)
                     {
+                        MonsterHealth = 20;
                         Damage = 7;
-                        ExpReward = 2;
                         GoldReward = 3;
-                        monsterHealth = 20;
+                        ExpReward = 4;
                     }
                     else
                     {
@@ -752,15 +753,15 @@ namespace MiniRogue
 
                     if (BossFight)
                     {
+                        MonsterHealth = 25;
                         Damage = 9;
-                        ExpReward = 2;
                         GoldReward = 3;
-                        monsterHealth = 25;
+                        ExpReward = 5;
                     }
                     else
                     {
                         Damage = 8;
-                        ExpReward = 3;
+                        ExpReward = 2;
                         GoldReward = 0;
                     }
 
@@ -770,10 +771,10 @@ namespace MiniRogue
 
                     if (BossFight)
                     {
+                        MonsterHealth = 30;
                         Damage = 12;
-                        ExpReward = 0;
                         GoldReward = 0;
-                        monsterHealth = 30;        
+                        ExpReward = 0;
                     }
                     else
                     {
