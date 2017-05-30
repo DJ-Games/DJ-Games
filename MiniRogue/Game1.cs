@@ -146,6 +146,8 @@ namespace MiniRogue
         Hand playerHand;
         BasicDie playerDice;
         Card currentCard;
+        int currentCardNumber;
+        float colorMultiplyer = 1;
 
         int deviceWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
         int deviceHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
@@ -497,6 +499,7 @@ namespace MiniRogue
                                 if (position.X > 75 && position.X < 270 && position.Y > 260 && position.Y < 535)
                                 {
                                     currentCard = playerHand.Card1;
+                                    currentCardNumber = 1;
                                     playerHand.Card1.Moving = true;
                                     currentTurnState = CurrentTurnState.ANIMATECARD1;
                                     //currentTurnState = CurrentTurnState.TURN1;
@@ -510,7 +513,7 @@ namespace MiniRogue
 
                             if (playerHand.Card1.Moving)
                             {
-                                playerHand.Card1.SlideCard(1);
+                                playerHand.Card1.SlideCard(currentCardNumber);
                             }
                             else
                             {
@@ -520,7 +523,11 @@ namespace MiniRogue
                             break;
 
                         case CurrentTurnState.TURN1:
-                            if(currentCard.HandleCard(player, mouseState, prevMouseState, position.X, position.Y))
+                            currentCard.ScaleVector = new Vector2(.43f, .43f);
+                            currentCard.LevelXpos = 75;
+                            currentCard.LevelYPos = 260;
+                            colorMultiplyer = 1f;
+                            if (currentCard.HandleCard(player, mouseState, prevMouseState, position.X, position.Y))
                             {
                                 currentTurnState = CurrentTurnState.PRETURN2;
                             }
@@ -538,22 +545,54 @@ namespace MiniRogue
                                 if (position.X > 300 && position.X < 495 && position.Y > 100 && position.Y < 375)
                                 {
                                     currentCard = playerHand.Card2;
-                                    currentTurnState = CurrentTurnState.TURN2;
+                                    currentCardNumber = 2;
+                                    playerHand.Card2.Moving = true;
+                                    currentTurnState = CurrentTurnState.ANIMATECARD2;
 
                                 }
 
                                 if (position.X > 300 && position.X < 495 && position.Y > 400 && position.Y < 575)
                                 {
                                     currentCard = playerHand.Card3;
-                                    currentTurnState = CurrentTurnState.TURN2;
+                                    currentCardNumber = 3;
+                                    playerHand.Card3.Moving = true;
+                                    currentTurnState = CurrentTurnState.ANIMATECARD2;
                                 }
                             }
 
+                            break;
 
+                        case CurrentTurnState.ANIMATECARD2:
 
-                            break;          
+                            if (playerHand.Card2.Moving)
+                            {
+                                playerHand.Card2.SlideCard(currentCardNumber);
+                            }
+                            else if (playerHand.Card3.Moving)
+                            {
+                                playerHand.Card3.SlideCard(currentCardNumber);
+                            }
+                            else
+                            {
+                                currentTurnState = CurrentTurnState.TURN2;
+                            }
+
+                            break;    
 
                         case CurrentTurnState.TURN2:
+                            currentCard.ScaleVector = new Vector2(.43f, .43f);
+                            colorMultiplyer = 1f;
+                            if (currentCardNumber == 2)
+                            {
+                                currentCard.LevelXpos = 300;
+                                currentCard.LevelYPos = 100;
+                            }
+                            if (currentCardNumber == 3)
+                            {
+                                currentCard.LevelXpos = 300;
+                                currentCard.LevelYPos = 400;
+                            }
+
 
                             if (currentCard.HandleCard(player, mouseState, prevMouseState, position.X, position.Y))
                             {
@@ -809,20 +848,26 @@ namespace MiniRogue
 
                         case CurrentTurnState.ANIMATECARD1:
 
-                            playerHand.DrawHand(spriteBatch);
+                            CardSlideAnim();
+
+                            //playerHand.DrawHand(spriteBatch);
 
                             break;
 
                         case CurrentTurnState.TURN1:
-                            currentCard.ScaleVector = new Vector2(.43f, .43f);
-                            currentCard.LevelXpos = 75;
-                            currentCard.LevelYPos = 260;
                             currentCard.DrawCard(spriteBatch, dungeonFont);
                             break;
 
                         case CurrentTurnState.PRETURN2:
 
                             playerHand.DrawHand(spriteBatch);
+
+                            break;
+
+                        case CurrentTurnState.ANIMATECARD2:
+
+                            CardSlideAnim();
+                            //playerHand.DrawHand(spriteBatch);
 
                             break;
 
@@ -992,6 +1037,69 @@ namespace MiniRogue
             if (eyesOnScreen && guy.X < 0)
             {
                 guy.X += 10;
+            }
+        }
+
+        public void CardSlideAnim()
+        {
+            colorMultiplyer -= .033f;
+            switch (currentCardNumber)
+            {
+
+                case 1:
+
+                    spriteBatch.Draw(playerHand.Card2.CurrentTexture, new Vector2(playerHand.Card2.LevelXpos, playerHand.Card2.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card2.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card3.CurrentTexture, new Vector2(playerHand.Card3.LevelXpos, playerHand.Card3.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card3.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card4.CurrentTexture, new Vector2(playerHand.Card4.LevelXpos, playerHand.Card4.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card4.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card5.CurrentTexture, new Vector2(playerHand.Card5.LevelXpos, playerHand.Card5.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card5.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card6.CurrentTexture, new Vector2(playerHand.Card6.LevelXpos, playerHand.Card6.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card6.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card7.CurrentTexture, new Vector2(playerHand.Card7.LevelXpos, playerHand.Card7.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card7.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card1.CurrentTexture, new Vector2(playerHand.Card1.LevelXpos, playerHand.Card1.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(0, 0), playerHand.Card1.ScaleVector, SpriteEffects.None, 1);
+
+                    break;
+
+                case 2:
+
+                    spriteBatch.Draw(playerHand.Card1.CurrentTexture, new Vector2(playerHand.Card1.LevelXpos, playerHand.Card1.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card1.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card3.CurrentTexture, new Vector2(playerHand.Card3.LevelXpos, playerHand.Card3.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card3.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card4.CurrentTexture, new Vector2(playerHand.Card4.LevelXpos, playerHand.Card4.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card4.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card5.CurrentTexture, new Vector2(playerHand.Card5.LevelXpos, playerHand.Card5.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card5.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card6.CurrentTexture, new Vector2(playerHand.Card6.LevelXpos, playerHand.Card6.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card6.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card7.CurrentTexture, new Vector2(playerHand.Card7.LevelXpos, playerHand.Card7.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card7.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card2.CurrentTexture, new Vector2(playerHand.Card2.LevelXpos, playerHand.Card2.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(0, 0), playerHand.Card2.ScaleVector, SpriteEffects.None, 1);
+
+                    break;
+
+                case 3:
+
+                    spriteBatch.Draw(playerHand.Card1.CurrentTexture, new Vector2(playerHand.Card1.LevelXpos, playerHand.Card1.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card1.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card2.CurrentTexture, new Vector2(playerHand.Card2.LevelXpos, playerHand.Card2.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card2.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card4.CurrentTexture, new Vector2(playerHand.Card4.LevelXpos, playerHand.Card4.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card4.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card5.CurrentTexture, new Vector2(playerHand.Card5.LevelXpos, playerHand.Card5.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card5.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card6.CurrentTexture, new Vector2(playerHand.Card6.LevelXpos, playerHand.Card6.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card6.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card7.CurrentTexture, new Vector2(playerHand.Card7.LevelXpos, playerHand.Card7.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card7.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card3.CurrentTexture, new Vector2(playerHand.Card3.LevelXpos, playerHand.Card3.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(0, 0), playerHand.Card3.ScaleVector, SpriteEffects.None, 1);
+
+                    break;
+
+                case 4:
+
+                    break;
+
+                case 5:
+
+                    break;
+
+                case 6:
+
+                    break;
+
+                case 7:
+
+                    break;
+
+                default:
+                    break;
             }
         }
 

@@ -116,7 +116,7 @@ namespace MiniRogue
                     LevelXpos += .83f;
                     LevelYPos -= 5.3f;
 
-                    if (LevelXpos > 100)
+                    if (scaleVector.X > .75f)
                     {
                         Moving = false;
                     }
@@ -124,14 +124,28 @@ namespace MiniRogue
                     break;
 
                 case 2:
-                    
 
+                    ScaleVector = new Vector2(ScaleVector.X + .0107f, ScaleVector.Y + .0107f);
+                    LevelXpos -= 6.7f;
+                   
+
+                    if (scaleVector.X > .75f)
+                    {
+                        Moving = false;
+                    }
 
                     break;
 
                 case 3:
 
+                    ScaleVector = new Vector2(ScaleVector.X + .0107f, ScaleVector.Y + .0107f);
+                    LevelXpos -= 6.7f;
+                    LevelYPos -= 10f;
 
+                    if (scaleVector.X > .75f)
+                    {
+                        Moving = false;
+                    }
 
                     break;
 
