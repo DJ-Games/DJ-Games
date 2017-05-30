@@ -728,7 +728,7 @@ namespace MiniRogue
                             player.HasFoughtMonster = false;
                             playerHand = new Hand();
                             DrawNewHand();
-                            player.Food--;
+                            player.Food-=1;
 
                             if (player.Food == 0)
                             {
