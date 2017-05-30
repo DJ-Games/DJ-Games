@@ -848,7 +848,7 @@ namespace MiniRogue
 
                         case CurrentTurnState.ANIMATECARD1:
 
-                            CardSlideAnim();
+                            DrawSlidingCards();
 
                             //playerHand.DrawHand(spriteBatch);
 
@@ -866,7 +866,7 @@ namespace MiniRogue
 
                         case CurrentTurnState.ANIMATECARD2:
 
-                            CardSlideAnim();
+                            DrawSlidingCards();
                             //playerHand.DrawHand(spriteBatch);
 
                             break;
@@ -1040,7 +1040,7 @@ namespace MiniRogue
             }
         }
 
-        public void CardSlideAnim()
+        public void DrawSlidingCards()
         {
             colorMultiplyer -= .033f;
             switch (currentCardNumber)
