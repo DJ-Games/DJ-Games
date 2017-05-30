@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Input.Touch;
 
 namespace MiniRogueAndroid
 {
@@ -11,6 +12,24 @@ namespace MiniRogueAndroid
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+
+        // Resolution Independence
+        Vector2 virtualScreen = new Vector2(1280, 720);
+        Vector3 ScalingFactor;
+        Matrix Scale;
+
+        // Touch
+        TouchCollection currentTouchState;
+        TouchCollection previousTouchState;
+
+
+
+        Texture2D backGround;
+        Texture2D titleScreen;
+
+        bool title;
+
 
         public Game1()
         {
@@ -46,6 +65,10 @@ namespace MiniRogueAndroid
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+
+            backGround = Content.Load<Texture2D>("GameScreen");
+            titleScreen = Content.Load<Texture2D>("TitleScreen");
+
         }
 
         /// <summary>
@@ -69,6 +92,27 @@ namespace MiniRogueAndroid
 
             // TODO: Add your update logic here
 
+            // Calculate ScalingFactor
+            float widthScale = (float)GraphicsDevice.PresentationParameters.BackBufferWidth / virtualScreen.X;
+            float heightScale = (float)GraphicsDevice.PresentationParameters.BackBufferHeight / virtualScreen.Y;
+            ScalingFactor = new Vector3(widthScale, heightScale, 1);
+            Scale = Matrix.CreateScale(ScalingFactor);
+
+            currentTouchState = TouchPanel.GetState();
+
+            if (TouchControl())
+            {
+                if (title)
+                {
+                    title = false;
+                }
+                else { title = true; }
+            }
+
+
+
+            previousTouchState = currentTouchState;
+
             base.Update(gameTime);
         }
 
@@ -82,7 +126,35 @@ namespace MiniRogueAndroid
 
             // TODO: Add your drawing code here
 
+            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, Scale);
+
+            if (title)
+            {
+                spriteBatch.Draw(titleScreen, new Vector2(0, 0), Color.White);
+            }
+            else
+            {
+                spriteBatch.Draw(backGround, new Vector2(0, 0), Color.White);
+            }
+
+
+
+            spriteBatch.End();
+
             base.Draw(gameTime);
         }
+
+        public bool TouchControl()
+        {
+            foreach (var touch in currentTouchState)
+            {
+                if (touch.State == TouchLocationState.Pressed && touch.Position.X > 100 && touch.Position.Y > 100)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 }
