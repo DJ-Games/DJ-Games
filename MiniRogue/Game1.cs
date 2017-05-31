@@ -445,8 +445,6 @@ namespace MiniRogue
 
                 case Gamestate.DIFFICULTY_SELECT:
 
-                    //----- Begin Mouse controls -----
-
                     if (SingleMouseClick())
                     {
                         if (position.X > 800 && position.X < 1050 && position.Y > 167 && position.Y < 241)
@@ -610,14 +608,32 @@ namespace MiniRogue
                                 if (position.X > 525 && position.X < 720 && position.Y > 260 && position.Y < 535)
                                 {
                                     currentCard = playerHand.Card4;
-                                    currentTurnState = CurrentTurnState.TURN3;
+                                    currentCardNumber = 4;
+                                    playerHand.Card4.Moving = true;
+                                    currentTurnState = CurrentTurnState.ANIMATECARD3;
                                 }
                             }
 
                             break;
 
-                        case CurrentTurnState.TURN3:
+                        case CurrentTurnState.ANIMATECARD3:
 
+                            if (playerHand.Card4.Moving)
+                            {
+                                playerHand.Card4.SlideCard(currentCardNumber);
+                            }
+                            else
+                            {
+                                currentTurnState = CurrentTurnState.TURN3;
+                            }
+
+                            break;
+
+                        case CurrentTurnState.TURN3:
+                            currentCard.ScaleVector = new Vector2(.43f, .43f);
+                            currentCard.LevelXpos = 525;
+                            currentCard.LevelYPos = 260;
+                            colorMultiplyer = 1f;
                             if (currentCard.HandleCard(player, mouseState, prevMouseState, position.X, position.Y))
                             {
                                 currentTurnState = CurrentTurnState.PRETURN4;
@@ -635,7 +651,9 @@ namespace MiniRogue
                                 if (position.X > 750 && position.X < 945 && position.Y > 100 && position.Y < 375)
                                 {
                                     currentCard = playerHand.Card5;
-                                    currentTurnState = CurrentTurnState.TURN4;
+                                    currentCardNumber = 5;
+                                    playerHand.Card5.Moving = true;
+                                    currentTurnState = CurrentTurnState.ANIMATECARD4;
 
                                 }
 
@@ -643,16 +661,45 @@ namespace MiniRogue
                                 if (position.X > 750 && position.X < 945 && position.Y > 400 && position.Y < 575)
                                 {
                                     currentCard = playerHand.Card6;
-                                    currentTurnState = CurrentTurnState.TURN4;
+                                    currentCardNumber = 6;
+                                    playerHand.Card6.Moving = true;
+                                    currentTurnState = CurrentTurnState.ANIMATECARD4;
                                 }
                             }
 
 
                             break;
 
+                        case CurrentTurnState.ANIMATECARD4:
+
+                            if (playerHand.Card5.Moving)
+                            {
+                                playerHand.Card5.SlideCard(currentCardNumber);
+                            }
+                            else if (playerHand.Card6.Moving)
+                            {
+                                playerHand.Card6.SlideCard(currentCardNumber);
+                            }
+                            else
+                            {
+                                currentTurnState = CurrentTurnState.TURN4;
+                            }
+
+                            break;
 
                         case CurrentTurnState.TURN4:
-
+                            currentCard.ScaleVector = new Vector2(.43f, .43f);
+                            colorMultiplyer = 1f;
+                            if (currentCardNumber == 5)
+                            {
+                                currentCard.LevelXpos = 750;
+                                currentCard.LevelYPos = 100;
+                            }
+                            if (currentCardNumber == 6)
+                            {
+                                currentCard.LevelXpos = 750;
+                                currentCard.LevelYPos = 400;
+                            }
                             if (currentCard.HandleCard(player, mouseState, prevMouseState, position.X, position.Y))
                             {
                                 if (player.DungeonArea == 2 || player.DungeonArea == 4 || player.DungeonArea == 7 || player.DungeonArea == 10 || player.DungeonArea == 14)
@@ -735,12 +782,6 @@ namespace MiniRogue
                                 player.Health -= 2;
                             }
 
-                            //playerHand.Card1.Flipped = false;
-                            //playerHand.Card2.Flipped = false;
-                            //playerHand.Card3.Flipped = false;
-                            //playerHand.Card4.Flipped = false;
-                            //playerHand.Card5.Flipped = false;
-                            //playerHand.Card6.Flipped = false;
                             gamestate = Gamestate.HACKANDSLASH;
                             currentTurnState = CurrentTurnState.PRETURN1;
                         }
@@ -882,6 +923,12 @@ namespace MiniRogue
 
                             break;
 
+                        case CurrentTurnState.ANIMATECARD3:
+
+                            DrawSlidingCards();
+
+                            break;
+
                         case CurrentTurnState.TURN3:
 
 
@@ -892,6 +939,12 @@ namespace MiniRogue
                         case CurrentTurnState.PRETURN4:
 
                             playerHand.DrawHand(spriteBatch);
+
+                            break;
+
+                        case CurrentTurnState.ANIMATECARD4:
+
+                            DrawSlidingCards();
 
                             break;
 

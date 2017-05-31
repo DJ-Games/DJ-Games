@@ -151,19 +151,41 @@ namespace MiniRogue
 
                 case 4:
 
+                    ScaleVector = new Vector2(ScaleVector.X + .0107f, ScaleVector.Y + .0107f);
+                    LevelXpos -= 14.17f;
+                    LevelYPos -= 5.3f;
+
+                    if (scaleVector.X > .75f)
+                    {
+                        Moving = false;
+                    }
 
 
                     break;
 
                 case 5:
 
+                    ScaleVector = new Vector2(ScaleVector.X + .0107f, ScaleVector.Y + .0107f);
+                    LevelXpos -= 21.7f;
 
+
+                    if (scaleVector.X > .75f)
+                    {
+                        Moving = false;
+                    }
 
                     break;
 
                 case 6:
 
+                    ScaleVector = new Vector2(ScaleVector.X + .0107f, ScaleVector.Y + .0107f);
+                    LevelXpos -= 21.7f;
+                    LevelYPos -= 10f;
 
+                    if (scaleVector.X > .75f)
+                    {
+                        Moving = false;
+                    }
 
                     break;
 
