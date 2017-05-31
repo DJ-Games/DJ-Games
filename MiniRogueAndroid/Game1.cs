@@ -68,7 +68,12 @@ namespace MiniRogueAndroid
         Vector2 leftDoor = new Vector2(99, 140);
         Vector2 guy = new Vector2(-450, 250);
 
-        // Initialize Textures
+        // Player
+        Player player;
+
+        // ------------- Initialize Textures ------------------
+
+        // Title Screen
         Texture2D titleBlank;
         Texture2D titleRightDoor;
         Texture2D titleLeftDoor;
@@ -76,6 +81,18 @@ namespace MiniRogueAndroid
         Texture2D titleGuy;
         Texture2D titleBlack;
 
+        // Select Screen
+        Texture2D difficultyScreen;
+
+        // Spell Icons
+        Texture2D fireSpellIcon;
+        Texture2D healthSpellIcon;
+        Texture2D iceSpellIcon;
+        Texture2D poisonSpellIcon;
+        Dictionary<string, Texture2D> spellIcons;
+
+
+        // ----------------------------------------------------
 
 
         public Game1()
@@ -111,7 +128,7 @@ namespace MiniRogueAndroid
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            // --------------------- Load Textures ----------------------------
 
             // Title Screen Animation
             titleBlank = Content.Load<Texture2D>("Title_Screen");
@@ -121,8 +138,23 @@ namespace MiniRogueAndroid
             titleGuy = Content.Load<Texture2D>("Title_Screen_Guy");
             titleBlack = Content.Load<Texture2D>("Title_Screen_Background");
 
+            // Difficulty select screen
+            difficultyScreen = Content.Load<Texture2D>("Difficulty_Select_Screen");
 
+            // Spell Icons
+            fireSpellIcon = Content.Load<Texture2D>("Fire_Spell_Icon");
+            healthSpellIcon = Content.Load<Texture2D>("Healing_Spell_Icon");
+            iceSpellIcon = Content.Load<Texture2D>("Ice_Spell_Icon");
+            poisonSpellIcon = Content.Load<Texture2D>("Poison_Spell_Icon");
 
+            spellIcons = new Dictionary<string, Texture2D>();
+
+            spellIcons.Add("Fire Spell Icon", fireSpellIcon);
+            spellIcons.Add("Healing Spell Icon", healthSpellIcon);
+            spellIcons.Add("Ice Spell Icon", iceSpellIcon);
+            spellIcons.Add("Poison Spell Icon", poisonSpellIcon);
+
+            // ----------------------------------------------------------------
 
         }
 
@@ -166,10 +198,41 @@ namespace MiniRogueAndroid
                     }
 
                     break;
+
                 case Gamestate.DIFFICULTY_SELECT:
+
+                    if (TouchControl(800, 1050, 167, 241))
+                    {
+                        player = new Player(1, 5, 50, 6, spellIcons);
+                        //DrawNewHand();
+                        gameState = Gamestate.HACKANDSLASH;
+                    }
+                    if (TouchControl(800, 1050, 270, 344))
+                    {
+                        player = new Player(0, 5, 3, 6, spellIcons);
+                        //DrawNewHand();
+                        gameState = Gamestate.HACKANDSLASH;
+                    }
+                    if (TouchControl(800, 1050, 373, 447))
+                    {
+                        player = new Player(0, 4, 2, 5, spellIcons);
+                        //DrawNewHand();
+                        gameState = Gamestate.HACKANDSLASH;
+                    }
+                    if (TouchControl(800, 1050, 476, 550))
+                    {
+                        player = new Player(0, 3, 1, 3, spellIcons);
+                        //DrawNewHand();
+                        gameState = Gamestate.HACKANDSLASH;
+                    }
+
                     break;
                 case Gamestate.HACKANDSLASH:
+
+     
+
                     break;
+
                 case Gamestate.DELVING:
                     break;
                 case Gamestate.GAME_OVER:
@@ -215,6 +278,9 @@ namespace MiniRogueAndroid
 
                     break;
                 case Gamestate.DIFFICULTY_SELECT:
+
+                    spriteBatch.Draw(difficultyScreen, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+
                     break;
                 case Gamestate.HACKANDSLASH:
                     break;
