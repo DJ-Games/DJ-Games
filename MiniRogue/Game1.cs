@@ -724,15 +724,32 @@ namespace MiniRogue
                                 if (position.X > 925 && position.X < 1120 && position.Y > 260 && position.Y < 535)
                                 {
                                     currentCard = playerHand.Card7;
-                                    currentTurnState = CurrentTurnState.BOSS;
+                                    currentCardNumber = 7;
+                                    playerHand.Card7.Moving = true;
+                                    currentTurnState = CurrentTurnState.ANIMATEBOSSCARD;
                                 }
                             }
 
                             break;
 
+                        case CurrentTurnState.ANIMATEBOSSCARD:
+
+                            if (playerHand.Card7.Moving)
+                            {
+                                playerHand.Card7.SlideCard(currentCardNumber);
+                            }
+                            else
+                            {
+                                currentTurnState = CurrentTurnState.BOSS;
+                            }
+
+                            break;
 
                         case CurrentTurnState.BOSS:
-
+                            currentCard.ScaleVector = new Vector2(.43f, .43f);
+                            currentCard.LevelXpos = 975;
+                            currentCard.LevelYPos = 260;
+                            colorMultiplyer = 1f;
                             if (currentCard.HandleCard(player, mouseState, prevMouseState, position.X, position.Y))
                             {
                                 gamestate = Gamestate.DELVING;
@@ -958,6 +975,12 @@ namespace MiniRogue
                         case CurrentTurnState.PREBOSS:
 
                             playerHand.DrawHand(spriteBatch);
+
+                            break;
+
+                        case CurrentTurnState.ANIMATEBOSSCARD:
+
+                            DrawSlidingCards();
 
                             break;
 
