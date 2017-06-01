@@ -107,8 +107,8 @@ namespace MiniRogue
         {
             XPos = xPos;
             YPos = yPos;
-            PreviousMouseState = CurrentMouseState;
-
+            CurrentMouseState = current;
+            PreviousMouseState = previous;
 
             switch (combatState)
             {
@@ -227,13 +227,13 @@ namespace MiniRogue
             {
                 case CombatState.ENEMYHEALTHROLL:
 
-                    sBatch.Draw(CombatButtons["Roll Die"].ButtonTexture, new Vector2(450, 250), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(CombatButtons["Roll Die"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     sBatch.DrawString(dungeonFont, "Roll For Monster Health", new Vector2(365, 100), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
 
                     break;
                 case CombatState.ROLLDIE:
 
-                    sBatch.Draw(CombatButtons["Roll Die"].ButtonTexture, new Vector2(450, 250), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(CombatButtons["Roll Die"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     sBatch.DrawString(dungeonFont, "Roll Combat Dice", new Vector2(400, 100), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
 
                     break;
@@ -344,11 +344,10 @@ namespace MiniRogue
                 {
                     case CombatState.ENEMYHEALTHROLL:
 
-                        if (XPos > 450 && XPos < 698 && YPos > 250 && YPos < 322)
+                        if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 612)
                         {
                             
                             monsterHealth = player.DungeonArea + player.playerDice.RollDice();
-                            Thread.Sleep(500);
                             combatState = CombatState.ROLLDIE;
 
                         }
@@ -358,7 +357,7 @@ namespace MiniRogue
                         
                         
 
-                        if (XPos > 450 && XPos < 698 && YPos > 250 && YPos < 322)
+                        if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 612)
                         {                      
                             
                             combatState = CombatState.ROLLANIMATION;

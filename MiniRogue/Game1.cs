@@ -304,10 +304,10 @@ namespace MiniRogue
             dieTextures.Add("Roll 6", die6);
             dieTextures.Add("Blank", dieBlank);
 
-            combatDice.Add("Combat Die 1", new Die(dieTextures, 250, 450));
-            combatDice.Add("Combat Die 2", new Die(dieTextures, 450, 450));
-            combatDice.Add("Combat Die 3", new Die(dieTextures, 650, 450));
-            combatDice.Add("Combat Die 4", new Die(dieTextures, 850, 450));
+            combatDice.Add("Combat Die 1", new Die(dieTextures, 550, 300));
+            combatDice.Add("Combat Die 2", new Die(dieTextures, 735, 300));
+            combatDice.Add("Combat Die 3", new Die(dieTextures, 920, 300));
+            combatDice.Add("Combat Die 4", new Die(dieTextures, 1105, 300));
 
             checkBoxes.Add("Check Box 1", new CheckBox(checkBoxFull, checkBoxEmpty, checkBoxGray, 275, 380));
             checkBoxes.Add("Check Box 2", new CheckBox(checkBoxFull, checkBoxEmpty, checkBoxGray, 475, 380));

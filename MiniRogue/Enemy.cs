@@ -104,7 +104,7 @@ namespace MiniRogue
             {
                 case EnemyTurnState.STARTCOMBAT:
 
-                    sBatch.Draw(Buttons["Combat Button"].ButtonTexture, new Vector2(700, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Combat Button"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     
 
                     break;
@@ -131,7 +131,7 @@ namespace MiniRogue
                     case EnemyTurnState.STARTCOMBAT:
 
 
-                        if (XPos > 700 && XPos < 948 && YPos > 500 && YPos < 572)
+                        if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 612)
                         {
 
                             CurrentCombat = new Combat(Buttons, CombatDice, CheckBoxes);
