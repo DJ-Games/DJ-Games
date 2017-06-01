@@ -490,8 +490,6 @@ namespace MiniRogue
 
                             FlipCard(playerHand.Card1);
 
-                            //-----------------
-
                             if (SingleMouseClick())
                             {
                                 if (position.X > 75 && position.X < 270 && position.Y > 260 && position.Y < 535)
@@ -500,7 +498,29 @@ namespace MiniRogue
                                     currentCardNumber = 1;
                                     playerHand.Card1.Moving = true;
                                     currentTurnState = CurrentTurnState.ANIMATECARD1;
-                                    //currentTurnState = CurrentTurnState.TURN1;
+                                }
+                            }
+
+                            if (player.Spells.Count == 1 && player.Spells[0].Name == "Healing")
+                            {
+                                if (SingleMouseClick())
+                                {
+                                    if (position.X > 1130 && position.X < 1175 && position.Y > 20 && position.Y < 65)
+                                    {
+                                        player.Health += 8;
+                                        player.RemoveSpell(0);
+                                    }
+                                }
+                            }
+                            if (player.Spells.Count == 1 || player.Spells.Count == 2 && player.Spells[1].Name == "Healing")
+                            {
+                                if (SingleMouseClick())
+                                {
+                                    if (position.X > 1180 && position.X < 1225 && position.Y > 20 && position.Y < 65)
+                                    {
+
+                                        player.RemoveSpell(1);
+                                    }
                                 }
                             }
 
@@ -555,6 +575,29 @@ namespace MiniRogue
                                     currentCardNumber = 3;
                                     playerHand.Card3.Moving = true;
                                     currentTurnState = CurrentTurnState.ANIMATECARD2;
+                                }
+                            }
+
+                            if (player.Spells.Count == 1 && player.Spells[0].Name == "Healing")
+                            {
+                                if (SingleMouseClick())
+                                {
+                                    if (position.X > 1130 && position.X < 1175 && position.Y > 20 && position.Y < 65)
+                                    {
+                                        player.Health += 8;
+                                        player.RemoveSpell(0);
+                                    }
+                                }
+                            }
+                            if (player.Spells.Count == 1 || player.Spells.Count == 2 && player.Spells[1].Name == "Healing")
+                            {
+                                if (SingleMouseClick())
+                                {
+                                    if (position.X > 1180 && position.X < 1225 && position.Y > 20 && position.Y < 65)
+                                    {
+
+                                        player.RemoveSpell(1);
+                                    }
                                 }
                             }
 
@@ -614,6 +657,29 @@ namespace MiniRogue
                                 }
                             }
 
+                            if (player.Spells.Count == 1 && player.Spells[0].Name == "Healing")
+                            {
+                                if (SingleMouseClick())
+                                {
+                                    if (position.X > 1130 && position.X < 1175 && position.Y > 20 && position.Y < 65)
+                                    {
+                                        player.Health += 8;
+                                        player.RemoveSpell(0);
+                                    }
+                                }
+                            }
+                            if (player.Spells.Count == 1 || player.Spells.Count == 2 && player.Spells[1].Name == "Healing")
+                            {
+                                if (SingleMouseClick())
+                                {
+                                    if (position.X > 1180 && position.X < 1225 && position.Y > 20 && position.Y < 65)
+                                    {
+
+                                        player.RemoveSpell(1);
+                                    }
+                                }
+                            }
+
                             break;
 
                         case CurrentTurnState.ANIMATECARD3:
@@ -667,6 +733,28 @@ namespace MiniRogue
                                 }
                             }
 
+                            if (player.Spells.Count == 1 && player.Spells[0].Name == "Healing")
+                            {
+                                if (SingleMouseClick())
+                                {
+                                    if (position.X > 1130 && position.X < 1175 && position.Y > 20 && position.Y < 65)
+                                    {
+                                        player.Health += 8;
+                                        player.RemoveSpell(0);
+                                    }
+                                }
+                            }
+                            if (player.Spells.Count == 1 || player.Spells.Count == 2 && player.Spells[1].Name == "Healing")
+                            {
+                                if (SingleMouseClick())
+                                {
+                                    if (position.X > 1180 && position.X < 1225 && position.Y > 20 && position.Y < 65)
+                                    {
+
+                                        player.RemoveSpell(1);
+                                    }
+                                }
+                            }
 
                             break;
 
@@ -727,6 +815,29 @@ namespace MiniRogue
                                     currentCardNumber = 7;
                                     playerHand.Card7.Moving = true;
                                     currentTurnState = CurrentTurnState.ANIMATEBOSSCARD;
+                                }
+                            }
+
+                            if (player.Spells.Count == 1 && player.Spells[0].Name == "Healing")
+                            {
+                                if (SingleMouseClick())
+                                {
+                                    if (position.X > 1130 && position.X < 1175 && position.Y > 20 && position.Y < 65)
+                                    {
+                                        player.Health += 8;
+                                        player.RemoveSpell(0);
+                                    }
+                                }
+                            }
+                            if (player.Spells.Count == 1 || player.Spells.Count == 2 && player.Spells[1].Name == "Healing")
+                            {
+                                if (SingleMouseClick())
+                                {
+                                    if (position.X > 1180 && position.X < 1225 && position.Y > 20 && position.Y < 65)
+                                    {
+
+                                        player.RemoveSpell(1);
+                                    }
                                 }
                             }
 
@@ -908,8 +1019,6 @@ namespace MiniRogue
 
                             DrawSlidingCards();
 
-                            //playerHand.DrawHand(spriteBatch);
-
                             break;
 
                         case CurrentTurnState.TURN1:
@@ -925,7 +1034,6 @@ namespace MiniRogue
                         case CurrentTurnState.ANIMATECARD2:
 
                             DrawSlidingCards();
-                            //playerHand.DrawHand(spriteBatch);
 
                             break;
 
