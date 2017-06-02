@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System.Threading;
 using System.Collections.Generic;
 
@@ -140,7 +141,7 @@ namespace MiniRogue
         SpriteFont dungeonFont;
         Vector2 position;
 
-
+        Song song;
 
         Player player;
         Hand playerHand;
@@ -275,8 +276,9 @@ namespace MiniRogue
             font = Content.Load<SpriteFont>("Font");
             highTower = Content.Load<SpriteFont>("HighTower");
             dungeonFont = Content.Load<SpriteFont>("Dungeon");
-
-
+            song = Content.Load <Song>("Music");
+            MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
 
             position = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
                 graphics.GraphicsDevice.Viewport.Height / 2);

@@ -871,3 +871,9 @@
 /processorParam:TextureFormat=Color
 /build:PoisonSpellIcon.png
 
+#begin Music.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Music.mp3
+
