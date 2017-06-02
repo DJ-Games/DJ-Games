@@ -438,11 +438,6 @@ namespace MiniRogue
                 // set based on difficulty selection. 
 
 
-                //_________________________________________________________________
-                //  MAYBE MAKE A DICTIONARY OF TEXTURES TO SEND IN INSTEAD
-                //  OF INDIVIDUAL TEXTURES???
-                //_________________________________________________________________
-
                 case Gamestate.DIFFICULTY_SELECT:
 
                     if (SingleMouseClick())

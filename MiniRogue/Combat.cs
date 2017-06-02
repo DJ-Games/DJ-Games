@@ -257,27 +257,27 @@ namespace MiniRogue
                     CombatDice["Combat Die 3"].DrawCombatDie(sBatch);
                     CombatDice["Combat Die 4"].DrawCombatDie(sBatch);
 
-                    sBatch.Draw(CombatButtons["Use Feat Button"].ButtonTexture, new Vector2(300, 250), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                    sBatch.Draw(CombatButtons["Accept Button"].ButtonTexture, new Vector2(650, 250), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(CombatButtons["Use Feat Button"].ButtonTexture, new Vector2(590, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(CombatButtons["Accept Button"].ButtonTexture, new Vector2(925, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     if (CombatDice["Combat Die 1"].Active)
                     {
-                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 1"].Roll.ToString(), new Vector2(250, 600), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 1"].Roll.ToString(), new Vector2(585, 400), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
                     }
 
                     if (CombatDice["Combat Die 2"].Active)
                     {
-                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 2"].Roll.ToString(), new Vector2(450, 600), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 2"].Roll.ToString(), new Vector2(770, 350), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
                     }
 
                     if (CombatDice["Combat Die 3"].Active)
                     {
-                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 3"].Roll.ToString(), new Vector2(650, 600), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 3"].Roll.ToString(), new Vector2(955, 350), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
                     }
 
                     if (CombatDice["Combat Die 4"].Active)
                     {
-                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 4"].Roll.ToString(), new Vector2(850, 600), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 4"].Roll.ToString(), new Vector2(1140, 350), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
                     }
 
 
@@ -397,12 +397,12 @@ namespace MiniRogue
                         //----------------------------------------------------------------------------------------------
 
 
-                        if (XPos > 300 && XPos < 548 && YPos > 250 && YPos < 322)
+                        if (XPos > 590 && XPos < 838 && YPos > 540 && YPos < 612)
                         {
                             combatState = CombatState.USEFEAT;
                         }
 
-                        if (XPos > 650 && XPos < 898 && YPos > 250 && YPos < 322)
+                        if (XPos > 925 && XPos < 1173 && YPos > 540 && YPos < 612)
                         {
                             combatState = CombatState.DEALDAMAGE;
                         }

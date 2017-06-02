@@ -130,16 +130,17 @@ namespace MiniRogue
             {
 
                 case MerchantTurnState.BUYSELL:
-                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(660, 100), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);  
-                    sBatch.DrawString(font, "Would you like to buy or sell?", new Vector2(500, 200), Color.White);
-                    int counter = 240;
+                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);  
+                    sBatch.DrawString(font, "Buy", new Vector2(705, 100), Color.White);
+                    sBatch.DrawString(font, "Sell", new Vector2(1005, 100), Color.White);
+                    int counter = 150;
                     foreach (var item in CurrentButtons)
                     {
-                        sBatch.Draw(item.ButtonTexture, new Vector2(525, counter), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                        sBatch.Draw(item.ButtonTexture, new Vector2(600, counter), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                         counter += 80;
                     }
-                    sBatch.Draw(Buttons["Green Armor Piece Button"].ButtonTexture, new Vector2(800, 240), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                    sBatch.Draw(Buttons["Green Spells Button"].ButtonTexture, new Vector2(800, 320), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Green Armor Piece Button"].ButtonTexture, new Vector2(900, 150), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Green Spells Button"].ButtonTexture, new Vector2(900, 230), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     
                     break;
                 case MerchantTurnState.BUYSPELL:
@@ -211,48 +212,48 @@ namespace MiniRogue
                     // ------- BUY / SELL STATE -------
                     case MerchantTurnState.BUYSELL:
 
-                        if (XPos > 660 && XPos < 908 && YPos > 100 && YPos < 172)
+                        if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
                             merchantTurnState = MerchantTurnState.COMPLETE; 
 
                         }
-                        if (XPos > 525 && XPos < 773 && YPos > 240 && YPos < 312)
+                        if (XPos > 600 && XPos < 848 && YPos > 150 && YPos < 222)
                         {
                             Selection = "Buy Ration";
                             merchantTurnState = MerchantTurnState.CONFIRMBUY;
                             
                         }
 
-                        if (XPos > 525 && XPos < 773 && YPos > 320 && YPos < 392)
+                        if (XPos > 600 && XPos < 848 && YPos > 230 && YPos < 302)
                         {
                             Selection = "Buy Potion";
                             merchantTurnState = MerchantTurnState.CONFIRMBUY;
                         }
 
-                        if (XPos > 525 && XPos < 773 && YPos > 400 && YPos < 472)
+                        if (XPos > 600 && XPos < 848 && YPos > 310 && YPos < 382)
                         {
                             Selection = "Buy Big Potion";
                             merchantTurnState = MerchantTurnState.CONFIRMBUY;
                         }
 
-                        if (XPos > 525 && XPos < 773 && YPos > 480 && YPos < 552)
+                        if (XPos > 600 && XPos < 848 && YPos > 390 && YPos < 462)
                         {
                             Selection = "Buy Armor";
                             merchantTurnState = MerchantTurnState.CONFIRMBUY;
                         }
 
-                        if (XPos > 525 && XPos < 773 && YPos > 560 && YPos < 632)
+                        if (XPos > 600 && XPos < 848 && YPos > 470 && YPos < 542)
                         {
                             merchantTurnState = MerchantTurnState.BUYSPELL;
                         }
 
-                        if (XPos > 800 && XPos < 1048 && YPos > 240 && YPos < 312)
+                        if (XPos > 900 && XPos < 1148 && YPos > 240 && YPos < 312)
                         {
                             Selection = "Sell Armor";
                             merchantTurnState = MerchantTurnState.CONFIRMSELL;
                         }
 
-                        if (XPos > 800 && XPos < 1048 && YPos > 320 && YPos < 392)
+                        if (XPos > 900 && XPos < 1148 && YPos > 320 && YPos < 392)
                         {
                             if (player.Spells.Count > 0)
                             {
