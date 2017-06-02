@@ -225,7 +225,7 @@ namespace MiniRogue
 
         public override void DrawCard(SpriteBatch sBatch, SpriteFont font)
         {
-            sBatch.Draw(CardTexture, new Vector2(100, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+            sBatch.Draw(CardTexture, new Vector2(100, 130), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
             
 
             switch (trapTurnState)

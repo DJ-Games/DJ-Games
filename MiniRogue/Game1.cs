@@ -1188,7 +1188,7 @@ namespace MiniRogue
             {
                 card.Flipped = true;
             }
-            if (card.Flipped && card.ScaleVector.X < .43f)
+            if (card.Flipped && card.ScaleVector.X < .40f)
             {
                 card.ScaleVector = new Vector2(card.ScaleVector.X + .02f, card.ScaleVector.Y);
             }

@@ -84,7 +84,7 @@ namespace MiniRogue
             Dice = new BasicDie();
             Name = name;
             Buttons = buttons;
-            ScaleVector = new Vector2(.43f, .43f);
+            ScaleVector = new Vector2(.40f, .40f);
             Rng = new Random();
             
         }

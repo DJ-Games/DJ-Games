@@ -71,19 +71,19 @@ namespace MiniRogue
             Card6 = playerHand[5];
             Card7 = playerHand[6];
 
-            Card1.LevelXpos = 75;
+            Card1.LevelXpos = 92;
             Card1.LevelYPos = 260;
-            Card2.LevelXpos = 300;
+            Card2.LevelXpos = 317;
             Card2.LevelYPos = 100;
-            Card3.LevelXpos = 300;
-            Card3.LevelYPos = 400;
-            Card4.LevelXpos = 525;
+            Card3.LevelXpos = 317;
+            Card3.LevelYPos = 410;
+            Card4.LevelXpos = 542;
             Card4.LevelYPos = 260;
-            Card5.LevelXpos = 750;
+            Card5.LevelXpos = 767;
             Card5.LevelYPos = 100;
-            Card6.LevelXpos = 750;
-            Card6.LevelYPos = 400;
-            Card7.LevelXpos = 975;
+            Card6.LevelXpos = 767;
+            Card6.LevelYPos = 410;
+            Card7.LevelXpos = 992;
             Card7.LevelYPos = 260;
         }
 
