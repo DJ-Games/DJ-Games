@@ -40,6 +40,8 @@ namespace MiniRogue
 
         public bool NeedsRoll { get; set; }
 
+        public bool CritRollAvailable { get; set; }
+
         public int Xpos { get; set; }
 
         public int Ypos { get; set; }

@@ -490,7 +490,11 @@ namespace MiniRogue
                         {
                             if (XPos > 550 && XPos < 650 && YPos > 300 && YPos < 400)
                             {
-                                CombatDice["Combat Die 1"].NeedsRoll = true;
+                                if (CombatDice["Combat Die 1"].Roll == 6)
+                                {
+                                    CombatDice["Combat Die 1"].CritRollAvailable = true;
+                                }
+                                else { CombatDice["Combat Die 1"].NeedsRoll = true; }
                                 combatState = CombatState.USEFEATREVISED;
                             }
                         }
@@ -499,7 +503,11 @@ namespace MiniRogue
                         {
                             if (XPos > 735 && XPos < 835 && YPos > 300 && YPos < 400)
                             {
-                                CombatDice["Combat Die 2"].NeedsRoll = true;
+                                if (CombatDice["Combat Die 2"].Roll == 6)
+                                {
+                                    CombatDice["Combat Die 2"].CritRollAvailable = true;
+                                }
+                                else { CombatDice["Combat Die 2"].NeedsRoll = true; }    
                                 combatState = CombatState.USEFEATREVISED;
                             }
                         }
@@ -508,7 +516,11 @@ namespace MiniRogue
                         {
                             if (XPos > 920 && XPos < 1020 && YPos > 300 && YPos < 400)
                             {
-                                CombatDice["Combat Die 3"].NeedsRoll = true;
+                                if (CombatDice["Combat Die 3"].Roll == 6)
+                                {
+                                    CombatDice["Combat Die 3"].CritRollAvailable = true;
+                                }
+                                else { CombatDice["Combat Die 3"].NeedsRoll = true; }
                                 combatState = CombatState.USEFEATREVISED;
                             }
                         }
@@ -517,7 +529,11 @@ namespace MiniRogue
                         {
                             if (XPos > 1105 && XPos < 1205 && YPos > 300 && YPos < 400)
                             {
-                                CombatDice["Combat Die 4"].NeedsRoll = true;
+                                if (CombatDice["Combat Die 4"].Roll == 6)
+                                {
+                                    CombatDice["Combat Die 4"].CritRollAvailable = true;
+                                }
+                                else { CombatDice["Combat Die 4"].NeedsRoll = true; }
                                 combatState = CombatState.USEFEATREVISED;
                             }
                         }
