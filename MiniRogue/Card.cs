@@ -113,8 +113,8 @@ namespace MiniRogue
                 case 1:
 
                     ScaleVector = new Vector2(ScaleVector.X + .0107f, ScaleVector.Y + .0107f);
-                    LevelXpos += .83f;
-                    LevelYPos -= 5.3f;
+                    LevelXpos += .26f;
+                    LevelYPos -= 4.33f;
 
                     if (scaleVector.X > .75f)
                     {
@@ -126,7 +126,8 @@ namespace MiniRogue
                 case 2:
 
                     ScaleVector = new Vector2(ScaleVector.X + .0107f, ScaleVector.Y + .0107f);
-                    LevelXpos -= 6.7f;
+                    LevelXpos -= 7.23f;
+                    LevelYPos += 1f;
                    
 
                     if (scaleVector.X > .75f)
@@ -139,8 +140,8 @@ namespace MiniRogue
                 case 3:
 
                     ScaleVector = new Vector2(ScaleVector.X + .0107f, ScaleVector.Y + .0107f);
-                    LevelXpos -= 6.7f;
-                    LevelYPos -= 10f;
+                    LevelXpos -= 7.23f;
+                    LevelYPos -= 9.33f;
 
                     if (scaleVector.X > .75f)
                     {
@@ -152,8 +153,8 @@ namespace MiniRogue
                 case 4:
 
                     ScaleVector = new Vector2(ScaleVector.X + .0107f, ScaleVector.Y + .0107f);
-                    LevelXpos -= 14.17f;
-                    LevelYPos -= 5.3f;
+                    LevelXpos -= 14.73f;
+                    LevelYPos -= 4.33f;
 
                     if (scaleVector.X > .75f)
                     {
@@ -166,8 +167,8 @@ namespace MiniRogue
                 case 5:
 
                     ScaleVector = new Vector2(ScaleVector.X + .0107f, ScaleVector.Y + .0107f);
-                    LevelXpos -= 21.7f;
-
+                    LevelXpos -= 22.23f;
+                    LevelYPos += 1f;
 
                     if (scaleVector.X > .75f)
                     {
@@ -179,8 +180,8 @@ namespace MiniRogue
                 case 6:
 
                     ScaleVector = new Vector2(ScaleVector.X + .0107f, ScaleVector.Y + .0107f);
-                    LevelXpos -= 21.7f;
-                    LevelYPos -= 10f;
+                    LevelXpos -= 22.23f;
+                    LevelYPos -= 9.33f;
 
                     if (scaleVector.X > .75f)
                     {
@@ -192,8 +193,8 @@ namespace MiniRogue
                 case 7:
 
                     ScaleVector = new Vector2(ScaleVector.X + .0107f, ScaleVector.Y + .0107f);
-                    LevelXpos -= 29.17f;
-                    LevelYPos -= 5.3f;
+                    LevelXpos -= 29.73f;
+                    LevelYPos -= 4.33f;
 
                     if (scaleVector.X > .75f)
                     {
