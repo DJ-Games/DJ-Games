@@ -14,7 +14,7 @@ namespace MiniRogue
     enum RestingTurnState
     {
         SELECTION,
-        REVIEW, 
+        //REVIEW,
         COMPLETE,
         
     }
@@ -52,10 +52,10 @@ namespace MiniRogue
 
                     return false;
 
-                case RestingTurnState.REVIEW:
-                    HandleButtons(player);
+                //case RestingTurnState.REVIEW:
+                //    HandleButtons(player);
 
-                    return false;
+                    //return false;
 
                 case RestingTurnState.COMPLETE:
                     return true;
@@ -90,9 +90,9 @@ namespace MiniRogue
                     }
                     break;
 
-                case RestingTurnState.REVIEW:
-                    sBatch.Draw(Buttons["Confirm Purchase Menu"].ButtonTexture, new Vector2(580, 320), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                    break;
+                //case RestingTurnState.REVIEW:
+                //    //sbatch.draw(buttons["confirm purchase menu"].buttontexture, new vector2(580, 320), new rectangle?(), color.white, 0f, new vector2(), 1f, spriteeffects.none, 1);
+                //    break;
 
                 case RestingTurnState.COMPLETE:
                     break;
@@ -125,56 +125,59 @@ namespace MiniRogue
                         if (XPos > 770 && XPos < 1018 && YPos > 240 && YPos < 312)
                         {
                             PlayerChoice = "Reinforce Weapon";
-                            restingTurnState = RestingTurnState.REVIEW;
+                            player.Experience += 1; 
+                            restingTurnState = RestingTurnState.COMPLETE;
                         }
 
                         if (XPos > 770 && XPos < 1018 && YPos > 390 && YPos < 462)
                         {
                             PlayerChoice = "Ration";
-                            restingTurnState = RestingTurnState.REVIEW;
+                            player.Food += 1; 
+                            restingTurnState = RestingTurnState.COMPLETE;
                         }
 
                         if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 612)
                         {
                             PlayerChoice = "Heal";
-                            restingTurnState = RestingTurnState.REVIEW;
+                            player.Health = +1; 
+                            restingTurnState = RestingTurnState.COMPLETE;
                         }
 
                         break;
 
-                    case RestingTurnState.REVIEW:
+                    //case RestingTurnState.REVIEW:
 
-                        if (XPos > 614 && XPos < 860 && YPos > 420 && YPos < 490)
-                        {
-                            switch (PlayerChoice)
-                            {
-                                case "Reinforce Weapon":
+                    //    if (XPos > 614 && XPos < 860 && YPos > 420 && YPos < 490)
+                    //    {
+                    //        switch (PlayerChoice)
+                    //        {
+                    //            case "Reinforce Weapon":
 
-                                    player.Experience++;
-                                    restingTurnState = RestingTurnState.COMPLETE;
-                                    break;
+                    //                player.Experience++;
+                    //                restingTurnState = RestingTurnState.COMPLETE;
+                    //                break;
 
-                                case "Ration":
+                    //            case "Ration":
 
-                                    player.Food++;
-                                    restingTurnState = RestingTurnState.COMPLETE;
-                                    break;
+                    //                player.Food++;
+                    //                restingTurnState = RestingTurnState.COMPLETE;
+                    //                break;
 
-                                case "Heal":
+                    //            case "Heal":
 
-                                    player.Health+=2;
-                                    restingTurnState = RestingTurnState.COMPLETE;
-                                    break;
-                            }
-                        }
+                    //                player.Health+=2;
+                    //                restingTurnState = RestingTurnState.COMPLETE;
+                    //                break;
+                    //        }
+                    //    }
 
-                        if (XPos > 900 && XPos < 1150 && YPos > 420 && YPos < 490)
-                        {
-                            restingTurnState = RestingTurnState.SELECTION;
-                        }
+                    //    if (XPos > 900 && XPos < 1150 && YPos > 420 && YPos < 490)
+                    //    {
+                    //        restingTurnState = RestingTurnState.SELECTION;
+                    //    }
 
 
-                        break;
+                    //    break;
 
 
                 }
