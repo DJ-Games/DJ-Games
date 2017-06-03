@@ -38,6 +38,8 @@ namespace MiniRogue
 
         public bool Active { get; set; }
 
+        public bool NeedsRoll { get; set; }
+
         public int Xpos { get; set; }
 
         public int Ypos { get; set; }

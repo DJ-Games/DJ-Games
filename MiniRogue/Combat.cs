@@ -17,7 +17,9 @@ namespace MiniRogue
         ROLLDIE,
         ROLLANIMATION,
         RESOLVEDIE,
+        RESOLVEDIEREVISED,
         USEFEAT,
+        USEFEATREVISED,
         DEALDAMAGE,
         USESPELL,
         DAMAGEPLAYER,
@@ -282,6 +284,41 @@ namespace MiniRogue
 
 
                     break;
+
+
+                case CombatState.RESOLVEDIEREVISED:
+
+                    CombatDice["Combat Die 1"].DrawCombatDie(sBatch);
+                    CombatDice["Combat Die 2"].DrawCombatDie(sBatch);
+                    CombatDice["Combat Die 3"].DrawCombatDie(sBatch);
+                    CombatDice["Combat Die 4"].DrawCombatDie(sBatch);
+
+                   
+                    sBatch.Draw(CombatButtons["Accept Button"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+
+                    if (CombatDice["Combat Die 1"].Active)
+                    {
+                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 1"].Roll.ToString(), new Vector2(585, 400), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    }
+
+                    if (CombatDice["Combat Die 2"].Active)
+                    {
+                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 2"].Roll.ToString(), new Vector2(770, 350), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    }
+
+                    if (CombatDice["Combat Die 3"].Active)
+                    {
+                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 3"].Roll.ToString(), new Vector2(955, 350), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    }
+
+                    if (CombatDice["Combat Die 4"].Active)
+                    {
+                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 4"].Roll.ToString(), new Vector2(1140, 350), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    }
+
+                    break;
+
+
                 case CombatState.USEFEAT:
 
                     CombatDice["Combat Die 1"].DrawCombatDie(sBatch);
@@ -300,6 +337,40 @@ namespace MiniRogue
 
                     break;
 
+                case CombatState.USEFEATREVISED:
+
+                    CombatDice["Combat Die 1"].DrawCombatDie(sBatch);
+                    CombatDice["Combat Die 2"].DrawCombatDie(sBatch);
+                    CombatDice["Combat Die 3"].DrawCombatDie(sBatch);
+                    CombatDice["Combat Die 4"].DrawCombatDie(sBatch);
+
+
+                    if (CombatDice["Combat Die 1"].Active)
+                    {
+                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 1"].Roll.ToString(), new Vector2(585, 400), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    }
+
+                    if (CombatDice["Combat Die 2"].Active)
+                    {
+                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 2"].Roll.ToString(), new Vector2(770, 350), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    }
+
+                    if (CombatDice["Combat Die 3"].Active)
+                    {
+                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 3"].Roll.ToString(), new Vector2(955, 350), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    }
+
+                    if (CombatDice["Combat Die 4"].Active)
+                    {
+                        sBatch.DrawString(dungeonFont, CombatDice["Combat Die 4"].Roll.ToString(), new Vector2(1140, 350), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    }
+
+                    sBatch.Draw(CombatButtons["Spend 2 HP Button"].ButtonTexture, new Vector2(300, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(CombatButtons["Spend 1 XP Button"].ButtonTexture, new Vector2(600, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(CombatButtons["Crit Roll Button"].ButtonTexture, new Vector2(900, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    
+
+                    break;
 
                 case CombatState.DEALDAMAGE:
 
@@ -402,11 +473,61 @@ namespace MiniRogue
                             combatState = CombatState.USEFEAT;
                         }
 
+
+
+
                         if (XPos > 925 && XPos < 1173 && YPos > 540 && YPos < 612)
                         {
                             combatState = CombatState.DEALDAMAGE;
                         }
 
+                        break;
+
+
+                    case CombatState.RESOLVEDIEREVISED:
+
+                        if (CombatDice["Combat Die 1"].Active)
+                        {
+                            if (XPos > 550 && XPos < 650 && YPos > 300 && YPos < 400)
+                            {
+                                CombatDice["Combat Die 1"].NeedsRoll = true;
+                                combatState = CombatState.USEFEATREVISED;
+                            }
+                        }
+
+                        if (CombatDice["Combat Die 2"].Active)
+                        {
+                            if (XPos > 735 && XPos < 835 && YPos > 300 && YPos < 400)
+                            {
+                                CombatDice["Combat Die 2"].NeedsRoll = true;
+                                combatState = CombatState.USEFEATREVISED;
+                            }
+                        }
+
+                        if (CombatDice["Combat Die 3"].Active)
+                        {
+                            if (XPos > 920 && XPos < 1020 && YPos > 300 && YPos < 400)
+                            {
+                                CombatDice["Combat Die 3"].NeedsRoll = true;
+                                combatState = CombatState.USEFEATREVISED;
+                            }
+                        }
+
+                        if (CombatDice["Combat Die 4"].Active)
+                        {
+                            if (XPos > 1105 && XPos < 1205 && YPos > 300 && YPos < 400)
+                            {
+                                CombatDice["Combat Die 4"].NeedsRoll = true;
+                                combatState = CombatState.USEFEATREVISED;
+                            }
+                        }
+
+
+
+                        if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
+                        {
+                            combatState = CombatState.DEALDAMAGE;
+                        }
 
 
                         break;
@@ -524,6 +645,79 @@ namespace MiniRogue
 
 
                         break;
+
+
+                    case CombatState.USEFEATREVISED:
+
+                        if (CombatDice["Combat Die 1"].Active)
+                        {
+                            if (XPos > 550 && XPos < 650 && YPos > 300 && YPos < 400)
+                            {
+                                CombatDice["Combat Die 1"].NeedsRoll = false;
+                                combatState = CombatState.RESOLVEDIEREVISED;
+                            }
+                        }
+
+                        if (CombatDice["Combat Die 2"].Active)
+                        {
+                            if (XPos > 735 && XPos < 835 && YPos > 300 && YPos < 400)
+                            {
+                                CombatDice["Combat Die 2"].NeedsRoll = false;
+                                combatState = CombatState.RESOLVEDIEREVISED;
+                            }
+                        }
+
+                        if (CombatDice["Combat Die 3"].Active)
+                        {
+                            if (XPos > 920 && XPos < 1020 && YPos > 300 && YPos < 400)
+                            {
+                                CombatDice["Combat Die 3"].NeedsRoll = false;
+                                combatState = CombatState.RESOLVEDIEREVISED;
+                            }
+                        }
+
+                        if (CombatDice["Combat Die 4"].Active)
+                        {
+                            if (XPos > 1105 && XPos < 1205 && YPos > 300 && YPos < 400)
+                            {
+                                CombatDice["Combat Die 4"].NeedsRoll = false;
+                                combatState = CombatState.RESOLVEDIEREVISED;
+                            }
+                        }
+
+                        if (player.Health >= 3)
+                        {
+                            if (XPos > 300 && XPos < 548 && YPos > 600 && YPos < 672)
+                            {
+                                player.Health -= 2;
+                                ReRollDieRevised();
+                            }
+                        }
+
+                        if (player.Experience >= 1)
+                        {
+                            if (XPos > 600 && XPos < 848 && YPos > 600 && YPos < 672)
+                            {
+                                player.Experience--;
+                                ReRollDieRevised();
+                            }
+                        }
+
+                        if (true)
+                        {
+
+                        }
+
+
+                        if (XPos > 900 && XPos < 1148 && YPos > 600 && YPos < 672)
+                        {
+
+                        }
+
+
+                        break;
+
+
                     case CombatState.DEALDAMAGE:
 
 
@@ -910,7 +1104,77 @@ namespace MiniRogue
             AnimationCounter+=5;
         }
 
+        public void ReRollDieRevised()
+        {
+            int die1Roll;
+            int die2Roll;
+            int die3Roll;
+            int die4Roll;
 
+            if (ActiveDie > 0 && CombatDice["Combat Die 1"].NeedsRoll)
+            {
+                die1Roll = Rng.Next(6) + 1;
+                if (CombatDice["Combat Die 1"].Roll == 6)
+                {
+                    CombatDice["Combat Die 1"].Roll += die1Roll;
+                }
+                else
+                {
+                    CombatDice["Combat Die 1"].Roll = die1Roll;
+                }
+                CombatDice["Combat Die 1"].CurrentTexture = CombatDice["Combat Die 1"].DieTextures["Roll " + die1Roll];
+                CombatDice["Combat Die 1"].FeatUsed = true;
+                CombatDice["Combat Die 1"].NeedsRoll = false;
+            }
+
+            if (ActiveDie > 1 && CombatDice["Combat Die 2"].NeedsRoll)
+            {
+                die2Roll = Rng.Next(6) + 1;
+                if (CombatDice["Combat Die 2"].Roll == 6)
+                {
+                    CombatDice["Combat Die 2"].Roll += die2Roll;
+                }
+                else
+                {
+                    CombatDice["Combat Die 2"].Roll = die2Roll;
+                }
+                CombatDice["Combat Die 2"].CurrentTexture = CombatDice["Combat Die 2"].DieTextures["Roll " + die2Roll];
+                CombatDice["Combat Die 2"].FeatUsed = true;
+                CombatDice["Combat Die 2"].NeedsRoll = false;
+            }
+            if (ActiveDie > 0 && CombatDice["Combat Die 3"].NeedsRoll)
+            {
+                die3Roll = Rng.Next(6) + 1;
+                if (CombatDice["Combat Die 3"].Roll == 6)
+                {
+                    CombatDice["Combat Die 3"].Roll += die3Roll;
+                }
+                else
+                {
+                    CombatDice["Combat Die 3"].Roll = die3Roll;
+                }
+                CombatDice["Combat Die 3"].CurrentTexture = CombatDice["Combat Die 3"].DieTextures["Roll " + die3Roll];
+                CombatDice["Combat Die 3"].FeatUsed = true;
+                CombatDice["Combat Die 3"].NeedsRoll = false;
+            }
+            if (ActiveDie > 0 && CombatDice["Combat Die 4"].NeedsRoll)
+            {
+                die4Roll = Rng.Next(6) + 1;
+                if (CombatDice["Combat Die 4"].Roll == 6)
+                {
+                    CombatDice["Combat Die 4"].Roll += die4Roll;
+                }
+                else
+                {
+                    CombatDice["Combat Die 4"].Roll = die4Roll;
+                }
+                CombatDice["Combat Die 4"].CurrentTexture = CombatDice["Combat Die 4"].DieTextures["Roll " + die4Roll];
+                CombatDice["Combat Die 4"].FeatUsed = true;
+                CombatDice["Combat Die 4"].NeedsRoll = false;
+            }
+
+            combatState = CombatState.ROLLANIMATION;
+        }
 
 
     }
