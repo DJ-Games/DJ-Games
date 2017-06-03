@@ -277,6 +277,7 @@ namespace MiniRogue
             highTower = Content.Load<SpriteFont>("HighTower");
             dungeonFont = Content.Load<SpriteFont>("Dungeon");
             song = Content.Load <Song>("Music");
+            MediaPlayer.Volume -= 0.7f;
             MediaPlayer.Play(song);
             MediaPlayer.IsRepeating = true;
 
