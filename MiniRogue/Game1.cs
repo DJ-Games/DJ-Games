@@ -20,7 +20,7 @@ namespace MiniRogue
         HACKANDSLASH,
         DELVING,
         GAME_OVER,
-        CREDITS,
+        WINSCREEN,
         COMBATTESTING,
     }
 
@@ -901,6 +901,10 @@ namespace MiniRogue
                             {
                                 player.DungeonLevel = 5;
                             }
+                            if (player.DungeonArea == 15)
+                            {
+                                gamestate = Gamestate.WINSCREEN;
+                            }
                             player.HasFoughtMonster = false;
                             playerHand = new Hand();
                             DrawNewHand();
@@ -920,10 +924,25 @@ namespace MiniRogue
                             break;
 
                 case Gamestate.GAME_OVER:
+                    if (SingleMouseClick())
+                    {
+                        if (position.X > 600 && position.X < 848 && position.Y > 500 && position.Y < 572)
+                        {
+                            gamestate = Gamestate.TITILESCREEN;
+                        }
+                    }
 
-                    break;
+                        break;
 
-                case Gamestate.CREDITS:
+                case Gamestate.WINSCREEN:
+
+                    if (SingleMouseClick())
+                    {
+                        if (position.X > 600 && position.X < 848 && position.Y > 500 && position.Y < 572)
+                        {
+                            gamestate = Gamestate.TITILESCREEN;
+                        }
+                    }
 
                     break;
 
@@ -1116,11 +1135,14 @@ namespace MiniRogue
                 case Gamestate.GAME_OVER:
 
                     spriteBatch.DrawString(font, "You died. Game Over.", new Vector2(660, 200), Color.White);
+                    spriteBatch.Draw(acceptButton, new Vector2(600, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
 
-                case Gamestate.CREDITS:
+                case Gamestate.WINSCREEN:
 
+                    spriteBatch.DrawString(font, "You win!", new Vector2(660, 200), Color.White);
+                    spriteBatch.Draw(acceptButton, new Vector2(600, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     break;
 
 
