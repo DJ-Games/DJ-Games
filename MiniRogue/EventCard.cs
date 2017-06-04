@@ -36,7 +36,7 @@ namespace MiniRogue
 
         public Dictionary<string, CheckBox> CheckBoxes { get; set; }
 
-        public int AnimationCounter { get; set; }
+        //public int AnimationCounter { get; set; }
 
         public int SkillCheckResult { get; set; }
 

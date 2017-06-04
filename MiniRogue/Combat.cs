@@ -240,7 +240,7 @@ namespace MiniRogue
         public void DrawCombat(SpriteBatch sBatch, SpriteFont dungeonFont)
         {
        
-            sBatch.DrawString(dungeonFont, "Monster Health: " + monsterHealth, new Vector2(425, 50), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+            sBatch.DrawString(dungeonFont, "Monster Health: " + monsterHealth, new Vector2(700, 100), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
 
 
             switch (combatState)
@@ -248,13 +248,13 @@ namespace MiniRogue
                 case CombatState.ENEMYHEALTHROLL:
 
                     sBatch.Draw(CombatButtons["Roll Die"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                    sBatch.DrawString(dungeonFont, "Roll For Monster Health", new Vector2(365, 100), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    sBatch.DrawString(dungeonFont, "Roll For Monster Health", new Vector2(650, 150), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
 
                     break;
                 case CombatState.ROLLDIE:
 
                     sBatch.Draw(CombatButtons["Roll Die"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                    sBatch.DrawString(dungeonFont, "Roll Combat Dice", new Vector2(400, 100), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+                    sBatch.DrawString(dungeonFont, "Roll Combat Dice", new Vector2(700, 150), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
 
                     break;
 
