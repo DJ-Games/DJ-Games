@@ -542,8 +542,8 @@ namespace MiniRogue
                             break;
 
                         case CurrentTurnState.TURN1:
-                            currentCard.ScaleVector = new Vector2(.43f, .43f);
-                            currentCard.LevelXpos = 75;
+                            currentCard.ScaleVector = new Vector2(.40f, .40f);
+                            currentCard.LevelXpos = 92;
                             currentCard.LevelYPos = 260;
                             colorMultiplyer = 1f;
                             if (currentCard.HandleCard(player, mouseState, prevMouseState, position.X, position.Y))
@@ -622,17 +622,17 @@ namespace MiniRogue
                             break;    
 
                         case CurrentTurnState.TURN2:
-                            currentCard.ScaleVector = new Vector2(.43f, .43f);
+                            currentCard.ScaleVector = new Vector2(.40f, .40f);
                             colorMultiplyer = 1f;
                             if (currentCardNumber == 2)
                             {
-                                currentCard.LevelXpos = 300;
+                                currentCard.LevelXpos = 317;
                                 currentCard.LevelYPos = 100;
                             }
                             if (currentCardNumber == 3)
                             {
-                                currentCard.LevelXpos = 300;
-                                currentCard.LevelYPos = 400;
+                                currentCard.LevelXpos = 317;
+                                currentCard.LevelYPos = 410;
                             }
 
 
@@ -697,8 +697,8 @@ namespace MiniRogue
                             break;
 
                         case CurrentTurnState.TURN3:
-                            currentCard.ScaleVector = new Vector2(.43f, .43f);
-                            currentCard.LevelXpos = 525;
+                            currentCard.ScaleVector = new Vector2(.40f, .40f);
+                            currentCard.LevelXpos = 542;
                             currentCard.LevelYPos = 260;
                             colorMultiplyer = 1f;
                             if (currentCard.HandleCard(player, mouseState, prevMouseState, position.X, position.Y))
@@ -777,17 +777,17 @@ namespace MiniRogue
                             break;
 
                         case CurrentTurnState.TURN4:
-                            currentCard.ScaleVector = new Vector2(.43f, .43f);
+                            currentCard.ScaleVector = new Vector2(.40f, .40f);
                             colorMultiplyer = 1f;
                             if (currentCardNumber == 5)
                             {
-                                currentCard.LevelXpos = 750;
+                                currentCard.LevelXpos = 767;
                                 currentCard.LevelYPos = 100;
                             }
                             if (currentCardNumber == 6)
                             {
-                                currentCard.LevelXpos = 750;
-                                currentCard.LevelYPos = 400;
+                                currentCard.LevelXpos = 767;
+                                currentCard.LevelYPos = 410;
                             }
                             if (currentCard.HandleCard(player, mouseState, prevMouseState, position.X, position.Y))
                             {
@@ -858,8 +858,8 @@ namespace MiniRogue
                             break;
 
                         case CurrentTurnState.BOSS:
-                            currentCard.ScaleVector = new Vector2(.43f, .43f);
-                            currentCard.LevelXpos = 975;
+                            currentCard.ScaleVector = new Vector2(.40f, .40f);
+                            currentCard.LevelXpos = 992;
                             currentCard.LevelYPos = 260;
                             colorMultiplyer = 1f;
                             if (currentCard.HandleCard(player, mouseState, prevMouseState, position.X, position.Y))

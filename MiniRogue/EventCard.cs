@@ -177,7 +177,7 @@ namespace MiniRogue
             {
                 case EventCardTurnState.INITIAL_ROLL:
                     sBatch.DrawString(dungeonFont, "Roll for event.", new Vector2(770, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
-                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
 
@@ -191,7 +191,7 @@ namespace MiniRogue
 
                     EventDie.DrawCombatDie(sBatch);
                     sBatch.DrawString(dungeonFont, "Roll for skill check.", new Vector2(730, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
-                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     int counter = 650;
                     foreach (var item in CurrentButtons)
@@ -233,7 +233,7 @@ namespace MiniRogue
                 case EventCardTurnState.FIGHT_MONSTER:
 
 
-                    sBatch.Draw(Buttons["Combat Button"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Combat Button"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
 
@@ -417,7 +417,7 @@ namespace MiniRogue
 
                     case EventCardTurnState.INITIAL_ROLL:
 
-                        if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 613)
+                        if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
 
                             eventCardTurnState = EventCardTurnState.ROLLANIMATION;
@@ -428,7 +428,7 @@ namespace MiniRogue
 
                     case EventCardTurnState.SKILL_CHECK:
 
-                        if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 613)
+                        if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
                             SkillCheck = true;
                             eventCardTurnState = EventCardTurnState.ROLLANIMATION;
@@ -645,7 +645,7 @@ namespace MiniRogue
 
                     case EventCardTurnState.FIGHT_MONSTER:
 
-                        if (XPos > 700 && XPos < 948 && YPos > 500 && YPos < 572)
+                        if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
 
                             CurrentCombat = new Combat(Buttons, CombatDice, CheckBoxes);

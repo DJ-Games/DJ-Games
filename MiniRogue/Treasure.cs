@@ -192,7 +192,7 @@ namespace MiniRogue
 
                     sBatch.DrawString(font, "You gained " + GoldAward + " gold!", new Vector2(730, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     sBatch.DrawString(font, "Roll 5+ to find a treasure.", new Vector2(680, 250), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
-                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
 
@@ -208,7 +208,7 @@ namespace MiniRogue
                     sBatch.DrawString(font, "You Rolled a:  " + ExtTreasureResult, new Vector2(725, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     sBatch.DrawString(font, "You found a treasure!", new Vector2(670, 250), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     sBatch.DrawString(font, "Roll for treasure.", new Vector2(715, 300), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
-                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
 
@@ -217,7 +217,7 @@ namespace MiniRogue
                     TreasureDie.DrawCombatDie(sBatch);
                     sBatch.DrawString(font, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     sBatch.DrawString(font, "Click spell you would like to remove or done to keep current spells.", new Vector2(520, 250), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
-                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
 
@@ -240,7 +240,7 @@ namespace MiniRogue
                     {
                         sBatch.DrawString(font, "You gained 2 Experience.", new Vector2(725, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     }
-                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
 
@@ -260,7 +260,7 @@ namespace MiniRogue
                     case TreasureTurnState.GOLD_AWARD:
 
                         player.Gold += GoldAward;
-                        if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 612)
+                        if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
                             treasureTurnState = TreasureTurnState.ROLLANIMATION;                    
                         }
@@ -268,7 +268,7 @@ namespace MiniRogue
 
                     case TreasureTurnState.EXTRA_TREASURE_ROLL:
                         
-                        if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 612)
+                        if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
                             TreasureRoll = true;
                             treasureTurnState = TreasureTurnState.ROLLANIMATION;
@@ -278,7 +278,7 @@ namespace MiniRogue
 
                     case TreasureTurnState.REMOVESPELL:
 
-                        if (XPos > 700 && XPos < 948 && YPos > 275 && YPos < 348)
+                        if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
                             treasureTurnState = TreasureTurnState.COMPLETE;
                         }
@@ -305,7 +305,7 @@ namespace MiniRogue
 
                     case TreasureTurnState.REVIEW:
                         
-                            if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 612)
+                            if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                             {
                                 treasureTurnState = TreasureTurnState.COMPLETE;
                             }

@@ -186,7 +186,7 @@ namespace MiniRogue
                 switch (trapTurnState)
                 {
                     case TrapTurnState.ROLL_FOR_TRAP:
-                        if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 612)
+                        if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
                             trapTurnState = TrapTurnState.ROLLANIMATION;
                         }
@@ -195,7 +195,7 @@ namespace MiniRogue
                    
                     case TrapTurnState.SKILL_CHECK:
  
-                        if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 612)
+                        if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
                             trapTurnState = TrapTurnState.ROLLANIMATION;
                             SkillCheck = true;
@@ -204,7 +204,7 @@ namespace MiniRogue
                         break;                       
 
                     case TrapTurnState.REVIEW:
-                        if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 612)
+                        if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
                             trapTurnState = TrapTurnState.COMPLETE;
                         }
@@ -231,7 +231,7 @@ namespace MiniRogue
             switch (trapTurnState)
             {
                 case TrapTurnState.ROLL_FOR_TRAP:
-                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     sBatch.DrawString(font, "Roll to determine the trap you face", new Vector2(600, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     break;
 
@@ -247,7 +247,7 @@ namespace MiniRogue
                     //sBatch.DrawString(font, "Roll to determine the trap you face", new Vector2(730, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     //sBatch.DrawString(font, "You Rolled a:  " + TrapResult, new Vector2(680, 250), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     sBatch.DrawString(font, "Roll a skill check to evade the trap", new Vector2(600, 250), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
-                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     switch (TrapResult)
                     {
                         case 1:
@@ -284,7 +284,7 @@ namespace MiniRogue
                 case TrapTurnState.REVIEW:
 
                     //sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
-                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(770, 540), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     //sBatch.DrawString(font, "Roll to determine the trap you face", new Vector2(660, 200), Color.White);
                     //sBatch.DrawString(font, "You Rolled a:  " + TrapResult, new Vector2(725, 300), Color.White);
                     //sBatch.DrawString(font, "Roll a skill check to evade the trap", new Vector2(660, 380), Color.White);

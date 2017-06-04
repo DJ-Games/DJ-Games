@@ -112,7 +112,7 @@ namespace MiniRogue
             {
                 case BossTurnState.STARTCOMBAT:
 
-                    sBatch.Draw(Buttons["Combat Button"].ButtonTexture, new Vector2(700, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Combat Button"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
 
@@ -125,7 +125,7 @@ namespace MiniRogue
 
                 case BossTurnState.REWARDS:
 
-                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(700, 275), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     sBatch.DrawString(dungeonFont, "Roll to determine your reward.", new Vector2(520, 230), Color.White);
 
                     break;
@@ -134,14 +134,14 @@ namespace MiniRogue
 
                     sBatch.DrawString(dungeonFont, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White);
                     sBatch.DrawString(dungeonFont, "Click spell you would like to remove or done to keep current spells.", new Vector2(520, 230), Color.White);
-                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(700, 275), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
 
                     break;
 
                 case BossTurnState.REVIEW:
 
                     sBatch.DrawString(dungeonFont, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White);
-                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(700, 275), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
 
                     break;
 
@@ -168,7 +168,7 @@ namespace MiniRogue
                     case BossTurnState.STARTCOMBAT:
 
 
-                        if (XPos > 700 && XPos < 948 && YPos > 500 && YPos < 572)
+                        if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
 
                             CurrentCombat = new Combat(Buttons, CombatDice, CheckBoxes);
@@ -181,7 +181,7 @@ namespace MiniRogue
                         break;
 
                     case BossTurnState.REWARDS:
-                        if (XPos > 700 && XPos < 948 && YPos > 275 && YPos < 348)
+                        if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
                             TreasureResult = player.playerDice.RollDice();
                         }
@@ -219,7 +219,7 @@ namespace MiniRogue
 
                     case BossTurnState.REMOVESPELL:
 
-                        if (XPos > 700 && XPos < 948 && YPos > 275 && YPos < 348)
+                        if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
                             bossTurnState = BossTurnState.COMPLETE;
                         }
@@ -247,7 +247,7 @@ namespace MiniRogue
 
                     case BossTurnState.REVIEW:
 
-                        if (XPos > 700 && XPos < 948 && YPos > 275 && YPos < 348)
+                        if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
                             bossTurnState = BossTurnState.COMPLETE;
                         }
