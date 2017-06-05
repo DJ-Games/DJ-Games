@@ -52,12 +52,6 @@ namespace MiniRogue
 
         public int GoldReward { get; set; }
 
-        public bool InsufficientHealth { get; set; }
-
-        public bool InsufficientXP { get; set; }
-
-        public bool OneBoxChecked { get; set; }
-
         private int monsterHealth;
 
         public int MonsterHealth
@@ -146,7 +140,6 @@ namespace MiniRogue
                     else
                     {
                         RollDie();
-                        //RollInitialDie();
                         combatState = CombatState.RESOLVEDIEREVISED;
                     }
 
@@ -205,24 +198,19 @@ namespace MiniRogue
 
                     return false;
 
-
                 case CombatState.COMPLETE:
                     HealthFeatAvailable = false;
                     ExperienceFeatAvailable = false;
                     return true;
 
                 default:
-
                     return false;
             }
-
         }
 
         public void DrawCombat(SpriteBatch sBatch, SpriteFont dungeonFont)
-        {
-       
+        {     
             sBatch.DrawString(dungeonFont, "Monster Health: " + monsterHealth, new Vector2(700, 100), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
-
 
             switch (combatState)
             {
@@ -248,15 +236,13 @@ namespace MiniRogue
 
                     break;
 
-
                 case CombatState.RESOLVEDIEREVISED:
 
                     CombatDice["Combat Die 1"].DrawCombatDie(sBatch);
                     CombatDice["Combat Die 2"].DrawCombatDie(sBatch);
                     CombatDice["Combat Die 3"].DrawCombatDie(sBatch);
                     CombatDice["Combat Die 4"].DrawCombatDie(sBatch);
-
-                   
+                  
                     sBatch.Draw(CombatButtons["Accept Button"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     if (CombatDice["Combat Die 1"].Active)
@@ -287,7 +273,6 @@ namespace MiniRogue
                     CombatDice["Combat Die 2"].DrawCombatDie(sBatch);
                     CombatDice["Combat Die 3"].DrawCombatDie(sBatch);
                     CombatDice["Combat Die 4"].DrawCombatDie(sBatch);
-
 
                     if (CombatDice["Combat Die 1"].Active)
                     {
@@ -324,7 +309,6 @@ namespace MiniRogue
                         sBatch.Draw(CombatButtons["Crit Roll Button"].ButtonTexture, new Vector2(900, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     }
                     
-
                     break;
 
                 case CombatState.DEALDAMAGE:
@@ -336,13 +320,11 @@ namespace MiniRogue
                     sBatch.DrawString(dungeonFont, "Click on a spell icon to use.", new Vector2(650, 250), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
                     sBatch.Draw(CombatButtons["Accept Button"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
-
                     break;
 
                 case CombatState.DAMAGEPLAYER:
 
                     break;
-
 
                 case CombatState.RESULTS:
 
@@ -356,10 +338,6 @@ namespace MiniRogue
             }
         }
 
-
-
-
-
         public void HandleButtons(Player player)
         {
 
@@ -371,18 +349,14 @@ namespace MiniRogue
                     case CombatState.ENEMYHEALTHROLL:
 
                         if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
-                        {
-                            
+                        {                          
                             monsterHealth = player.DungeonArea + player.playerDice.RollDice();
                             combatState = CombatState.ROLLDIE;
-
                         }
 
                         break;
 
                     case CombatState.ROLLDIE:
-
-
 
                         if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
@@ -392,7 +366,6 @@ namespace MiniRogue
 
                         break;
                     
-
                     case CombatState.RESOLVEDIEREVISED:
 
                         if (player.Health >= 3)
@@ -409,7 +382,7 @@ namespace MiniRogue
                         {
                             if (XPos > 550 && XPos < 650 && YPos > 300 && YPos < 400)
                             {
-                                if (CombatDice["Combat Die 1"].Roll == 6)
+                                if (CombatDice["Combat Die 1"].Roll % 6 == 0 && CombatDice["Combat Die 1"].Roll != 0)
                                 {
                                     CombatDice["Combat Die 1"].CritRollAvailable = true;
                                 }
@@ -422,7 +395,7 @@ namespace MiniRogue
                         {
                             if (XPos > 735 && XPos < 835 && YPos > 300 && YPos < 400)
                             {
-                                if (CombatDice["Combat Die 2"].Roll == 6)
+                                if (CombatDice["Combat Die 2"].Roll % 6 == 0 && CombatDice["Combat Die 2"].Roll != 0)
                                 {
                                     CombatDice["Combat Die 2"].CritRollAvailable = true;
                                 }
@@ -435,7 +408,7 @@ namespace MiniRogue
                         {
                             if (XPos > 920 && XPos < 1020 && YPos > 300 && YPos < 400)
                             {
-                                if (CombatDice["Combat Die 3"].Roll == 6)
+                                if (CombatDice["Combat Die 3"].Roll % 6 == 0 && CombatDice["Combat Die 3"].Roll != 0)
                                 {
                                     CombatDice["Combat Die 3"].CritRollAvailable = true;
                                 }
@@ -448,7 +421,7 @@ namespace MiniRogue
                         {
                             if (XPos > 1105 && XPos < 1205 && YPos > 300 && YPos < 400)
                             {
-                                if (CombatDice["Combat Die 4"].Roll == 6)
+                                if (CombatDice["Combat Die 4"].Roll % 6 == 0 && CombatDice["Combat Die 4"].Roll != 0)
                                 {
                                     CombatDice["Combat Die 4"].CritRollAvailable = true;
                                 }
@@ -457,13 +430,10 @@ namespace MiniRogue
                             }
                         }
 
-
-
                         if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
                             combatState = CombatState.DEALDAMAGE;
                         }
-
 
                         break;
 
@@ -507,16 +477,12 @@ namespace MiniRogue
                             }
                         }
 
-                        // Three buttons processing
-
-
                         if (HealthFeatAvailable)
                         {
                             if (XPos > 300 && XPos < 548 && YPos > 600 && YPos < 672)
                             {
                                 player.Health -= 2;
                                 combatState = CombatState.ROLLANIMATION;
-                                //ReRollDieRevised();
                             }
                         }
 
@@ -525,7 +491,6 @@ namespace MiniRogue
                             if (XPos > 600 && XPos < 848 && YPos > 600 && YPos < 672)
                             {
                                 player.Experience--;
-                                //ReRollDieRevised();
                                 combatState = CombatState.ROLLANIMATION;
                             }
                         }
@@ -534,16 +499,13 @@ namespace MiniRogue
                         {
                             if (XPos > 900 && XPos < 1148 && YPos > 600 && YPos < 672)
                             {
-                                //ReRollDieRevised();
                                 combatState = CombatState.ROLLANIMATION;
                             }
                         }
 
                         break;
 
-
                     case CombatState.DEALDAMAGE:
-
 
                         break;
 
@@ -624,7 +586,6 @@ namespace MiniRogue
                 CombatDice["Combat Die " + (i + 1)].Roll = 0;
             }
 
-            // Activate die and check boxes based on number of active die
             if (ActiveDie > 0)
             {
                 CombatDice["Combat Die 1"].Active = true;
@@ -814,7 +775,7 @@ namespace MiniRogue
             if (ActiveDie > 0 && (CombatDice["Combat Die 1"].NeedsRoll || CombatDice["Combat Die 1"].CritRollAvailable))
             {
                 die1Roll = Rng.Next(6) + 1;
-                if (CombatDice["Combat Die 1"].Roll % 6 == 0)
+                if (CombatDice["Combat Die 1"].Roll % 6 == 0 && CombatDice["Combat Die 1"].Roll != 0)
                 {
                     CombatDice["Combat Die 1"].Roll += die1Roll;
                 }
@@ -830,7 +791,7 @@ namespace MiniRogue
             if (ActiveDie > 1 && (CombatDice["Combat Die 2"].NeedsRoll || CombatDice["Combat Die 2"].CritRollAvailable))
             {
                 die2Roll = Rng.Next(6) + 1;
-                if (CombatDice["Combat Die 2"].Roll % 6 == 0)
+                if (CombatDice["Combat Die 2"].Roll % 6 == 0 && CombatDice["Combat Die 2"].Roll != 0)
                 {
                     CombatDice["Combat Die 2"].Roll += die2Roll;
                 }
@@ -845,7 +806,7 @@ namespace MiniRogue
             if (ActiveDie > 0 && (CombatDice["Combat Die 3"].NeedsRoll || CombatDice["Combat Die 3"].CritRollAvailable))
             {
                 die3Roll = Rng.Next(6) + 1;
-                if (CombatDice["Combat Die 3"].Roll % 6 == 0)
+                if (CombatDice["Combat Die 3"].Roll % 6 == 0 && CombatDice["Combat Die 3"].Roll != 0)
                 {
                     CombatDice["Combat Die 3"].Roll += die3Roll;
                 }
@@ -860,7 +821,7 @@ namespace MiniRogue
             if (ActiveDie > 0 && (CombatDice["Combat Die 4"].NeedsRoll || CombatDice["Combat Die 4"].CritRollAvailable))
             {
                 die4Roll = Rng.Next(6) + 1;
-                if (CombatDice["Combat Die 4"].Roll % 6 == 0)
+                if (CombatDice["Combat Die 4"].Roll % 6 == 0 && CombatDice["Combat Die 4"].Roll != 0)
                 {
                     CombatDice["Combat Die 4"].Roll += die4Roll;
                 }
