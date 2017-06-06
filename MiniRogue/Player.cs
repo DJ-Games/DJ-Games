@@ -121,6 +121,10 @@ namespace MiniRogue
                     Rank = 4;
                     experience = value;
                 }
+                if ((experience = value) > 36)
+                {
+                    experience = 36;
+                }
             }
         }
 

@@ -107,6 +107,7 @@ namespace MiniRogue
             {
                 case CombatState.ENEMYHEALTHROLL:
 
+                    MonsterPoisoned = false;
                     ActiveDie = player.Rank;
                     BossFight = bossFight;
                     SetMonsterStats(player);
@@ -157,6 +158,10 @@ namespace MiniRogue
 
                 case CombatState.DEALDAMAGE:
                     MonsterHealth -= (CombatDice["Combat Die 1"].Roll + CombatDice["Combat Die 2"].Roll + CombatDice["Combat Die 3"].Roll + CombatDice["Combat Die 4"].Roll);
+                    if (MonsterPoisoned)
+                    {
+                        MonsterHealth -= 5;
+                    }
                     if (MonsterHealth <= 0)
                     {
                         player.Experience += ExpReward;
@@ -745,6 +750,7 @@ namespace MiniRogue
                     break;
 
                 case "Poison":
+                    MonsterHealth -= 5;
                     MonsterPoisoned = true;
 
                     break;

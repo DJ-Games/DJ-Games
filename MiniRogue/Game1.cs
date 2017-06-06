@@ -137,6 +137,11 @@ namespace MiniRogue
         Texture2D iceSpellIcon;
         Texture2D poisonSpellIcon;
         Texture2D critRollButton;
+        Texture2D blackSewers;
+        Texture2D PoisonousDungeon;
+        Texture2D undeadCatacombs;
+        Texture2D flamingUnderworld;
+        Texture2D sunkenKeepOfOg;
         SpriteFont font;
         SpriteFont highTower;
         SpriteFont dungeonFont;
@@ -269,12 +274,17 @@ namespace MiniRogue
             titleEyes = Content.Load<Texture2D>("TitleScreenEyes");
             titleGuy = Content.Load<Texture2D>("TitleScreenGuy");
             titleBlack = Content.Load<Texture2D>("TitleScreenBlack");
-            gameScreen = Content.Load<Texture2D>("GameScreen");
+            gameScreen = Content.Load<Texture2D>("GameScreen2");
             fireSpellIcon = Content.Load<Texture2D>("FireSpellIcon");
             healthSpellIcon = Content.Load<Texture2D>("HealthSpellIcon");
             iceSpellIcon = Content.Load<Texture2D>("IceSpellIcon");
             poisonSpellIcon = Content.Load<Texture2D>("PoisonSpellIcon");
             critRollButton = Content.Load<Texture2D>("CritRollButton");
+            blackSewers = Content.Load<Texture2D>("BlackSewers");
+            PoisonousDungeon = Content.Load<Texture2D>("PoisonousDungeon");
+            undeadCatacombs = Content.Load<Texture2D>("UndeadCatacombs");
+            flamingUnderworld = Content.Load<Texture2D>("FlamingUnderworld");
+            sunkenKeepOfOg = Content.Load<Texture2D>("SunkenKeepOfOg");
             font = Content.Load<SpriteFont>("Font");
             highTower = Content.Load<SpriteFont>("HighTower");
             dungeonFont = Content.Load<SpriteFont>("Dungeon");
@@ -901,16 +911,16 @@ namespace MiniRogue
                             {
                                 player.DungeonLevel = 5;
                             }
-                            if (player.DungeonArea == 15)
+                            if (player.DungeonArea == 14)
                             {
                                 gamestate = Gamestate.WINSCREEN;
                             }
                             player.HasFoughtMonster = false;
                             playerHand = new Hand();
                             DrawNewHand();
-                            player.Food-=1;
+                            player.Food--;
 
-                            if (player.Food == 0)
+                            if (player.Food <= 0)
                             {
                                 player.Health -= 2;
                             }
@@ -1021,6 +1031,90 @@ namespace MiniRogue
                     spriteBatch.DrawString(highTower, player.Food.ToString(), new Vector2(1007, 26), Color.White);
                     spriteBatch.DrawString(highTower, player.Experience.ToString(), new Vector2(380, 26), Color.Red);
                     spriteBatch.DrawString(highTower, player.Rank.ToString(), new Vector2(485, 26), Color.Red);
+
+
+                    if (player.DungeonArea <= 2)
+                    {
+                        spriteBatch.Draw(blackSewers, new Vector2(0, 675), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                    }
+                    if (player.DungeonArea >= 3 && player.DungeonArea <= 4)
+                    {
+                        spriteBatch.Draw(PoisonousDungeon, new Vector2(0, 675), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                    }
+                    if (player.DungeonArea >= 5 && player.DungeonArea <= 7)
+                    {
+                        spriteBatch.Draw(undeadCatacombs, new Vector2(0, 675), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                    }
+                    if (player.DungeonArea >= 8 && player.DungeonArea <= 10)
+                    {
+                        spriteBatch.Draw(flamingUnderworld, new Vector2(0, 675), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                    }
+                    if (player.DungeonArea >= 11 && player.DungeonArea <= 14)
+                    {
+                        spriteBatch.Draw(sunkenKeepOfOg, new Vector2(0, 675), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                    }
+
+                    switch (player.DungeonArea)
+                    {
+                        case 1:
+                            
+                            break;
+
+                        case 2:
+                            
+                            break;
+
+                        case 3:
+                            
+                            break;
+
+                        case 4:
+                            
+                            break;
+
+                        case 5:
+                            
+                            break;
+
+                        case 6:
+                            
+                            break;
+
+                        case 7:
+                           
+                            break;
+
+                        case 8:
+                            
+                            break;
+
+                        case 9:
+                            
+                            break;
+
+                        case 10:
+                            
+                            break;
+
+                        case 11:
+                            
+                            break;
+
+                        case 12:
+                            
+                            break;
+
+                        case 13:
+                            
+                            break;
+
+                        case 14:
+                            
+                            break;
+
+                        default:
+                            break;
+                    }
 
                     foreach (var item in player.Spells)
                     {
