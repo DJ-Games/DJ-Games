@@ -510,7 +510,7 @@ namespace MiniRogue
 
                                     if (XPos > 810 && XPos < 890 && YPos > 300 && YPos < 380)
                                     {
-                                        player.Gold =+ 2;
+                                        player.Gold += 2;
                                         eventCardTurnState = EventCardTurnState.COMPLETE;
                                     }
 
@@ -522,7 +522,7 @@ namespace MiniRogue
 
                                     if (XPos > 970 && XPos < 1050 && YPos > 300 && YPos < 380)
                                     {
-                                        player.Armor =+ 1;
+                                        player.Armor += 1;
                                         eventCardTurnState = EventCardTurnState.COMPLETE;
                                     }
 
