@@ -460,7 +460,7 @@ namespace MiniRogue
                     {
                         if (position.X > 800 && position.X < 1050 && position.Y > 167 && position.Y < 241)
                         {
-                            player = new Player(1, 20, 50, 6, spellIcons);
+                            player = new Player(1, 20, 50, 0, spellIcons);
                             DrawNewHand();
                             gamestate = Gamestate.HACKANDSLASH;
                         }

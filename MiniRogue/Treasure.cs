@@ -136,8 +136,7 @@ namespace MiniRogue
                             AnimationCounter = 0;
                             ExtTreasureResult = player.playerDice.RollDice();
                             TreasureDie.CurrentTexture = TreasureDie.DieTextures["Roll " + ExtTreasureResult];
-                            // Set to zero for testing
-                            if (ExtTreasureResult >= 0)
+                            if (ExtTreasureResult >= 5)
                             {
                                 treasureTurnState = TreasureTurnState.EXTRA_TREASURE_ROLL;
                             }

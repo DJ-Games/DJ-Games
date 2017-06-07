@@ -60,10 +60,7 @@ namespace MiniRogue
                 if ((monsterHealth = value) < 0)
                 {
                     monsterHealth = 0;
-                }
-                else
-                {
-                    monsterHealth = value;
+                    return;
                 }
             }
         }
