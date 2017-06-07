@@ -529,17 +529,22 @@ namespace MiniRogue
                             combatState = CombatState.DAMAGEPLAYER; 
                         }
 
-                        if (XPos > 1130 && XPos < 1175 && YPos > 20 && YPos < 65)
+                        if (player.Spells.Count == 1)
                         {
-                            CastSpell(player.Spells[0].Name, player);
-                            player.RemoveSpell(0);
-                            if (MonsterHealth <= 0)
+
+                            if (XPos > 1130 && XPos < 1175 && YPos > 20 && YPos < 65)
                             {
-                                player.Experience += ExpReward;
-                                player.Gold += GoldReward;
-                                combatState = CombatState.RESULTS;
+                                CastSpell(player.Spells[0].Name, player);
+                                player.RemoveSpell(0);
+                                if (MonsterHealth <= 0)
+                                {
+                                    player.Experience += ExpReward;
+                                    player.Gold += GoldReward;
+                                    combatState = CombatState.RESULTS;
+                                }
                             }
                         }
+
 
                         if (player.Spells.Count == 2)
                         {
