@@ -25,7 +25,7 @@ namespace MiniRogue
                     armor = 0;
                     return;
                 }
-                else if ((armor = value) > 5)
+                if ((armor = value) > 5)
                 {
                     armor = 5;
                     return;
