@@ -142,6 +142,7 @@ namespace MiniRogue
         Texture2D undeadCatacombs;
         Texture2D flamingUnderworld;
         Texture2D sunkenKeepOfOg;
+        Texture2D mapHighlight;
         SpriteFont font;
         SpriteFont highTower;
         SpriteFont dungeonFont;
@@ -285,6 +286,7 @@ namespace MiniRogue
             undeadCatacombs = Content.Load<Texture2D>("UndeadCatacombs");
             flamingUnderworld = Content.Load<Texture2D>("FlamingUnderworld");
             sunkenKeepOfOg = Content.Load<Texture2D>("SunkenKeepOfOg");
+            mapHighlight = Content.Load<Texture2D>("MapHighlight");
             font = Content.Load<SpriteFont>("Font");
             highTower = Content.Load<SpriteFont>("HighTower");
             dungeonFont = Content.Load<SpriteFont>("Dungeon");
@@ -1020,9 +1022,6 @@ namespace MiniRogue
 
                 case Gamestate.HACKANDSLASH:
 
-                    spriteBatch.DrawString(font, "Dungeon Level: " + player.DungeonLevel, new Vector2(1120, 20), Color.White);
-                    spriteBatch.DrawString(font, "Dungeon Area: " + player.DungeonArea, new Vector2(1120, 40), Color.White);
-
                     spriteBatch.Draw(gameScreen, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     spriteBatch.DrawString(highTower, player.Health.ToString(), new Vector2(742, 26), Color.Black);
@@ -1035,81 +1034,81 @@ namespace MiniRogue
 
                     if (player.DungeonArea <= 2)
                     {
-                        spriteBatch.Draw(blackSewers, new Vector2(0, 675), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                        spriteBatch.Draw(blackSewers, new Vector2(5, 665), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                     }
                     if (player.DungeonArea >= 3 && player.DungeonArea <= 4)
                     {
-                        spriteBatch.Draw(PoisonousDungeon, new Vector2(0, 675), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                        spriteBatch.Draw(PoisonousDungeon, new Vector2(5, 665), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                     }
                     if (player.DungeonArea >= 5 && player.DungeonArea <= 7)
                     {
-                        spriteBatch.Draw(undeadCatacombs, new Vector2(0, 675), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                        spriteBatch.Draw(undeadCatacombs, new Vector2(5, 665), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                     }
                     if (player.DungeonArea >= 8 && player.DungeonArea <= 10)
                     {
-                        spriteBatch.Draw(flamingUnderworld, new Vector2(0, 675), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                        spriteBatch.Draw(flamingUnderworld, new Vector2(5, 665), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                     }
                     if (player.DungeonArea >= 11 && player.DungeonArea <= 14)
                     {
-                        spriteBatch.Draw(sunkenKeepOfOg, new Vector2(0, 675), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                        spriteBatch.Draw(sunkenKeepOfOg, new Vector2(5, 665), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                     }
 
                     switch (player.DungeonArea)
                     {
                         case 1:
-                            
+                            spriteBatch.Draw(mapHighlight, new Vector2(11, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 2:
-                            
+                            spriteBatch.Draw(mapHighlight, new Vector2(68, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 3:
-                            
+                            spriteBatch.Draw(mapHighlight, new Vector2(13, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 4:
-                            
+                            spriteBatch.Draw(mapHighlight, new Vector2(71, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 5:
-                            
+                            spriteBatch.Draw(mapHighlight, new Vector2(11, 686), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 6:
-                            
+                            spriteBatch.Draw(mapHighlight, new Vector2(68, 686), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 7:
-                           
+                            spriteBatch.Draw(mapHighlight, new Vector2(125, 686), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 8:
-                            
+                            spriteBatch.Draw(mapHighlight, new Vector2(11, 680), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 9:
-                            
+                            spriteBatch.Draw(mapHighlight, new Vector2(68, 680), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 10:
-                            
+                            spriteBatch.Draw(mapHighlight, new Vector2(125, 680), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 11:
-                            
+                            spriteBatch.Draw(mapHighlight, new Vector2(13, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 12:
-                            
+                            spriteBatch.Draw(mapHighlight, new Vector2(70, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 13:
-                            
+                            spriteBatch.Draw(mapHighlight, new Vector2(127, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 14:
-                            
+                            spriteBatch.Draw(mapHighlight, new Vector2(185, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         default:
