@@ -76,7 +76,7 @@ namespace MiniRogue
 
 
                 case MerchantTurnState.INSUFFICENTFUNDS:
-                    Thread.Sleep(500);
+                    //Thread.Sleep(500);
 
                     merchantTurnState = MerchantTurnState.BUYSELL;
                     return false;
@@ -147,7 +147,7 @@ namespace MiniRogue
                     int counter2 = 240;
                     foreach (var item in CurrentButtons)
                     {
-                        sBatch.Draw(item.ButtonTexture, new Vector2(525, counter2), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                        sBatch.Draw(item.ButtonTexture, new Vector2(700, counter2), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                         counter2 += 80;
                     }
 
@@ -364,7 +364,7 @@ namespace MiniRogue
                                 default:
                                     break;
                             }
-                            Thread.Sleep(500);
+                            //Thread.Sleep(500);
                         }
 
                         if (XPos > 820 && XPos < 1070 && YPos > 420 && YPos < 490)
@@ -377,26 +377,26 @@ namespace MiniRogue
                     // ------- BUY SPELL STATE -------
                     case MerchantTurnState.BUYSPELL:
 
-                        if (XPos > 525 && XPos < 773 && YPos > 240 && YPos < 312)
+                        if (XPos > 700 && XPos < 948 && YPos > 240 && YPos < 312)
                         {
                             Selection = "Buy Fire Spell";
                             merchantTurnState = MerchantTurnState.CONFIRMBUY;
 
                         }
 
-                        if (XPos > 525 && XPos < 773 && YPos > 320 && YPos < 392)
+                        if (XPos > 700 && XPos < 948 && YPos > 320 && YPos < 392)
                         {
                             Selection = "Buy Ice Spell";
                             merchantTurnState = MerchantTurnState.CONFIRMBUY;
                         }
 
-                        if (XPos > 525 && XPos < 773 && YPos > 400 && YPos < 472)
+                        if (XPos > 700 && XPos < 948 && YPos > 400 && YPos < 472)
                         {
                             Selection = "Buy Poison Spell";
                             merchantTurnState = MerchantTurnState.CONFIRMBUY;
                         }
 
-                        if (XPos > 525 && XPos < 773 && YPos > 480 && YPos < 552)
+                        if (XPos > 700 && XPos < 948 && YPos > 480 && YPos < 552)
                         {
                             Selection = "Buy Healing Spell";
                             merchantTurnState = MerchantTurnState.CONFIRMBUY;
