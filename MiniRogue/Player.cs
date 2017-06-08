@@ -23,10 +23,12 @@ namespace MiniRogue
                 if ((armor = value) < 0)
                 {
                     armor = 0;
+                    return;
                 }
-                if ((armor = value) > 5)
+                else if ((armor = value) > 5)
                 {
                     armor = 5;
+                    return;
                 }
             }
         }
@@ -41,11 +43,14 @@ namespace MiniRogue
                 if ((health = value) < 0)
                 {
                     health = 0;
+                    return;
                 }
                 if ((health = value) > 20)
                 {
                     health = 20;
+                    return;
                 }
+                
             }
         }
 
@@ -59,11 +64,14 @@ namespace MiniRogue
                 if ((gold = value) < 0)
                 {
                     gold = 0;
+                    return;
                 }
                 if((gold = value) > 20)
                 {
                     gold = 20;
+                    return;
                 }
+                
             }
         }
 
@@ -77,10 +85,12 @@ namespace MiniRogue
                 if ((food = value) < 0)
                 {
                     food = 0;
+                    return;
                 }
                 if ((food = value) > 6)
                 {
                     food = 6;
+                    return;
                 }
             }
         }
@@ -96,34 +106,33 @@ namespace MiniRogue
                 if ((experience = value) < 0)
                 {
                     experience = 0;
-                }
-                if ((experience = value) > 18)
-                {
-                    experience = 18;
+                    return;
                 }
                 if ((experience = value) < 6)
                 {
                     Rank = 1;
-                    experience = value;
+                    return;
                 }
                 if ((experience = value) >= 6 && (experience = value) < 18)
                 {
                     Rank = 2;
-                    experience = value;
+                    return;
                 }
                 if ((experience = value) >= 18 && (experience = value) < 36)
                 {
                     Rank = 3;
-                    experience = value;
+                    return;
                 }
-                if ((experience = value) >= 36)
+                if ((experience = value) == 36)
                 {
                     Rank = 4;
-                    experience = value;
+                    return;
                 }
                 if ((experience = value) > 36)
                 {
                     experience = 36;
+                    Health++;
+                    return;
                 }
             }
         }

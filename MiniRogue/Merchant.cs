@@ -153,6 +153,7 @@ namespace MiniRogue
 
                     break;
                 case MerchantTurnState.SELLSPELL:
+                    sBatch.DrawString(font, "Click the spell you would like to sell", new Vector2 (700, 100), Color.White);
 
                     break;
                 case MerchantTurnState.CONFIRMBUY:
@@ -219,47 +220,63 @@ namespace MiniRogue
                         }
                         if (XPos > 600 && XPos < 848 && YPos > 150 && YPos < 222)
                         {
-                            Selection = "Buy Ration";
-                            merchantTurnState = MerchantTurnState.CONFIRMBUY;
-                            
+                            if (player.Food < 6 && player.Gold >= 1)
+                            {
+                                Selection = "Buy Ration";
+                                merchantTurnState = MerchantTurnState.CONFIRMBUY;
+                            }
                         }
 
                         if (XPos > 600 && XPos < 848 && YPos > 230 && YPos < 302)
                         {
-                            Selection = "Buy Potion";
-                            merchantTurnState = MerchantTurnState.CONFIRMBUY;
+                            if (player.Health < 20 && player.Gold >= 1)
+                            {
+                                Selection = "Buy Potion";
+                                merchantTurnState = MerchantTurnState.CONFIRMBUY;
+                            }
                         }
 
                         if (XPos > 600 && XPos < 848 && YPos > 310 && YPos < 382)
                         {
-                            Selection = "Buy Big Potion";
-                            merchantTurnState = MerchantTurnState.CONFIRMBUY;
+                            if (player.Health < 20 && player.Gold >= 3)
+                            {
+                                Selection = "Buy Big Potion";
+                                merchantTurnState = MerchantTurnState.CONFIRMBUY;
+                            }
                         }
 
                         if (XPos > 600 && XPos < 848 && YPos > 390 && YPos < 462)
                         {
-                            Selection = "Buy Armor";
-                            merchantTurnState = MerchantTurnState.CONFIRMBUY;
+                            if (player.Armor < 5 && player.Gold >= 6)
+                            {
+                                Selection = "Buy Armor";
+                                merchantTurnState = MerchantTurnState.CONFIRMBUY;
+                            }
                         }
 
                         if (XPos > 600 && XPos < 848 && YPos > 470 && YPos < 542)
                         {
-                            merchantTurnState = MerchantTurnState.BUYSPELL;
+                            if (player.Gold >= 8 && player.Spells.Count < 2)
+                            {
+                                merchantTurnState = MerchantTurnState.BUYSPELL;
+                            }
                         }
 
-                        if (XPos > 900 && XPos < 1148 && YPos > 240 && YPos < 312)
+                        if (XPos > 900 && XPos < 1148 && YPos > 150 && YPos < 222)
                         {
-                            Selection = "Sell Armor";
-                            merchantTurnState = MerchantTurnState.CONFIRMSELL;
+                            if (player.Armor > 0)
+                            {
+                                Selection = "Sell Armor";
+                                merchantTurnState = MerchantTurnState.CONFIRMSELL;
+                            }
                         }
 
-                        if (XPos > 900 && XPos < 1148 && YPos > 320 && YPos < 392)
+                        if (XPos > 900 && XPos < 1148 && YPos > 230 && YPos < 302)
                         {
                             if (player.Spells.Count > 0)
                             {
                                 merchantTurnState = MerchantTurnState.SELLSPELL;
                             }
-                            else merchantTurnState = MerchantTurnState.INSUFFICENTFUNDS;
                         }
                
                         break;
@@ -364,7 +381,6 @@ namespace MiniRogue
                                 default:
                                     break;
                             }
-                            Thread.Sleep(500);
                         }
 
                         if (XPos > 820 && XPos < 1070 && YPos > 420 && YPos < 490)
@@ -409,12 +425,17 @@ namespace MiniRogue
 
                     case MerchantTurnState.SELLSPELL:
 
-                        if (XPos > 1130 && XPos < 1175 && YPos > 20 && YPos < 65)
+                        if (player.Spells.Count == 1)
                         {
-                            SpellIndex = 0;
-                            merchantTurnState = MerchantTurnState.CONFIRMSELL;
-                            Selection = "Sell Spell";
+
+                            if (XPos > 1130 && XPos < 1175 && YPos > 20 && YPos < 65)
+                            {
+                                SpellIndex = 0;
+                                merchantTurnState = MerchantTurnState.CONFIRMSELL;
+                                Selection = "Sell Spell";
+                            }
                         }
+
 
                         if (player.Spells.Count == 2)
                         {
@@ -425,6 +446,25 @@ namespace MiniRogue
                                 Selection = "Sell Spell";
                             }
                         }
+
+
+
+                        //if (XPos > 1130 && XPos < 1175 && YPos > 20 && YPos < 65)
+                        //{
+                        //    SpellIndex = 0;
+                        //    merchantTurnState = MerchantTurnState.CONFIRMSELL;
+                        //    Selection = "Sell Spell";
+                        //}
+
+                        //if (player.Spells.Count == 2)
+                        //{
+                        //    if (XPos > 1180 && XPos < 1225 && YPos > 20 && YPos < 65)
+                        //    {
+                        //        SpellIndex = 1;
+                        //        merchantTurnState = MerchantTurnState.CONFIRMSELL;
+                        //        Selection = "Sell Spell";
+                        //    }
+                        //}
 
                         break;
 
