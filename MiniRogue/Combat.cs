@@ -124,6 +124,11 @@ namespace MiniRogue
 
                 case CombatState.ROLLDIE:
 
+                    CombatDice["Combat Die 1"].FeatUsed = false;
+                    CombatDice["Combat Die 2"].FeatUsed = false;
+                    CombatDice["Combat Die 3"].FeatUsed = false;
+                    CombatDice["Combat Die 4"].FeatUsed = false;
+
                     ActiveDie = player.Rank;
                     CombatDice["Combat Die 1"].CurrentTexture = CombatDice["Combat Die 1"].DieTextures["Blank"];
                     CombatDice["Combat Die 2"].CurrentTexture = CombatDice["Combat Die 2"].DieTextures["Blank"];
@@ -398,7 +403,11 @@ namespace MiniRogue
                                     CombatDice["Combat Die 1"].CritRollAvailable = true;
                                 }
                                 else { CombatDice["Combat Die 1"].NeedsRoll = true; }
-                                CombatDice["Combat Die 1"].FeatUsed = true;
+                                if (CombatDice["Combat Die 1"].CritRollAvailable)
+                                {
+                                    CombatDice["Combat Die 1"].FeatUsed = false;
+                                }
+                                else { CombatDice["Combat Die 1"].FeatUsed = true; }
                                 combatState = CombatState.USEFEAT;
                             }
                         }
@@ -412,7 +421,11 @@ namespace MiniRogue
                                     CombatDice["Combat Die 2"].CritRollAvailable = true;
                                 }
                                 else { CombatDice["Combat Die 2"].NeedsRoll = true; }
-                                CombatDice["Combat Die 2"].FeatUsed = true;
+                                if (CombatDice["Combat Die 2"].CritRollAvailable)
+                                {
+                                    CombatDice["Combat Die 2"].FeatUsed = false;
+                                }
+                                else { CombatDice["Combat Die 2"].FeatUsed = true; }
                                 combatState = CombatState.USEFEAT;
                             }
                         }
@@ -426,7 +439,11 @@ namespace MiniRogue
                                     CombatDice["Combat Die 3"].CritRollAvailable = true;
                                 }
                                 else { CombatDice["Combat Die 3"].NeedsRoll = true; }
-                                CombatDice["Combat Die 3"].FeatUsed = true;
+                                if (CombatDice["Combat Die 3"].CritRollAvailable)
+                                {
+                                    CombatDice["Combat Die 3"].FeatUsed = false;
+                                }
+                                else { CombatDice["Combat Die 3"].FeatUsed = true; }
                                 combatState = CombatState.USEFEAT;
                             }
                         }
@@ -440,7 +457,11 @@ namespace MiniRogue
                                     CombatDice["Combat Die 4"].CritRollAvailable = true;
                                 }
                                 else { CombatDice["Combat Die 4"].NeedsRoll = true; }
-                                CombatDice["Combat Die 4"].FeatUsed = true;
+                                if (CombatDice["Combat Die 4"].CritRollAvailable)
+                                {
+                                    CombatDice["Combat Die 4"].FeatUsed = false;
+                                }
+                                else { CombatDice["Combat Die 4"].FeatUsed = true; }
                                 combatState = CombatState.USEFEAT;
                             }
                         }
