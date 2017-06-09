@@ -132,6 +132,7 @@ namespace MiniRogue
 
                 case BossTurnState.REMOVESPELL:
 
+                    sBatch.Draw(Buttons["Rewards"].ButtonTexture, new Vector2(600, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
                     sBatch.DrawString(dungeonFont, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White);
                     sBatch.DrawString(dungeonFont, "Click a spell to remove or", new Vector2(650, 250), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     sBatch.DrawString(dungeonFont, "click done to keep current spells", new Vector2(600, 300), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
@@ -141,6 +142,7 @@ namespace MiniRogue
 
                 case BossTurnState.REVIEW:
 
+                    sBatch.Draw(Buttons["Rewards"].ButtonTexture, new Vector2(600, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
                     sBatch.DrawString(dungeonFont, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White);
                     if (TreasureResult > 2)
                     {
