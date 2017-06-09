@@ -27,7 +27,7 @@ namespace MiniRogue
 
         public bool Guarded { get; set; }
 
-        public bool Sucess { get; set; }
+        public bool Success { get; set; }
 
         public int GoldAward { get; set; }
 
@@ -70,6 +70,7 @@ namespace MiniRogue
             switch (treasureTurnState)
             {
                 case TreasureTurnState.GOLD_AWARD:
+                    Success = false;
                     TreasureAwarded = false;
                     TreasureRoll = false;
                     if (player.HasFoughtMonster)
@@ -138,6 +139,7 @@ namespace MiniRogue
                             TreasureDie.CurrentTexture = TreasureDie.DieTextures["Roll " + ExtTreasureResult];
                             if (ExtTreasureResult >= 5)
                             {
+                                Success = true;
                                 treasureTurnState = TreasureTurnState.EXTRA_TREASURE_ROLL;
                             }
                             else { treasureTurnState = TreasureTurnState.REVIEW; }
@@ -222,7 +224,12 @@ namespace MiniRogue
                     break;
 
                 case TreasureTurnState.REVIEW:
-                    
+
+                    if (!Success)
+                    {
+                        sBatch.DrawString(font, "You did not find treasure.", new Vector2(700, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
+                    }
+
                     TreasureDie.DrawCombatDie(sBatch);
                     if (TreasureResult == 3 || TreasureResult == 5 || TreasureResult == 6)
                     {
