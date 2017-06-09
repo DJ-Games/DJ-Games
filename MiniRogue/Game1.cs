@@ -143,6 +143,7 @@ namespace MiniRogue
         Texture2D flamingUnderworld;
         Texture2D sunkenKeepOfOg;
         Texture2D mapHighlight;
+        Texture2D rewards;
         SpriteFont font;
         SpriteFont highTower;
         SpriteFont dungeonFont;
@@ -287,6 +288,7 @@ namespace MiniRogue
             flamingUnderworld = Content.Load<Texture2D>("FlamingUnderworld");
             sunkenKeepOfOg = Content.Load<Texture2D>("SunkenKeepOfOg");
             mapHighlight = Content.Load<Texture2D>("MapHighlight");
+            rewards = Content.Load<Texture2D>("Rewards");
             font = Content.Load<SpriteFont>("Font");
             highTower = Content.Load<SpriteFont>("HighTower");
             dungeonFont = Content.Load<SpriteFont>("Dungeon");
@@ -374,6 +376,7 @@ namespace MiniRogue
             buttonDictionay.Add("Spend 2 HP Button", new Button(spend2HPButton, "Spend 2 HP Button"));
             buttonDictionay.Add("Spend 1 XP Button", new Button(spend1XPButton, "Spend 1 XP Button"));
             buttonDictionay.Add("Crit Roll Button", new Button(critRollButton, "Crit Roll Button"));
+            buttonDictionay.Add("Rewards", new Button(rewards, "Rewards"));
 
             spellIcons.Add("Fire Spell Icon", fireSpellIcon);
             spellIcons.Add("Healing Spell Icon", healthSpellIcon);
