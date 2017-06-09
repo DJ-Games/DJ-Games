@@ -100,17 +100,22 @@ namespace MiniRogue
                                 switch (TrapResult)
                                 {
                                     case 1:
-
-                                        player.Food -= 1;
+                                        if (player.Food > 0)
+                                        {
+                                            player.Food -= 1;
+                                        }
+                                        player.Health -= 2; 
                                         break;
 
                                     case 2:
-
-                                        player.Gold -= 1;
+                                        if (player.Gold > 0)
+                                        {
+                                            player.Gold -= 1;
+                                        }
+                                        player.Health -= 2;         
                                         break;
 
                                     case 3:
-
                                         if (player.Armor > 0)
                                         {
                                             player.Armor -= 1;
@@ -130,11 +135,10 @@ namespace MiniRogue
                                         {
                                             player.Experience -= 1;
                                         }
-
+                                        player.Health -= 2;
                                         break;
 
                                     case 6:
-
                                         player.FallBelow();
                                         break;
 
