@@ -965,7 +965,7 @@ namespace MiniRogue
 
                 case Gamestate.COMBATTESTING:
 
-                    if (combat.HandleCombat(player, mouseState, prevMouseState, position.X, position.Y, true))
+                    if (combat.HandleCombat(player, mouseState, prevMouseState, position.X, position.Y, true, false))
                     {
                         gamestate = Gamestate.TITILESCREEN;
                     }

@@ -150,7 +150,7 @@ namespace MiniRogue
 
                 case EventCardTurnState.COMBAT:
 
-                    if (CurrentCombat.HandleCombat(player, CurrentMouseState, PreviousMouseState, XPos, yPos, false))
+                    if (CurrentCombat.HandleCombat(player, CurrentMouseState, PreviousMouseState, XPos, yPos, false, true))
                     {
                         eventCardTurnState = EventCardTurnState.COMPLETE;
                     }

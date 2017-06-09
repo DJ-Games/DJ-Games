@@ -74,7 +74,7 @@ namespace MiniRogue
 
                 case EnemyTurnState.COMBAT:
 
-                    if (CurrentCombat.HandleCombat(player, CurrentMouseState, PreviousMouseState, XPos, yPos, false))
+                    if (CurrentCombat.HandleCombat(player, CurrentMouseState, PreviousMouseState, XPos, yPos, false, false))
                     {
                         enemyTurnState = EnemyTurnState.COMPLETE;
                     }

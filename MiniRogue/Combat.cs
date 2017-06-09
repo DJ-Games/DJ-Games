@@ -67,6 +67,8 @@ namespace MiniRogue
 
         public bool BossFight { get; set; }
 
+        public bool EventFight { get; set; }
+
         public bool MonsterPoisoned { get; set; }
 
         public bool MonsterFrozen { get; set; }
@@ -93,7 +95,7 @@ namespace MiniRogue
 
         //---------------------- METHODS ------------------------
 
-        public bool HandleCombat(Player player, MouseState current, MouseState previous, float xPos, float yPos, bool bossFight)
+        public bool HandleCombat(Player player, MouseState current, MouseState previous, float xPos, float yPos, bool bossFight, bool eventFight)
         {
             XPos = xPos;
             YPos = yPos;
@@ -107,6 +109,7 @@ namespace MiniRogue
                     MonsterPoisoned = false;
                     //ActiveDie = player.Rank;
                     BossFight = bossFight;
+                    EventFight = eventFight;
                     SetMonsterStats(player);
 
 
@@ -649,6 +652,12 @@ namespace MiniRogue
                         ExpReward = 2;
 
                     }
+                    else if (EventFight)
+                    {
+                        Damage = 2;
+                        ExpReward = 2;
+                        GoldReward = 0;
+                    }
                     else
                     {
                         Damage = 2;
@@ -666,6 +675,12 @@ namespace MiniRogue
                         Damage = 5;
                         GoldReward = 2;
                         ExpReward = 3;
+                    }
+                    else if (EventFight)
+                    {
+                        Damage = 4;
+                        ExpReward = 2;
+                        GoldReward = 0;
                     }
                     else
                     {
@@ -686,6 +701,12 @@ namespace MiniRogue
                         GoldReward = 3;
                         ExpReward = 4;
                     }
+                    else if (EventFight)
+                    {
+                        Damage = 6;
+                        ExpReward = 2;
+                        GoldReward = 0;
+                    }
                     else
                     {
                         Damage = 6;
@@ -705,6 +726,12 @@ namespace MiniRogue
                         GoldReward = 3;
                         ExpReward = 5;
                     }
+                    else if (EventFight)
+                    {
+                        Damage = 8;
+                        ExpReward = 2;
+                        GoldReward = 0;
+                    }
                     else
                     {
                         Damage = 8;
@@ -722,6 +749,12 @@ namespace MiniRogue
                         Damage = 12;
                         GoldReward = 0;
                         ExpReward = 0;
+                    }
+                    else if (EventFight)
+                    {
+                        Damage = 10;
+                        ExpReward = 2;
+                        GoldReward = 0;
                     }
                     else
                     {

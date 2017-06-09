@@ -59,7 +59,7 @@ namespace MiniRogue
 
                 case BossTurnState.COMBAT:
 
-                    if (CurrentCombat.HandleCombat(player, CurrentMouseState, PreviousMouseState, XPos, yPos, true))
+                    if (CurrentCombat.HandleCombat(player, CurrentMouseState, PreviousMouseState, XPos, yPos, true, false))
                     {
                         bossTurnState = BossTurnState.REWARDS;
                     }
