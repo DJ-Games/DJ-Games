@@ -222,7 +222,7 @@ namespace MiniRogue
                     break;
 
                 case TreasureTurnState.REVIEW:
-                    
+
                     TreasureDie.DrawCombatDie(sBatch);
                     if (TreasureResult == 3 || TreasureResult == 5 || TreasureResult == 6)
                     {
