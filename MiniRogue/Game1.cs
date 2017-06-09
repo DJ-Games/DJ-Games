@@ -505,7 +505,7 @@ namespace MiniRogue
 
                             if (SingleMouseClick())
                             {
-                                if (position.X > 75 && position.X < 270 && position.Y > 260 && position.Y < 535)
+                                if (position.X > 92 && position.X < 290 && position.Y > 260 && position.Y < 542)
                                 {
                                     currentCard = playerHand.Card1;
                                     currentCardNumber = 1;
@@ -573,7 +573,7 @@ namespace MiniRogue
 
                             if (SingleMouseClick())
                             {
-                                if (position.X > 300 && position.X < 495 && position.Y > 100 && position.Y < 375)
+                                if (position.X > 317 && position.X < 515 && position.Y > 100 && position.Y < 382)
                                 {
                                     currentCard = playerHand.Card2;
                                     currentCardNumber = 2;
@@ -582,7 +582,7 @@ namespace MiniRogue
 
                                 }
 
-                                if (position.X > 300 && position.X < 495 && position.Y > 400 && position.Y < 575)
+                                if (position.X > 317 && position.X < 515 && position.Y > 410 && position.Y < 692)
                                 {
                                     currentCard = playerHand.Card3;
                                     currentCardNumber = 3;
@@ -661,7 +661,7 @@ namespace MiniRogue
 
                             if (SingleMouseClick())
                             {
-                                if (position.X > 525 && position.X < 720 && position.Y > 260 && position.Y < 535)
+                                if (position.X > 542 && position.X < 740 && position.Y > 260 && position.Y < 542)
                                 {
                                     currentCard = playerHand.Card4;
                                     currentCardNumber = 4;
@@ -727,7 +727,7 @@ namespace MiniRogue
 
                             if (SingleMouseClick())
                             {
-                                if (position.X > 750 && position.X < 945 && position.Y > 100 && position.Y < 375)
+                                if (position.X > 767 && position.X < 965 && position.Y > 100 && position.Y < 382)
                                 {
                                     currentCard = playerHand.Card5;
                                     currentCardNumber = 5;
@@ -737,7 +737,7 @@ namespace MiniRogue
                                 }
 
 
-                                if (position.X > 750 && position.X < 945 && position.Y > 400 && position.Y < 575)
+                                if (position.X > 767 && position.X < 965 && position.Y > 410 && position.Y < 692)
                                 {
                                     currentCard = playerHand.Card6;
                                     currentCardNumber = 6;
@@ -822,7 +822,7 @@ namespace MiniRogue
 
                             if (SingleMouseClick())
                             {
-                                if (position.X > 925 && position.X < 1120 && position.Y > 260 && position.Y < 535)
+                                if (position.X > 992 && position.X < 1190 && position.Y > 260 && position.Y < 542)
                                 {
                                     currentCard = playerHand.Card7;
                                     currentCardNumber = 7;
