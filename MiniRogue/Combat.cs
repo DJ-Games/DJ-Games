@@ -41,7 +41,7 @@ namespace MiniRogue
         public Dictionary<string, Button> CombatButtons { get; set; }
 
         public Dictionary<string, Die> CombatDice { get; set; }
-
+        
         public int ActiveDie { get; set; }
 
         public int Damage { get; set; }
@@ -105,7 +105,7 @@ namespace MiniRogue
                 case CombatState.ENEMYHEALTHROLL:
 
                     MonsterPoisoned = false;
-                    ActiveDie = player.Rank;
+                    //ActiveDie = player.Rank;
                     BossFight = bossFight;
                     SetMonsterStats(player);
 
@@ -121,6 +121,11 @@ namespace MiniRogue
 
                 case CombatState.ROLLDIE:
 
+                    ActiveDie = player.Rank;
+                    CombatDice["Combat Die 1"].CurrentTexture = CombatDice["Combat Die 1"].DieTextures["Blank"];
+                    CombatDice["Combat Die 2"].CurrentTexture = CombatDice["Combat Die 2"].DieTextures["Blank"];
+                    CombatDice["Combat Die 3"].CurrentTexture = CombatDice["Combat Die 3"].DieTextures["Blank"];
+                    CombatDice["Combat Die 4"].CurrentTexture = CombatDice["Combat Die 4"].DieTextures["Blank"];
                     SetDieActivations();
                     AnimationCounter = 0;
                     MonsterFrozen = false;
@@ -209,9 +214,12 @@ namespace MiniRogue
         }
 
         public void DrawCombat(SpriteBatch sBatch, SpriteFont dungeonFont)
-        {     
-            sBatch.DrawString(dungeonFont, "Monster Health: " + monsterHealth, new Vector2(700, 100), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
-
+        {
+            if (combatState != CombatState.ENEMYHEALTHROLL)
+            {
+                sBatch.DrawString(dungeonFont, "Monster Health: " + monsterHealth, new Vector2(700, 100), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
+            }  
+            
             switch (combatState)
             {
                 case CombatState.ENEMYHEALTHROLL:
@@ -816,7 +824,7 @@ namespace MiniRogue
                 die2Roll = Rng.Next(6) + 1;
                 if (die2Roll == 1)
                 {
-                    CombatDice["Combat Die 1"].Roll = die2Roll;
+                    CombatDice["Combat Die 2"].Roll = die2Roll;
                 }
                 else if (CombatDice["Combat Die 2"].Roll % 6 == 0 && CombatDice["Combat Die 2"].Roll != 0)
                 {
@@ -835,7 +843,7 @@ namespace MiniRogue
                 die3Roll = Rng.Next(6) + 1;
                 if (die3Roll == 1)
                 {
-                    CombatDice["Combat Die 1"].Roll = die3Roll;
+                    CombatDice["Combat Die 3"].Roll = die3Roll;
                 }
                 else if (CombatDice["Combat Die 3"].Roll % 6 == 0 && CombatDice["Combat Die 3"].Roll != 0)
                 {
@@ -854,7 +862,7 @@ namespace MiniRogue
                 die4Roll = Rng.Next(6) + 1;
                 if (die4Roll == 1)
                 {
-                    CombatDice["Combat Die 1"].Roll = die4Roll;
+                    CombatDice["Combat Die 4"].Roll = die4Roll;
                 }
                 else if (CombatDice["Combat Die 4"].Roll % 6 == 0 && CombatDice["Combat Die 4"].Roll != 0)
                 {

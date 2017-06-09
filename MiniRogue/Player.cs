@@ -131,7 +131,7 @@ namespace MiniRogue
                 if ((experience = value) > 36)
                 {
                     experience = 36;
-                    Health++;
+                    Health += (value - 36);
                     return;
                 }
             }

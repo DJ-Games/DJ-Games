@@ -441,7 +441,7 @@ namespace MiniRogue
                         {
                             combat = new Combat(buttonDictionay, combatDice, checkBoxes);
                             player = new Player(0, 10, 10, 10, spellIcons);
-                            player.Rank = 2;
+                            player.Rank = 4;
                             gamestate = Gamestate.COMBATTESTING;
                         }
                     }
@@ -1060,7 +1060,7 @@ namespace MiniRogue
                             break;
 
                         case 2:
-                            spriteBatch.Draw(mapHighlight, new Vector2(68, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(mapHighlight, new Vector2(40, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 3:
@@ -1068,7 +1068,7 @@ namespace MiniRogue
                             break;
 
                         case 4:
-                            spriteBatch.Draw(mapHighlight, new Vector2(71, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(mapHighlight, new Vector2(41, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 5:
@@ -1076,11 +1076,11 @@ namespace MiniRogue
                             break;
 
                         case 6:
-                            spriteBatch.Draw(mapHighlight, new Vector2(68, 686), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(mapHighlight, new Vector2(41, 686), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 7:
-                            spriteBatch.Draw(mapHighlight, new Vector2(125, 686), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(mapHighlight, new Vector2(80, 686), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 8:
@@ -1088,11 +1088,11 @@ namespace MiniRogue
                             break;
 
                         case 9:
-                            spriteBatch.Draw(mapHighlight, new Vector2(68, 680), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(mapHighlight, new Vector2(41, 680), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 10:
-                            spriteBatch.Draw(mapHighlight, new Vector2(125, 680), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(mapHighlight, new Vector2(80, 680), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 11:
@@ -1100,15 +1100,15 @@ namespace MiniRogue
                             break;
 
                         case 12:
-                            spriteBatch.Draw(mapHighlight, new Vector2(70, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(mapHighlight, new Vector2(41, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 13:
-                            spriteBatch.Draw(mapHighlight, new Vector2(127, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(mapHighlight, new Vector2(80, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 14:
-                            spriteBatch.Draw(mapHighlight, new Vector2(185, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(mapHighlight, new Vector2(120, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         default:
