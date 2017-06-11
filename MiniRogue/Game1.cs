@@ -517,28 +517,7 @@ namespace MiniRogue
                                 }
                             }
 
-                            if (player.Spells.Count == 1 && player.Spells[0].Name == "Healing")
-                            {
-                                if (SingleMouseClick())
-                                {
-                                    if (position.X > 1130 && position.X < 1175 && position.Y > 20 && position.Y < 65)
-                                    {
-                                        player.Health += 8;
-                                        player.RemoveSpell(0);
-                                    }
-                                }
-                            }
-                            if (player.Spells.Count == 1 || player.Spells.Count == 2 && player.Spells[1].Name == "Healing")
-                            {
-                                if (SingleMouseClick())
-                                {
-                                    if (position.X > 1180 && position.X < 1225 && position.Y > 20 && position.Y < 65)
-                                    {
-
-                                        player.RemoveSpell(1);
-                                    }
-                                }
-                            }
+                            HandleHealingSpells();
 
                             break;
 
@@ -594,28 +573,7 @@ namespace MiniRogue
                                 }
                             }
 
-                            if (player.Spells.Count == 1 && player.Spells[0].Name == "Healing")
-                            {
-                                if (SingleMouseClick())
-                                {
-                                    if (position.X > 1130 && position.X < 1175 && position.Y > 20 && position.Y < 65)
-                                    {
-                                        player.Health += 8;
-                                        player.RemoveSpell(0);
-                                    }
-                                }
-                            }
-                            if (player.Spells.Count == 1 || player.Spells.Count == 2 && player.Spells[1].Name == "Healing")
-                            {
-                                if (SingleMouseClick())
-                                {
-                                    if (position.X > 1180 && position.X < 1225 && position.Y > 20 && position.Y < 65)
-                                    {
-
-                                        player.RemoveSpell(1);
-                                    }
-                                }
-                            }
+                            HandleHealingSpells();
 
                             break;
 
@@ -673,28 +631,7 @@ namespace MiniRogue
                                 }
                             }
 
-                            if (player.Spells.Count == 1 && player.Spells[0].Name == "Healing")
-                            {
-                                if (SingleMouseClick())
-                                {
-                                    if (position.X > 1130 && position.X < 1175 && position.Y > 20 && position.Y < 65)
-                                    {
-                                        player.Health += 8;
-                                        player.RemoveSpell(0);
-                                    }
-                                }
-                            }
-                            if (player.Spells.Count == 1 || player.Spells.Count == 2 && player.Spells[1].Name == "Healing")
-                            {
-                                if (SingleMouseClick())
-                                {
-                                    if (position.X > 1180 && position.X < 1225 && position.Y > 20 && position.Y < 65)
-                                    {
-
-                                        player.RemoveSpell(1);
-                                    }
-                                }
-                            }
+                            HandleHealingSpells();
 
                             break;
 
@@ -749,28 +686,7 @@ namespace MiniRogue
                                 }
                             }
 
-                            if (player.Spells.Count == 1 && player.Spells[0].Name == "Healing")
-                            {
-                                if (SingleMouseClick())
-                                {
-                                    if (position.X > 1130 && position.X < 1175 && position.Y > 20 && position.Y < 65)
-                                    {
-                                        player.Health += 8;
-                                        player.RemoveSpell(0);
-                                    }
-                                }
-                            }
-                            if (player.Spells.Count == 1 || player.Spells.Count == 2 && player.Spells[1].Name == "Healing")
-                            {
-                                if (SingleMouseClick())
-                                {
-                                    if (position.X > 1180 && position.X < 1225 && position.Y > 20 && position.Y < 65)
-                                    {
-
-                                        player.RemoveSpell(1);
-                                    }
-                                }
-                            }
+                            HandleHealingSpells();
 
                             break;
 
@@ -834,29 +750,7 @@ namespace MiniRogue
                                 }
                             }
 
-                            if (player.Spells.Count == 1 && player.Spells[0].Name == "Healing")
-                            {
-                                if (SingleMouseClick())
-                                {
-                                    if (position.X > 1130 && position.X < 1175 && position.Y > 20 && position.Y < 65)
-                                    {
-                                        player.Health += 8;
-                                        player.RemoveSpell(0);
-                                    }
-                                }
-                            }
-                            if (player.Spells.Count == 1 || player.Spells.Count == 2 && player.Spells[1].Name == "Healing")
-                            {
-                                if (SingleMouseClick())
-                                {
-                                    if (position.X > 1180 && position.X < 1225 && position.Y > 20 && position.Y < 65)
-                                    {
-
-                                        player.RemoveSpell(1);
-                                    }
-                                }
-                            }
-
+                            HandleHealingSpells();
                             break;
 
                         case CurrentTurnState.ANIMATEBOSSCARD:
@@ -1435,6 +1329,32 @@ namespace MiniRogue
 
                 default:
                     break;
+            }
+        }
+
+        public void HandleHealingSpells()
+        {
+            if (player.Spells.Count == 1 && player.Spells[0].Name == "Healing")
+            {
+                if (SingleMouseClick())
+                {
+                    if (position.X > 1130 && position.X < 1175 && position.Y > 20 && position.Y < 65)
+                    {
+                        player.Health += 8;
+                        player.RemoveSpell(0);
+                    }
+                }
+            }
+            if (player.Spells.Count == 2 && player.Spells[1].Name == "Healing")
+            {
+                if (SingleMouseClick())
+                {
+                    if (position.X > 1180 && position.X < 1225 && position.Y > 20 && position.Y < 65)
+                    {
+                        player.Health += 8;
+                        player.RemoveSpell(1);
+                    }
+                }
             }
         }
 
