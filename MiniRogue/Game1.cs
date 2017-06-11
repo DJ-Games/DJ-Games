@@ -969,11 +969,11 @@ namespace MiniRogue
                             break;
 
                         case 5:
-                            spriteBatch.Draw(mapHighlight, new Vector2(11, 686), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(mapHighlight, new Vector2(11, 683), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 6:
-                            spriteBatch.Draw(mapHighlight, new Vector2(41, 686), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(mapHighlight, new Vector2(44, 683), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 7:
