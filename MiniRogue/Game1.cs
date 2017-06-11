@@ -291,7 +291,7 @@ namespace MiniRogue
             rewards = Content.Load<Texture2D>("Rewards");
             font = Content.Load<SpriteFont>("Font");
             highTower = Content.Load<SpriteFont>("HighTower");
-            dungeonFont = Content.Load<SpriteFont>("Dungeon");
+            dungeonFont = Content.Load<SpriteFont>("MorrisRoman");
             song = Content.Load <Song>("Music");
             MediaPlayer.Volume -= 0.7f;
             //MediaPlayer.Play(song);

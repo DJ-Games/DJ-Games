@@ -985,9 +985,9 @@
 /processorParam:TextureFormat=Color
 /build:Rewards.png
 
-#begin MorrisRoman.spritefont
+#begin morrisRoman.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:TextureFormat=Compressed
-/build:MorrisRoman.spritefont
+/build:morrisRoman.spritefont
 
