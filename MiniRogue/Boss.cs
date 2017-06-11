@@ -132,7 +132,7 @@ namespace MiniRogue
 
                 case BossTurnState.REMOVESPELL:
 
-                    sBatch.Draw(Buttons["Rewards"].ButtonTexture, new Vector2(600, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Rewards"].ButtonTexture, new Vector2(600, 100), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     sBatch.DrawString(dungeonFont, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White);
                     sBatch.DrawString(dungeonFont, "Click a spell to remove or", new Vector2(650, 250), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     sBatch.DrawString(dungeonFont, "click done to keep current spells", new Vector2(600, 300), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
@@ -142,13 +142,13 @@ namespace MiniRogue
 
                 case BossTurnState.REVIEW:
 
-                    sBatch.Draw(Buttons["Rewards"].ButtonTexture, new Vector2(600, 100), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Rewards"].ButtonTexture, new Vector2(600, 100), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     sBatch.DrawString(dungeonFont, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White);
                     if (TreasureResult > 2)
                     {
                         sBatch.DrawString(dungeonFont, "You gained a " + AwardedSpell + " spell", new Vector2(675, 250), Color.White);
                     }
-                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
 
@@ -191,37 +191,38 @@ namespace MiniRogue
                         if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
                             TreasureResult = player.playerDice.RollDice();
+                            switch (TreasureResult)
+                            {
+                                case 1:
+                                    player.Armor++;
+                                    break;
+
+                                case 2:
+                                    player.Experience += 2;
+                                    break;
+
+                                case 3:
+                                    AwardedSpell = "Fire";
+                                    break;
+
+                                case 4:
+                                    AwardedSpell = "Ice";
+                                    break;
+
+                                case 5:
+                                    AwardedSpell = "Poison";
+                                    break;
+
+                                case 6:
+                                    AwardedSpell = "Healing";
+                                    break;
+                                default:
+                                    break;
+                            }
+                            bossTurnState = BossTurnState.REVIEW;
                         }
 
-                        switch (TreasureResult)
-                        {
-                            case 1:
-                                player.Armor++;
-                                break;
 
-                            case 2:
-                                player.Experience += 2;
-                                break;
-
-                            case 3:
-                                AwardedSpell = "Fire";
-                                break;
-
-                            case 4:
-                                AwardedSpell = "Ice";
-                                break;
-
-                            case 5:
-                                AwardedSpell = "Poison";
-                                break;
-
-                            case 6:
-                                AwardedSpell = "Healing";
-                                break;
-                            default:
-                                break;
-                        }
-                        bossTurnState = BossTurnState.REVIEW;
                         break;
 
                     case BossTurnState.REMOVESPELL:

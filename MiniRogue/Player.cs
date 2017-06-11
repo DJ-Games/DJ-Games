@@ -123,13 +123,14 @@ namespace MiniRogue
                     Rank = 3;
                     return;
                 }
-                if ((experience = value) == 36)
+                //if ((experience = value) == 36)
+                //{
+                //    Rank = 4;
+                //    return;
+                //}
+                if ((experience = value) >= 36)
                 {
                     Rank = 4;
-                    return;
-                }
-                if ((experience = value) > 36)
-                {
                     experience = 36;
                     Health += (value - 36);
                     return;
