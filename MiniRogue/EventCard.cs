@@ -96,6 +96,7 @@ namespace MiniRogue
                         if (SkillCheck)
                         {
                             SkillCheckResult = player.playerDice.RollDice();
+                            EventDie.CurrentTexture = EventDie.DieTextures["Roll " + SkillCheckResult];
                             if (SkillCheckResult <= player.Rank)
                             {
                                 CurrentButtons.Clear();

@@ -799,7 +799,7 @@ namespace MiniRogue
             switch (spell)
             {
                 case "Fire":
-                    monsterHealth -= 8;
+                    MonsterHealth -= 8;
 
                     break;
 
