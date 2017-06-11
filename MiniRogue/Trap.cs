@@ -104,7 +104,7 @@ namespace MiniRogue
                                         {
                                             player.Food -= 1;
                                         }
-                                        player.Health -= 2; 
+                                       else player.Health -= 2; 
                                         break;
 
                                     case 2:
@@ -112,7 +112,7 @@ namespace MiniRogue
                                         {
                                             player.Gold -= 1;
                                         }
-                                        player.Health -= 2;         
+                                       else player.Health -= 2;         
                                         break;
 
                                     case 3:
@@ -120,7 +120,7 @@ namespace MiniRogue
                                         {
                                             player.Armor -= 1;
                                         }
-                                        player.Health -= 2;
+                                       else player.Health -= 2;
 
                                         break;
 
@@ -135,7 +135,7 @@ namespace MiniRogue
                                         {
                                             player.Experience -= 1;
                                         }
-                                        player.Health -= 2;
+                                       else player.Health -= 2;
                                         break;
 
                                     case 6:
