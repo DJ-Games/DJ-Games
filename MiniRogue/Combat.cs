@@ -561,7 +561,7 @@ namespace MiniRogue
                             combatState = CombatState.DAMAGEPLAYER; 
                         }
 
-                        if (player.Spells.Count == 1)
+                        if (player.Spells.Count >= 1)
                         {
 
                             if (XPos > 1130 && XPos < 1175 && YPos > 20 && YPos < 65)
