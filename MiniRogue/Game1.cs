@@ -973,23 +973,23 @@ namespace MiniRogue
                             break;
 
                         case 6:
-                            spriteBatch.Draw(mapHighlight, new Vector2(42, 683), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(mapHighlight, new Vector2(40, 683), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 7:
-                            spriteBatch.Draw(mapHighlight, new Vector2(80, 686), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(mapHighlight, new Vector2(69, 683), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 8:
-                            spriteBatch.Draw(mapHighlight, new Vector2(11, 680), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(mapHighlight, new Vector2(11, 682), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 9:
-                            spriteBatch.Draw(mapHighlight, new Vector2(41, 680), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(mapHighlight, new Vector2(41, 682), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 10:
-                            spriteBatch.Draw(mapHighlight, new Vector2(80, 680), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(mapHighlight, new Vector2(69, 682), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 11:
@@ -1001,11 +1001,11 @@ namespace MiniRogue
                             break;
 
                         case 13:
-                            spriteBatch.Draw(mapHighlight, new Vector2(80, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(mapHighlight, new Vector2(69, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         case 14:
-                            spriteBatch.Draw(mapHighlight, new Vector2(120, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
+                            spriteBatch.Draw(mapHighlight, new Vector2(98, 681), new Rectangle?(), Color.White, 0f, new Vector2(), .5f, SpriteEffects.None, 1);
                             break;
 
                         default:
