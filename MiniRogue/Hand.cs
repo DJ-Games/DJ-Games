@@ -71,19 +71,19 @@ namespace MiniRogue
             Card6 = playerHand[5];
             Card7 = playerHand[6];
 
-            Card1.LevelXpos = 92;
+            Card1.LevelXpos = 191;
             Card1.LevelYPos = 260;
-            Card2.LevelXpos = 317;
+            Card2.LevelXpos = 416;
             Card2.LevelYPos = 100;
-            Card3.LevelXpos = 317;
+            Card3.LevelXpos = 416;
             Card3.LevelYPos = 410;
-            Card4.LevelXpos = 542;
+            Card4.LevelXpos = 641;
             Card4.LevelYPos = 260;
-            Card5.LevelXpos = 767;
+            Card5.LevelXpos = 866;
             Card5.LevelYPos = 100;
-            Card6.LevelXpos = 767;
+            Card6.LevelXpos = 866;
             Card6.LevelYPos = 410;
-            Card7.LevelXpos = 992;
+            Card7.LevelXpos = 1091;
             Card7.LevelYPos = 260;
         }
 
@@ -120,7 +120,7 @@ namespace MiniRogue
         {
             foreach (var item in playerHand)
             {
-                sBatch.Draw(item.CurrentTexture, new Vector2(item.LevelXpos, item.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(0, 0), item.ScaleVector, SpriteEffects.None, 1);
+                sBatch.Draw(item.CurrentTexture, new Vector2(item.LevelXpos, item.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(247, 0), item.ScaleVector, SpriteEffects.None, 1);
             }
         }
 
