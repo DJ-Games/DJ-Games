@@ -81,6 +81,8 @@ namespace MiniRogue
 
         public bool ExperienceFeatAvailable { get; set; }
 
+        public bool SpellUsedThisRound { get; set; }
+
 
         //----------------------CONSTRUCTORS -------------------------
 
@@ -137,6 +139,7 @@ namespace MiniRogue
                     SetDieActivations();
                     AnimationCounter = 0;
                     MonsterFrozen = false;
+                    SpellUsedThisRound = false;
                     HandleButtons(player);
                     return false;
 
@@ -561,7 +564,7 @@ namespace MiniRogue
                             combatState = CombatState.DAMAGEPLAYER; 
                         }
 
-                        if (player.Spells.Count >= 1)
+                        if (player.Spells.Count >= 1 && SpellUsedThisRound == false)
                         {
 
                             if (XPos > 1130 && XPos < 1175 && YPos > 20 && YPos < 65)
@@ -578,7 +581,7 @@ namespace MiniRogue
                         }
 
 
-                        if (player.Spells.Count == 2)
+                        if (player.Spells.Count == 2 && SpellUsedThisRound == false)
                         {
                             if (XPos > 1180 && XPos < 1225 && YPos > 20 && YPos < 65)
                             {
@@ -796,6 +799,7 @@ namespace MiniRogue
 
         public void CastSpell(string spell, Player player)
         {
+            SpellUsedThisRound = true;
             switch (spell)
             {
                 case "Fire":

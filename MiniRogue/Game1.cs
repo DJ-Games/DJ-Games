@@ -144,6 +144,9 @@ namespace MiniRogue
         Texture2D sunkenKeepOfOg;
         Texture2D mapHighlight;
         Texture2D rewards;
+        Texture2D gameBackground;
+        Texture2D characterStats;
+        Texture2D dungeon;
         SpriteFont font;
         SpriteFont highTower;
         SpriteFont dungeonFont;
@@ -289,6 +292,9 @@ namespace MiniRogue
             sunkenKeepOfOg = Content.Load<Texture2D>("SunkenKeepOfOg");
             mapHighlight = Content.Load<Texture2D>("MapHighlight");
             rewards = Content.Load<Texture2D>("Rewards");
+            gameBackground = Content.Load<Texture2D>("GameBackground");
+            characterStats = Content.Load<Texture2D>("CharacterStats");
+            dungeon = Content.Load<Texture2D>("Dungeon");
             font = Content.Load<SpriteFont>("Font");
             highTower = Content.Load<SpriteFont>("HighTower");
             dungeonFont = Content.Load<SpriteFont>("MorrisRoman");
@@ -465,7 +471,7 @@ namespace MiniRogue
                     {
                         if (position.X > 800 && position.X < 1050 && position.Y > 167 && position.Y < 241)
                         {
-                            player = new Player(1, 20, 50, 6, spellIcons);
+                            player = new Player(1, 2, 50, 6, spellIcons);
                             DrawNewHand();
                             gamestate = Gamestate.HACKANDSLASH;
                         }
@@ -790,7 +796,7 @@ namespace MiniRogue
 
                     if (SingleMouseClick())
                     {
-                        if (position.X > 600 && position.X < 848 && position.Y > 500 && position.Y < 572)
+                        if (position.X > 770 && position.X < 1018 && position.Y > 450 && position.Y < 522)
                         {
                             player.DungeonArea++;
 
@@ -835,8 +841,9 @@ namespace MiniRogue
                 case Gamestate.GAME_OVER:
                     if (SingleMouseClick())
                     {
-                        if (position.X > 600 && position.X < 848 && position.Y > 500 && position.Y < 572)
+                        if (position.X > 770 && position.X < 1018 && position.Y > 450 && position.Y < 522)
                         {
+                            ResetGame();
                             gamestate = Gamestate.TITILESCREEN;
                         }
                     }
@@ -847,8 +854,9 @@ namespace MiniRogue
 
                     if (SingleMouseClick())
                     {
-                        if (position.X > 600 && position.X < 848 && position.Y > 500 && position.Y < 572)
+                        if (position.X > 770 && position.X < 1018 && position.Y > 450 && position.Y < 522)
                         {
+                            ResetGame();
                             gamestate = Gamestate.TITILESCREEN;
                         }
                     }
@@ -919,7 +927,9 @@ namespace MiniRogue
 
                 case Gamestate.HACKANDSLASH:
 
-                    spriteBatch.Draw(gameScreen, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    //spriteBatch.Draw(gameScreen, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(gameBackground, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(characterStats, new Vector2(8, 8), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     spriteBatch.DrawString(highTower, player.Health.ToString(), new Vector2(742, 26), Color.Black);
                     spriteBatch.DrawString(highTower, player.Armor.ToString(), new Vector2(623, 26), Color.Black);
@@ -1117,22 +1127,26 @@ namespace MiniRogue
 
                 case Gamestate.DELVING:
 
-                    spriteBatch.DrawString(font, "You have completed area " + player.DungeonArea + "!", new Vector2(660, 200), Color.White);
-                    spriteBatch.Draw(acceptButton, new Vector2(600, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(gameBackground, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(dungeon, new Vector2(150, 150), new Rectangle?(), Color.White, 0f, new Vector2(), 1.3f, SpriteEffects.None, 1);
+                    spriteBatch.DrawString(dungeonFont, "You have completed area " + player.DungeonArea + "!", new Vector2(780, 200), Color.White);
+                    spriteBatch.Draw(acceptButton, new Vector2(770, 450), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
 
                 case Gamestate.GAME_OVER:
 
-                    spriteBatch.DrawString(font, "You died. Game Over.", new Vector2(660, 200), Color.White);
-                    spriteBatch.Draw(acceptButton, new Vector2(600, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(gameBackground, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.DrawString(font, "You died. Game Over.", new Vector2(780, 200), Color.White);
+                    spriteBatch.Draw(acceptButton, new Vector2(770, 450), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
 
                 case Gamestate.WINSCREEN:
 
-                    spriteBatch.DrawString(font, "You win!", new Vector2(660, 200), Color.White);
-                    spriteBatch.Draw(acceptButton, new Vector2(600, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(gameBackground, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.DrawString(font, "You win!", new Vector2(780, 200), Color.White);
+                    spriteBatch.Draw(acceptButton, new Vector2(770, 450), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     break;
 
 
@@ -1356,6 +1370,19 @@ namespace MiniRogue
                     }
                 }
             }
+        }
+
+        public void ResetGame()
+        {
+            currentTurnState = CurrentTurnState.PRETURN1;
+            currentCard = null;
+            player = null;
+
+            for (int i = 0; i < 7; i++)
+            {
+                playerHand.PlayerHand.Clear();
+            }
+
         }
 
     }
