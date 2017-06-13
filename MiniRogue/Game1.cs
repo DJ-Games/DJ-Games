@@ -147,6 +147,7 @@ namespace MiniRogue
         Texture2D gameBackground;
         Texture2D characterStats;
         Texture2D dungeon;
+        Texture2D dieHighlight;
         SpriteFont font;
         SpriteFont highTower;
         SpriteFont dungeonFont;
@@ -295,6 +296,7 @@ namespace MiniRogue
             gameBackground = Content.Load<Texture2D>("GameBackground");
             characterStats = Content.Load<Texture2D>("CharacterStats");
             dungeon = Content.Load<Texture2D>("Dungeon");
+            dieHighlight = Content.Load<Texture2D>("Die Highlight");
             font = Content.Load<SpriteFont>("Font");
             highTower = Content.Load<SpriteFont>("HighTower");
             dungeonFont = Content.Load<SpriteFont>("MorrisRoman");
@@ -383,6 +385,7 @@ namespace MiniRogue
             buttonDictionay.Add("Spend 1 XP Button", new Button(spend1XPButton, "Spend 1 XP Button"));
             buttonDictionay.Add("Crit Roll Button", new Button(critRollButton, "Crit Roll Button"));
             buttonDictionay.Add("Rewards", new Button(rewards, "Rewards"));
+            buttonDictionay.Add("Die Highlight", new Button(dieHighlight, "Die Highlight"));
 
             spellIcons.Add("Fire Spell Icon", fireSpellIcon);
             spellIcons.Add("Healing Spell Icon", healthSpellIcon);

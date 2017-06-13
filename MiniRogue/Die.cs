@@ -42,6 +42,8 @@ namespace MiniRogue
 
         public bool CritRollAvailable { get; set; }
 
+        public bool FeatCritRollAvailable { get; set; }
+
         public int Xpos { get; set; }
 
         public int Ypos { get; set; }
