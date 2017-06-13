@@ -48,6 +48,8 @@ namespace MiniRogue
 
         public float LevelYPos { get; set; }
 
+        public float OriginXPos { get; set; }
+
         public MouseState CurrentMouseState { get; set; }
 
         public MouseState PreviousMouseState { get; set; }
@@ -112,11 +114,20 @@ namespace MiniRogue
             {
                 case 1:
 
-                    ScaleVector = new Vector2(ScaleVector.X + .0107f, ScaleVector.Y + .0107f);
-                    LevelXpos += .26f;
+                    //ScaleVector = new Vector2(ScaleVector.X + .0107f, ScaleVector.Y + .0107f);
+                    //LevelXpos += .26f;
+                    //LevelYPos -= 4.33f;
+
+                    //if (scaleVector.X > .75f)
+                    //{
+                    //    Moving = false;
+                    //}
+
+                    ScaleVector = new Vector2(ScaleVector.X + .0117f, ScaleVector.Y + .0117f);
+                    LevelXpos += 2.77f;
                     LevelYPos -= 4.33f;
 
-                    if (scaleVector.X > .75f)
+                    if (scaleVector.X > .74f)
                     {
                         Moving = false;
                     }
@@ -125,12 +136,12 @@ namespace MiniRogue
 
                 case 2:
 
-                    ScaleVector = new Vector2(ScaleVector.X + .0107f, ScaleVector.Y + .0107f);
-                    LevelXpos -= 7.23f;
+                    ScaleVector = new Vector2(ScaleVector.X + .0117f, ScaleVector.Y + .0117f);
+                    LevelXpos -= 4.73f;
                     LevelYPos += 1f;
                    
 
-                    if (scaleVector.X > .75f)
+                    if (scaleVector.X > .74f)
                     {
                         Moving = false;
                     }
@@ -139,11 +150,11 @@ namespace MiniRogue
 
                 case 3:
 
-                    ScaleVector = new Vector2(ScaleVector.X + .0107f, ScaleVector.Y + .0107f);
-                    LevelXpos -= 7.23f;
+                    ScaleVector = new Vector2(ScaleVector.X + .0117f, ScaleVector.Y + .0117f);
+                    LevelXpos -= 4.73f;
                     LevelYPos -= 9.33f;
 
-                    if (scaleVector.X > .75f)
+                    if (scaleVector.X > .74f)
                     {
                         Moving = false;
                     }
@@ -152,11 +163,11 @@ namespace MiniRogue
 
                 case 4:
 
-                    ScaleVector = new Vector2(ScaleVector.X + .0107f, ScaleVector.Y + .0107f);
-                    LevelXpos -= 14.73f;
+                    ScaleVector = new Vector2(ScaleVector.X + .0117f, ScaleVector.Y + .0117f);
+                    LevelXpos -= 12.23f;
                     LevelYPos -= 4.33f;
 
-                    if (scaleVector.X > .75f)
+                    if (scaleVector.X > .74f)
                     {
                         Moving = false;
                     }
@@ -166,11 +177,11 @@ namespace MiniRogue
 
                 case 5:
 
-                    ScaleVector = new Vector2(ScaleVector.X + .0107f, ScaleVector.Y + .0107f);
-                    LevelXpos -= 22.23f;
+                    ScaleVector = new Vector2(ScaleVector.X + .0117f, ScaleVector.Y + .0117f);
+                    LevelXpos -= 19.73f;
                     LevelYPos += 1f;
 
-                    if (scaleVector.X > .75f)
+                    if (scaleVector.X > .74f)
                     {
                         Moving = false;
                     }
@@ -179,11 +190,11 @@ namespace MiniRogue
 
                 case 6:
 
-                    ScaleVector = new Vector2(ScaleVector.X + .0107f, ScaleVector.Y + .0107f);
-                    LevelXpos -= 22.23f;
+                    ScaleVector = new Vector2(ScaleVector.X + .0117f, ScaleVector.Y + .0117f);
+                    LevelXpos -= 19.73f;
                     LevelYPos -= 9.33f;
 
-                    if (scaleVector.X > .75f)
+                    if (scaleVector.X > .74f)
                     {
                         Moving = false;
                     }

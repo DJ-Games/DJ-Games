@@ -120,7 +120,7 @@ namespace MiniRogue
         {
             foreach (var item in playerHand)
             {
-                sBatch.Draw(item.CurrentTexture, new Vector2(item.LevelXpos, item.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(247, 0), item.ScaleVector, SpriteEffects.None, 1);
+                sBatch.Draw(item.CurrentTexture, new Vector2(item.LevelXpos, item.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(248, 0), item.ScaleVector, SpriteEffects.None, 1);
             }
         }
 

@@ -471,7 +471,7 @@ namespace MiniRogue
                     {
                         if (position.X > 800 && position.X < 1050 && position.Y > 167 && position.Y < 241)
                         {
-                            player = new Player(1, 2, 50, 6, spellIcons);
+                            player = new Player(1, 20, 50, 6, spellIcons);
                             DrawNewHand();
                             gamestate = Gamestate.HACKANDSLASH;
                         }
@@ -1265,7 +1265,7 @@ namespace MiniRogue
                     spriteBatch.Draw(playerHand.Card5.CurrentTexture, new Vector2(playerHand.Card5.LevelXpos, playerHand.Card5.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card5.ScaleVector, SpriteEffects.None, 1);
                     spriteBatch.Draw(playerHand.Card6.CurrentTexture, new Vector2(playerHand.Card6.LevelXpos, playerHand.Card6.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card6.ScaleVector, SpriteEffects.None, 1);
                     spriteBatch.Draw(playerHand.Card7.CurrentTexture, new Vector2(playerHand.Card7.LevelXpos, playerHand.Card7.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card7.ScaleVector, SpriteEffects.None, 1);
-                    spriteBatch.Draw(playerHand.Card1.CurrentTexture, new Vector2(playerHand.Card1.LevelXpos, playerHand.Card1.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(0, 0), playerHand.Card1.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card1.CurrentTexture, new Vector2(playerHand.Card1.LevelXpos, playerHand.Card1.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(248, 0), playerHand.Card1.ScaleVector, SpriteEffects.None, 1);
 
                     break;
 
@@ -1277,7 +1277,7 @@ namespace MiniRogue
                     spriteBatch.Draw(playerHand.Card5.CurrentTexture, new Vector2(playerHand.Card5.LevelXpos, playerHand.Card5.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card5.ScaleVector, SpriteEffects.None, 1);
                     spriteBatch.Draw(playerHand.Card6.CurrentTexture, new Vector2(playerHand.Card6.LevelXpos, playerHand.Card6.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card6.ScaleVector, SpriteEffects.None, 1);
                     spriteBatch.Draw(playerHand.Card7.CurrentTexture, new Vector2(playerHand.Card7.LevelXpos, playerHand.Card7.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card7.ScaleVector, SpriteEffects.None, 1);
-                    spriteBatch.Draw(playerHand.Card2.CurrentTexture, new Vector2(playerHand.Card2.LevelXpos, playerHand.Card2.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(0, 0), playerHand.Card2.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card2.CurrentTexture, new Vector2(playerHand.Card2.LevelXpos, playerHand.Card2.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(248, 0), playerHand.Card2.ScaleVector, SpriteEffects.None, 1);
 
                     break;
 
@@ -1289,7 +1289,7 @@ namespace MiniRogue
                     spriteBatch.Draw(playerHand.Card5.CurrentTexture, new Vector2(playerHand.Card5.LevelXpos, playerHand.Card5.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card5.ScaleVector, SpriteEffects.None, 1);
                     spriteBatch.Draw(playerHand.Card6.CurrentTexture, new Vector2(playerHand.Card6.LevelXpos, playerHand.Card6.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card6.ScaleVector, SpriteEffects.None, 1);
                     spriteBatch.Draw(playerHand.Card7.CurrentTexture, new Vector2(playerHand.Card7.LevelXpos, playerHand.Card7.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card7.ScaleVector, SpriteEffects.None, 1);
-                    spriteBatch.Draw(playerHand.Card3.CurrentTexture, new Vector2(playerHand.Card3.LevelXpos, playerHand.Card3.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(0, 0), playerHand.Card3.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card3.CurrentTexture, new Vector2(playerHand.Card3.LevelXpos, playerHand.Card3.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(248, 0), playerHand.Card3.ScaleVector, SpriteEffects.None, 1);
 
                     break;
 
@@ -1301,7 +1301,7 @@ namespace MiniRogue
                     spriteBatch.Draw(playerHand.Card5.CurrentTexture, new Vector2(playerHand.Card5.LevelXpos, playerHand.Card5.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card5.ScaleVector, SpriteEffects.None, 1);
                     spriteBatch.Draw(playerHand.Card6.CurrentTexture, new Vector2(playerHand.Card6.LevelXpos, playerHand.Card6.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card6.ScaleVector, SpriteEffects.None, 1);
                     spriteBatch.Draw(playerHand.Card7.CurrentTexture, new Vector2(playerHand.Card7.LevelXpos, playerHand.Card7.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card7.ScaleVector, SpriteEffects.None, 1);
-                    spriteBatch.Draw(playerHand.Card4.CurrentTexture, new Vector2(playerHand.Card4.LevelXpos, playerHand.Card4.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(0, 0), playerHand.Card4.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card4.CurrentTexture, new Vector2(playerHand.Card4.LevelXpos, playerHand.Card4.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(248, 0), playerHand.Card4.ScaleVector, SpriteEffects.None, 1);
 
                     break;
 
@@ -1313,7 +1313,7 @@ namespace MiniRogue
                     spriteBatch.Draw(playerHand.Card4.CurrentTexture, new Vector2(playerHand.Card4.LevelXpos, playerHand.Card4.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card4.ScaleVector, SpriteEffects.None, 1);
                     spriteBatch.Draw(playerHand.Card6.CurrentTexture, new Vector2(playerHand.Card6.LevelXpos, playerHand.Card6.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card6.ScaleVector, SpriteEffects.None, 1);
                     spriteBatch.Draw(playerHand.Card7.CurrentTexture, new Vector2(playerHand.Card7.LevelXpos, playerHand.Card7.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card7.ScaleVector, SpriteEffects.None, 1);
-                    spriteBatch.Draw(playerHand.Card5.CurrentTexture, new Vector2(playerHand.Card5.LevelXpos, playerHand.Card5.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(0, 0), playerHand.Card5.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card5.CurrentTexture, new Vector2(playerHand.Card5.LevelXpos, playerHand.Card5.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(248, 0), playerHand.Card5.ScaleVector, SpriteEffects.None, 1);
 
                     break;
 
@@ -1325,7 +1325,7 @@ namespace MiniRogue
                     spriteBatch.Draw(playerHand.Card4.CurrentTexture, new Vector2(playerHand.Card4.LevelXpos, playerHand.Card4.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card4.ScaleVector, SpriteEffects.None, 1);
                     spriteBatch.Draw(playerHand.Card5.CurrentTexture, new Vector2(playerHand.Card5.LevelXpos, playerHand.Card5.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card5.ScaleVector, SpriteEffects.None, 1);
                     spriteBatch.Draw(playerHand.Card7.CurrentTexture, new Vector2(playerHand.Card7.LevelXpos, playerHand.Card7.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card7.ScaleVector, SpriteEffects.None, 1);
-                    spriteBatch.Draw(playerHand.Card6.CurrentTexture, new Vector2(playerHand.Card6.LevelXpos, playerHand.Card6.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(0, 0), playerHand.Card6.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card6.CurrentTexture, new Vector2(playerHand.Card6.LevelXpos, playerHand.Card6.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(248, 0), playerHand.Card6.ScaleVector, SpriteEffects.None, 1);
 
                     break;
 
@@ -1337,7 +1337,7 @@ namespace MiniRogue
                     spriteBatch.Draw(playerHand.Card4.CurrentTexture, new Vector2(playerHand.Card4.LevelXpos, playerHand.Card4.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card4.ScaleVector, SpriteEffects.None, 1);
                     spriteBatch.Draw(playerHand.Card5.CurrentTexture, new Vector2(playerHand.Card5.LevelXpos, playerHand.Card5.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card5.ScaleVector, SpriteEffects.None, 1);
                     spriteBatch.Draw(playerHand.Card6.CurrentTexture, new Vector2(playerHand.Card6.LevelXpos, playerHand.Card6.LevelYPos), new Rectangle?(), Color.White * colorMultiplyer, 0f, new Vector2(0, 0), playerHand.Card6.ScaleVector, SpriteEffects.None, 1);
-                    spriteBatch.Draw(playerHand.Card7.CurrentTexture, new Vector2(playerHand.Card7.LevelXpos, playerHand.Card7.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(0, 0), playerHand.Card7.ScaleVector, SpriteEffects.None, 1);
+                    spriteBatch.Draw(playerHand.Card7.CurrentTexture, new Vector2(playerHand.Card7.LevelXpos, playerHand.Card7.LevelYPos), new Rectangle?(), Color.White, 0f, new Vector2(248, 0), playerHand.Card7.ScaleVector, SpriteEffects.None, 1);
 
                     break;
 
