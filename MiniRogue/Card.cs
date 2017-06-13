@@ -203,11 +203,11 @@ namespace MiniRogue
 
                 case 7:
 
-                    ScaleVector = new Vector2(ScaleVector.X + .0107f, ScaleVector.Y + .0107f);
-                    LevelXpos -= 29.73f;
+                    ScaleVector = new Vector2(ScaleVector.X + .0117f, ScaleVector.Y + .0117f);
+                    LevelXpos -= 27.23f;
                     LevelYPos -= 4.33f;
 
-                    if (scaleVector.X > .75f)
+                    if (scaleVector.X > .74f)
                     {
                         Moving = false;
                     }

@@ -15,6 +15,7 @@ namespace MiniRogue
     {
         STARTCOMBAT,
         COMBAT,
+        ROLLANIMATION,
         REWARDS,
         REMOVESPELL,
         REVIEW,
@@ -33,13 +34,18 @@ namespace MiniRogue
 
         public string AwardedSpell { get; set; }
 
+        public Die RewardDie { get; set; }
+
+        public Dictionary<string, Texture2D> DieTextures { get; set; }
+
         BossTurnState bossTurnState = new BossTurnState();
 
-        public Boss(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons, Dictionary<string, Die> combatDice, Dictionary<string, CheckBox> checkBoxes) : base(name, cardTexture, cardBack, buttons)
+        public Boss(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons, Dictionary<string, Die> combatDice, Dictionary<string, Texture2D> dieTextures) : base(name, cardTexture, cardBack, buttons)
         {
             Buttons = buttons;
             CombatDice = combatDice;
-            CheckBoxes = checkBoxes;
+            DieTextures = dieTextures;
+            RewardDie = new Die(DieTextures, 840, 400);
         }
 
         public override bool HandleCard(Player player, MouseState current, MouseState previous, float xPos, float yPos)
@@ -54,7 +60,7 @@ namespace MiniRogue
             {
                 case BossTurnState.STARTCOMBAT:
                     HandleButtons(player);
-
+                    AnimationCounter = 0;
                     return false;
 
                 case BossTurnState.COMBAT:
@@ -72,6 +78,58 @@ namespace MiniRogue
 
                     return false;
 
+                case BossTurnState.ROLLANIMATION:
+
+                    if (AnimationCounter < 60)
+                    {
+                        RollAnimation();
+                    }
+                    else
+                    {
+                        TreasureResult = player.playerDice.RollDice();
+                        RewardDie.CurrentTexture = RewardDie.DieTextures["Roll " + TreasureResult];
+                        switch (TreasureResult)
+                        {
+                            case 1:
+                                player.Armor++;
+                                break;
+
+                            case 2:
+                                player.Experience += 2;
+                                break;
+
+                            case 3:
+                                AwardedSpell = "Fire";
+                                break;
+
+                            case 4:
+                                AwardedSpell = "Ice";
+                                break;
+
+                            case 5:
+                                AwardedSpell = "Poison";
+                                break;
+
+                            case 6:
+                                AwardedSpell = "Healing";
+                                break;
+                            default:
+                                break;
+                        }
+                        if (TreasureResult > 2 && player.Spells.Count == 2)
+                        {
+                            bossTurnState = BossTurnState.REMOVESPELL;
+                        }
+                        else if (TreasureResult > 2)
+                        {
+                            player.AddSpell(AwardedSpell);
+                            bossTurnState = BossTurnState.REVIEW;
+                        }
+                        
+                    }
+
+                    return false;
+
                 case BossTurnState.REMOVESPELL:
 
                     HandleButtons(player);
@@ -80,15 +138,14 @@ namespace MiniRogue
 
                 case BossTurnState.REVIEW:
 
-                    if (TreasureResult > 2 && player.Spells.Count == 2)
-                    {
-                        bossTurnState = BossTurnState.REMOVESPELL;
-                    }
-                    else if (TreasureResult > 2)
-                    {
-                        player.AddSpell(AwardedSpell);
-                        bossTurnState = BossTurnState.COMPLETE;
-                    }
+                    //if (TreasureResult > 2 && player.Spells.Count == 2)
+                    //{
+                    //    bossTurnState = BossTurnState.REMOVESPELL;
+                    //}
+                    //else if (TreasureResult > 2)
+                    //{
+                    //    player.AddSpell(AwardedSpell);
+                    //}
                     HandleButtons(player);
 
                     return false;
@@ -122,18 +179,24 @@ namespace MiniRogue
 
                     break;
 
-
                 case BossTurnState.REWARDS:
 
                     sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                    sBatch.DrawString(dungeonFont, "Roll to determine your reward.", new Vector2(520, 230), Color.White);
+                    sBatch.DrawString(dungeonFont, "Roll to determine your reward.", new Vector2(750, 230), Color.White);
+
+                    break;
+
+                case BossTurnState.ROLLANIMATION:
+
+                    RewardDie.DrawCombatDie(sBatch);
 
                     break;
 
                 case BossTurnState.REMOVESPELL:
 
-                    sBatch.Draw(Buttons["Rewards"].ButtonTexture, new Vector2(600, 100), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                    sBatch.DrawString(dungeonFont, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White);
+                    RewardDie.DrawCombatDie(sBatch);
+                    sBatch.Draw(Buttons["Rewards"].ButtonTexture, new Vector2(650, 100), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    //sBatch.DrawString(dungeonFont, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White);
                     sBatch.DrawString(dungeonFont, "Click a spell to remove or", new Vector2(650, 250), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     sBatch.DrawString(dungeonFont, "click done to keep current spells", new Vector2(600, 300), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
                     sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1);
@@ -142,12 +205,8 @@ namespace MiniRogue
 
                 case BossTurnState.REVIEW:
 
-                    sBatch.Draw(Buttons["Rewards"].ButtonTexture, new Vector2(600, 100), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                    sBatch.DrawString(dungeonFont, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White);
-                    if (TreasureResult > 2)
-                    {
-                        sBatch.DrawString(dungeonFont, "You gained a " + AwardedSpell + " spell", new Vector2(675, 250), Color.White);
-                    }
+                    RewardDie.DrawCombatDie(sBatch);
+                    sBatch.Draw(Buttons["Rewards"].ButtonTexture, new Vector2(650, 100), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
@@ -190,37 +249,12 @@ namespace MiniRogue
                     case BossTurnState.REWARDS:
                         if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
-                            TreasureResult = player.playerDice.RollDice();
-                            switch (TreasureResult)
-                            {
-                                case 1:
-                                    player.Armor++;
-                                    break;
-
-                                case 2:
-                                    player.Experience += 2;
-                                    break;
-
-                                case 3:
-                                    AwardedSpell = "Fire";
-                                    break;
-
-                                case 4:
-                                    AwardedSpell = "Ice";
-                                    break;
-
-                                case 5:
-                                    AwardedSpell = "Poison";
-                                    break;
-
-                                case 6:
-                                    AwardedSpell = "Healing";
-                                    break;
-                                default:
-                                    break;
-                            }
-                            bossTurnState = BossTurnState.REVIEW;
+                            bossTurnState = BossTurnState.ROLLANIMATION;
                         }
+                        break;
+
+                    case BossTurnState.ROLLANIMATION:
+
 
 
                         break;
@@ -269,5 +303,12 @@ namespace MiniRogue
                 }
             }
         }
+
+        public void RollAnimation()
+        {
+            RewardDie.CurrentTexture = RewardDie.DieTextureList[Rng.Next(RewardDie.DieTextureList.Count - 1)];
+            AnimationCounter += 5;
+        }
+
     }
 }
