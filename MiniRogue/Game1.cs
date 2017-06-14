@@ -482,7 +482,6 @@ namespace MiniRogue
                             player = new Player(1, 5, 5, 6, spellIcons);
                             DrawNewHand();
                             gamestate = Gamestate.HACKANDSLASH;
-                            player.DungeonArea = 14;
                         }
 
                         if (position.X > 800 && position.X < 1050 && position.Y > 270 && position.Y < 344)
