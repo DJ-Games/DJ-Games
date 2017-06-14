@@ -148,6 +148,7 @@ namespace MiniRogue
         Texture2D characterStats;
         Texture2D dungeon;
         Texture2D dieHighlight;
+        Texture2D eyes;
         SpriteFont font;
         SpriteFont highTower;
         SpriteFont dungeonFont;
@@ -297,6 +298,7 @@ namespace MiniRogue
             characterStats = Content.Load<Texture2D>("CharacterStats");
             dungeon = Content.Load<Texture2D>("Dungeon");
             dieHighlight = Content.Load<Texture2D>("Die Highlight");
+            eyes = Content.Load<Texture2D>("Eyes");
             font = Content.Load<SpriteFont>("Font");
             highTower = Content.Load<SpriteFont>("HighTower");
             dungeonFont = Content.Load<SpriteFont>("MorrisRoman");
@@ -475,7 +477,7 @@ namespace MiniRogue
                     {
                         if (position.X > 800 && position.X < 1050 && position.Y > 167 && position.Y < 241)
                         {
-                            player = new Player(1, 20, 50, 6, spellIcons);
+                            player = new Player(1, 2, 50, 6, spellIcons);
                             DrawNewHand();
                             gamestate = Gamestate.HACKANDSLASH;
                         }
@@ -1140,8 +1142,9 @@ namespace MiniRogue
 
                 case Gamestate.GAME_OVER:
 
-                    spriteBatch.Draw(gameBackground, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                    spriteBatch.DrawString(font, "You died. Game Over.", new Vector2(780, 200), Color.White);
+                    spriteBatch.Draw(titleBlack, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.DrawString(dungeonFont, "You died. Game Over.", new Vector2(790, 200), Color.White);
+                    spriteBatch.Draw(eyes, new Vector2(150, 170), new Rectangle?(), Color.White, 0f, new Vector2(), 2.7f, SpriteEffects.None, 1);
                     spriteBatch.Draw(acceptButton, new Vector2(770, 450), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
