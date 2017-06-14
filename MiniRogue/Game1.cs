@@ -453,6 +453,7 @@ namespace MiniRogue
                         {
                             combat = new Combat(buttonDictionay, combatDice, checkBoxes);
                             player = new Player(0, 10, 10, 10, spellIcons);
+                            player.Experience = 3;
                             player.Rank = 4;
                             gamestate = Gamestate.COMBATTESTING;
                         }

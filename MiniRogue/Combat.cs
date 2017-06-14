@@ -379,23 +379,22 @@ namespace MiniRogue
 
                     if (HealthFeatAvailable)
                     {
-                        sBatch.Draw(CombatButtons["Spend 2 HP Button"].ButtonTexture, new Vector2(300, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                        sBatch.Draw(CombatButtons["Spend 2 HP Button"].ButtonTexture, new Vector2(600, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     }
 
                     if (ExperienceFeatAvailable)
                     {
-                        sBatch.Draw(CombatButtons["Spend 1 XP Button"].ButtonTexture, new Vector2(600, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                        sBatch.Draw(CombatButtons["Spend 1 XP Button"].ButtonTexture, new Vector2(900, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     }
 
                     if (InUseDie != 0)
                     {
                         if (CombatDice["Combat Die " + InUseDie.ToString()].CritRollAvailable)
                         {
-                            sBatch.Draw(CombatButtons["Crit Roll Button"].ButtonTexture, new Vector2(900, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                            sBatch.Draw(CombatButtons["Crit Roll Button"].ButtonTexture, new Vector2(750, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                         }
                     }
 
-                    
                     break;
 
                 case CombatState.DEALDAMAGE:
@@ -579,7 +578,7 @@ namespace MiniRogue
 
                         if (HealthFeatAvailable)
                         {
-                            if (XPos > 300 && XPos < 548 && YPos > 600 && YPos < 672)
+                            if (XPos > 600 && XPos < 848 && YPos > 600 && YPos < 672)
                             {
                                 player.Health -= 2;
                                 combatState = CombatState.ROLLANIMATION;
@@ -588,7 +587,7 @@ namespace MiniRogue
 
                         if (ExperienceFeatAvailable)
                         {
-                            if (XPos > 600 && XPos < 848 && YPos > 600 && YPos < 672)
+                            if (XPos > 900 && XPos < 1148 && YPos > 600 && YPos < 672)
                             {
                                 player.Experience--;
                                 combatState = CombatState.ROLLANIMATION;
@@ -599,7 +598,7 @@ namespace MiniRogue
                         {
                             if (CombatDice["Combat Die " + InUseDie.ToString()].CritRollAvailable)
                             {
-                                if (XPos > 900 && XPos < 1148 && YPos > 600 && YPos < 672)
+                                if (XPos > 750 && XPos < 998 && YPos > 500 && YPos < 572)
                                 {
                                     combatState = CombatState.ROLLANIMATION;
                                 }
