@@ -148,6 +148,7 @@ namespace MiniRogue
         Texture2D characterStats;
         Texture2D dungeon;
         Texture2D dieHighlight;
+        Texture2D winScreenGuy;
         Texture2D eyes;
         SpriteFont font;
         SpriteFont highTower;
@@ -299,6 +300,7 @@ namespace MiniRogue
             dungeon = Content.Load<Texture2D>("Dungeon");
             dieHighlight = Content.Load<Texture2D>("Die Highlight");
             eyes = Content.Load<Texture2D>("Eyes");
+            winScreenGuy = Content.Load<Texture2D>("WinScreenGuy");
             font = Content.Load<SpriteFont>("Font");
             highTower = Content.Load<SpriteFont>("HighTower");
             dungeonFont = Content.Load<SpriteFont>("MorrisRoman");
@@ -477,9 +479,10 @@ namespace MiniRogue
                     {
                         if (position.X > 800 && position.X < 1050 && position.Y > 167 && position.Y < 241)
                         {
-                            player = new Player(1, 2, 50, 6, spellIcons);
+                            player = new Player(1, 20, 50, 6, spellIcons);
                             DrawNewHand();
                             gamestate = Gamestate.HACKANDSLASH;
+                            player.DungeonArea = 14;
                         }
 
                         if (position.X > 800 && position.X < 1050 && position.Y > 270 && position.Y < 344)
@@ -822,7 +825,7 @@ namespace MiniRogue
                             {
                                 player.DungeonLevel = 5;
                             }
-                            if (player.DungeonArea == 14)
+                            if (player.DungeonArea == 15)
                             {
                                 gamestate = Gamestate.WINSCREEN;
                             }
@@ -836,8 +839,12 @@ namespace MiniRogue
                                 player.Health -= 2;
                             }
 
-                            gamestate = Gamestate.HACKANDSLASH;
-                            currentTurnState = CurrentTurnState.PRETURN1;
+                            if (gamestate != Gamestate.WINSCREEN)
+                            {
+                                gamestate = Gamestate.HACKANDSLASH;
+                                currentTurnState = CurrentTurnState.PRETURN1;
+                            }
+                            
                         }
 
                     }
@@ -1151,8 +1158,9 @@ namespace MiniRogue
 
                 case Gamestate.WINSCREEN:
 
-                    spriteBatch.Draw(gameBackground, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                    spriteBatch.DrawString(font, "You win!", new Vector2(780, 200), Color.White);
+                    spriteBatch.Draw(titleBlack, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.DrawString(font, "You win!", new Vector2(820, 200), Color.White);
+                    spriteBatch.Draw(winScreenGuy, new Vector2(-20, 150), new Rectangle?(), Color.White, 0f, new Vector2(), 1.5f, SpriteEffects.None, 1);
                     spriteBatch.Draw(acceptButton, new Vector2(770, 450), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     break;
 
