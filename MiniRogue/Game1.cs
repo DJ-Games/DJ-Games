@@ -1125,7 +1125,7 @@ namespace MiniRogue
 
                     spriteBatch.Draw(gameBackground, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     spriteBatch.Draw(dungeon, new Vector2(150, 150), new Rectangle?(), Color.White, 0f, new Vector2(), 1.3f, SpriteEffects.None, 1);
-                    spriteBatch.DrawString(dungeonFont, "You have completed area " + player.DungeonArea + "!", new Vector2(690, 200), Color.White);
+                    spriteBatch.DrawString(dungeonFont, "You have completed area " + player.DungeonArea + "!", new Vector2(670, 200), Color.White);
                     spriteBatch.Draw(acceptButton, new Vector2(770, 450), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;

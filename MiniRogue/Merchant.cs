@@ -153,7 +153,7 @@ namespace MiniRogue
 
                     break;
                 case MerchantTurnState.SELLSPELL:
-                    sBatch.DrawString(font, "Click the spell you would like to sell", new Vector2 (700, 100), Color.White);
+                    sBatch.DrawString(font, "Click the spell you would like to sell", new Vector2 (550, 100), Color.White);
 
                     break;
                 case MerchantTurnState.CONFIRMBUY:
