@@ -16,6 +16,7 @@ namespace MiniRogue
     enum Gamestate
     {
         TITILESCREEN,
+        OPTIONS,
         DIFFICULTY_SELECT,
         HACKANDSLASH,
         DELVING,
@@ -447,7 +448,14 @@ namespace MiniRogue
                         {
                             gamestate = Gamestate.DIFFICULTY_SELECT;
                         }
+
+                        if (position.X > 800 && position.X < 1048 && position.Y > 475 && position.Y < 547)
+                        {
+                            gamestate = Gamestate.OPTIONS;
+                        }
                     }
+
+
 
                     //----------------------- FOR TESTING COMBAT --------------------------
 
@@ -471,6 +479,18 @@ namespace MiniRogue
                 // 
                 // Player is created, hand is created, new hand is draw, and player stats
                 // set based on difficulty selection. 
+
+                case Gamestate.OPTIONS:
+
+                    if (SingleMouseClick())
+                    {
+                        if (position.X > 516 && position.X < 764 && position.Y > 500 && position.Y < 572)
+                        {
+                            gamestate = Gamestate.TITILESCREEN;
+                        }
+                    }
+
+                        break;
 
 
                 case Gamestate.DIFFICULTY_SELECT:
@@ -909,6 +929,14 @@ namespace MiniRogue
                     spriteBatch.Draw(titleGuy, guy, new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
+
+                case Gamestate.OPTIONS:
+
+                    spriteBatch.Draw(gameBackground, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.Draw(acceptButton, new Vector2(516, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    spriteBatch.DrawString(dungeonFont, "Options", new Vector2(576, 100), Color.White);
+                    break;
+
 
                 // -------------- Difficulty Select Screen Game State Draw -----------------
 
