@@ -90,6 +90,8 @@ namespace MiniRogue
 
         public bool InitialRolls { get; set; }
 
+        public bool DieSoundPlayed { get; set; }
+
 
         //----------------------CONSTRUCTORS -------------------------
 
@@ -911,8 +913,11 @@ namespace MiniRogue
 
         public void RollAnimation()
         {
+
+            PlayDieSounds();
+
             if ((InitialRolls && ActiveDie > 0) || (InUseDie == 1 && ActiveDie > 0))
-            {
+            {    
                 CombatDice["Combat Die 1"].CurrentTexture = CombatDice["Combat Die 1"].DieTextureList[Rng.Next(CombatDice["Combat Die 1"].DieTextureList.Count - 1)];
             }
             if ((InitialRolls && ActiveDie > 1) || (InUseDie == 2 && ActiveDie > 1))
@@ -932,6 +937,9 @@ namespace MiniRogue
 
         public void RollDie()
         {
+
+            DieSoundPlayed = false;
+
             int die1Roll;
             int die2Roll;
             int die3Roll;
@@ -1028,6 +1036,31 @@ namespace MiniRogue
             InitialRolls = false;
         }
 
+        public void PlayDieSounds()
+        {
 
+            if (!DieSoundPlayed)
+            {
+                if (ActiveDie == 1 && InUseDie == 0)
+                {
+                    DieSounds["One Die Roll"].Play();
+                }
+                else if (ActiveDie == 2 && InUseDie == 0)
+                {
+                    DieSounds["Two Die Roll"].Play(); ;
+                }
+                else if (ActiveDie == 3 && InUseDie == 0)
+                {
+                    DieSounds["Three Die Roll"].Play(); ;
+                }
+                else if (ActiveDie == 4 && InUseDie == 0)
+                {
+                    DieSounds["Four Die Roll"].Play(); ;
+                }
+                else { DieSounds["One Die Roll"].Play(); ; }
+
+                DieSoundPlayed = true;
+            }
+        }
     }
 }

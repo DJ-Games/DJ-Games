@@ -325,6 +325,7 @@ namespace MiniRogue
             MediaPlayer.Volume = .5f;
             MediaPlayer.Play(song);           
             MediaPlayer.IsRepeating = true;
+            SoundEffect.MasterVolume = .5f;
 
             cardFlip = Content.Load<SoundEffect>("CardFlip");
             oneDieRoll = Content.Load<SoundEffect>("1DieRoll");
