@@ -264,7 +264,7 @@ namespace MiniRogue
                             break;
 
                         case 4:
-                            sBatch.DrawString(font, "Spring Blades: You Lose a Health", new Vector2(575, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                            sBatch.DrawString(font, "Spring Blades: You Lose a Health", new Vector2(610, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                             break;
 
                         case 5:
@@ -272,7 +272,7 @@ namespace MiniRogue
                             break;
 
                         case 6:
-                            sBatch.DrawString(font, "Pit: Lose Two Health and", new Vector2(650, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                            sBatch.DrawString(font, "Pit: Lose Two Health and", new Vector2(650, 150), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                             sBatch.DrawString(font, "Fall an Area Below", new Vector2(675, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                             break;
 
@@ -289,7 +289,7 @@ namespace MiniRogue
 
                     if (success)
                     {
-                        sBatch.DrawString(font, "Success! You avoided the trap", new Vector2(600, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                        sBatch.DrawString(font, "Success! You avoided the trap", new Vector2(620, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                     }
 
                     else

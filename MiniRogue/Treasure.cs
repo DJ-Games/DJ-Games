@@ -206,9 +206,9 @@ namespace MiniRogue
                 case TreasureTurnState.EXTRA_TREASURE_ROLL:
 
                     TreasureDie.DrawCombatDie(sBatch);
-                    sBatch.DrawString(font, "You Rolled a:  " + ExtTreasureResult, new Vector2(725, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
-                    sBatch.DrawString(font, "You found a treasure!", new Vector2(670, 250), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
-                    sBatch.DrawString(font, "Roll for treasure.", new Vector2(715, 300), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                    sBatch.DrawString(font, "You Rolled a:  " + ExtTreasureResult, new Vector2(735, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                    sBatch.DrawString(font, "You found a treasure!", new Vector2(680, 250), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                    sBatch.DrawString(font, "Roll for treasure.", new Vector2(725, 300), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                     sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
@@ -233,7 +233,7 @@ namespace MiniRogue
                     TreasureDie.DrawCombatDie(sBatch);
                     if (TreasureResult == 3 || TreasureResult == 5 || TreasureResult == 6)
                     {
-                        sBatch.DrawString(font, "You gained a " + AwardedSpell + " Spell.", new Vector2(700, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                        sBatch.DrawString(font, "You gained a " + AwardedSpell + " Spell.", new Vector2(725, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                     }
                     if (TreasureResult == 4)
                     {
