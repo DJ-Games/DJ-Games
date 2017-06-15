@@ -237,7 +237,7 @@ namespace MiniRogue
                     }
                     if (TreasureResult == 4)
                     {
-                        sBatch.DrawString(font, "You gained an " + AwardedSpell + " Spell.", new Vector2(700, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                        sBatch.DrawString(font, "You gained an " + AwardedSpell + " Spell.", new Vector2(600, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                     }
                     if(TreasureResult == 1)
                     {
@@ -245,7 +245,7 @@ namespace MiniRogue
                     }
                     if (TreasureResult == 2)
                     {
-                        sBatch.DrawString(font, "You gained 2 Experience.", new Vector2(700, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                        sBatch.DrawString(font, "You gained 2 Experience.", new Vector2(800, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                     }
 
                    

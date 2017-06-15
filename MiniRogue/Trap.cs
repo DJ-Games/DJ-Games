@@ -264,7 +264,7 @@ namespace MiniRogue
                             break;
 
                         case 4:
-                            sBatch.DrawString(font, "Spring Blades: You Lose a Health", new Vector2(525, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                            sBatch.DrawString(font, "Spring Blades: You Lose a Health", new Vector2(575, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                             break;
 
                         case 5:
