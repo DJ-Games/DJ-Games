@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 
 namespace MiniRogue
@@ -59,6 +60,8 @@ namespace MiniRogue
         public Dictionary<string, Button> Buttons { get; set; }
 
         public List<Button> CurrentButtons { get; set; }
+
+        public Dictionary<string, SoundEffect> DieSounds { get; set; }
 
         private Vector2 scaleVector;
 

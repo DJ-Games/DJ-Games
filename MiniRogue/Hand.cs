@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 
 namespace MiniRogue
 {
@@ -45,11 +46,11 @@ namespace MiniRogue
 
         public void DrawNewHand(Texture2D enemyTex, Texture2D eventTex, Texture2D merchantTex,
             Texture2D restingTex, Texture2D trapTex, Texture2D treasureTex, Texture2D bossTex, Texture2D cardBack, Dictionary<string, Button> buttons,
-            Dictionary<string, Die> combatDice, Dictionary<string, CheckBox> checkBoxes, Dictionary<string, Texture2D> dieTextures)
+            Dictionary<string, Die> combatDice, Dictionary<string, SoundEffect> dieSounds, Dictionary<string, Texture2D> dieTextures)
         {
-            playerHand.Add(new Enemy("Enemy", enemyTex, cardBack, buttons, combatDice, checkBoxes));
+            playerHand.Add(new Enemy("Enemy", enemyTex, cardBack, buttons, combatDice, dieSounds));
 
-            playerHand.Add(new EventCard("EventCard", eventTex, cardBack, buttons, combatDice, checkBoxes, dieTextures));
+            playerHand.Add(new EventCard("EventCard", eventTex, cardBack, buttons, combatDice, dieSounds, dieTextures));
 
             playerHand.Add(new Merchant("Merchant", merchantTex, cardBack, buttons, dieTextures));
 

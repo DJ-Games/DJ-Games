@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace MiniRogue
 {
@@ -41,7 +42,9 @@ namespace MiniRogue
         public Dictionary<string, Button> CombatButtons { get; set; }
 
         public Dictionary<string, Die> CombatDice { get; set; }
-        
+
+        public Dictionary<string, SoundEffect> DieSounds { get; set; }
+
         public int ActiveDie { get; set; }
 
         public int Damage { get; set; }
@@ -90,10 +93,11 @@ namespace MiniRogue
 
         //----------------------CONSTRUCTORS -------------------------
 
-        public Combat(Dictionary<string, Button> combatButtons, Dictionary<string, Die> combatDice, Dictionary<string, CheckBox> checkBoxes)
+        public Combat(Dictionary<string, Button> combatButtons, Dictionary<string, Die> combatDice, Dictionary<string, SoundEffect> dieSounds)
         {
             CombatButtons = combatButtons;
             CombatDice = combatDice;
+            DieSounds = dieSounds;
             Rng = new Random();
 
 

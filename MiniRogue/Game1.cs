@@ -490,7 +490,7 @@ namespace MiniRogue
                     {
                         if (position.X > 0 && position.X < 100 && position.Y > 0 && position.Y < 100)
                         {
-                            combat = new Combat(buttonDictionay, combatDice, checkBoxes);
+                            combat = new Combat(buttonDictionay, combatDice, soundEffects);
                             player = new Player(0, 10, 10, 10, spellIcons);
                             player.Experience = 3;
                             player.Rank = 4;
@@ -1303,7 +1303,7 @@ namespace MiniRogue
         public void DrawNewHand()
         {
 
-            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, bossMonsterCard, cardBack, buttonDictionay, combatDice, checkBoxes, dieTextures);
+            playerHand.DrawNewHand(enemyCard, eventCard, merchantCard, restingCard, trapCard, treasureCard, bossMonsterCard, cardBack, buttonDictionay, combatDice, soundEffects, dieTextures);
 
 
         } 

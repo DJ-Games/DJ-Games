@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 
 namespace MiniRogue
@@ -57,13 +58,13 @@ namespace MiniRogue
             CurrentButtons = new List<Button>();
         }
 
-        public EventCard(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons, Dictionary<string, Die> combatDice, Dictionary<string, CheckBox> checkBoxes, Dictionary<string, Texture2D> dieTextures) : base(name, cardTexture, cardBack, buttons)
+        public EventCard(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons, Dictionary<string, Die> combatDice, Dictionary<string, SoundEffect> dieSounds, Dictionary<string, Texture2D> dieTextures) : base(name, cardTexture, cardBack, buttons)
         {
             eventCardTurnState = new EventCardTurnState();
             CurrentButtons = new List<Button>();
             Buttons = buttons;
             CombatDice = combatDice;
-            CheckBoxes = checkBoxes;
+            DieSounds = dieSounds;
             DieTextures = dieTextures;
             EventDie = new Die(DieTextures, 840, 400);
         }
@@ -649,7 +650,7 @@ namespace MiniRogue
                         if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
 
-                            CurrentCombat = new Combat(Buttons, CombatDice, CheckBoxes);
+                            CurrentCombat = new Combat(Buttons, CombatDice, DieSounds);
                             eventCardTurnState = EventCardTurnState.COMBAT;
 
                         }

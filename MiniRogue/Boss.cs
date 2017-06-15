@@ -237,7 +237,7 @@ namespace MiniRogue
                         if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
 
-                            CurrentCombat = new Combat(Buttons, CombatDice, CheckBoxes);
+                            CurrentCombat = new Combat(Buttons, CombatDice, DieSounds);
                             bossTurnState = BossTurnState.COMBAT;
 
                         }
