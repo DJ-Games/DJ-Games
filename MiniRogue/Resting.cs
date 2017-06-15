@@ -139,7 +139,7 @@ namespace MiniRogue
                         if (XPos > 770 && XPos < 1018 && YPos > 540 && YPos < 612)
                         {
                             PlayerChoice = "Heal";
-                            player.Health += 1; 
+                            player.Health += 2; 
                             restingTurnState = RestingTurnState.COMPLETE;
                         }
 
