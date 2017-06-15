@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.Threading;
 using System.Collections.Generic;
+using System;
 
 
 namespace MiniRogue
@@ -44,7 +45,7 @@ namespace MiniRogue
         BOSS,
 
     }
-
+    
 
     public class Game1 : Game
     {
@@ -159,7 +160,7 @@ namespace MiniRogue
         Vector2 position;
 
         Song song;
-        //float volumeModifier = 0.7f;
+        int musicVolume = 10;
 
         Player player;
         Hand playerHand;
@@ -311,8 +312,8 @@ namespace MiniRogue
             highTower = Content.Load<SpriteFont>("HighTower");
             dungeonFont = Content.Load<SpriteFont>("MorrisRoman");
             song = Content.Load <Song>("Music");
-            MediaPlayer.Volume = .15f;
-            //MediaPlayer.Play(song);           
+            MediaPlayer.Volume = .5f;
+            MediaPlayer.Play(song);           
             MediaPlayer.IsRepeating = true;
 
             position = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
@@ -436,7 +437,7 @@ namespace MiniRogue
                 }
             }
 
-
+            VolumeControl();
 
             //------------------- Switch for gamestates ------------------------
             switch (gamestate)
@@ -491,6 +492,16 @@ namespace MiniRogue
                         {
                             gamestate = Gamestate.TITILESCREEN;
                         }
+
+                        for (int i = 630; i <= 855; i += 25)
+                        {
+                            if (position.X > i && position.X < (i+20) && position.Y > 200 && position.Y < 255)
+                            {
+                                musicVolume = (int)Math.Truncate((double)((i - 605)/25));
+                            }
+                        }
+
+
                     }
 
                         break;
@@ -937,7 +948,20 @@ namespace MiniRogue
 
                     spriteBatch.Draw(gameBackground, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     spriteBatch.Draw(acceptButton, new Vector2(516, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                    spriteBatch.DrawString(dungeonFont, "Options", new Vector2(576, 100), Color.White);
+                    spriteBatch.DrawString(dungeonFont, "Options", new Vector2(555, 100), Color.White);
+                    spriteBatch.DrawString(dungeonFont, "Music Volume", new Vector2(350, 210), Color.White);
+
+                    for (int i = 630; i <= 855; i+=25)
+                    {
+                        spriteBatch.Draw(soundBarGray, new Vector2(i, 200), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    }
+
+                    for (int i = 1; i <= musicVolume; i++)
+                    {
+                        spriteBatch.Draw(soundBar, new Vector2((605 + (i*25)), 200), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    }
+
+
                     break;
 
 
@@ -1412,6 +1436,55 @@ namespace MiniRogue
                 playerHand.PlayerHand.Clear();
             }
 
+        }
+
+        public void VolumeControl()
+        {
+            switch (musicVolume)
+            {
+                case 1:
+                    MediaPlayer.Volume = 0;
+                    break;
+
+                case 2:
+                    MediaPlayer.Volume = .05f;
+                    break;
+
+                case 3:
+                    MediaPlayer.Volume = .1f;
+                    break;
+
+                case 4:
+                    MediaPlayer.Volume = .15f;
+                    break;
+
+                case 5:
+                    MediaPlayer.Volume = .2f;
+                    break;
+
+                case 6:
+                    MediaPlayer.Volume = .25f;
+                    break;
+
+                case 7:
+                    MediaPlayer.Volume = .3f;
+                    break;
+
+                case 8:
+                    MediaPlayer.Volume = .35f;
+                    break;
+
+                case 9:
+                    MediaPlayer.Volume = .4f;
+                    break;
+
+                case 10:
+                    MediaPlayer.Volume = .45f;
+                    break;
+
+                default:
+                    break;
+            }
         }
 
     }
