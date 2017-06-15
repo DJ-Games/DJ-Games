@@ -147,7 +147,7 @@ namespace MiniRogue
                     int counter2 = 240;
                     foreach (var item in CurrentButtons)
                     {
-                        sBatch.Draw(item.ButtonTexture, new Vector2(700, counter2), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                        sBatch.Draw(item.ButtonTexture, new Vector2(730, counter2), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                         counter2 += 80;
                     }
 
@@ -157,10 +157,10 @@ namespace MiniRogue
 
                     break;
                 case MerchantTurnState.CONFIRMBUY:
-                    sBatch.Draw(Buttons["Confirm Purchase Menu"].ButtonTexture, new Vector2(500, 320), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Confirm Purchase Menu"].ButtonTexture, new Vector2(570, 320), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     break;
                 case MerchantTurnState.CONFIRMSELL:
-                    sBatch.Draw(Buttons["Confirm Sale Menu"].ButtonTexture, new Vector2(500, 320), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    sBatch.Draw(Buttons["Confirm Sale Menu"].ButtonTexture, new Vector2(570, 320), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     break;
                 case MerchantTurnState.COMPLETE:
                     break;
@@ -285,7 +285,7 @@ namespace MiniRogue
                     // ------- CONFIRM BUY STATE -------
                     case MerchantTurnState.CONFIRMBUY:
 
-                        if (XPos > 534 && XPos < 780 && YPos > 420 && YPos < 490)
+                        if (XPos > 600 && XPos < 850 && YPos > 420 && YPos < 490)
                         {
                             switch (Selection)
                             {
@@ -384,7 +384,7 @@ namespace MiniRogue
                             }
                         }
 
-                        if (XPos > 820 && XPos < 1070 && YPos > 420 && YPos < 490)
+                        if (XPos > 890 && XPos < 1138 && YPos > 420 && YPos < 490)
                         {
                             merchantTurnState = MerchantTurnState.BUYSELL;
                         }
@@ -478,7 +478,7 @@ namespace MiniRogue
                     // ------- CONFIRM SALE STATE -------
                     case MerchantTurnState.CONFIRMSELL:
 
-                        if (XPos > 534 && XPos < 780 && YPos > 420 && YPos < 490)
+                        if (XPos > 600 && XPos < 850 && YPos > 420 && YPos < 490)
                         {
                             switch (Selection)
                             {
@@ -505,7 +505,7 @@ namespace MiniRogue
                             }
                         }
 
-                        if (XPos > 820 && XPos < 1070 && YPos > 420 && YPos < 490)
+                        if (XPos > 890 && XPos < 1138 && YPos > 420 && YPos < 490)
                         {
                             merchantTurnState = MerchantTurnState.BUYSELL;
                         }

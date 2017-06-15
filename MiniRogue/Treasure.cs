@@ -233,11 +233,11 @@ namespace MiniRogue
                     TreasureDie.DrawCombatDie(sBatch);
                     if (TreasureResult == 3 || TreasureResult == 5 || TreasureResult == 6)
                     {
-                        sBatch.DrawString(font, "You gained a " + AwardedSpell + " Spell.", new Vector2(690, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                        sBatch.DrawString(font, "You gained a " + AwardedSpell + " Spell.", new Vector2(680, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                     }
                     if (TreasureResult == 4)
                     {
-                        sBatch.DrawString(font, "You gained an " + AwardedSpell + " Spell.", new Vector2(690, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                        sBatch.DrawString(font, "You gained an " + AwardedSpell + " Spell.", new Vector2(680, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                     }
                     if(TreasureResult == 1)
                     {
