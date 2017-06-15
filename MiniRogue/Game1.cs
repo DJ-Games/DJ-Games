@@ -323,8 +323,6 @@ namespace MiniRogue
             gamestate = Gamestate.TITILESCREEN;
             currentTurnState = CurrentTurnState.PRETURN1;
 
-
-
             dieTextures = new Dictionary<string, Texture2D>();
 
             combatDice = new Dictionary<string, Die>();
