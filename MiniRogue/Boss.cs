@@ -182,7 +182,7 @@ namespace MiniRogue
                 case BossTurnState.REWARDS:
 
                     sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                    sBatch.DrawString(dungeonFont, "Roll to determine your reward.", new Vector2(750, 230), Color.White);
+                    sBatch.DrawString(dungeonFont, "Roll to determine your reward.", new Vector2(620, 230), Color.White);
 
                     break;
 

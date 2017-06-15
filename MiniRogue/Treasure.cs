@@ -241,11 +241,11 @@ namespace MiniRogue
                     }
                     if(TreasureResult == 1)
                     {
-                        sBatch.DrawString(font, "You gained 1 armor.", new Vector2(725, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                        sBatch.DrawString(font, "You gained 1 armor.", new Vector2(710, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                     }
                     if (TreasureResult == 2)
                     {
-                        sBatch.DrawString(font, "You gained 2 Experience.", new Vector2(725, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                        sBatch.DrawString(font, "You gained 2 Experience.", new Vector2(700, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                     }
 
                    
