@@ -81,7 +81,7 @@ namespace MiniRogue
                 case RestingTurnState.SELECTION:
 
 
-                    sBatch.DrawString(font, "You are resting. Choose an option.", new Vector2(575, 100), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                    sBatch.DrawString(font, "You are resting. Choose an option.", new Vector2(570, 100), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                     int counter = 240; 
                     foreach (var item in CurrentButtons)
                     {
