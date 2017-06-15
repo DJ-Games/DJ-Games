@@ -260,7 +260,7 @@ namespace MiniRogue
                             break;
 
                         case 3:
-                            sBatch.DrawString(font, "Acid Mist: Lose an Armor or Two Health", new Vector2(520, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                            sBatch.DrawString(font, "Acid Mist: Lose an Armor or Two Health", new Vector2(525, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                             break;
 
                         case 4:
