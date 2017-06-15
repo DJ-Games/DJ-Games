@@ -1142,7 +1142,7 @@ namespace MiniRogue
                 case Gamestate.WINSCREEN:
 
                     spriteBatch.Draw(titleBlack, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                    spriteBatch.DrawString(font, "You win!", new Vector2(820, 200), Color.White);
+                    spriteBatch.DrawString(dungeonFont, "You win!", new Vector2(820, 200), Color.White);
                     spriteBatch.Draw(winScreenGuy, new Vector2(-20, 150), new Rectangle?(), Color.White, 0f, new Vector2(), 1.5f, SpriteEffects.None, 1);
                     spriteBatch.Draw(acceptButton, new Vector2(770, 450), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     break;
