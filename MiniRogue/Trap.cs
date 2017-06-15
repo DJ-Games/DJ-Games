@@ -272,8 +272,8 @@ namespace MiniRogue
                             break;
 
                         case 6:
-                            sBatch.DrawString(font, "Pit: Lose Two Health and", new Vector2(650, 150), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
-                            sBatch.DrawString(font, "Fall an Area Below", new Vector2(675, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                            sBatch.DrawString(font, "Pit: Lose Two Health and", new Vector2(660, 150), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                            sBatch.DrawString(font, "Fall an Area Below", new Vector2(700, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                             break;
 
                         default:

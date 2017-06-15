@@ -206,9 +206,9 @@ namespace MiniRogue
                 case TreasureTurnState.EXTRA_TREASURE_ROLL:
 
                     TreasureDie.DrawCombatDie(sBatch);
-                    sBatch.DrawString(font, "You Rolled a:  " + ExtTreasureResult, new Vector2(735, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
-                    sBatch.DrawString(font, "You found a treasure!", new Vector2(680, 250), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
-                    sBatch.DrawString(font, "Roll for treasure.", new Vector2(725, 300), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                    sBatch.DrawString(font, "You Rolled a:  " + ExtTreasureResult, new Vector2(745, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                    sBatch.DrawString(font, "You found a treasure!", new Vector2(690, 250), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                    sBatch.DrawString(font, "Roll for treasure.", new Vector2(735, 300), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                     sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
@@ -216,9 +216,9 @@ namespace MiniRogue
                 case TreasureTurnState.REMOVESPELL:
 
                     TreasureDie.DrawCombatDie(sBatch);
-                    sBatch.DrawString(font, "You Rolled a:  " + TreasureResult, new Vector2(725, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
-                    sBatch.DrawString(font, "Click a spell to remove or", new Vector2(650, 250), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
-                    sBatch.DrawString(font, "click done to keep current spells", new Vector2(600, 300), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                    sBatch.DrawString(font, "You Rolled a:  " + TreasureResult, new Vector2(715, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                    sBatch.DrawString(font, "Click a spell to remove or", new Vector2(660, 250), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                    sBatch.DrawString(font, "click done to keep current spells", new Vector2(610, 300), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                     sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
@@ -233,11 +233,11 @@ namespace MiniRogue
                     TreasureDie.DrawCombatDie(sBatch);
                     if (TreasureResult == 3 || TreasureResult == 5 || TreasureResult == 6)
                     {
-                        sBatch.DrawString(font, "You gained a " + AwardedSpell + " Spell.", new Vector2(725, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                        sBatch.DrawString(font, "You gained a " + AwardedSpell + " Spell.", new Vector2(690, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                     }
                     if (TreasureResult == 4)
                     {
-                        sBatch.DrawString(font, "You gained an " + AwardedSpell + " Spell.", new Vector2(600, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                        sBatch.DrawString(font, "You gained an " + AwardedSpell + " Spell.", new Vector2(690, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                     }
                     if(TreasureResult == 1)
                     {
