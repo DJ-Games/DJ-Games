@@ -123,11 +123,6 @@ namespace MiniRogue
                     Rank = 3;
                     return;
                 }
-                //if ((experience = value) == 36)
-                //{
-                //    Rank = 4;
-                //    return;
-                //}
                 if ((experience = value) >= 36)
                 {
                     Rank = 4;
@@ -147,7 +142,43 @@ namespace MiniRogue
 
         public int DungeonLevel { get; set; }
 
-        public int DungeonArea { get; set; }
+        private int dungeonArea;
+
+        public int DungeonArea
+        {
+            get { return dungeonArea; }
+            set
+            {
+                if ((dungeonArea = value) >= 11)
+                {
+                    DungeonLevel = 5;
+                    return;
+                }
+                if ((dungeonArea = value) >= 8)
+                {
+                    DungeonLevel = 4;
+                    return;
+                }
+                if ((dungeonArea = value) >= 5)
+                {
+                    DungeonLevel = 3;
+                    return;
+                }
+                if ((dungeonArea = value) >= 3)
+                {
+                    DungeonLevel = 2;
+                    return;
+                }
+                if ((dungeonArea = value) >= 1)
+                {
+                    DungeonLevel = 1;
+                    return;
+                }
+            }
+        }
+
+
+        //public int DungeonArea { get; set; }
 
         public BasicDie playerDice { get; set; }
 
@@ -166,7 +197,7 @@ namespace MiniRogue
             Food = food;
             Rank = 1; 
 
-            DungeonLevel = 1;
+            //DungeonLevel = 1;
             DungeonArea = 1;
 
             HasFoughtMonster = false;

@@ -479,7 +479,7 @@ namespace MiniRogue
                     {
                         if (position.X > 800 && position.X < 1050 && position.Y > 167 && position.Y < 241)
                         {
-                            player = new Player(1, 5, 5, 6, spellIcons);
+                            player = new Player(1, 5, 20, 6, spellIcons);
                             DrawNewHand();
                             gamestate = Gamestate.HACKANDSLASH;
                         }
@@ -808,22 +808,22 @@ namespace MiniRogue
                         {
                             player.DungeonArea++;
 
-                            if (player.DungeonArea == 3)
-                            {
-                                player.DungeonLevel = 2;
-                            }
-                            if (player.DungeonArea == 5)
-                            {
-                                player.DungeonLevel = 3;
-                            }
-                            if (player.DungeonArea == 8)
-                            {
-                                player.DungeonLevel = 4;
-                            }
-                            if (player.DungeonArea == 11)
-                            {
-                                player.DungeonLevel = 5;
-                            }
+                            //if (player.DungeonArea == 3)
+                            //{
+                            //    player.DungeonLevel = 2;
+                            //}
+                            //if (player.DungeonArea == 5)
+                            //{
+                            //    player.DungeonLevel = 3;
+                            //}
+                            //if (player.DungeonArea == 8)
+                            //{
+                            //    player.DungeonLevel = 4;
+                            //}
+                            //if (player.DungeonArea == 11)
+                            //{
+                            //    player.DungeonLevel = 5;
+                            //}
                             if (player.DungeonArea == 15)
                             {
                                 gamestate = Gamestate.WINSCREEN;
@@ -1362,7 +1362,7 @@ namespace MiniRogue
 
         public void HandleHealingSpells()
         {
-            if (player.Spells.Count == 1 && player.Spells[0].Name == "Healing")
+            if (player.Spells.Count >= 1 && player.Spells[0].Name == "Healing")
             {
                 if (SingleMouseClick())
                 {
