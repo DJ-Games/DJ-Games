@@ -14,14 +14,11 @@ namespace MiniRogue
     enum RestingTurnState
     {
         SELECTION,
-        //REVIEW,
-        COMPLETE,
-        
+        COMPLETE,       
     }
 
     class Resting : Card
     {
-
 
         public string PlayerChoice { get; set; }
 
@@ -52,21 +49,12 @@ namespace MiniRogue
 
                     return false;
 
-                //case RestingTurnState.REVIEW:
-                //    HandleButtons(player);
-
-                    //return false;
-
                 case RestingTurnState.COMPLETE:
                     return true;
 
                 default:
                     return false;
             }
-
-
-
-
         }
 
         public override void DrawCard(SpriteBatch sBatch, SpriteFont font)
@@ -90,19 +78,11 @@ namespace MiniRogue
                     }
                     break;
 
-                //case RestingTurnState.REVIEW:
-                //    //sbatch.draw(buttons["confirm purchase menu"].buttontexture, new vector2(580, 320), new rectangle?(), color.white, 0f, new vector2(), 1f, spriteeffects.none, 1);
-                //    break;
-
                 case RestingTurnState.COMPLETE:
                     break;
                 default:
                     break;
             }
-
-
-
-
         }
 
 
@@ -144,48 +124,8 @@ namespace MiniRogue
                         }
 
                         break;
-
-                    //case RestingTurnState.REVIEW:
-
-                    //    if (XPos > 614 && XPos < 860 && YPos > 420 && YPos < 490)
-                    //    {
-                    //        switch (PlayerChoice)
-                    //        {
-                    //            case "Reinforce Weapon":
-
-                    //                player.Experience++;
-                    //                restingTurnState = RestingTurnState.COMPLETE;
-                    //                break;
-
-                    //            case "Ration":
-
-                    //                player.Food++;
-                    //                restingTurnState = RestingTurnState.COMPLETE;
-                    //                break;
-
-                    //            case "Heal":
-
-                    //                player.Health+=2;
-                    //                restingTurnState = RestingTurnState.COMPLETE;
-                    //                break;
-                    //        }
-                    //    }
-
-                    //    if (XPos > 900 && XPos < 1150 && YPos > 420 && YPos < 490)
-                    //    {
-                    //        restingTurnState = RestingTurnState.SELECTION;
-                    //    }
-
-
-                    //    break;
-
-
                 }
             }
         }
-
-
-
-
     }
 }
