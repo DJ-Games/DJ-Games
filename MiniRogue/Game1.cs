@@ -163,6 +163,7 @@ namespace MiniRogue
 
         Song song;
         int musicVolume = 10;
+        int soundEffectVolume = 10;
         SoundEffect cardFlip;
         SoundEffect oneDieRoll;
         SoundEffect twoDieRoll;
@@ -522,6 +523,14 @@ namespace MiniRogue
                             if (position.X > i && position.X < (i+20) && position.Y > 200 && position.Y < 255)
                             {
                                 musicVolume = (int)Math.Truncate((double)((i - 605)/25));
+                            }
+                        }
+
+                        for (int i = 630; i <= 855; i += 25)
+                        {
+                            if (position.X > i && position.X < (i + 20) && position.Y > 300 && position.Y < 355)
+                            {
+                                soundEffectVolume = (int)Math.Truncate((double)((i - 605) / 25));
                             }
                         }
 
@@ -1005,6 +1014,7 @@ namespace MiniRogue
                     spriteBatch.Draw(acceptButton, new Vector2(516, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     spriteBatch.DrawString(dungeonFont, "Options", new Vector2(555, 100), Color.White);
                     spriteBatch.DrawString(dungeonFont, "Music Volume", new Vector2(350, 210), Color.White);
+                    spriteBatch.DrawString(dungeonFont, "Sound Volume", new Vector2(350, 310), Color.White);
 
                     for (int i = 630; i <= 855; i+=25)
                     {
@@ -1014,6 +1024,16 @@ namespace MiniRogue
                     for (int i = 1; i <= musicVolume; i++)
                     {
                         spriteBatch.Draw(soundBar, new Vector2((605 + (i*25)), 200), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    }
+
+                    for (int i = 630; i <= 855; i += 25)
+                    {
+                        spriteBatch.Draw(soundBarGray, new Vector2(i, 300), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    }
+
+                    for (int i = 1; i <= soundEffectVolume; i++)
+                    {
+                        spriteBatch.Draw(soundBar, new Vector2((605 + (i * 25)), 300), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     }
 
 
@@ -1535,6 +1555,52 @@ namespace MiniRogue
 
                 case 10:
                     MediaPlayer.Volume = .45f;
+                    break;
+
+                default:
+                    break;
+            }
+
+            switch (soundEffectVolume)
+            {
+                case 1:
+                    SoundEffect.MasterVolume = 0;
+                    break;
+
+                case 2:
+                    SoundEffect.MasterVolume = .05f;
+                    break;
+
+                case 3:
+                    SoundEffect.MasterVolume = .1f;
+                    break;
+
+                case 4:
+                    SoundEffect.MasterVolume = .15f;
+                    break;
+
+                case 5:
+                    SoundEffect.MasterVolume = .2f;
+                    break;
+
+                case 6:
+                    SoundEffect.MasterVolume = .25f;
+                    break;
+
+                case 7:
+                    SoundEffect.MasterVolume = .3f;
+                    break;
+
+                case 8:
+                    SoundEffect.MasterVolume = .35f;
+                    break;
+
+                case 9:
+                    SoundEffect.MasterVolume = .4f;
+                    break;
+
+                case 10:
+                    SoundEffect.MasterVolume = .45f;
                     break;
 
                 default:
