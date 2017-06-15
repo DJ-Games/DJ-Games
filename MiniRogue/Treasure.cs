@@ -227,7 +227,7 @@ namespace MiniRogue
 
                     if (!Success)
                     {
-                        sBatch.DrawString(font, "You did not find treasure.", new Vector2(700, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                        sBatch.DrawString(font, "You did not find treasure.", new Vector2(680, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                     }
 
                     TreasureDie.DrawCombatDie(sBatch);
