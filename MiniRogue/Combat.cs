@@ -268,14 +268,30 @@ namespace MiniRogue
 
                 case CombatState.ROLLANIMATION:
 
-                    for (int i = 1; i < 5; i++)
+                    if (CombatDice["Combat Die 1"].FeatUsed)
                     {
-                        if (CombatDice["Combat Die " + i.ToString()].FeatUsed)
-                        {
-                            sBatch.Draw(CombatButtons["Die Highlight"].ButtonTexture, new Vector2(550, 300), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                        }
-                        CombatDice["Combat Die " + i.ToString()].DrawCombatDie(sBatch);
+                        sBatch.Draw(CombatButtons["Die Highlight"].ButtonTexture, new Vector2(550, 300), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     }
+
+                    if (CombatDice["Combat Die 2"].FeatUsed)
+                    {
+                        sBatch.Draw(CombatButtons["Die Highlight"].ButtonTexture, new Vector2(735, 300), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    }
+
+                    if (CombatDice["Combat Die 3"].FeatUsed)
+                    {
+                        sBatch.Draw(CombatButtons["Die Highlight"].ButtonTexture, new Vector2(920, 300), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    }
+
+                    if (CombatDice["Combat Die 4"].FeatUsed)
+                    {
+                        sBatch.Draw(CombatButtons["Die Highlight"].ButtonTexture, new Vector2(1105, 300), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                    }
+
+                    CombatDice["Combat Die 1"].DrawCombatDie(sBatch);
+                    CombatDice["Combat Die 2"].DrawCombatDie(sBatch);
+                    CombatDice["Combat Die 3"].DrawCombatDie(sBatch);
+                    CombatDice["Combat Die 4"].DrawCombatDie(sBatch);
 
                     break;
 
@@ -377,12 +393,12 @@ namespace MiniRogue
                         sBatch.DrawString(dungeonFont, CombatDice["Combat Die 4"].Roll.ToString(), new Vector2(1140, 400), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
                     }
 
-                    if (HealthFeatAvailable)
+                    if (HealthFeatAvailable && !CombatDice["Combat Die " + InUseDie.ToString()].CritRollAvailable)
                     {
                         sBatch.Draw(CombatButtons["Spend 2 HP Button"].ButtonTexture, new Vector2(600, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     }
 
-                    if (ExperienceFeatAvailable)
+                    if (ExperienceFeatAvailable && !CombatDice["Combat Die " + InUseDie.ToString()].CritRollAvailable)
                     {
                         sBatch.Draw(CombatButtons["Spend 1 XP Button"].ButtonTexture, new Vector2(900, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     }
@@ -576,7 +592,7 @@ namespace MiniRogue
                             }
                         }
 
-                        if (HealthFeatAvailable)
+                        if (HealthFeatAvailable && !CombatDice["Combat Die " + InUseDie.ToString()].CritRollAvailable)
                         {
                             if (XPos > 600 && XPos < 848 && YPos > 600 && YPos < 672)
                             {
@@ -585,7 +601,7 @@ namespace MiniRogue
                             }
                         }
 
-                        if (ExperienceFeatAvailable)
+                        if (ExperienceFeatAvailable && !CombatDice["Combat Die " + InUseDie.ToString()].CritRollAvailable)
                         {
                             if (XPos > 900 && XPos < 1148 && YPos > 600 && YPos < 672)
                             {
