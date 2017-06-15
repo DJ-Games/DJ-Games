@@ -151,12 +151,15 @@ namespace MiniRogue
         Texture2D dieHighlight;
         Texture2D winScreenGuy;
         Texture2D eyes;
+        Texture2D soundBar;
+        Texture2D soundBarGray;
         SpriteFont font;
         SpriteFont highTower;
         SpriteFont dungeonFont;
         Vector2 position;
 
         Song song;
+        //float volumeModifier = 0.7f;
 
         Player player;
         Hand playerHand;
@@ -302,11 +305,13 @@ namespace MiniRogue
             dieHighlight = Content.Load<Texture2D>("Die Highlight");
             eyes = Content.Load<Texture2D>("Eyes");
             winScreenGuy = Content.Load<Texture2D>("WinScreenGuy");
+            soundBar = Content.Load<Texture2D>("SoundBar");
+            soundBarGray = Content.Load<Texture2D>("SoundBarGray");
             font = Content.Load<SpriteFont>("Font");
             highTower = Content.Load<SpriteFont>("HighTower");
             dungeonFont = Content.Load<SpriteFont>("MorrisRoman");
             song = Content.Load <Song>("Music");
-            MediaPlayer.Volume -= 0.7f;
+            MediaPlayer.Volume = .15f;
             //MediaPlayer.Play(song);           
             MediaPlayer.IsRepeating = true;
 
