@@ -12,7 +12,6 @@ namespace MiniRogue
 {
     class Player
     {
-
         private int armor;
 
         public int Armor
