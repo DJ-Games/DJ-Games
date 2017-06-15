@@ -236,7 +236,7 @@ namespace MiniRogue
             {
                 case TrapTurnState.ROLL_FOR_TRAP:
                     sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                    sBatch.DrawString(font, "Roll to determine the trap you face", new Vector2(600, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
+                    sBatch.DrawString(font, "Roll to determine the trap you face", new Vector2(600, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                     break;
 
                 case TrapTurnState.ROLLANIMATION:
@@ -247,32 +247,32 @@ namespace MiniRogue
 
                 case TrapTurnState.SKILL_CHECK:
 
-                    sBatch.DrawString(font, "Roll a skill check to evade the trap", new Vector2(600, 250), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
+                    sBatch.DrawString(font, "Roll a skill check to evade the trap", new Vector2(600, 250), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                     sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     switch (TrapResult)
                     {
                         case 1:
-                            sBatch.DrawString(font, "Mildew: You Lose a Food", new Vector2(600, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
+                            sBatch.DrawString(font, "Mildew: You Lose a Food", new Vector2(600, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                             break;
 
                         case 2:
-                            sBatch.DrawString(font, "TripWire: You Lose a Gold", new Vector2(600, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
+                            sBatch.DrawString(font, "TripWire: You Lose a Gold", new Vector2(600, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                             break;
 
                         case 3:
-                            sBatch.DrawString(font, "Acid Mist: Lose a Armor Piece or Two Health", new Vector2(517, 200), Color.White, 0f, new Vector2(), 1.85f, SpriteEffects.None, 0f);
+                            sBatch.DrawString(font, "Acid Mist: Lose a Armor Piece or Two Health", new Vector2(512, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                             break;
 
                         case 4:
-                            sBatch.DrawString(font, "Spring Blades: You Lose a Health", new Vector2(600, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
+                            sBatch.DrawString(font, "Spring Blades: You Lose a Health", new Vector2(600, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                             break;
 
                         case 5:
-                            sBatch.DrawString(font, "Moving Walls: You Lose a XP", new Vector2(600, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
+                            sBatch.DrawString(font, "Moving Walls: You Lose a XP", new Vector2(600, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                             break;
 
                         case 6:
-                            sBatch.DrawString(font, "Pit: Lose Two Health and fall an Area Below", new Vector2(525, 200), Color.White, 0f, new Vector2(), 1.85f, SpriteEffects.None, 0f);
+                            sBatch.DrawString(font, "Pit: Lose Two Health and fall an Area Below", new Vector2(525, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                             break;
 
                         default:
@@ -288,12 +288,12 @@ namespace MiniRogue
 
                     if (success)
                     {
-                        sBatch.DrawString(font, "Success! You avoided the trap", new Vector2(600, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
+                        sBatch.DrawString(font, "Success! You avoided the trap", new Vector2(600, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                     }
 
                     else
                     {
-                        sBatch.DrawString(font, "You Failed, accept your fate", new Vector2(650, 200), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 0f);
+                        sBatch.DrawString(font, "You Failed, accept your fate", new Vector2(650, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                     }
                     TrapDie.DrawCombatDie(sBatch);
                     break;
