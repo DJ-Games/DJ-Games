@@ -191,7 +191,7 @@ namespace MiniRogue
                 case EventCardTurnState.SKILL_CHECK:
 
                     EventDie.DrawCombatDie(sBatch);
-                    sBatch.DrawString(dungeonFont, "Roll for skill check.", new Vector2(730, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                    sBatch.DrawString(dungeonFont, "Roll for skill check.", new Vector2(720, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                     sBatch.Draw(Buttons["Roll Die"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     int counter = 650;
@@ -226,7 +226,7 @@ namespace MiniRogue
                         sBatch.Draw(item.ButtonTexture, new Vector2(counter3, 300), new Rectangle?(), Color.White, 0f, new Vector2(), .50f, SpriteEffects.None, 1);
                         counter3 += 80;
                     }
-                    sBatch.DrawString(dungeonFont, "Failed skill check", new Vector2(680, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                    sBatch.DrawString(dungeonFont, "Failed skill check.", new Vector2(740, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
 
 
                     break;
