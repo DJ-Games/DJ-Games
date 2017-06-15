@@ -245,7 +245,7 @@ namespace MiniRogue
                     }
                     if (TreasureResult == 2)
                     {
-                        sBatch.DrawString(font, "You gained 2 Experience.", new Vector2(800, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                        sBatch.DrawString(font, "You gained 2 Experience.", new Vector2(750, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                     }
 
                    
