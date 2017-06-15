@@ -256,7 +256,7 @@ namespace MiniRogue
                             break;
 
                         case 2:
-                            sBatch.DrawString(font, "TripWire: You Lose a Gold", new Vector2(625, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                            sBatch.DrawString(font, "TripWire: You Lose a Gold", new Vector2(665, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                             break;
 
                         case 3:
@@ -264,7 +264,7 @@ namespace MiniRogue
                             break;
 
                         case 4:
-                            sBatch.DrawString(font, "Spring Blades: You Lose a Health", new Vector2(625, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                            sBatch.DrawString(font, "Spring Blades: You Lose a Health", new Vector2(525, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                             break;
 
                         case 5:
@@ -272,7 +272,8 @@ namespace MiniRogue
                             break;
 
                         case 6:
-                            sBatch.DrawString(font, "Pit: Lose Two Health and fall an Area Below", new Vector2(465, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                            sBatch.DrawString(font, "Pit: Lose Two Health and", new Vector2(650, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                            sBatch.DrawString(font, "Fall an Area Below", new Vector2(675, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
                             break;
 
                         default:
