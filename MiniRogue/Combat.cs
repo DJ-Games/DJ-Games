@@ -393,18 +393,18 @@ namespace MiniRogue
                         sBatch.DrawString(dungeonFont, CombatDice["Combat Die 4"].Roll.ToString(), new Vector2(1140, 400), Color.White, 0f, new Vector2(), 2f, SpriteEffects.None, 1);
                     }
 
-                    if (HealthFeatAvailable && !CombatDice["Combat Die " + InUseDie.ToString()].CritRollAvailable)
-                    {
-                        sBatch.Draw(CombatButtons["Spend 2 HP Button"].ButtonTexture, new Vector2(600, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                    }
-
-                    if (ExperienceFeatAvailable && !CombatDice["Combat Die " + InUseDie.ToString()].CritRollAvailable)
-                    {
-                        sBatch.Draw(CombatButtons["Spend 1 XP Button"].ButtonTexture, new Vector2(900, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                    }
-
                     if (InUseDie != 0)
                     {
+                        if (HealthFeatAvailable && !CombatDice["Combat Die " + InUseDie.ToString()].CritRollAvailable)
+                        {
+                            sBatch.Draw(CombatButtons["Spend 2 HP Button"].ButtonTexture, new Vector2(600, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                        }
+
+                        if (ExperienceFeatAvailable && !CombatDice["Combat Die " + InUseDie.ToString()].CritRollAvailable)
+                        {
+                            sBatch.Draw(CombatButtons["Spend 1 XP Button"].ButtonTexture, new Vector2(900, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                        }
+
                         if (CombatDice["Combat Die " + InUseDie.ToString()].CritRollAvailable)
                         {
                             sBatch.Draw(CombatButtons["Crit Roll Button"].ButtonTexture, new Vector2(750, 500), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
@@ -592,26 +592,26 @@ namespace MiniRogue
                             }
                         }
 
-                        if (HealthFeatAvailable && !CombatDice["Combat Die " + InUseDie.ToString()].CritRollAvailable)
-                        {
-                            if (XPos > 600 && XPos < 848 && YPos > 600 && YPos < 672)
-                            {
-                                player.Health -= 2;
-                                combatState = CombatState.ROLLANIMATION;
-                            }
-                        }
-
-                        if (ExperienceFeatAvailable && !CombatDice["Combat Die " + InUseDie.ToString()].CritRollAvailable)
-                        {
-                            if (XPos > 900 && XPos < 1148 && YPos > 600 && YPos < 672)
-                            {
-                                player.Experience--;
-                                combatState = CombatState.ROLLANIMATION;
-                            }
-                        }
-
                         if (InUseDie != 0)
                         {
+                            if (HealthFeatAvailable && !CombatDice["Combat Die " + InUseDie.ToString()].CritRollAvailable)
+                            {
+                                if (XPos > 600 && XPos < 848 && YPos > 600 && YPos < 672)
+                                {
+                                    player.Health -= 2;
+                                    combatState = CombatState.ROLLANIMATION;
+                                }
+                            }
+
+                            if (ExperienceFeatAvailable && !CombatDice["Combat Die " + InUseDie.ToString()].CritRollAvailable)
+                            {
+                                if (XPos > 900 && XPos < 1148 && YPos > 600 && YPos < 672)
+                                {
+                                    player.Experience--;
+                                    combatState = CombatState.ROLLANIMATION;
+                                }
+                            }
+
                             if (CombatDice["Combat Die " + InUseDie.ToString()].CritRollAvailable)
                             {
                                 if (XPos > 750 && XPos < 998 && YPos > 500 && YPos < 572)
@@ -620,7 +620,6 @@ namespace MiniRogue
                                 }
                             }
                         }
-
 
                         break;
 
