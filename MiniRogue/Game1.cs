@@ -1125,7 +1125,7 @@ namespace MiniRogue
 
                     spriteBatch.Draw(gameBackground, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     spriteBatch.Draw(dungeon, new Vector2(150, 150), new Rectangle?(), Color.White, 0f, new Vector2(), 1.3f, SpriteEffects.None, 1);
-                    spriteBatch.DrawString(dungeonFont, "You have completed area " + player.DungeonArea + "!", new Vector2(780, 200), Color.White);
+                    spriteBatch.DrawString(dungeonFont, "You have completed area " + player.DungeonArea + "!", new Vector2(700, 200), Color.White);
                     spriteBatch.Draw(acceptButton, new Vector2(770, 450), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
                     break;
@@ -1133,7 +1133,7 @@ namespace MiniRogue
                 case Gamestate.GAME_OVER:
 
                     spriteBatch.Draw(titleBlack, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                    spriteBatch.DrawString(dungeonFont, "You died. Game Over.", new Vector2(790, 200), Color.White);
+                    spriteBatch.DrawString(dungeonFont, "You died. Game Over.", new Vector2(700, 200), Color.White);
                     spriteBatch.Draw(eyes, new Vector2(150, 170), new Rectangle?(), Color.White, 0f, new Vector2(), 2.7f, SpriteEffects.None, 1);
                     spriteBatch.Draw(acceptButton, new Vector2(770, 450), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
 
@@ -1142,7 +1142,7 @@ namespace MiniRogue
                 case Gamestate.WINSCREEN:
 
                     spriteBatch.Draw(titleBlack, new Vector2(0, 0), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
-                    spriteBatch.DrawString(font, "You win!", new Vector2(820, 200), Color.White);
+                    spriteBatch.DrawString(font, "You win!", new Vector2(700, 200), Color.White);
                     spriteBatch.Draw(winScreenGuy, new Vector2(-20, 150), new Rectangle?(), Color.White, 0f, new Vector2(), 1.5f, SpriteEffects.None, 1);
                     spriteBatch.Draw(acceptButton, new Vector2(770, 450), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     break;
