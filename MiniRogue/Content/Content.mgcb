@@ -1087,3 +1087,33 @@
 /processorParam:TextureFormat=Color
 /build:SoundBarGray.png
 
+#begin CardFlip.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:CardFlip.wav
+
+#begin 1DieRoll.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:1DieRoll.wav
+
+#begin 2DieRoll.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:2DieRoll.wav
+
+#begin 3DieRoll.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:3DieRoll.wav
+
+#begin 4DieRoll.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:4DieRoll.wav
+

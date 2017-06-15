@@ -2,9 +2,11 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 using System.Threading;
 using System.Collections.Generic;
 using System;
+
 
 
 namespace MiniRogue
@@ -161,6 +163,14 @@ namespace MiniRogue
 
         Song song;
         int musicVolume = 10;
+        SoundEffect cardFlip;
+        SoundEffect oneDieRoll;
+        SoundEffect twoDieRoll;
+        SoundEffect threeDieRoll;
+        SoundEffect fourDieRoll;
+        bool flipSoundPlayed = false;
+        Dictionary<string, SoundEffect> soundEffects;
+
 
         Player player;
         Hand playerHand;
@@ -316,6 +326,12 @@ namespace MiniRogue
             MediaPlayer.Play(song);           
             MediaPlayer.IsRepeating = true;
 
+            cardFlip = Content.Load<SoundEffect>("CardFlip");
+            oneDieRoll = Content.Load<SoundEffect>("1DieRoll");
+            twoDieRoll = Content.Load<SoundEffect>("2DieRoll");
+            threeDieRoll = Content.Load<SoundEffect>("3DieRoll");
+            fourDieRoll = Content.Load<SoundEffect>("4DieRoll");
+
             position = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
                 graphics.GraphicsDevice.Viewport.Height / 2);
             playerDice = new BasicDie();
@@ -331,6 +347,8 @@ namespace MiniRogue
             checkBoxes = new Dictionary<string, CheckBox>();
 
             spellIcons = new Dictionary<string, Texture2D>();
+
+            soundEffects = new Dictionary<string, SoundEffect>();
 
             dieTextures.Add("Roll 1", die1);
             dieTextures.Add("Roll 2", die2);
@@ -400,7 +418,12 @@ namespace MiniRogue
             spellIcons.Add("Healing Spell Icon", healthSpellIcon);
             spellIcons.Add("Ice Spell Icon", iceSpellIcon);
             spellIcons.Add("Poison Spell Icon", poisonSpellIcon);
- 
+
+            soundEffects.Add("One Die Roll", oneDieRoll);
+            soundEffects.Add("Two Die Roll", twoDieRoll);
+            soundEffects.Add("Three Die Roll", threeDieRoll);
+            soundEffects.Add("Four Die Roll", fourDieRoll);
+
         }
 
 
@@ -552,6 +575,12 @@ namespace MiniRogue
                     {
                         case CurrentTurnState.PRETURN1:
 
+                            if (!flipSoundPlayed)
+                            {
+                                cardFlip.Play();
+                                flipSoundPlayed = true;
+                            }
+
                             FlipCard(playerHand.Card1);
 
                             if (SingleMouseClick())
@@ -572,6 +601,7 @@ namespace MiniRogue
 
                         case CurrentTurnState.ANIMATECARD1:
 
+                            flipSoundPlayed = false;
                             if (playerHand.Card1.Moving)
                             {
                                 playerHand.Card1.SlideCard(currentCardNumber);
@@ -597,6 +627,11 @@ namespace MiniRogue
 
                         case CurrentTurnState.PRETURN2:
 
+                            if (!flipSoundPlayed)
+                            {
+                                cardFlip.Play();
+                                flipSoundPlayed = true;
+                            }
                             FlipCard(playerHand.Card2);
                             FlipCard(playerHand.Card3);
 
@@ -627,6 +662,7 @@ namespace MiniRogue
 
                         case CurrentTurnState.ANIMATECARD2:
 
+                            flipSoundPlayed = false;
                             if (playerHand.Card2.Moving)
                             {
                                 playerHand.Card2.SlideCard(currentCardNumber);
@@ -666,6 +702,11 @@ namespace MiniRogue
 
                         case CurrentTurnState.PRETURN3:
 
+                            if (!flipSoundPlayed)
+                            {
+                                cardFlip.Play();
+                                flipSoundPlayed = true;
+                            }
                             FlipCard(playerHand.Card4);
 
                             if (SingleMouseClick())
@@ -685,6 +726,7 @@ namespace MiniRogue
 
                         case CurrentTurnState.ANIMATECARD3:
 
+                            flipSoundPlayed = false;
                             if (playerHand.Card4.Moving)
                             {
                                 playerHand.Card4.SlideCard(currentCardNumber);
@@ -710,6 +752,11 @@ namespace MiniRogue
 
                         case CurrentTurnState.PRETURN4:
 
+                            if (!flipSoundPlayed)
+                            {
+                                cardFlip.Play();
+                                flipSoundPlayed = true;
+                            }
                             FlipCard(playerHand.Card5);
                             FlipCard(playerHand.Card6);
 
@@ -740,6 +787,7 @@ namespace MiniRogue
 
                         case CurrentTurnState.ANIMATECARD4:
 
+                            flipSoundPlayed = false;
                             if (playerHand.Card5.Moving)
                             {
                                 playerHand.Card5.SlideCard(currentCardNumber);
@@ -785,6 +833,11 @@ namespace MiniRogue
 
                         case CurrentTurnState.PREBOSS:
 
+                            if (!flipSoundPlayed)
+                            {
+                                cardFlip.Play();
+                                flipSoundPlayed = true;
+                            }
                             FlipCard(playerHand.Card7);
 
                             if (SingleMouseClick())
@@ -803,6 +856,7 @@ namespace MiniRogue
 
                         case CurrentTurnState.ANIMATEBOSSCARD:
 
+                            flipSoundPlayed = false;
                             if (playerHand.Card7.Moving)
                             {
                                 playerHand.Card7.SlideCard(currentCardNumber);
