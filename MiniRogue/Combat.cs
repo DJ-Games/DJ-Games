@@ -215,7 +215,13 @@ namespace MiniRogue
                     {
 
                     }
-                    else { player.Health -= (Damage - player.Armor); }
+                    else
+                    {
+                        if (Damage - player.Armor >= 0)
+                        {
+                            player.Health -= (Damage - player.Armor);
+                        }    
+                    }
 
                     if (player.Health > 0)
                     {
