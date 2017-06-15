@@ -144,13 +144,13 @@ namespace MiniRogue
                     
                     break;
                 case MerchantTurnState.BUYSPELL:
-                    int counter2 = 240;
+                    int counter2 = 200;
                     foreach (var item in CurrentButtons)
                     {
-                        sBatch.Draw(item.ButtonTexture, new Vector2(730, counter2), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
+                        sBatch.Draw(item.ButtonTexture, new Vector2(770, counter2), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                         counter2 += 80;
                     }
-
+                    sBatch.Draw(Buttons["Done Button"].ButtonTexture, new Vector2(770, 600), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                     break;
                 case MerchantTurnState.SELLSPELL:
                     sBatch.DrawString(font, "Click the spell you would like to sell", new Vector2 (550, 100), Color.White);
@@ -197,7 +197,7 @@ namespace MiniRogue
             CurrentButtons.Add(Buttons["Green Ice Spell Button"]);
             CurrentButtons.Add(Buttons["Green Poison Spell Button"]);
             CurrentButtons.Add(Buttons["Green Healing Spell Button"]);
-            CurrentButtons.Add(Buttons["Done Button"]); 
+            //CurrentButtons.Add(Buttons["Done Button"]); 
         }
 
         /// <summary>
@@ -394,34 +394,33 @@ namespace MiniRogue
                     // ------- BUY SPELL STATE -------
                     case MerchantTurnState.BUYSPELL:
 
-                        if (XPos > 700 && XPos < 948 && YPos > 240 && YPos < 312)
+                        if (XPos > 770 && XPos < 1018 && YPos > 200 && YPos < 272)
                         {
                             Selection = "Buy Fire Spell";
                             merchantTurnState = MerchantTurnState.CONFIRMBUY;
 
                         }
 
-                        if (XPos > 700 && XPos < 948 && YPos > 320 && YPos < 392)
+                        if (XPos > 770 && XPos < 1018 && YPos > 280 && YPos < 352)
                         {
                             Selection = "Buy Ice Spell";
                             merchantTurnState = MerchantTurnState.CONFIRMBUY;
                         }
 
-                        if (XPos > 700 && XPos < 948 && YPos > 400 && YPos < 472)
+                        if (XPos > 770 && XPos < 1018 && YPos > 360 && YPos < 432)
                         {
                             Selection = "Buy Poison Spell";
                             merchantTurnState = MerchantTurnState.CONFIRMBUY;
                         }
 
-                        if (XPos > 700 && XPos < 948 && YPos > 480 && YPos < 552)
+                        if (XPos > 770 && XPos < 1018 && YPos > 440 && YPos < 512)
                         {
                             Selection = "Buy Healing Spell";
                             merchantTurnState = MerchantTurnState.CONFIRMBUY;
                         }
 
-                        if (XPos > 700 && XPos < 948 && YPos > 560 && YPos < 632)
+                        if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
-                            Selection = "Done Button";
                             merchantTurnState = MerchantTurnState.BUYSELL; 
                         }
 
