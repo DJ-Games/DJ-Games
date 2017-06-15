@@ -808,22 +808,6 @@ namespace MiniRogue
                         {
                             player.DungeonArea++;
 
-                            //if (player.DungeonArea == 3)
-                            //{
-                            //    player.DungeonLevel = 2;
-                            //}
-                            //if (player.DungeonArea == 5)
-                            //{
-                            //    player.DungeonLevel = 3;
-                            //}
-                            //if (player.DungeonArea == 8)
-                            //{
-                            //    player.DungeonLevel = 4;
-                            //}
-                            //if (player.DungeonArea == 11)
-                            //{
-                            //    player.DungeonLevel = 5;
-                            //}
                             if (player.DungeonArea == 15)
                             {
                                 gamestate = Gamestate.WINSCREEN;
