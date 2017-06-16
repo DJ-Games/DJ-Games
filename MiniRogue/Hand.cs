@@ -58,7 +58,7 @@ namespace MiniRogue
 
             playerHand.Add(new Trap("Trap", trapTex, cardBack, buttons, dieTextures));
 
-            playerHand.Add(new Treasure("Treasure", treasureTex, cardBack, buttons, dieTextures));
+            playerHand.Add(new Treasure("Treasure", treasureTex, cardBack, buttons, dieTextures, dieSounds));
 
             ShuffleHand();
 

@@ -7,6 +7,7 @@ using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace MiniRogue
 {
@@ -49,11 +50,13 @@ namespace MiniRogue
 
         TreasureTurnState treasureTurnState;
 
-        public Treasure(string name, Texture2D cardTexture, Texture2D cardBack,  Dictionary<string, Button> buttons, Dictionary<string, Texture2D> dieTextures) : base(name, cardTexture, cardBack, buttons)
+        public Treasure(string name, Texture2D cardTexture, Texture2D cardBack,  Dictionary<string, Button> buttons, Dictionary<string,
+            Texture2D> dieTextures, Dictionary<string, SoundEffect> dieSounds) : base(name, cardTexture, cardBack, buttons)
         {
             treasureTurnState = TreasureTurnState.GOLD_AWARD;
             CurrentButtons = new List<Button>();
             DieTextures = dieTextures;
+            DieSounds = dieSounds;
             TreasureDie = new Die(DieTextures,840, 400);
         }
 
@@ -90,6 +93,7 @@ namespace MiniRogue
                     }
                     else
                     {
+                        DieSoundPlayed = false;
                         if (TreasureRoll)
                         {
                             AnimationCounter = 0;
@@ -330,6 +334,11 @@ namespace MiniRogue
 
         public void RollAnimation()
         {
+            if (!DieSoundPlayed)
+            {
+                DieSounds["One Die Roll"].Play();
+                DieSoundPlayed = true;
+            }
             TreasureDie.CurrentTexture = TreasureDie.DieTextureList[Rng.Next(TreasureDie.DieTextureList.Count - 1)];
             AnimationCounter += 5;
         }
