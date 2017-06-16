@@ -251,6 +251,7 @@ namespace MiniRogue
                         break;
 
                     case BossTurnState.REWARDS:
+                   
                         if (XPos > 770 && XPos < 1018 && YPos > 600 && YPos < 672)
                         {
                             bossTurnState = BossTurnState.ROLLANIMATION;
