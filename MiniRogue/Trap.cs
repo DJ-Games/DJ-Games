@@ -7,6 +7,7 @@ using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace MiniRogue
 {
@@ -49,12 +50,14 @@ namespace MiniRogue
         TrapTurnState trapTurnState;
 
 
-        public Trap(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons, Dictionary<string, Texture2D> dieTextures) : base(name, cardTexture, cardBack, buttons)
+        public Trap(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons, Dictionary<string,
+            Texture2D> dieTextures, Dictionary<string, SoundEffect> dieSounds) : base(name, cardTexture, cardBack, buttons)
         {
            
             trapTurnState = TrapTurnState.ROLL_FOR_TRAP;
             CurrentButtons = new List<Button>();
             DieTextures = dieTextures;
+            DieSounds = dieSounds;
             TrapDie = new Die(DieTextures, 840, 400);
         }
 
@@ -82,6 +85,7 @@ namespace MiniRogue
                     }
                     else
                     {
+                        DieSoundPlayed = false;
                         if (SkillCheck)
                         {
                             SkillCheckResult = player.playerDice.RollDice();
@@ -161,6 +165,8 @@ namespace MiniRogue
                     return false;
 
                 case TrapTurnState.SKILL_CHECK:
+
+                    DieSoundPlayed = false;
                     AnimationCounter = 0;
                     HandleButtons(player);
                     return false;
@@ -311,6 +317,11 @@ namespace MiniRogue
 
         public void RollAnimation()
         {
+            if (!DieSoundPlayed)
+            {
+                DieSounds["One Die Roll"].Play();
+                DieSoundPlayed = true;
+            }
             TrapDie.CurrentTexture = TrapDie.DieTextureList[Rng.Next(TrapDie.DieTextureList.Count - 1)];
             AnimationCounter += 5;
         }
