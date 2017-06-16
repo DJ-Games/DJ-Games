@@ -62,7 +62,7 @@ namespace MiniRogue
 
             ShuffleHand();
 
-            PlayerHand.Add(new Boss("Boss", bossTex, cardBack, buttons, combatDice, dieTextures));
+            PlayerHand.Add(new Boss("Boss", bossTex, cardBack, buttons, combatDice, dieTextures, dieSounds));
 
             Card1 = playerHand[0];
             Card2 = playerHand[1];

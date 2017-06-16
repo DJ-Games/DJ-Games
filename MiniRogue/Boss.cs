@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace MiniRogue
 {
@@ -40,11 +41,14 @@ namespace MiniRogue
 
         BossTurnState bossTurnState = new BossTurnState();
 
-        public Boss(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons, Dictionary<string, Die> combatDice, Dictionary<string, Texture2D> dieTextures) : base(name, cardTexture, cardBack, buttons)
+        public Boss(string name, Texture2D cardTexture, Texture2D cardBack, Dictionary<string, Button> buttons,
+            Dictionary<string, Die> combatDice, Dictionary<string, Texture2D> dieTextures, Dictionary<string, SoundEffect> dieSounds)
+            : base(name, cardTexture, cardBack, buttons)
         {
             Buttons = buttons;
             CombatDice = combatDice;
             DieTextures = dieTextures;
+            DieSounds = dieSounds;
             RewardDie = new Die(DieTextures, 840, 400);
         }
 

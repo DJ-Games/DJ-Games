@@ -77,6 +77,8 @@ namespace MiniRogue
 
         public bool Moving { get; set; }
 
+        public bool DieSoundPlayed { get; set; }
+
         //public Vector2 ScaleVector { get; set; }
 
         // Constructors
