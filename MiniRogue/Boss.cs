@@ -78,6 +78,10 @@ namespace MiniRogue
 
                 case BossTurnState.REWARDS:
 
+                    if (player.DungeonArea == 14)
+                    {
+                        bossTurnState = BossTurnState.COMPLETE;
+                    }
                     HandleButtons(player);
 
                     return false;

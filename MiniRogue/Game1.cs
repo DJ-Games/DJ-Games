@@ -1522,15 +1522,15 @@ namespace MiniRogue
                     break;
 
                 case 2:
-                    MediaPlayer.Volume = .05f;
+                    MediaPlayer.Volume = .08f;
                     break;
 
                 case 3:
-                    MediaPlayer.Volume = .1f;
+                    MediaPlayer.Volume = .12f;
                     break;
 
                 case 4:
-                    MediaPlayer.Volume = .15f;
+                    MediaPlayer.Volume = .16f;
                     break;
 
                 case 5:
@@ -1538,23 +1538,23 @@ namespace MiniRogue
                     break;
 
                 case 6:
-                    MediaPlayer.Volume = .25f;
+                    MediaPlayer.Volume = .24f;
                     break;
 
                 case 7:
-                    MediaPlayer.Volume = .3f;
+                    MediaPlayer.Volume = .28f;
                     break;
 
                 case 8:
-                    MediaPlayer.Volume = .35f;
+                    MediaPlayer.Volume = .32f;
                     break;
 
                 case 9:
-                    MediaPlayer.Volume = .4f;
+                    MediaPlayer.Volume = .36f;
                     break;
 
                 case 10:
-                    MediaPlayer.Volume = .45f;
+                    MediaPlayer.Volume = .40f;
                     break;
 
                 default:
