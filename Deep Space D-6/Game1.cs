@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace Deep_Space_D_6
 {
@@ -25,6 +26,16 @@ namespace Deep_Space_D_6
         GameState gameState;
 
         Texture2D ship;
+        Texture2D dieCommander;
+        Texture2D dieEngineer;
+        Texture2D dieMedic;
+        Texture2D dieScience;
+        Texture2D dieTactical;
+        Texture2D dieThreat;
+
+        Dictionary<string, Texture2D> dieTextures;
+        Dictionary<string, Die>
+
 
 
 
@@ -56,8 +67,12 @@ namespace Deep_Space_D_6
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             ship = Content.Load<Texture2D>("ship");
-
-
+            dieCommander = Content.Load<Texture2D>("dieCommander");
+            dieEngineer = Content.Load<Texture2D>("dieEngineer");
+            dieMedic = Content.Load<Texture2D>("dieMedic");
+            dieScience = Content.Load<Texture2D>("dieScience");
+            dieTactical = Content.Load<Texture2D>("dieTactical");
+            dieThreat = Content.Load<Texture2D>("dieThreat");
 
             
         }
