@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 
-namespace Deep_Space_D_6.Content
+namespace Deep_Space_D_6
 {
     class Die
     {
@@ -26,6 +26,22 @@ namespace Deep_Space_D_6.Content
 
         public int ShipYPos { get; set; }
 
+        public bool OnShip { get; set; }
 
+        public Die(Dictionary<string, Texture2D> dieTextures, int returnedXPos, int returnedYPos)
+        {
+            DieTextures = dieTextures;
+            ReturnedXPos = returnedXPos;
+            ReturnedYPos = returnedYPos;
+            CurrentTexture = DieTextures["dieTactical"];
+        }
+
+        public void DrawDie(SpriteBatch sBatch)
+        {
+            if (!OnShip)
+            {
+                sBatch.Draw(CurrentTexture, new Vector2(ReturnedXPos, ReturnedYPos), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1f);
+            }
+        }
     }
 }
