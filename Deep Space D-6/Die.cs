@@ -16,11 +16,56 @@ namespace Deep_Space_D_6
 
         public Texture2D CurrentTexture { get; set; }
 
+        private int dieValue;
+                
+        public int DieValue
+        {
+            get { return dieValue; }
+            set
+            {
+                if ((dieValue = value) == 1)
+                {
+                    CurrentTexture = DieTextures["dieCommander"];
+                    return;
+                }
+                if ((dieValue = value) == 2)
+                {
+                    CurrentTexture = DieTextures["dieTactical"];
+                    return;
+                }
+                if ((dieValue = value) == 3)
+                {
+                    CurrentTexture = DieTextures["dieMedic"];
+                    return;
+                }
+                if ((dieValue = value) == 4)
+                {
+                    CurrentTexture = DieTextures["dieScience"];
+                    return;
+                }
+                if ((dieValue = value) == 5)
+                {
+                    CurrentTexture = DieTextures["dieEngineer"];
+                    return;
+                }
+                if ((dieValue = value) == 6)
+                {
+                    CurrentTexture = DieTextures["dieThreat"];
+                    return;
+                }
+            }
+        }
+
+
         public Random RNG { get; set; }
 
         public int ReturnedXPos { get; set; }
 
         public int ReturnedYPos { get; set; }
+
+        public int InHandXPos { get; set; }
+
+        public int InHandYPos { get; set; }
 
         public int ShipXPos { get; set; }
 
@@ -28,12 +73,23 @@ namespace Deep_Space_D_6
 
         public bool OnShip { get; set; }
 
+        public bool InHand { get; set; }
+
+
+
         public Die(Dictionary<string, Texture2D> dieTextures, int returnedXPos, int returnedYPos)
         {
             DieTextures = dieTextures;
             ReturnedXPos = returnedXPos;
             ReturnedYPos = returnedYPos;
-            CurrentTexture = DieTextures["dieTactical"];
+            RNG = new Random();
+        }
+
+        public void RollDie()
+        {
+            DieValue = RNG.Next(6)+1;
+            
+            
         }
 
         public void DrawDie(SpriteBatch sBatch)

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Deep_Space_D_6
 {
@@ -36,7 +37,8 @@ namespace Deep_Space_D_6
         Dictionary<string, Texture2D> dieTextures;
         Dictionary<string, Die> playerDice;
 
-
+        // For Testing
+        bool dieRolled = false;
 
 
 
@@ -85,10 +87,15 @@ namespace Deep_Space_D_6
             dieTextures.Add("dieThreat", dieThreat);
 
             playerDice.Add("Die1", new Die(dieTextures, 200, 118));
+            Thread.Sleep(20);
             playerDice.Add("Die2", new Die(dieTextures, 277, 118));
+            Thread.Sleep(20);
             playerDice.Add("Die3", new Die(dieTextures, 200, 191));
+            Thread.Sleep(20);
             playerDice.Add("Die4", new Die(dieTextures, 277, 191));
+            Thread.Sleep(20);
             playerDice.Add("Die5", new Die(dieTextures, 200, 266));
+            Thread.Sleep(20);
             playerDice.Add("Die6", new Die(dieTextures, 277, 266));
 
 
@@ -108,7 +115,18 @@ namespace Deep_Space_D_6
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            if (!dieRolled)
+            {
+                for (int i = 1; i < 7; i++)
+                {
+                    playerDice["Die" + i].RollDie();
+                    dieRolled = true;
+                }
+            }
+            
+
+
+
 
             base.Update(gameTime);
         }
