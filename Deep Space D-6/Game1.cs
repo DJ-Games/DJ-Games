@@ -24,6 +24,9 @@ namespace Deep_Space_D_6
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        MouseState currentMouseState;
+        MouseState previousMouseState;
+
         GameState gameState;
 
         Texture2D ship;
@@ -59,7 +62,8 @@ namespace Deep_Space_D_6
             gameState = GameState.MAINPLAY;
 
             base.Initialize();
-            
+            this.IsMouseVisible = true;
+
         }
 
 
@@ -112,8 +116,8 @@ namespace Deep_Space_D_6
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+
+            currentMouseState = Mouse.GetState();
 
             if (!dieRolled)
             {
@@ -123,10 +127,31 @@ namespace Deep_Space_D_6
                     dieRolled = true;
                 }
             }
-            
+
+            if (LeftClickHeld())
+            {
+                if (playerDice["Die1"].ReturnedXPos > 200 && playerDice["Die1"].ReturnedXPos < 267 && playerDice["Die1"].ReturnedYPos > 118 && playerDice["Die1"].ReturnedYPos < 185)
+                {
+                    playerDice["Die1"].InHand = true;
+                }
+                else
+                {
+                    playerDice["Die1"].InHand = false;
+                }
+            }
+
+            if (playerDice["Die1"].InHand)
+            {
+                playerDice["Die1"].InHandXPos = currentMouseState.X;
+                playerDice["Die1"].InHandYPos = currentMouseState.Y;
+
+            }
 
 
 
+
+
+            previousMouseState = currentMouseState;
 
             base.Update(gameTime);
         }
@@ -147,8 +172,8 @@ namespace Deep_Space_D_6
                     {
                         playerDice["Die" + i].DrawDie(spriteBatch);
                     }
-                    
-                    
+
+
 
                     break;
 
@@ -166,5 +191,33 @@ namespace Deep_Space_D_6
 
             base.Draw(gameTime);
         }
+
+        public bool SingleMouseClick()
+        {
+            if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool LeftClickHeld()
+        {
+            if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Pressed)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool LeftClickPressed()
+        {
+            if (currentMouseState.LeftButton == ButtonState.Pressed)
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }
