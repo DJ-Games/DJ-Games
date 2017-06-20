@@ -162,7 +162,7 @@ namespace MiniRogue
         Vector2 position;
 
         Song song;
-        int musicVolume = 10;
+        int musicVolume = 6;
         int soundEffectVolume = 10;
         SoundEffect cardFlip;
         SoundEffect oneDieRoll;
