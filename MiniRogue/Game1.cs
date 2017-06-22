@@ -913,13 +913,16 @@ namespace MiniRogue
                             player.HasFoughtMonster = false;
                             playerHand = new Hand();
                             DrawNewHand();
-                            player.Food--;
+                            //player.Food--;
 
                             if (player.Food <= 0)
                             {
                                 player.Health -= 2;
                             }
-
+                            else
+                            {
+                                player.Food--;
+                            }
                             if (gamestate != Gamestate.WINSCREEN)
                             {
                                 gamestate = Gamestate.HACKANDSLASH;
