@@ -162,7 +162,7 @@ namespace MiniRogue
         Vector2 position;
 
         Song song;
-        int musicVolume = 6;
+        int musicVolume = 10;
         int soundEffectVolume = 10;
         SoundEffect cardFlip;
         SoundEffect oneDieRoll;
@@ -913,16 +913,13 @@ namespace MiniRogue
                             player.HasFoughtMonster = false;
                             playerHand = new Hand();
                             DrawNewHand();
-                            //player.Food--;
+                            player.Food--;
 
                             if (player.Food <= 0)
                             {
                                 player.Health -= 2;
                             }
-                            else
-                            {
-                                player.Food--;
-                            }
+
                             if (gamestate != Gamestate.WINSCREEN)
                             {
                                 gamestate = Gamestate.HACKANDSLASH;
