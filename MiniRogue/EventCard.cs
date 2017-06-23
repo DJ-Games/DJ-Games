@@ -213,7 +213,7 @@ namespace MiniRogue
                         sBatch.Draw(item.ButtonTexture, new Vector2(counter2, 300), new Rectangle?(), Color.White, 0f, new Vector2(), .50f, SpriteEffects.None, 1);
                         counter2 += 80;
                     }
-                    sBatch.DrawString(dungeonFont, "Sucess! Adjust your event +1 or -1 ", new Vector2(600, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
+                    sBatch.DrawString(dungeonFont, "Success! Adjust your event +1 or -1 ", new Vector2(600, 200), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0f);
 
 
                     break;
