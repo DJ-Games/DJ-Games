@@ -26,6 +26,8 @@ namespace Deep_Space_D_6
 
         MouseState currentMouseState;
         MouseState previousMouseState;
+        Vector2 position;
+
 
         GameState gameState;
 
@@ -102,7 +104,8 @@ namespace Deep_Space_D_6
             Thread.Sleep(20);
             playerDice.Add("Die6", new Die(dieTextures, 277, 266));
 
-
+            position = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
+                graphics.GraphicsDevice.Viewport.Height / 2);
 
 
         }
@@ -119,6 +122,10 @@ namespace Deep_Space_D_6
 
             currentMouseState = Mouse.GetState();
 
+            position.X = currentMouseState.X;
+            position.Y = currentMouseState.Y;
+
+
             if (!dieRolled)
             {
                 for (int i = 1; i < 7; i++)
@@ -130,7 +137,7 @@ namespace Deep_Space_D_6
 
             if (LeftClickHeld())
             {
-                if (playerDice["Die1"].ReturnedXPos > 200 && playerDice["Die1"].ReturnedXPos < 267 && playerDice["Die1"].ReturnedYPos > 118 && playerDice["Die1"].ReturnedYPos < 185)
+                if (position.X > 200 && position.X < 267 && position.Y > 118 && position.Y < 185)
                 {
                     playerDice["Die1"].InHand = true;
                 }

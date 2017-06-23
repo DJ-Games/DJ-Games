@@ -94,9 +94,13 @@ namespace Deep_Space_D_6
 
         public void DrawDie(SpriteBatch sBatch)
         {
-            if (!OnShip)
+            if (!OnShip && !InHand)
             {
                 sBatch.Draw(CurrentTexture, new Vector2(ReturnedXPos, ReturnedYPos), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1f);
+            }
+            else
+            {
+                sBatch.Draw(CurrentTexture, new Vector2(InHandXPos, InHandYPos), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1f);
             }
         }
     }
