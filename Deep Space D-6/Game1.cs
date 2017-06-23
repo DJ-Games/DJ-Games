@@ -182,14 +182,6 @@ namespace Deep_Space_D_6
                 }
             }
 
-            if (!LeftClickHeld())
-            {
-                for (int i = 1; i < 7; i++)
-                {
-                    playerDice["Die" + i].InHand = false;
-                }
-            }
-
             if (LeftClickReleased() && !noDieInHand)
             {
                 if (position.X > 517 && position.X < 669 && position.Y > 44 && position.Y < 100)
@@ -223,8 +215,14 @@ namespace Deep_Space_D_6
 
             }
 
-
-
+            // This has to be after we check for released left clicks
+            if (!LeftClickHeld())
+            {
+                for (int i = 1; i < 7; i++)
+                {
+                    playerDice["Die" + i].InHand = false;
+                }
+            }
 
 
             previousMouseState = currentMouseState;
