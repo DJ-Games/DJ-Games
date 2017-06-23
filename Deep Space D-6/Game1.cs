@@ -255,11 +255,6 @@ namespace Deep_Space_D_6
                     break;
             }
 
-            
-
-
-
-
 
             spriteBatch.End();
 
