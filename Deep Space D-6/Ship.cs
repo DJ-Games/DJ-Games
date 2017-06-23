@@ -42,18 +42,18 @@ namespace Deep_Space_D_6
 
                     if (ThreatZone.Count == 0)
                     {
-                        die.ShipXPos = 517;
-                        die.ShipYPos = 44;
+                        die.ShipXPos = 522;
+                        die.ShipYPos = 48;
                     }
                     if (ThreatZone.Count == 1)
                     {
-                        die.ShipXPos = 579;
-                        die.ShipYPos = 44;
+                        die.ShipXPos = 583;
+                        die.ShipYPos = 48;
                     }
                     if (ThreatZone.Count == 2)
                     {
-                        die.ShipXPos = 639;
-                        die.ShipYPos = 44;
+                        die.ShipXPos = 644;
+                        die.ShipYPos = 48;
                     }
                     ThreatZone.Add(die);
                     die.OnShip = true;
@@ -61,27 +61,212 @@ namespace Deep_Space_D_6
 
                 case "Commander":
 
+                    switch (CommanderZone.Count)
+                    {
+                        case 0:
+                            die.ShipXPos = 550;
+                            die.ShipYPos = 220;
+                            break;
 
+                        case 1:
+                            die.ShipXPos = 605;
+                            die.ShipYPos = 220;
+                            break;
+
+                        case 2:
+                            die.ShipXPos = 660;
+                            die.ShipYPos = 220;
+                            break;
+
+                        case 3:
+                            die.ShipXPos = 550;
+                            die.ShipYPos = 165;
+                            break;
+
+                        case 4:
+                            die.ShipXPos = 605;
+                            die.ShipYPos = 165;
+                            break;
+
+                        case 5:
+                            die.ShipXPos = 660;
+                            die.ShipYPos = 165;
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    CommanderZone.Add(die);
+                    die.OnShip = true;
                     return;
 
                 case "Tactical":
 
+                    switch (TacticalZone.Count)
+                    {
+                        case 0:
+                            die.ShipXPos = 550;
+                            die.ShipYPos = 345;
+                            break;
 
+                        case 1:
+                            die.ShipXPos = 605;
+                            die.ShipYPos = 345;
+                            break;
+
+                        case 2:
+                            die.ShipXPos = 660;
+                            die.ShipYPos = 345;
+                            break;
+
+                        case 3:
+                            die.ShipXPos = 550;
+                            die.ShipYPos = 290;
+                            break;
+
+                        case 4:
+                            die.ShipXPos = 605;
+                            die.ShipYPos = 290;
+                            break;
+
+                        case 5:
+                            die.ShipXPos = 660;
+                            die.ShipYPos = 290;
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    TacticalZone.Add(die);
+                    die.OnShip = true;
                     return;
 
                 case "Medic":
 
+                    switch (MedicZone.Count)
+                    {
+                        case 0:
+                            die.ShipXPos = 485;
+                            die.ShipYPos = 470;
+                            break;
 
+                        case 1:
+                            die.ShipXPos = 540;
+                            die.ShipYPos = 470;
+                            break;
+
+                        case 2:
+                            die.ShipXPos = 595;
+                            die.ShipYPos = 470;
+                            break;
+
+                        case 3:
+                            die.ShipXPos = 485;
+                            die.ShipYPos = 415;
+                            break;
+
+                        case 4:
+                            die.ShipXPos = 540;
+                            die.ShipYPos = 415;
+                            break;
+
+                        case 5:
+                            die.ShipXPos = 595;
+                            die.ShipYPos = 415;
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    MedicZone.Add(die);
+                    die.OnShip = true;
                     return;
 
                 case "Science":
 
+                    switch (ScienceZone.Count)
+                    {
+                        case 0:
+                            die.ShipXPos = 660;
+                            die.ShipYPos = 470;
+                            break;
 
+                        case 1:
+                            die.ShipXPos = 715;
+                            die.ShipYPos = 470;
+                            break;
+
+                        case 2:
+                            die.ShipXPos = 770;
+                            die.ShipYPos = 470;
+                            break;
+
+                        case 3:
+                            die.ShipXPos = 660;
+                            die.ShipYPos = 415;
+                            break;
+
+                        case 4:
+                            die.ShipXPos = 715;
+                            die.ShipYPos = 415;
+                            break;
+
+                        case 5:
+                            die.ShipXPos = 770;
+                            die.ShipYPos = 415;
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    ScienceZone.Add(die);
+                    die.OnShip = true;
                     return;
 
                 case "Engineer":
 
+                    switch (EngineerZone.Count)
+                    {
+                        case 0:
+                            die.ShipXPos = 547;
+                            die.ShipYPos = 578;
+                            break;
 
+                        case 1:
+                            die.ShipXPos = 602;
+                            die.ShipYPos = 578;
+                            break;
+
+                        case 2:
+                            die.ShipXPos = 657;
+                            die.ShipYPos = 578;
+                            break;
+
+                        case 3:
+                            die.ShipXPos = 547;
+                            die.ShipYPos = 523;
+                            break;
+
+                        case 4:
+                            die.ShipXPos = 602;
+                            die.ShipYPos = 523;
+                            break;
+
+                        case 5:
+                            die.ShipXPos = 657;
+                            die.ShipYPos = 523;
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    EngineerZone.Add(die);
+                    die.OnShip = true;
                     return;
 
                 default:

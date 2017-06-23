@@ -100,7 +100,7 @@ namespace Deep_Space_D_6
             }
             if (OnShip)
             {
-                sBatch.Draw(CurrentTexture, new Vector2(ShipXPos, ShipYPos), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1f);
+                sBatch.Draw(CurrentTexture, new Vector2(ShipXPos, ShipYPos), new Rectangle?(), Color.White, 0f, new Vector2(), .75f, SpriteEffects.None, 1f);
             }
             if (InHand)
             {

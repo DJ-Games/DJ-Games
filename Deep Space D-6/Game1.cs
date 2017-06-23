@@ -184,6 +184,7 @@ namespace Deep_Space_D_6
 
             if (LeftClickReleased() && !noDieInHand)
             {
+                // Threat Zone 
                 if (position.X > 517 && position.X < 669 && position.Y > 44 && position.Y < 100)
                 {
                     for (int i = 1; i < 7; i++)
@@ -195,6 +196,72 @@ namespace Deep_Space_D_6
                         
                     }
                 }
+
+                // Commander Zone
+                if (position.X > 533 && position.X < 722 && position.Y > 125 && position.Y < 284)
+                {
+                    for (int i = 1; i < 7; i++)
+                    {
+                        if (playerDice["Die" + i].InHand)
+                        {
+                            gameShip.AddDieToShip(playerDice["Die" + i], "Commander");
+                        }
+
+                    }
+                }
+
+                // Tactical Zone
+                if (position.X > 515 && position.X < 740 && position.Y > 284 && position.Y < 399)
+                {
+                    for (int i = 1; i < 7; i++)
+                    {
+                        if (playerDice["Die" + i].InHand)
+                        {
+                            gameShip.AddDieToShip(playerDice["Die" + i], "Tactical");
+                        }
+
+                    }
+                }
+
+                // Medic Zone
+                if (position.X > 415 && position.X < 652 && position.Y > 399 && position.Y < 525)
+                {
+                    for (int i = 1; i < 7; i++)
+                    {
+                        if (playerDice["Die" + i].InHand)
+                        {
+                            gameShip.AddDieToShip(playerDice["Die" + i], "Medic");
+                        }
+
+                    }
+                }
+
+                // Science Zone
+                if (position.X > 652 && position.X < 838 && position.Y > 399 && position.Y < 525)
+                {
+                    for (int i = 1; i < 7; i++)
+                    {
+                        if (playerDice["Die" + i].InHand)
+                        {
+                            gameShip.AddDieToShip(playerDice["Die" + i], "Science");
+                        }
+
+                    }
+                }
+
+                // Engineer Zone
+                if (position.X > 547 && position.X < 707 && position.Y > 525 && position.Y < 622)
+                {
+                    for (int i = 1; i < 7; i++)
+                    {
+                        if (playerDice["Die" + i].InHand)
+                        {
+                            gameShip.AddDieToShip(playerDice["Die" + i], "Engineer");
+                        }
+
+                    }
+                }
+
             }
 
 
