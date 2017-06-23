@@ -98,7 +98,11 @@ namespace Deep_Space_D_6
             {
                 sBatch.Draw(CurrentTexture, new Vector2(ReturnedXPos, ReturnedYPos), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1f);
             }
-            else
+            if (OnShip)
+            {
+                sBatch.Draw(CurrentTexture, new Vector2(ShipXPos, ShipYPos), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1f);
+            }
+            if (InHand)
             {
                 sBatch.Draw(CurrentTexture, new Vector2(InHandXPos, InHandYPos), new Rectangle?(), Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1f);
             }

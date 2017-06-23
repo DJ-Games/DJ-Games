@@ -42,6 +42,8 @@ namespace Deep_Space_D_6
         Dictionary<string, Texture2D> dieTextures;
         Dictionary<string, Die> playerDice;
 
+        Ship gameShip;
+
         int activeDieNumber;
         bool noDieInHand;
 
@@ -106,6 +108,8 @@ namespace Deep_Space_D_6
             playerDice.Add("Die5", new Die(dieTextures, 200, 266));
             Thread.Sleep(20);
             playerDice.Add("Die6", new Die(dieTextures, 277, 266));
+
+            gameShip = new Ship();
 
             position = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
                 graphics.GraphicsDevice.Viewport.Height / 2);
@@ -185,6 +189,22 @@ namespace Deep_Space_D_6
                     playerDice["Die" + i].InHand = false;
                 }
             }
+
+            if (LeftClickReleased() && !noDieInHand)
+            {
+                if (position.X > 517 && position.X < 669 && position.Y > 44 && position.Y < 100)
+                {
+                    for (int i = 1; i < 7; i++)
+                    {
+                        if (playerDice["Die" + i].InHand)
+                        {
+                            gameShip.AddDieToShip(playerDice["Die" + i], "Threat");
+                        }
+                        
+                    }
+                }
+            }
+
 
             for (int i = 1; i < 7; i++)
             {
