@@ -42,6 +42,9 @@ namespace Deep_Space_D_6
         Dictionary<string, Texture2D> dieTextures;
         Dictionary<string, Die> playerDice;
 
+        int activeDieNumber;
+        bool noDieInHand;
+
         // For Testing
         bool dieRolled = false;
 
@@ -126,6 +129,13 @@ namespace Deep_Space_D_6
             position.Y = currentMouseState.Y;
 
 
+            if (!playerDice["Die1"].InHand && !playerDice["Die2"].InHand && !playerDice["Die3"].InHand &&
+                !playerDice["Die4"].InHand && !playerDice["Die5"].InHand && !playerDice["Die6"].InHand)
+            {
+                noDieInHand = true;
+            }
+            else { noDieInHand = false; }
+
             if (!dieRolled)
             {
                 for (int i = 1; i < 7; i++)
@@ -135,15 +145,54 @@ namespace Deep_Space_D_6
                 }
             }
 
-            if (LeftClickHeld())
+            if (LeftClickPressed() && noDieInHand)
             {
                 if (position.X > 200 && position.X < 267 && position.Y > 118 && position.Y < 185)
                 {
                     playerDice["Die1"].InHand = true;
                 }
-                else
+
+                if (position.X > 277 && position.X < 344 && position.Y > 118 && position.Y < 185)
                 {
-                    playerDice["Die1"].InHand = false;
+                    playerDice["Die2"].InHand = true;
+                }
+
+                if (position.X > 200 && position.X < 267 && position.Y > 191 && position.Y < 258)
+                {
+                    playerDice["Die3"].InHand = true;
+                }
+
+                if (position.X > 277 && position.X < 344 && position.Y > 191 && position.Y < 258)
+                {
+                    playerDice["Die4"].InHand = true;
+                }
+
+                if (position.X > 200 && position.X < 267 && position.Y > 266 && position.Y < 333)
+                {
+                    playerDice["Die5"].InHand = true;
+                }
+
+                if (position.X > 277 && position.X < 344 && position.Y > 266 && position.Y < 333)
+                {
+                    playerDice["Die6"].InHand = true;
+                }
+            }
+
+            if (!LeftClickHeld())
+            {
+                for (int i = 1; i < 7; i++)
+                {
+                    playerDice["Die" + i].InHand = false;
+                }
+            }
+
+            for (int i = 1; i < 7; i++)
+            {
+                if (playerDice["Die" + i].InHand)
+                {
+                    playerDice["Die" + i].InHandXPos = currentMouseState.X;
+                    playerDice["Die" + i].InHandYPos = currentMouseState.Y;
+
                 }
             }
 
@@ -226,5 +275,15 @@ namespace Deep_Space_D_6
             return false;
         }
 
+        public bool LeftClickReleased()
+        {
+            if (currentMouseState.LeftButton == ButtonState.Released && previousMouseState.LeftButton == ButtonState.Pressed)
+            {
+                return true;
+            }
+            return false;
+        }
     }
+
+    
 }
